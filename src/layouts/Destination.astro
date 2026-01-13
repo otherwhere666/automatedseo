@@ -17,9 +17,11 @@ interface Props {
   travelerTypes: TravelerType[];
   skip: { name: string; reason: string }[];
   lastUpdated: string;
+  image?: string;
+  imageAlt?: string;
 }
 
-const { city, country, quickTake, travelerTypes, skip, lastUpdated } = Astro.props;
+const { city, country, quickTake, travelerTypes, skip, lastUpdated, image, imageAlt } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
@@ -51,6 +53,18 @@ const schema = {
       <h1 class="text-display-xl mb-4">{city.toUpperCase()}</h1>
       <p class="text-display-sm text-ink-secondary">{country}</p>
     </header>
+
+    <!-- Hero Image -->
+    {image && (
+      <div class="mb-12 -mx-4 md:mx-0">
+        <img
+          src={image}
+          alt={imageAlt || `${city}, ${country}`}
+          class="w-full h-64 md:h-96 object-cover rounded-card"
+          loading="eager"
+        />
+      </div>
+    )}
 
     <!-- Quick Take -->
     <section class="my-12">

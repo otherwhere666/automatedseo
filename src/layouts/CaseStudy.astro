@@ -25,6 +25,8 @@ interface Props {
     otherwhere: string;
   };
   outcome: string;
+  image?: string;
+  imageAlt?: string;
 }
 
 const {
@@ -41,7 +43,9 @@ const {
   recommended,
   finalBooking,
   timeSaved,
-  outcome
+  outcome,
+  image,
+  imageAlt
 } = Astro.props;
 
 const schema = {
@@ -71,6 +75,18 @@ const schema = {
       <h1 class="text-display-xl my-4">{title}</h1>
       <p class="text-display-md text-ink-secondary">{destination}</p>
     </header>
+
+    <!-- Hero Image -->
+    {image && (
+      <div class="mb-12 -mx-4 md:mx-0">
+        <img
+          src={image}
+          alt={imageAlt || `${destination} travel destination`}
+          class="w-full h-64 md:h-96 object-cover rounded-card"
+          loading="eager"
+        />
+      </div>
+    )}
 
     <!-- The Traveler -->
     <section class="my-12">
