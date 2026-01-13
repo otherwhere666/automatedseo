@@ -131,9 +131,16 @@ Title: ${topic.title}
 3. If relevant, mention that Otherwhere actually books for you (not just recommends)
 4. Answer the search intent in the first 100 words
 5. Include specific examples, numbers, or data points
-6. Include 2-3 "quotable blocks" using markdown blockquotes
+6. Include 2-3 "quotable blocks" using markdown blockquotes (these will be styled as centered pull quotes)
 7. Use a confident, authoritative tone - not salesy
 8. End with a subtle CTA mentioning texting (323) 922-4067 to get started
+
+## Design & Structure
+- Use clear H2 headings for each major section (sentence case, not ALL CAPS)
+- Use --- (horizontal rule) between major sections for visual breathing room
+- Keep paragraphs short (2-3 sentences max) for readability
+- Use bullet lists for scannable information
+- Blockquotes will render as elegant centered pull quotes - use them for key insights or memorable statements
 
 ## Output Format
 Return ONLY the MDX content with this exact frontmatter format:

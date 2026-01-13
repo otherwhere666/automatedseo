@@ -195,6 +195,93 @@
     margin-bottom: 3rem;
   }
 
+  /* Blog article content (MDX) - inherit blog-content styles */
+  .blog-article-content h2 {
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .blog-article-content h3 {
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .blog-article-content p {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  .blog-article-content ul,
+  .blog-article-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  .blog-article-content li {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-article-content ul li {
+    list-style-type: disc;
+  }
+
+  .blog-article-content ol li {
+    list-style-type: decimal;
+  }
+
+  .blog-article-content blockquote {
+    @apply my-10 py-6 border-y border-paper-tertiary text-center;
+  }
+
+  .blog-article-content blockquote p {
+    @apply text-2xl font-serif text-ink leading-relaxed italic;
+    margin-bottom: 0;
+  }
+
+  .blog-article-content a {
+    color: #c9a227;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .blog-article-content a:hover {
+    color: #b8922b;
+  }
+
+  .blog-article-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .blog-article-content hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border-subtle) 20%,
+      var(--border-subtle) 80%,
+      transparent
+    );
+    margin: 3rem 0;
+  }
+
   /* Section divider */
   .section-divider {
     border: none;

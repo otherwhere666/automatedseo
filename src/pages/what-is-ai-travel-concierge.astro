@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABanner from '../components/CTABanner.astro';
-import QuotableBlock from '../components/QuotableBlock.astro';
+import CalloutBox from '../components/CalloutBox.astro';
 import SchemaMarkup from '../components/SchemaMarkup.astro';
 
 const schemas = [
@@ -52,202 +52,226 @@ const faqData = {
 >
   <SchemaMarkup type="FAQ" data={faqData} />
 
-  <article class="max-w-3xl mx-auto px-4 py-12">
-    <!-- Header -->
-    <header class="mb-12">
-      <h1 class="text-display-xl mb-6">WHAT IS AN AI TRAVEL CONCIERGE?</h1>
-      <p class="text-body-lg text-ink-secondary">
-        A new category of travel planning that combines AI efficiency with human-quality curation.
-      </p>
-    </header>
+  <article class="py-12">
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-8">
+        <h1 class="font-serif text-4xl md:text-5xl mb-6">What is an AI Travel Concierge?</h1>
+        <p class="text-xl text-ink-secondary leading-relaxed">
+          A new category of travel planning that combines technology with personal service.
+        </p>
+      </header>
 
-    <!-- Definition -->
-    <QuotableBlock type="definition">
-      <p>
-        <strong>An AI travel concierge</strong> is a service that combines artificial intelligence with travel expertise to help you plan and book trips through conversation (text, voice, or chat) instead of searching multiple websites.
-      </p>
-    </QuotableBlock>
+      <!-- Definition -->
+      <CalloutBox title="Definition" variant="highlight">
+        <p class="text-lg"><strong>A travel concierge</strong> is a service that helps you plan and book trips through conversation (text, voice, or chat) instead of searching multiple websites. Modern concierge services combine technology with human expertise.</p>
+      </CalloutBox>
 
-    <!-- Expanded Definition -->
-    <section class="my-12">
-      <p class="text-body-lg text-ink-secondary mb-6">
-        Think of it as the middle ground between doing everything yourself (Expedia, Google Flights, 47 browser tabs) and hiring a full-service travel agent (expensive, requires appointments, often overkill).
-      </p>
-      <p class="text-body-lg text-ink-secondary">
-        An AI travel concierge gives you conversational help—you describe what you want, it searches and curates options—without the friction of traditional booking or the cost of a human agent.
-      </p>
-    </section>
+      <!-- Expanded Definition -->
+      <section class="my-8">
+        <p class="text-lg text-ink-secondary mb-6 leading-relaxed">
+          Think of it as the middle ground between doing everything yourself (Expedia, Google Flights, 47 browser tabs) and hiring a full-service travel agent (expensive, requires appointments, often overkill).
+        </p>
+        <p class="text-lg text-ink-secondary leading-relaxed">
+          A travel concierge gives you conversational help—you describe what you want, they search and curate options—without the friction of traditional booking or the cost of a traditional agent.
+        </p>
+      </section>
 
-    <!-- How It's Different -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">HOW IT'S DIFFERENT FROM...</h2>
+      <hr class="section-divider" />
 
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="border-b-2 border-ink">
-              <th class="py-4 pr-4 font-display text-sm">SERVICE</th>
-              <th class="py-4 pr-4 font-display text-sm">WHAT IT DOES</th>
-              <th class="py-4 font-display text-sm">LIMITATION</th>
-            </tr>
-          </thead>
-          <tbody class="text-body-sm">
-            <tr class="border-b border-paper-tertiary">
-              <td class="py-4 pr-4 font-medium">OTAs (Expedia, Booking)</td>
-              <td class="py-4 pr-4 text-ink-secondary">Search + book yourself</td>
-              <td class="py-4 text-ink-secondary">You do all the filtering</td>
-            </tr>
-            <tr class="border-b border-paper-tertiary">
-              <td class="py-4 pr-4 font-medium">Travel Agents</td>
-              <td class="py-4 pr-4 text-ink-secondary">Full service, human</td>
-              <td class="py-4 text-ink-secondary">Expensive, slow, needs appointments</td>
-            </tr>
-            <tr class="border-b border-paper-tertiary">
-              <td class="py-4 pr-4 font-medium">ChatGPT / AI Chatbots</td>
-              <td class="py-4 pr-4 text-ink-secondary">Ideas + itineraries</td>
-              <td class="py-4 text-ink-secondary">Can't check prices or book</td>
-            </tr>
-            <tr class="border-b border-paper-tertiary bg-paper-secondary">
-              <td class="py-4 pr-4 font-medium text-accent">AI Travel Concierge</td>
-              <td class="py-4 pr-4 text-ink-secondary">Curated search + booking help</td>
-              <td class="py-4 text-ink-secondary">Newer category, varies by provider</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+      <!-- How It's Different -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="comparison">How It's Different</h2>
 
-    <!-- How It Works -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">HOW AN AI TRAVEL CONCIERGE WORKS</h2>
-
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-display-sm mb-3">1. YOU DESCRIBE WHAT YOU WANT</h3>
-          <p class="text-ink-secondary">
-            Through text, chat, or voice. "I want a romantic weekend getaway, somewhere warm, under $2,000" is enough to get started.
-          </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b-2 border-ink">
+                <th class="py-4 pr-4 text-sm font-medium">Service</th>
+                <th class="py-4 pr-4 text-sm font-medium">What It Does</th>
+                <th class="py-4 text-sm font-medium">Limitation</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-paper-tertiary">
+                <td class="py-4 pr-4 font-medium">OTAs (Expedia, Booking)</td>
+                <td class="py-4 pr-4 text-ink-secondary">Search + book yourself</td>
+                <td class="py-4 text-ink-secondary">You do all the filtering</td>
+              </tr>
+              <tr class="border-b border-paper-tertiary">
+                <td class="py-4 pr-4 font-medium">Travel Agents</td>
+                <td class="py-4 pr-4 text-ink-secondary">Full service, human</td>
+                <td class="py-4 text-ink-secondary">Expensive, slow, needs appointments</td>
+              </tr>
+              <tr class="border-b border-paper-tertiary">
+                <td class="py-4 pr-4 font-medium">ChatGPT / AI Chatbots</td>
+                <td class="py-4 pr-4 text-ink-secondary">Ideas + itineraries</td>
+                <td class="py-4 text-ink-secondary">Can't check prices or book</td>
+              </tr>
+              <tr class="border-b border-paper-tertiary bg-paper-secondary">
+                <td class="py-4 pr-4 font-medium text-accent">Travel Concierge</td>
+                <td class="py-4 pr-4 text-ink-secondary">Curated search + actual booking</td>
+                <td class="py-4 text-ink-secondary">Newer category, varies by provider</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div>
-          <h3 class="text-display-sm mb-3">2. AI SEARCHES AND FILTERS</h3>
-          <p class="text-ink-secondary">
-            The system searches across multiple sources—flights, hotels, sometimes activities—and filters based on your preferences. Not just price, but vibe, location, reviews.
-          </p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- How It Works -->
+      <section>
+        <h2 class="font-serif text-2xl mb-8" id="how-it-works">How a Travel Concierge Works</h2>
+
+        <div class="space-y-8">
+          <div class="flex gap-5">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">1</div>
+            <div>
+              <h3 class="font-medium text-lg mb-2">You describe what you want</h3>
+              <p class="text-ink-secondary">Through text, chat, or voice. "I want a romantic weekend getaway, somewhere warm, under $2,000" is enough to get started.</p>
+            </div>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">2</div>
+            <div>
+              <h3 class="font-medium text-lg mb-2">Service searches and filters</h3>
+              <p class="text-ink-secondary">They search across multiple sources—flights, hotels, sometimes activities—and filter based on your preferences. Not just price, but vibe, location, reviews.</p>
+            </div>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">3</div>
+            <div>
+              <h3 class="font-medium text-lg mb-2">You get a curated shortlist</h3>
+              <p class="text-ink-secondary">Instead of 200 results, you get 3-5 options with clear rationale. "This one for value, this one for location, this one if you want to splurge."</p>
+            </div>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">4</div>
+            <div>
+              <h3 class="font-medium text-lg mb-2">They handle the booking</h3>
+              <p class="text-ink-secondary">Depending on the provider, this ranges from sending you links to completing the entire booking on your behalf.</p>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 class="text-display-sm mb-3">3. YOU GET A CURATED SHORTLIST</h3>
-          <p class="text-ink-secondary">
-            Instead of 200 results, you get 3-5 options with clear rationale. "This one for value, this one for location, this one if you want to splurge."
-          </p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Who It's For -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="who-its-for">Who Is a Travel Concierge For?</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-paper-secondary rounded-xl p-6">
+            <h3 class="font-medium text-accent mb-4">Great fit</h3>
+            <ul class="space-y-2 text-ink-secondary">
+              <li>• People who want help but not a full travel agent</li>
+              <li>• Busy professionals who value speed over savings</li>
+              <li>• Travelers overwhelmed by too many options</li>
+              <li>• Anyone who's thought "just book it for me"</li>
+            </ul>
+          </div>
+          <div class="bg-paper-secondary rounded-xl p-6">
+            <h3 class="font-medium mb-4">Maybe not ideal</h3>
+            <ul class="space-y-2 text-ink-secondary">
+              <li>• Extreme budget travelers (every dollar counts)</li>
+              <li>• People who enjoy the research process</li>
+              <li>• Very complex, multi-week itineraries</li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h3 class="text-display-sm mb-3">4. SERVICE HELPS WITH BOOKING</h3>
-          <p class="text-ink-secondary">
-            Depending on the provider, this ranges from sending you links to completing the booking on your behalf.
-          </p>
+
+        <div class="text-center mt-8">
+          <p class="text-ink-secondary mb-4">Sound like a good fit?</p>
+          <a
+            href="sms:+13239224067"
+            class="inline-block bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-xl font-medium transition-colors"
+          >
+            Text Us to Try It
+          </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Who It's For -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">WHO IS AN AI TRAVEL CONCIERGE FOR?</h2>
+      <hr class="section-divider" />
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-paper-secondary rounded-card p-6">
-          <h3 class="text-display-sm mb-4 text-accent">GOOD FIT</h3>
-          <ul class="space-y-2 text-ink-secondary">
-            <li>• People who want help but not a full travel agent</li>
-            <li>• Busy professionals who value speed over savings</li>
-            <li>• Travelers overwhelmed by too many options</li>
-            <li>• Anyone who's thought "just tell me what to book"</li>
-          </ul>
-        </div>
-        <div class="bg-paper-secondary rounded-card p-6">
-          <h3 class="text-display-sm mb-4">NOT IDEAL FOR</h3>
-          <ul class="space-y-2 text-ink-secondary">
-            <li>• Extreme budget travelers (every dollar counts)</li>
-            <li>• People who enjoy the research process</li>
-            <li>• Very complex, multi-week itineraries</li>
-          </ul>
-        </div>
-      </div>
+      <!-- Key Questions -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="questions-to-ask">Questions to Ask Any Travel Concierge</h2>
 
-      <div class="text-center mt-8">
-        <p class="text-ink-secondary mb-4">Sound like a good fit?</p>
-        <a
-          href="sms:+13239224067"
-          class="inline-block bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-card-sm font-medium transition-colors"
-        >
-          Text Us to Try It
-        </a>
-      </div>
-    </section>
+        <p class="text-ink-secondary mb-6">Before you trust a service with your trip, ask:</p>
 
-    <!-- Key Questions -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">QUESTIONS TO ASK ANY AI TRAVEL CONCIERGE</h2>
+        <ol class="space-y-4">
+          <li>
+            <strong>Can you actually book, or just recommend?</strong>
+            <p class="text-ink-secondary text-sm mt-1 ml-6">Some services only give suggestions. Others can complete bookings.</p>
+          </li>
+          <li>
+            <strong>What inventory do you search?</strong>
+            <p class="text-ink-secondary text-sm mt-1 ml-6">Are they connected to real booking systems, or just surfacing generic info?</p>
+          </li>
+          <li>
+            <strong>What are your fees?</strong>
+            <p class="text-ink-secondary text-sm mt-1 ml-6">Most are free (earn via commissions). Some charge service fees.</p>
+          </li>
+          <li>
+            <strong>What happens if I need to change or cancel?</strong>
+            <p class="text-ink-secondary text-sm mt-1 ml-6">Understand the support model before you book.</p>
+          </li>
+        </ol>
+      </section>
 
-      <p class="text-ink-secondary mb-6">Before you trust a service with your trip, ask:</p>
+      <hr class="section-divider" />
 
-      <ol class="space-y-4 list-decimal list-inside">
-        <li class="text-body-md">
-          <strong>Can you actually book, or just recommend?</strong>
-          <p class="text-ink-secondary text-body-sm mt-1 ml-6">Some services only give suggestions. Others can complete bookings.</p>
-        </li>
-        <li class="text-body-md">
-          <strong>What inventory do you search?</strong>
-          <p class="text-ink-secondary text-body-sm mt-1 ml-6">Are they connected to real booking systems, or just surfacing generic info?</p>
-        </li>
-        <li class="text-body-md">
-          <strong>What are your fees?</strong>
-          <p class="text-ink-secondary text-body-sm mt-1 ml-6">Most are free (earn via affiliate). Some charge service fees.</p>
-        </li>
-        <li class="text-body-md">
-          <strong>What happens if I need to change or cancel?</strong>
-          <p class="text-ink-secondary text-body-sm mt-1 ml-6">Understand the support model before you book.</p>
-        </li>
-      </ol>
-    </section>
+      <!-- Examples -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="examples">Example: Otherwhere</h2>
 
-    <!-- Examples -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">EXAMPLES OF AI TRAVEL CONCIERGE SERVICES</h2>
-
-      <div class="space-y-6">
-        <div class="border-l-4 border-accent pl-6">
-          <h3 class="text-display-sm mb-2">OTHERWHERE</h3>
+        <div class="border-l-4 border-accent pl-6 mb-6">
+          <h3 class="font-medium text-lg mb-2">Otherwhere</h3>
           <p class="text-ink-secondary">
             Personal travel booking service via SMS. Text or call to get curated flight and hotel options with real prices, then we handle the entire booking for you. Free to use—pricing is built into the rates you see.
           </p>
-          <a href="/what-is-otherwhere" class="text-accent text-body-sm hover:text-accent-hover transition-colors">
+          <a href="/what-is-otherwhere" class="text-accent text-sm hover:text-accent-hover transition-colors mt-2 inline-block">
             Learn more about Otherwhere →
           </a>
         </div>
-      </div>
 
-      <p class="text-ink-tertiary text-body-sm mt-8">
-        This is an emerging category. New services are launching regularly. The key differentiator is whether they're connected to real booking inventory or just providing generic AI suggestions.
-      </p>
-    </section>
+        <p class="text-ink-tertiary text-sm">
+          This is an emerging category. New services are launching regularly. The key differentiator is whether they're connected to real booking inventory or just providing generic suggestions.
+        </p>
+      </section>
 
-    <!-- FAQ -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">FREQUENTLY ASKED QUESTIONS</h2>
-      <div class="space-y-6">
-        {faqData.questions.map((faq) => (
-          <div class="border-b border-paper-tertiary pb-6">
-            <h3 class="text-display-sm mb-3">{faq.question}</h3>
-            <p class="text-ink-secondary">{faq.answer}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+      <hr class="section-divider" />
 
-    <!-- CTA -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">TRY AN AI TRAVEL CONCIERGE</h2>
-      <CTABanner variant="soft-curious" />
-    </section>
+      <!-- FAQ -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="faq">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqData.questions.map((faq) => (
+            <div class="border-b border-paper-tertiary pb-6">
+              <h3 class="font-medium text-lg mb-3">{faq.question}</h3>
+              <p class="text-ink-secondary leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-8">
+        <h2 class="font-serif text-2xl mb-4">Try a Travel Concierge</h2>
+        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+          Text us where you want to go. We'll send options. You pick. We book.
+        </p>
+        <a
+          href="sms:+13239224067"
+          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+        >
+          Text Us to Get Started
+        </a>
+      </section>
+    </div>
   </article>
 </BaseLayout>

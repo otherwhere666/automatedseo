@@ -4,6 +4,7 @@ import CTABanner from '../components/CTABanner.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import AuthorBio from '../components/AuthorBio.astro';
+import CalloutBox from '../components/CalloutBox.astro';
 
 interface Props {
   frontmatter: {
@@ -12,6 +13,7 @@ interface Props {
     publishDate: string;
     updateDate?: string;
     image?: string;
+    imageAlt?: string;
     pillar?: string;
     keywords?: string[];
     cta?: string;
@@ -30,6 +32,7 @@ const {
   publishDate,
   updateDate,
   image,
+  imageAlt,
   pillar,
   keywords = [],
   cta = 'try-otherwhere',
@@ -91,58 +94,84 @@ const schemas = [articleSchema, breadcrumbSchema];
   <!-- Reading Progress Bar -->
   <div id="reading-progress" class="reading-progress w-0"></div>
 
-  <article class="max-w-3xl mx-auto px-4 py-12">
-    <!-- Article Header -->
-    <header class="mb-12">
-      <div class="flex items-center gap-4 text-body-sm text-ink-tertiary mb-4">
-        <time datetime={publishDate}>
-          {new Date(publishDate).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
-        {readingTime && (
-          <>
-            <span>·</span>
-            <span>{readingTime}</span>
-          </>
-        )}
-        {pillar && (
-          <>
-            <span>·</span>
-            <span class="capitalize">{pillar.replace(/-/g, ' ')}</span>
-          </>
-        )}
+  <article class="py-12">
+    <!-- Hero Image - Full width -->
+    {image && (
+      <div class="max-w-5xl mx-auto px-4 mb-8">
+        <img
+          src={image}
+          alt={imageAlt || title}
+          class="w-full h-72 md:h-[28rem] object-cover rounded-xl"
+          loading="eager"
+        />
       </div>
-      <h1 class="text-display-lg md:text-display-xl mb-6 text-balance">
-        {title}
-      </h1>
-      <p class="text-body-lg text-ink-secondary">
-        {description}
-      </p>
-    </header>
-
-    <!-- Table of Contents -->
-    {showToc && headings.length > 2 && (
-      <TableOfContents headings={headings} />
     )}
 
-    <!-- Article Content -->
-    <div class="prose prose-otherwhere prose-lg max-w-none">
-      <slot />
+    <!-- Content - Constrained width for readability -->
+    <div class="blog-content">
+      <!-- Article Header -->
+      <header class="mb-8">
+        <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-4">
+          <time datetime={publishDate}>
+            {new Date(publishDate).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          {readingTime && (
+            <>
+              <span>·</span>
+              <span>{readingTime}</span>
+            </>
+          )}
+          {pillar && (
+            <>
+              <span>·</span>
+              <span class="capitalize">{pillar.replace(/-/g, ' ')}</span>
+            </>
+          )}
+        </div>
+        <h1 class="font-serif text-4xl md:text-5xl mb-6">{title}</h1>
+        <p class="text-xl text-ink-secondary leading-relaxed">
+          {description}
+        </p>
+      </header>
+
+      <!-- Table of Contents -->
+      {showToc && headings.length > 2 && (
+        <TableOfContents headings={headings} />
+      )}
+
+      <hr class="section-divider" />
+
+      <!-- Article Content -->
+      <div class="blog-article-content">
+        <slot />
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- CTA Section -->
+      <section class="text-center py-8">
+        <h2 class="font-serif text-2xl mb-4">Ready to book your trip?</h2>
+        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+          Text us where you want to go. We'll send options. You pick. We book.
+        </p>
+        <a
+          href="sms:+13239224067"
+          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+        >
+          Text Us to Get Started
+        </a>
+      </section>
+
+      <!-- Author Bio -->
+      <AuthorBio />
+
+      <!-- Related Posts -->
+      <RelatedPosts pillar={pillar} currentSlug={Astro.url.pathname} />
     </div>
-
-    <!-- CTA Section -->
-    <div class="mt-12">
-      <CTABanner variant={cta} />
-    </div>
-
-    <!-- Author Bio -->
-    <AuthorBio />
-
-    <!-- Related Posts -->
-    <RelatedPosts pillar={pillar} currentSlug={Astro.url.pathname} />
   </article>
 </BaseLayout>
 
