@@ -1,0 +1,14 @@
+{
+  "_comment": "Content roles determine how GA4 is allowed to affect each page",
+  "_roles": {
+    "acquisition": "Fully eligible for optimization - can be rewritten, expanded, merged, or pruned",
+    "comprehension": "Never auto-deleted or noindexed - only clarity, linking, and CTA refinement allowed",
+    "trust": "Manual review only - no automated regeneration, treated as product surface"
+  },
+  "/what-is-otherwhere": "trust",
+  "/otherwhere-vs-chatgpt": "acquisition",
+  "/what-is-ai-travel-concierge": "comprehension",
+  "/case-studies/*": "trust",
+  "/destinations/*": "acquisition",
+  "/posts/*": "acquisition"
+}

@@ -1,0 +1,48 @@
+name: Weekly GA4 Analysis
+
+on:
+  schedule:
+    # Run every Monday at 8am UTC (before daily publish)
+    - cron: '0 8 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run GA4 analysis
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+        run: |
+          # Write credentials to file if provided
+          if [ -n "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
+            echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /tmp/ga-credentials.json
+            export GOOGLE_APPLICATION_CREDENTIALS=/tmp/ga-credentials.json
+          fi
+          node scripts/analyze-performance.js
+
+      - name: Commit performance data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/content-performance.json
+          git diff --staged --quiet || git commit -m "chore: update content performance data
+
+          Weekly GA4 analysis run
+
+          Co-Authored-By: GitHub Actions <noreply@github.com>"
+          git push

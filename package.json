@@ -17,13 +17,17 @@
     "validate:all": "node scripts/validate-all.js",
     "links": "node scripts/internal-linker.js",
     "publish": "npm run build && node scripts/publish.js",
-    "publish:draft": "node scripts/publish.js --draft"
+    "publish:draft": "node scripts/publish.js --draft",
+    "analyze": "node scripts/analyze-performance.js",
+    "analyze:apply": "node scripts/apply-performance-actions.js",
+    "auto-generate": "node scripts/auto-generate.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "@astrojs/mdx": "^4.2.3",
     "@astrojs/sitemap": "^3.3.1",
     "@astrojs/tailwind": "^6.0.2",
+    "@google-analytics/data": "^5.2.1",
     "astro": "^5.16.9",
     "reading-time": "^1.5.0",
     "slugify": "^1.6.6"
