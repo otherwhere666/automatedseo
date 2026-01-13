@@ -1,0 +1,23 @@
+---
+interface Props {
+  title?: string;
+  variant?: 'default' | 'highlight' | 'outcome';
+}
+
+const { title, variant = 'default' } = Astro.props;
+
+const variantClasses = {
+  default: 'callout-box-default',
+  highlight: 'callout-box-highlight',
+  outcome: 'callout-box-outcome',
+};
+---
+
+<aside class={`callout-box ${variantClasses[variant]}`}>
+  {title && (
+    <h4 class="callout-box-title">{title}</h4>
+  )}
+  <div class="text-ink-secondary leading-relaxed">
+    <slot />
+  </div>
+</aside>

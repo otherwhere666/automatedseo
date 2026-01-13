@@ -1,6 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import CTABanner from '../components/CTABanner.astro';
+import CaseStudyStats from '../components/CaseStudyStats.astro';
+import CalloutBox from '../components/CalloutBox.astro';
 
 interface Props {
   title: string;
@@ -58,6 +60,14 @@ const schema = {
     "name": "Otherwhere"
   }
 };
+
+// Build stats for the stats strip
+const stats = [
+  { value: timeSaved.otherwhere, label: 'Time to book' },
+  { value: timeline, label: 'Planning window' },
+  { value: finalBooking.price, label: 'Final price' },
+  { value: timeSaved.diy, label: 'Time saved' },
+];
 ---
 
 <BaseLayout
@@ -65,151 +75,155 @@ const schema = {
   description={`How we planned a ${type.toLowerCase()} trip to ${destination}. ${quote}`}
   schema={[schema]}
 >
-  <article class="max-w-3xl mx-auto px-4 py-12">
-    <!-- Header -->
-    <header class="mb-12">
-      <a href="/case-studies" class="text-accent text-body-sm hover:text-accent-hover transition-colors mb-4 block">
-        ← All Case Studies
-      </a>
-      <span class="text-accent text-body-sm">{type}</span>
-      <h1 class="text-display-xl my-4">{title}</h1>
-      <p class="text-display-md text-ink-secondary">{destination}</p>
-    </header>
-
-    <!-- Hero Image -->
+  <article class="py-12">
+    <!-- Hero Image - Full width -->
     {image && (
-      <div class="mb-12 -mx-4 md:mx-0">
+      <div class="max-w-5xl mx-auto px-4 mb-8">
         <img
           src={image}
           alt={imageAlt || `${destination} travel destination`}
-          class="w-full h-64 md:h-96 object-cover rounded-card"
+          class="w-full h-72 md:h-[28rem] object-cover rounded-xl"
           loading="eager"
         />
       </div>
     )}
 
-    <!-- The Traveler -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">THE TRAVELER</h2>
-      <div class="bg-paper-secondary rounded-card p-6">
-        <ul class="space-y-2">
-          <li><strong>Type:</strong> {travelerType}</li>
-          <li><strong>Budget:</strong> {budget}</li>
-          <li><strong>Timeline:</strong> {timeline}</li>
-        </ul>
-      </div>
-    </section>
+    <!-- Content - Constrained width -->
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-8">
+        <a href="/case-studies" class="text-accent text-sm hover:text-accent-hover transition-colors mb-4 inline-block">
+          ← All Case Studies
+        </a>
+        <span class="block text-accent text-sm font-medium uppercase tracking-wide mb-2">{type}</span>
+        <h1 class="font-serif text-4xl md:text-5xl mb-3">{title}</h1>
+        <p class="font-serif text-2xl text-ink-secondary">{destination}</p>
+      </header>
 
-    <!-- What They Asked -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">WHAT THEY ASKED</h2>
-      <blockquote class="border-l-4 border-accent pl-6 py-4 bg-paper-secondary rounded-r-card">
-        <p class="text-body-lg italic">"{quote}"</p>
-      </blockquote>
-    </section>
+      <!-- Intro paragraph -->
+      <p class="text-xl text-ink-secondary leading-relaxed mb-8">
+        {travelerType}. Budget: {budget}. Here's how we turned their vision into a booked trip.
+      </p>
 
-    <!-- Constraints -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">CONSTRAINTS</h2>
-      <ul class="space-y-2">
-        {constraints.map((c) => (
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">•</span>
-            <span>{c}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
+      <!-- Stats Strip -->
+      <CaseStudyStats stats={stats} />
 
-    <!-- Shortlisting Logic -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">OUR SHORTLISTING LOGIC</h2>
+      <hr class="section-divider" />
 
-      <div class="space-y-8">
-        <div>
-          <h3 class="text-display-sm mb-4 text-ink-tertiary">ELIMINATED</h3>
-          <ul class="space-y-2">
-            {eliminated.map((e) => (
-              <li class="flex items-start gap-3">
-                <span class="text-ink-tertiary mt-1">×</span>
-                <span><strong>{e.name}</strong> — {e.reason}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <!-- What They Asked -->
+      <section>
+        <h2 class="font-serif text-2xl mb-4" id="the-brief">The Brief</h2>
+        <blockquote class="pull-quote">
+          <p>"{quote}"</p>
+        </blockquote>
 
-        <div>
-          <h3 class="text-display-sm mb-4">CONSIDERED</h3>
-          <ul class="space-y-2">
-            {considered.map((c) => (
-              <li class="flex items-start gap-3">
-                <span class="text-ink-tertiary mt-1">○</span>
-                <span><strong>{c.name}</strong> — {c.reason}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-display-sm mb-4 text-accent">RECOMMENDED</h3>
-          <p class="text-body-lg">{recommended}</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The Final Booking -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">THE FINAL BOOKING</h2>
-      <div class="bg-accent/10 border-2 border-accent rounded-card p-6">
-        <h3 class="text-display-sm mb-4">{finalBooking.property}</h3>
+        <h3 class="font-medium text-lg mb-3 mt-8">Their requirements:</h3>
         <ul class="space-y-2 text-ink-secondary">
-          <li><strong>Why it won:</strong> {finalBooking.why}</li>
-          <li><strong>Price:</strong> {finalBooking.price}</li>
-          {finalBooking.extras && <li><strong>Extras added:</strong> {finalBooking.extras}</li>}
+          {constraints.map((c) => (
+            <li class="flex items-start gap-3">
+              <span class="text-accent mt-1">•</span>
+              <span>{c}</span>
+            </li>
+          ))}
         </ul>
-      </div>
-    </section>
+      </section>
 
-    <!-- Time Saved -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">TIME SAVED</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-paper-secondary rounded-card p-6 text-center">
-          <p class="text-body-sm text-ink-tertiary mb-2">DIY Research Estimate</p>
-          <p class="text-display-md">{timeSaved.diy}</p>
+      <hr class="section-divider" />
+
+      <!-- Our Process -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="our-process">Our Process</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="font-medium text-lg mb-3 text-ink-tertiary">What we ruled out:</h3>
+            <ul class="space-y-3">
+              {eliminated.map((e) => (
+                <li class="flex items-start gap-3 text-ink-secondary">
+                  <span class="text-red-400 mt-1">×</span>
+                  <span><strong class="text-ink">{e.name}</strong> — {e.reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-medium text-lg mb-3">What we considered:</h3>
+            <ul class="space-y-3">
+              {considered.map((c) => (
+                <li class="flex items-start gap-3 text-ink-secondary">
+                  <span class="text-ink-tertiary mt-1">○</span>
+                  <span><strong class="text-ink">{c.name}</strong> — {c.reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <CalloutBox title="Our Recommendation" variant="highlight">
+            <p class="text-lg">{recommended}</p>
+          </CalloutBox>
         </div>
-        <div class="bg-accent text-paper rounded-card p-6 text-center">
-          <p class="text-body-sm text-paper/70 mb-2">With Otherwhere</p>
-          <p class="text-display-md">{timeSaved.otherwhere}</p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- The Final Booking -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="the-booking">The Booking</h2>
+        <div class="bg-accent/10 border-2 border-accent rounded-xl p-6">
+          <h3 class="font-serif text-xl mb-4">{finalBooking.property}</h3>
+          <ul class="space-y-2 text-ink-secondary">
+            <li><strong class="text-ink">Why it won:</strong> {finalBooking.why}</li>
+            <li><strong class="text-ink">Price:</strong> {finalBooking.price}</li>
+            {finalBooking.extras && <li><strong class="text-ink">Extras added:</strong> {finalBooking.extras}</li>}
+          </ul>
         </div>
-      </div>
-      <div class="text-center mt-6">
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Outcome -->
+      <section>
+        <h2 class="font-serif text-2xl mb-6" id="the-outcome">The Outcome</h2>
+        <CalloutBox title="Result" variant="outcome">
+          <p class="text-lg">{outcome}</p>
+        </CalloutBox>
+
+        <!-- Time comparison -->
+        <div class="grid md:grid-cols-2 gap-4 mt-8">
+          <div class="bg-paper-secondary rounded-xl p-6 text-center">
+            <p class="text-sm text-ink-tertiary mb-2">DIY Research Estimate</p>
+            <p class="font-serif text-3xl">{timeSaved.diy}</p>
+          </div>
+          <div class="bg-accent text-paper rounded-xl p-6 text-center">
+            <p class="text-sm text-paper/70 mb-2">With Otherwhere</p>
+            <p class="font-serif text-3xl">{timeSaved.otherwhere}</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-8">
+        <h2 class="font-serif text-2xl mb-4">Want this for your trip?</h2>
+        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+          We turn overwhelming options into effortless bookings. Text us to get started.
+        </p>
         <a
           href="sms:+13239224067"
-          class="inline-block text-accent hover:text-accent-hover text-body-sm transition-colors"
+          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
         >
-          Ready to save time? Text us →
+          Text Us to Plan Your Trip
         </a>
-      </div>
-    </section>
+      </section>
 
-    <!-- Outcome -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">OUTCOME</h2>
-      <p class="text-body-lg">{outcome}</p>
-    </section>
-
-    <!-- CTA -->
-    <section class="mt-16">
-      <h2 class="text-display-md mb-6">WANT THIS FOR YOUR TRIP?</h2>
-      <CTABanner variant="personalized-recs" />
-    </section>
-
-    <!-- Navigation -->
-    <nav class="mt-12 pt-8 border-t border-paper-tertiary">
-      <a href="/case-studies" class="text-accent hover:text-accent-hover transition-colors">
-        ← Back to all case studies
-      </a>
-    </nav>
+      <!-- Navigation -->
+      <nav class="mt-8 pt-8 border-t border-paper-tertiary">
+        <a href="/case-studies" class="text-accent hover:text-accent-hover transition-colors">
+          ← Back to all case studies
+        </a>
+      </nav>
+    </div>
   </article>
 </BaseLayout>

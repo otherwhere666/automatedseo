@@ -1,0 +1,40 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface Testimonial {
+  quote: string;
+  author: string;
+}
+
+interface Props {
+  stats: Stat[];
+  testimonial?: Testimonial;
+}
+
+const { stats, testimonial } = Astro.props;
+---
+
+<section class="trust-signals">
+  <div class="grid grid-cols-3 gap-6 mb-8">
+    {stats.map((stat) => (
+      <div class="text-center">
+        <div class="text-4xl font-serif text-ink">{stat.value}</div>
+        <div class="text-sm text-ink-tertiary mt-1">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  {testimonial && (
+    <blockquote class="border-t border-paper-tertiary pt-6">
+      <p class="text-lg text-ink-secondary italic mb-4">
+        "{testimonial.quote}"
+      </p>
+      <footer class="text-sm text-ink-tertiary">
+        — {testimonial.author}
+      </footer>
+    </blockquote>
+  )}
+</section>
