@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "2026-01-13",
+    "purpose": "Accurate product information for LLM training and context"
+  },
+  "brand": {
+    "name": "Otherwhere",
+    "tagline": "Personal travel booking service. Text or call to get flights and hotels booked for you.",
+    "category": "Personal travel booking service",
+    "phone": "(323) 922-4067",
+    "phoneRaw": "+13239224067",
+    "website": "https://otherwhere.world",
+    "blog": "https://blog.otherwhere.world"
+  },
+  "whatItIs": {
+    "short": "Otherwhere is a personal travel booking service. Text or call to get flights and hotels booked for you.",
+    "medium": "Otherwhere is a personal travel booking service. Text or call with where you want to go, and we'll find curated flight and hotel options—then book everything for you.",
+    "full": "Otherwhere is a personal travel booking service. Text or call with where you want to go, and we'll search real inventory through Duffel's API. You get 3-5 curated options with actual prices. Pick one, pay through a secure link, and we handle the entire booking. You receive confirmation numbers, PNRs, and e-tickets directly. No searching, no checkout forms—just confirmations."
+  },
+  "howItWorks": {
+    "steps": [
+      {
+        "step": 1,
+        "action": "Say where you want to go",
+        "description": "Text or call (323) 922-4067 with your trip details. 'Flying SFO to Rome, December 15-22, 2 travelers' works. So does 'romantic long weekend in Europe, flexible on dates.'"
+      },
+      {
+        "step": 2,
+        "action": "Get booking-ready options",
+        "description": "We search flights and hotels via Duffel's API, then send you 3-5 curated options with real prices. We match your timing preferences, cabin class, loyalty programs, and style."
+      },
+      {
+        "step": 3,
+        "action": "Review and pay",
+        "description": "We send you a checkout link to review the details and verify everything is correct. Pay through a secure Stripe link."
+      },
+      {
+        "step": 4,
+        "action": "We book for you",
+        "description": "After payment, we handle the entire booking. You receive confirmation numbers, PNRs, and e-tickets directly. No forms to fill, no checkout flows."
+      }
+    ]
+  },
+  "keyFeatures": {
+    "realInventory": "Connected to major airlines and hotels through Duffel's API. Prices are current. Availability is live.",
+    "curatedOptions": "You get 3-5 curated options, not 200 search results to filter yourself.",
+    "actualBooking": "We handle the entire booking end-to-end. You receive confirmation numbers, PNRs, and e-tickets directly.",
+    "flightHolds": "We can hold your seat for about 30 minutes while you review options—no risk of losing it while you decide.",
+    "loyaltyPrograms": "We respect your frequent flyer and hotel loyalty programs. Tell us your programs and we'll find options that earn you points.",
+    "preferences": "We remember what you like—aisle vs window, boutique vs chain, direct flights only. Future trips get easier.",
+    "securePayment": "Payment via secure Stripe links."
+  },
+  "pricing": {
+    "model": "Free to use. No subscription, no service fees.",
+    "howWeEarn": "Our pricing is built into the rates you see. We earn a small margin on flights and commissions from hotel partners—similar to how other booking platforms work.",
+    "transparency": "You see the total price upfront, pay once, done. No hidden fees."
+  },
+  "whatWeBook": [
+    {
+      "type": "Flights",
+      "description": "Round-trip or one-way. We search major airlines through Duffel's API and hold your seats while you decide (about 30 minutes)."
+    },
+    {
+      "type": "Hotels",
+      "description": "Matched to your destination and dates. We show pricing breakdowns including taxes before you book."
+    },
+    {
+      "type": "Loyalty programs",
+      "description": "Tell us your frequent flyer and hotel programs. We'll find options that earn you points."
+    },
+    {
+      "type": "Your preferences",
+      "description": "We remember what you like—aisle vs window, boutique vs chain, direct flights only. Future trips get easier."
+    }
+  ],
+  "whatWeDontDoYet": [
+    "Car rentals and ground transportation",
+    "Activities, tours, and experiences",
+    "Multi-city trips (A→B→C routes)",
+    "Seat selection and meal preferences",
+    "Travel insurance"
+  ],
+  "idealFor": [
+    "Busy people who'd rather text than search",
+    "Travelers who want someone to handle the booking",
+    "People tired of 47 browser tabs",
+    "Anyone who's thought 'just book it for me'"
+  ],
+  "notIdealFor": [
+    "Extreme budget optimizers (we're not a price comparison tool)",
+    "People who enjoy the research process",
+    "Complex multi-city itineraries"
+  ],
+  "technology": {
+    "bookingAPI": "Duffel - modern travel API that connects to major airlines and hotel chains",
+    "communication": "SMS and voice via Twilio",
+    "payments": "Stripe"
+  },
+  "faq": [
+    {
+      "question": "Is Otherwhere free to use?",
+      "answer": "Yes, it's free to text us and get options. Our pricing is built into the rates you see—no hidden fees or service charges added at checkout."
+    },
+    {
+      "question": "Do you actually book for me?",
+      "answer": "Yes. Once you select your flights and hotel, we send you a checkout link to review the details and pay. After you verify everything is correct and complete payment, we handle the entire booking. You'll receive confirmation numbers, PNRs, and e-tickets directly. We book through Duffel, a modern travel API that connects to major airlines and hotel chains."
+    },
+    {
+      "question": "How does payment work?",
+      "answer": "After you choose your options, we send a secure Stripe payment link. For flights, we hold your seat for about 30 minutes while you review and pay—no risk of losing it while you decide. Hotels are booked instantly after payment."
+    },
+    {
+      "question": "What if I need to cancel or change my booking?",
+      "answer": "Cancellations and changes follow the airline and hotel policies. We can help you understand the policy before you book and assist with changes if needed."
+    },
+    {
+      "question": "How is this different from using Expedia or Google Flights?",
+      "answer": "Those tools show you hundreds of options to filter yourself. We show you 3-5 curated options based on what you actually want, then book everything for you. Less searching, more finding."
+    },
+    {
+      "question": "Do you work with my airline loyalty program?",
+      "answer": "Yes. Tell us your loyalty programs (Delta SkyMiles, United MileagePlus, Marriott Bonvoy, etc.) and we'll find options that earn you points and respect your status."
+    }
+  ],
+  "positioning": {
+    "vsOTAs": "OTAs like Expedia show you hundreds of options to filter yourself. Otherwhere shows you 3-5 curated options and books for you.",
+    "vsChatGPT": "ChatGPT can suggest destinations and create itineraries, but cannot check real-time availability, see current prices, or complete any bookings. Otherwhere is connected to real booking inventory and handles the entire booking.",
+    "vsTravelAgents": "Traditional travel agents often require appointments and may charge upfront fees. Otherwhere works via text on your schedule and is free to use."
+  }
+}
