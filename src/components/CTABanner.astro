@@ -8,37 +8,37 @@ const { variant = 'try-otherwhere' } = Astro.props;
 const variants = {
   'skip-the-prompts': {
     headline: 'Skip the Prompts',
-    body: 'Tired of crafting the perfect prompt? Text TRAVEL to +1 (323) 922-4067 and get personalized recommendations in minutes.',
+    body: 'Tired of crafting the perfect prompt? Text us at (323) 922-4067 and get personalized recommendations in minutes.',
     secondary: 'Already using ChatGPT? Try the Otherwhere Travel Concierge GPT for recommendations that actually lead to bookings.',
   },
   'try-otherwhere': {
     headline: 'Ready to Plan Your Trip?',
-    body: 'Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes.',
+    body: 'Text us at (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes.',
     secondary: 'Or try the Otherwhere GPT in ChatGPT for smart recommendations that actually lead to bookings.',
   },
   'personalized-recs': {
     headline: 'Want Personalized Recommendations?',
-    body: 'Text TRAVEL to +1 (323) 922-4067 and tell us what you\'re looking for. We\'ll curate options based on your preferences.',
+    body: 'Text us at (323) 922-4067 and tell us what you\'re looking for. We\'ll curate options based on your preferences.',
     secondary: null,
   },
   'stop-researching': {
     headline: 'Stop Researching. Start Texting.',
-    body: 'Your time is worth more than endless scrolling. Text TRAVEL to +1 (323) 922-4067 - we\'ll do the research for you.',
+    body: 'Your time is worth more than endless scrolling. Text us at (323) 922-4067 and we\'ll do the research for you.',
     secondary: null,
   },
   'soft-curious': {
     headline: 'Curious How It Works?',
-    body: 'Text TRAVEL to +1 (323) 922-4067 to try Otherwhere. No commitment, just a conversation.',
+    body: 'Text us at (323) 922-4067 to try Otherwhere. No commitment, just a conversation.',
     secondary: null,
   },
   'full': {
     headline: 'Ready to Plan Your Trip?',
-    body: 'Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes.',
+    body: 'Text us at (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes.',
     secondary: 'Already in ChatGPT? Try the Otherwhere Travel Concierge GPT for smart recommendations that actually lead to bookings.',
   },
   'inline': {
     headline: null,
-    body: 'Want current prices and availability? Text TRAVEL to +1 (323) 922-4067 with your dates.',
+    body: 'Want current prices and availability? Text us at (323) 922-4067 with your dates.',
     secondary: null,
   },
 };
@@ -63,10 +63,10 @@ const isInline = variant === 'inline';
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
-        href="sms:+13239224067&body=TRAVEL"
+        href="sms:+13239224067"
         class="bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-card-sm font-medium transition-colors"
       >
-        Text TRAVEL Now
+        Text Us
       </a>
       <a
         href="tel:+13239224067"
