@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABanner from '../components/CTABanner.astro';
-import QuotableBlock from '../components/QuotableBlock.astro';
 import SchemaMarkup from '../components/SchemaMarkup.astro';
 import TrustSignals from '../components/TrustSignals.astro';
 import CalloutBox from '../components/CalloutBox.astro';
@@ -12,18 +11,18 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "What is Otherwhere?",
-    "description": "Otherwhere is an AI travel concierge: text or call to get curated trip options and booking help."
+    "description": "Otherwhere is a personal travel booking service. Text or call to get flights and hotels booked for you."
   },
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Otherwhere AI Travel Concierge",
-    "serviceType": "Travel Planning",
+    "name": "Otherwhere Travel Booking",
+    "serviceType": "Travel Planning and Booking",
     "provider": {
       "@type": "Organization",
       "name": "Otherwhere"
     },
-    "description": "Text or call to get curated trip options and booking help.",
+    "description": "Text or call to get flights and hotels booked for you.",
     "areaServed": "Worldwide",
     "availableChannel": {
       "@type": "ServiceChannel",
@@ -37,42 +36,46 @@ const faqData = {
   questions: [
     {
       question: "Is Otherwhere free to use?",
-      answer: "Yes, it's free to text us and get recommendations. We earn a small commission when you book through our partner links, similar to how travel sites work."
+      answer: "Yes, it's free to text us and get options. Our pricing is built into the rates you see—no hidden fees or service charges added at checkout."
     },
     {
-      question: "Do you book for me or do I book myself?",
-      answer: "We help you find the right options and can assist with booking. For most bookings, you'll complete the purchase directly with the hotel or airline, but we handle the research and coordination."
+      question: "Do you actually book for me?",
+      answer: "Yes. Once you select your flights and hotel, we handle the entire booking. You'll receive confirmation numbers, PNRs, and e-tickets directly. We book through Duffel, a modern travel API that connects to major airlines and hotel chains."
+    },
+    {
+      question: "How does payment work?",
+      answer: "After you choose your options, we send a secure Stripe payment link. For flights, we hold your seat for about 30 minutes while you review and pay—no risk of losing it while you decide. Hotels are booked instantly after payment."
     },
     {
       question: "What if I need to cancel or change my booking?",
-      answer: "Cancellations and changes are handled per the provider's policy (hotel, airline, etc.). We can help you understand the policy before you book and assist with changes if needed."
+      answer: "Cancellations and changes follow the airline and hotel policies. We can help you understand the policy before you book and assist with changes if needed."
     },
     {
       question: "How is this different from using Expedia or Google Flights?",
-      answer: "Those tools give you thousands of options to filter yourself. We give you 3-5 curated recommendations based on your specific needs. Less searching, more finding."
+      answer: "Those tools show you hundreds of options to filter yourself. We show you 3-5 curated options based on what you actually want, then book everything for you. Less searching, more finding."
     },
     {
-      question: "Can you help with complex itineraries?",
-      answer: "Yes, though very complex multi-city trips may require more back-and-forth conversation. We're best at focused trips: a honeymoon destination, a weekend getaway, a business trip."
+      question: "Do you work with my airline loyalty program?",
+      answer: "Yes. Tell us your loyalty programs (Delta SkyMiles, United MileagePlus, Marriott Bonvoy, etc.) and we'll find options that earn you points and respect your status."
     }
   ]
 };
 
 const trustStats = [
   { value: "100%", label: "Booking rate" },
-  { value: "14 min", label: "Avg. conversation" },
-  { value: "Free", label: "To try" }
+  { value: "~10 min", label: "Avg. to booked" },
+  { value: "Free", label: "To use" }
 ];
 
 const testimonial = {
-  quote: "I couldn't have done this alone. She cried when she found out.",
-  author: "Surprise anniversary planner, Burgundy trip"
+  quote: "Ten minutes later, I had perfect flight and stay options. This is what travel booking should've always been.",
+  author: "Otherwhere customer"
 };
 ---
 
 <BaseLayout
-  title="What is Otherwhere? | AI Travel Concierge Explained"
-  description="Otherwhere is an AI travel concierge: text or call to get curated trip options and booking help. Learn how it works and who it's for."
+  title="What is Otherwhere? | Personal Travel Booking Service"
+  description="Otherwhere is a personal travel booking service. Text or call to get flights and hotels booked for you—end to end."
   schema={schemas}
 >
   <SchemaMarkup type="FAQ" data={faqData} />
@@ -83,7 +86,7 @@ const testimonial = {
       <header class="mb-8">
         <h1 class="font-serif text-4xl md:text-5xl mb-6">What is Otherwhere?</h1>
         <p class="text-xl text-ink-secondary leading-relaxed">
-          Planning a trip shouldn't feel like a second job. Otherwhere is your personal travel concierge—available via text message, powered by AI, guided by real expertise.
+          Otherwhere plans and books your trips end-to-end. Text or call with where you want to go, and we'll find flights and hotels that match your preferences—then book everything for you.
         </p>
       </header>
 
@@ -92,7 +95,7 @@ const testimonial = {
 
       <!-- Quick Definition -->
       <CalloutBox title="The Short Version" variant="highlight">
-        <p class="text-lg"><strong>Text us what you want. We'll send you 3-5 curated options with real prices. You book the one you like.</strong></p>
+        <p class="text-lg"><strong>Say where you want to go. We find booking-ready options. We book for you.</strong> No tabs, no searching, no checkout forms.</p>
       </CalloutBox>
 
       <hr class="section-divider" />
@@ -104,22 +107,22 @@ const testimonial = {
           <div class="flex gap-5">
             <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">1</div>
             <div>
-              <h3 class="font-medium text-lg mb-2">Text us at (323) 922-4067</h3>
-              <p class="text-ink-secondary">Start with a simple message: "Looking for a romantic hotel in Lisbon for 4 nights in March."</p>
+              <h3 class="font-medium text-lg mb-2">Say where</h3>
+              <p class="text-ink-secondary">Text or call (323) 922-4067 with your trip details. "Flying SFO to Rome, December 15-22, 2 travelers" works. So does "romantic long weekend in Europe, flexible on dates."</p>
             </div>
           </div>
           <div class="flex gap-5">
             <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">2</div>
             <div>
-              <h3 class="font-medium text-lg mb-2">Tell us what matters</h3>
-              <p class="text-ink-secondary">Budget, vibe, must-haves, dealbreakers. We ask only what we need to narrow it down.</p>
+              <h3 class="font-medium text-lg mb-2">Get booking-ready options</h3>
+              <p class="text-ink-secondary">We search flights and hotels, then send you 3-5 curated options with real prices. We match your timing preferences, cabin class, loyalty programs, and style.</p>
             </div>
           </div>
           <div class="flex gap-5">
             <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">3</div>
             <div>
-              <h3 class="font-medium text-lg mb-2">Get curated options</h3>
-              <p class="text-ink-secondary">We search real inventory and send you 3-5 options with actual prices. Not 200 results—just the ones worth considering.</p>
+              <h3 class="font-medium text-lg mb-2">Booked for you</h3>
+              <p class="text-ink-secondary">Pick your options, pay through a secure link, and we handle the rest. You'll get confirmation numbers, PNRs, and e-tickets. No forms to fill, no checkout flows—just confirmations.</p>
             </div>
           </div>
         </div>
@@ -129,62 +132,66 @@ const testimonial = {
             href="sms:+13239224067"
             class="inline-block bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-xl font-medium transition-colors"
           >
-            Try It Now — Text Us
+            Text Us to Start
           </a>
         </div>
       </section>
 
       <hr class="section-divider" />
 
-      <!-- What We Can Do -->
+      <!-- What We Book -->
       <section>
-        <h2 class="font-serif text-2xl mb-6" id="what-we-do">What We Can Do</h2>
+        <h2 class="font-serif text-2xl mb-6" id="what-we-book">What We Book</h2>
         <div class="grid md:grid-cols-2 gap-4">
           <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">✓</span>
-            <h3 class="font-medium mt-2 mb-1">Search across sources</h3>
-            <p class="text-ink-secondary text-sm">Flights and hotels from multiple aggregators</p>
+            <span class="text-accent text-xl">✈️</span>
+            <h3 class="font-medium mt-2 mb-1">Flights</h3>
+            <p class="text-ink-secondary text-sm">Round-trip or one-way. We search major airlines through Duffel's API and hold your seats while you decide (about 30 minutes).</p>
           </div>
           <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">✓</span>
-            <h3 class="font-medium mt-2 mb-1">Curate, not list</h3>
-            <p class="text-ink-secondary text-sm">3-5 options tailored to your preferences</p>
+            <span class="text-accent text-xl">🏨</span>
+            <h3 class="font-medium mt-2 mb-1">Hotels</h3>
+            <p class="text-ink-secondary text-sm">Matched to your destination and dates. We show pricing breakdowns including taxes before you book.</p>
           </div>
           <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">✓</span>
-            <h3 class="font-medium mt-2 mb-1">Handle logistics</h3>
-            <p class="text-ink-secondary text-sm">Booking coordination and support</p>
+            <span class="text-accent text-xl">💳</span>
+            <h3 class="font-medium mt-2 mb-1">Loyalty programs</h3>
+            <p class="text-ink-secondary text-sm">Tell us your frequent flyer and hotel programs. We'll find options that earn you points.</p>
           </div>
           <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">✓</span>
-            <h3 class="font-medium mt-2 mb-1">Remember you</h3>
-            <p class="text-ink-secondary text-sm">Preferences saved for future trips</p>
+            <span class="text-accent text-xl">🔄</span>
+            <h3 class="font-medium mt-2 mb-1">Your preferences</h3>
+            <p class="text-ink-secondary text-sm">We remember what you like—aisle vs window, boutique vs chain, direct flights only. Future trips get easier.</p>
           </div>
         </div>
       </section>
 
       <hr class="section-divider" />
 
-      <!-- What We Can't Do -->
+      <!-- What We Don't Do -->
       <section>
-        <h2 class="font-serif text-2xl mb-6" id="limitations">Our Limitations</h2>
-        <p class="text-ink-secondary mb-6">Transparency builds trust. Here's where our limits are:</p>
+        <h2 class="font-serif text-2xl mb-6" id="limitations">What We Don't Do (Yet)</h2>
+        <p class="text-ink-secondary mb-6">We're focused on doing flights and hotels really well. Here's what's not available yet:</p>
         <ul class="space-y-3 text-ink-secondary">
           <li class="flex items-start gap-3">
             <span class="text-ink-tertiary mt-1">×</span>
-            <span>We don't have access to every airline/hotel (we use major aggregators)</span>
+            <span>Car rentals and ground transportation</span>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-ink-tertiary mt-1">×</span>
-            <span>We can't guarantee specific prices (they change in real-time)</span>
+            <span>Activities, tours, and experiences</span>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-ink-tertiary mt-1">×</span>
-            <span>We're not a licensed travel agency (we facilitate, you book)</span>
+            <span>Multi-city trips (A→B→C routes)</span>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-ink-tertiary mt-1">×</span>
-            <span>Complex multi-city itineraries may require back-and-forth</span>
+            <span>Seat selection and meal preferences</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-ink-tertiary mt-1">×</span>
+            <span>Travel insurance</span>
           </li>
         </ul>
       </section>
@@ -196,20 +203,20 @@ const testimonial = {
         <h2 class="font-serif text-2xl mb-6" id="who-its-for">Who It's For</h2>
         <div class="grid md:grid-cols-2 gap-6">
           <div class="bg-paper-secondary rounded-xl p-6">
-            <h3 class="font-medium text-accent mb-4">Ideal for</h3>
+            <h3 class="font-medium text-accent mb-4">Great fit</h3>
             <ul class="space-y-2 text-ink-secondary">
-              <li>• Busy professionals who value time over money</li>
-              <li>• Travelers who want curation, not endless options</li>
-              <li>• People who hate the "47 open tabs" research process</li>
-              <li>• Anyone who's thought "I'd pay someone to handle this"</li>
+              <li>• Busy people who'd rather text than search</li>
+              <li>• Travelers who want someone to handle the booking</li>
+              <li>• People tired of 47 browser tabs</li>
+              <li>• Anyone who's thought "just book it for me"</li>
             </ul>
           </div>
           <div class="bg-paper-secondary rounded-xl p-6">
-            <h3 class="font-medium mb-4">Not ideal for</h3>
+            <h3 class="font-medium mb-4">Maybe not ideal</h3>
             <ul class="space-y-2 text-ink-secondary">
-              <li>• Budget travelers optimizing for the absolute cheapest option</li>
+              <li>• Extreme budget optimizers (we're not a price comparison tool)</li>
               <li>• People who enjoy the research process</li>
-              <li>• Complex group travel with 10+ people (yet)</li>
+              <li>• Complex multi-city itineraries</li>
             </ul>
           </div>
         </div>
@@ -221,8 +228,8 @@ const testimonial = {
       <section>
         <h2 class="font-serif text-2xl mb-6" id="pricing">Pricing</h2>
         <CalloutBox variant="default">
-          <p class="text-lg mb-3"><strong>Free to try.</strong> Text us, get recommendations, no charge.</p>
-          <p class="text-ink-secondary">We earn money through affiliate partnerships with hotels and booking platforms—similar to how other travel sites work. Our incentive is aligned with yours: we want you to book something great.</p>
+          <p class="text-lg mb-3"><strong>Free to use.</strong> No subscription, no service fees.</p>
+          <p class="text-ink-secondary">Our pricing is built into the rates you see. We earn a small margin on flights and commissions from hotel partners—similar to how other booking platforms work. You see the total price upfront, pay once, done.</p>
         </CalloutBox>
       </section>
 
@@ -247,7 +254,7 @@ const testimonial = {
       <section class="text-center py-8">
         <h2 class="font-serif text-2xl mb-4">Ready to try it?</h2>
         <p class="text-ink-secondary mb-6 max-w-md mx-auto">
-          No commitment, no sign-up. Just text us where you want to go.
+          Text us where you want to go. We'll send options. You pick. We book.
         </p>
         <a
           href="sms:+13239224067"

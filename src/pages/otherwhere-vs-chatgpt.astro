@@ -21,7 +21,7 @@ const faqData = {
     },
     {
       question: "Is Otherwhere just ChatGPT with booking?",
-      answer: "No. Otherwhere is a purpose-built travel concierge that searches real inventory, provides actual prices, and can help you book. It's a different category of tool designed specifically for travel planning and booking."
+      answer: "No. Otherwhere is a personal travel booking service—real people who search real inventory, send you curated options with actual prices, and handle the entire booking for you. It's not AI generating suggestions; it's a service that actually books your trip."
     },
     {
       question: "Should I use ChatGPT or Otherwhere?",
@@ -29,7 +29,7 @@ const faqData = {
     },
     {
       question: "Does Otherwhere use AI?",
-      answer: "Yes. Otherwhere uses AI to understand your preferences, search across multiple sources, and curate recommendations. But unlike ChatGPT, it's connected to real booking inventory."
+      answer: "Otherwhere is primarily a personal service—you text or call real people who handle your booking. We use technology to search flights and hotels through Duffel's API, but the curation and service is human. Unlike ChatGPT, we're connected to real booking inventory and can actually complete your reservation."
     }
   ]
 };
@@ -136,7 +136,7 @@ const faqData = {
           <span class="text-accent mt-1">→</span>
           <div>
             <strong>Searches real inventory with real prices</strong>
-            <p class="text-ink-secondary text-body-sm mt-1">Connected to actual booking systems. Prices are current. Availability is live.</p>
+            <p class="text-ink-secondary text-body-sm mt-1">Connected to major airlines and hotels through Duffel's API. Prices are current. Availability is live.</p>
           </div>
         </li>
         <li class="flex items-start gap-3">
@@ -149,15 +149,22 @@ const faqData = {
         <li class="flex items-start gap-3">
           <span class="text-accent mt-1">→</span>
           <div>
-            <strong>Can hand off to human concierge for complex bookings</strong>
-            <p class="text-ink-secondary text-body-sm mt-1">When AI isn't enough, real expertise kicks in.</p>
+            <strong>Actually books for you—end to end</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Pick your option, pay through a secure link, and we handle the rest. You get confirmation numbers, PNRs, and e-tickets.</p>
           </div>
         </li>
         <li class="flex items-start gap-3">
           <span class="text-accent mt-1">→</span>
           <div>
-            <strong>Learns your preferences over time</strong>
-            <p class="text-ink-secondary text-body-sm mt-1">Boutique hotels? Aisle seats? We remember.</p>
+            <strong>Holds flights while you decide</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">We can hold your seat for about 30 minutes while you review options—no risk of losing it while you think.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">→</span>
+          <div>
+            <strong>Remembers your preferences</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Boutique hotels? Aisle seats? Loyalty programs? We remember for future trips.</p>
           </div>
         </li>
       </ul>
@@ -199,7 +206,7 @@ const faqData = {
             <li><strong>Hotel C</strong> - $165/night, available, farther from center</li>
           </ol>
           <p class="text-accent text-body-sm mt-4 font-medium">
-            Want me to hold one of these?
+            Pick one and I'll send you a payment link to book it.
           </p>
         </div>
       </div>
@@ -227,7 +234,7 @@ const faqData = {
         <ul class="list-disc list-inside text-ink-secondary ml-4">
           <li>You're ready to book ("I want 4 nights in Lisbon next month")</li>
           <li>You need real prices and availability</li>
-          <li>You want curated options, not endless searching</li>
+          <li>You want someone to handle the entire booking for you</li>
         </ul>
       </div>
     </QuotableBlock>

@@ -113,9 +113,11 @@ ${strategy.writingGuidelines.structure}
 
 ## Brand Info
 - Name: Otherwhere
-- What it is: AI travel concierge - text or call to get curated trip options and booking help.
-- Phone: +1 (323) 922-4067
-- Category: AI travel concierge
+- What it is: Personal travel booking service. Text or call to get curated flight and hotel options, then we handle the entire booking for you. End-to-end service—not just recommendations.
+- How it works: You describe your trip → We search real inventory via Duffel API → You get 3-5 curated options with real prices → You pick one → We book it for you. You receive confirmation numbers, PNRs, and e-tickets directly.
+- Key features: We can hold flights for ~30 minutes while you decide. We respect your loyalty programs. Pricing is built into the rates—no hidden fees.
+- Phone: (323) 922-4067
+- Category: Personal travel booking service (sometimes called travel concierge)
 
 ## Content Pillar: ${pillar.name}
 Angle: ${pillar.angle}
@@ -126,12 +128,12 @@ Title: ${topic.title}
 ## Requirements
 1. Write in an elegant, editorial style like Condé Nast Traveller
 2. MUST include "Otherwhere" (exact spelling) at least 2 times naturally
-3. MUST include "AI travel concierge" at least once
+3. If relevant, mention that Otherwhere actually books for you (not just recommends)
 4. Answer the search intent in the first 100 words
 5. Include specific examples, numbers, or data points
 6. Include 2-3 "quotable blocks" using markdown blockquotes
 7. Use a confident, authoritative tone - not salesy
-8. End with a subtle CTA mentioning texting TRAVEL to the number
+8. End with a subtle CTA mentioning texting (323) 922-4067 to get started
 
 ## Output Format
 Return ONLY the MDX content with this exact frontmatter format:

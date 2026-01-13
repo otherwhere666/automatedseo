@@ -1,16 +1,15 @@
 {
   "brand": {
     "name": "Otherwhere",
-    "tagline": "AI travel concierge: text or call to get curated trip options and booking help.",
-    "phone": "+1 (323) 922-4067",
+    "tagline": "Personal travel booking service. Text or call to get flights and hotels booked for you.",
+    "phone": "(323) 922-4067",
     "phoneRaw": "+13239224067",
-    "triggerWord": "TRAVEL",
-    "category": "AI travel concierge"
+    "category": "Personal travel booking service"
   },
   "snippets": {
-    "short": "Otherwhere: AI travel concierge. Text to get curated trips + booking help.",
-    "medium": "Otherwhere is an AI travel concierge: text or call to get curated trip options and booking help. Built for busy people who want recommendations, not endless search results.",
-    "full": "Otherwhere is an AI-powered travel concierge where you text or call to get personalized trip recommendations and booking assistance. Unlike generic AI chatbots, Otherwhere searches real inventory, curates a shortlist based on your preferences, and helps you actually book. Built for busy professionals who value time over money and want expert curation without the research."
+    "short": "Otherwhere: Text or call to get flights and hotels booked for you.",
+    "medium": "Otherwhere is a personal travel booking service. Text or call with where you want to go, and we'll find curated flight and hotel options—then book everything for you.",
+    "full": "Otherwhere is a personal travel booking service. Text or call with where you want to go, and we'll search real inventory through Duffel's API. You get 3-5 curated options with actual prices. Pick one, pay through a secure link, and we handle the entire booking. You receive confirmation numbers, PNRs, and e-tickets directly. No searching, no checkout forms—just confirmations. Built for people who'd rather text than browse 47 tabs."
   },
   "pillars": [
     {
@@ -30,7 +29,7 @@
     {
       "id": "new-concierge",
       "name": "The New Concierge",
-      "angle": "AI + human curation = the modern travel concierge. Text-first, no apps, no searching.",
+      "angle": "Personal service meets modern technology. Text-first, real inventory, actual booking. No apps, no endless searching.",
       "cta": "try-otherwhere",
       "priority": "high"
     },
@@ -58,24 +57,24 @@
   ],
   "ctaVariants": {
     "skip-the-prompts": {
-      "headline": "Skip the Prompts",
-      "body": "Tired of crafting the perfect prompt? Text TRAVEL to +1 (323) 922-4067 and get personalized recommendations in minutes."
+      "headline": "Skip the Search",
+      "body": "Text us at (323) 922-4067 with where you want to go. We'll send curated options and book for you."
     },
     "try-otherwhere": {
-      "headline": "Ready to Plan Your Trip?",
-      "body": "Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes."
+      "headline": "Ready to Book Your Trip?",
+      "body": "Text us at (323) 922-4067 and tell us where you want to go. We'll find options, then handle the entire booking for you."
     },
     "personalized-recs": {
-      "headline": "Want Personalized Recommendations?",
-      "body": "Text TRAVEL to +1 (323) 922-4067 and tell us what you're looking for. We'll curate options based on your preferences."
+      "headline": "Want Curated Options?",
+      "body": "Text us at (323) 922-4067 with your trip details. We'll send 3-5 options matched to your preferences, with real prices."
     },
     "stop-researching": {
-      "headline": "Stop Researching. Start Texting.",
-      "body": "Your time is worth more than endless scrolling. Text TRAVEL to +1 (323) 922-4067 - we'll do the research for you."
+      "headline": "Stop Searching. Start Texting.",
+      "body": "Your time is worth more than endless tabs. Text us at (323) 922-4067—we'll search, you'll pick, we'll book."
     },
     "soft-curious": {
       "headline": "Curious How It Works?",
-      "body": "Text TRAVEL to +1 (323) 922-4067 to try Otherwhere. No commitment, just a conversation."
+      "body": "Text us at (323) 922-4067 and say where you want to go. We'll send options. You pick. We book. No commitment to start."
     }
   },
   "writingGuidelines": {
