@@ -1,0 +1,40 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+---
+
+<CaseStudy
+  title="The Surprise Anniversary"
+  destination="Burgundy, France"
+  type="Special Occasion"
+  travelerType="Husband, 45, planning surprise 20th anniversary trip for wife"
+  budget="$10,000 (saved for 2 years)"
+  timeline="Specific dates locked around anniversary"
+  quote="I want to surprise my wife. She always plans everything. For once, I want to get it right without her help. She loves wine, she's always wanted to go to France, and she doesn't like 'roughing it.'"
+  constraints={[
+    'Must have: Wine region, France, feels luxurious but not "stuffy rich"',
+    "Can't do: Backpacking-style, budget accommodations",
+    "Dealbreaker: Messing this up (high stakes)"
+  ]}
+  eliminated={[
+    { name: "Paris", reason: "They've been, she wants countryside" },
+    { name: "Bordeaux city hotels", reason: "Too urban for the vibe" },
+    { name: "Provence", reason: "Great but everyone does it" }
+  ]}
+  considered={[
+    { name: "Burgundy", reason: "Wine-focused, smaller scale than Bordeaux" },
+    { name: "Champagne region", reason: "Unique, less crowded" },
+    { name: "Loire Valley", reason: "Châteaux + wine, romantic" }
+  ]}
+  recommended="Burgundy, based in Beaune — intimate châteaux, world-class wine, feels discovered"
+  finalBooking={{
+    property: "Small château hotel outside Beaune",
+    why: 'Intimate, wine tastings on-site, Michelin restaurant, felt "discovered not Googled"',
+    price: "$7,200 for 6 nights including flights",
+    extras: "Private vineyard tour ($300), hot air balloon ($450)"
+  }}
+  timeSaved={{
+    diy: "15+ hours",
+    otherwhere: "35 minutes"
+  }}
+  outcome={'She cried when she found out. He said: "I couldn\'t have done this alone." We coordinated with the hotel for anniversary surprise (champagne, flowers).'}
+/>

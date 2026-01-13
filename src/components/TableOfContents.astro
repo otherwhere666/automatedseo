@@ -1,0 +1,25 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+
+// Only show h2 and h3 headings
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{tocHeadings.length > 0 && (
+  <nav class="toc" aria-label="Table of contents">
+    <h2 class="toc-title">In This Article</h2>
+    <ol class="toc-list">
+      {tocHeadings.map((heading) => (
+        <li class={heading.depth === 3 ? 'ml-4' : ''}>
+          <a href={`#${heading.slug}`} class="toc-link">
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

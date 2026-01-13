@@ -1,0 +1,53 @@
+name: Daily Auto Publish
+
+on:
+  schedule:
+    # Run every day at 9am UTC (4am EST, 1am PST)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Topic ID or slug (leave empty for auto-generate)'
+        required: false
+        type: string
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate article automatically
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/auto-generate.js
+
+      - name: Build site
+        run: npm run build
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "Otherwhere Bot"
+          git config user.email "bot@otherwhere.world"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-publish: $(date +%Y-%m-%d) - $(cat .last-generated-title 2>/dev/null || echo 'new article')"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Railway auto-deploys from main branch, so no separate deploy step needed

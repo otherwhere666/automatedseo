@@ -1,0 +1,38 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+---
+
+<CaseStudy
+  title="The Last-Minute Celebration"
+  destination="Miami, FL"
+  type="Last-Minute"
+  travelerType="Investor, 39, deal closed early, wants to celebrate immediately"
+  budget="Up to $5k for flights"
+  timeline="Leaving tomorrow"
+  quote="Miami tomorrow morning, first class if you can get it, I don't care which airline. Need to land by noon. Window seat."
+  constraints={[
+    "Must have: First class, window, land by noon",
+    "Loyalty: Delta SkyMiles (collect miles)",
+    "No hotel needed — staying at friend's place"
+  ]}
+  eliminated={[
+    { name: "United 1522", reason: "Arrives 12:15pm (late)" },
+    { name: "Economy options", reason: "First class was the requirement" }
+  ]}
+  considered={[
+    { name: "Delta 1765", reason: "First, $1,847, window 2A, arrives 11:58am" },
+    { name: "American 1291", reason: "First, $2,100, window 1A, arrives 11:45am" }
+  ]}
+  recommended="Delta 1765 — First class, window seat, arrives before noon, earns SkyMiles"
+  finalBooking={{
+    property: "Delta 1765, Seat 2A",
+    why: "Best price, met all requirements, earns Delta miles",
+    price: "$1,847",
+    extras: "SkyMiles number attached, miles credited automatically"
+  }}
+  timeSaved={{
+    diy: "25-30 minutes",
+    otherwhere: "8 minutes"
+  }}
+  outcome={'Booked by 9:20pm. Boarding pass in her Apple Wallet before she finished dinner. No apps, no searches — just "this is what I want" → "here are options" → "book #1" → done.'}
+/>

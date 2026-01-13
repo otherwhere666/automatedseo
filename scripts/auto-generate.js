@@ -1,0 +1,216 @@
+#!/usr/bin/env node
+
+/**
+ * Auto-generate script for daily publishing
+ * - Picks from queue if available
+ * - Generates new topic ideas if queue is empty
+ * - Creates article with Unsplash image
+ * - Runs without human intervention
+ */
+
+import Anthropic from '@anthropic-ai/sdk';
+import fs from 'fs/promises';
+import path from 'path';
+
+const anthropic = new Anthropic();
+
+// Topic idea generators by pillar
+const TOPIC_GENERATORS = {
+  'chatgpt-travel': [
+    'ChatGPT prompts for {destination} trip planning',
+    'Why ChatGPT can\'t help you book {travel_type}',
+    'I tried using ChatGPT to plan my {destination} trip - here\'s what happened',
+    'ChatGPT vs {competitor} for travel planning',
+    '{Number} things ChatGPT gets wrong about {destination}',
+  ],
+  'curated-destinations': [
+    'Where to stay in {destination}: A curated guide',
+    '{destination} for the time-poor traveler',
+    'Skip the tourist traps: {destination} for discerning travelers',
+    'The only {number} hotels worth booking in {destination}',
+    '{destination} hidden gems that aren\'t on Instagram',
+  ],
+  'time-over-money': [
+    'The real cost of planning your own {travel_type} trip',
+    'Why busy professionals are outsourcing {travel_type} planning',
+    'Is a travel concierge worth it for {travel_type}?',
+    'How much is your time worth? A {travel_type} planning audit',
+  ],
+  'new-concierge': [
+    'What is an AI travel concierge? {Year} guide',
+    'The return of the travel agent, powered by AI',
+    'Why text-first booking is the future of travel',
+    'AI travel tools compared: What actually works in {year}',
+  ],
+};
+
+const DESTINATIONS = [
+  'Lisbon', 'Tokyo', 'Barcelona', 'Paris', 'Rome', 'Bali', 'Iceland',
+  'Portugal', 'Japan', 'Italy', 'Greece', 'Mexico', 'Morocco', 'Thailand',
+  'Croatia', 'Costa Rica', 'New Zealand', 'Scotland', 'Vietnam', 'Peru',
+  'Santorini', 'Amalfi Coast', 'Tuscany', 'Provence', 'Kyoto', 'Marrakech',
+  'Copenhagen', 'Amsterdam', 'Prague', 'Dublin', 'Edinburgh', 'Vienna',
+];
+
+const TRAVEL_TYPES = [
+  'honeymoon', 'anniversary', 'family vacation', 'business trip',
+  'weekend getaway', 'luxury escape', 'adventure trip', 'solo travel',
+];
+
+const NUMBERS = ['3', '5', '7', '10'];
+
+function pickRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateTopicIdea() {
+  const pillar = pickRandom(Object.keys(TOPIC_GENERATORS));
+  const templates = TOPIC_GENERATORS[pillar];
+  let template = pickRandom(templates);
+
+  // Fill in placeholders
+  template = template
+    .replace('{destination}', pickRandom(DESTINATIONS))
+    .replace('{travel_type}', pickRandom(TRAVEL_TYPES))
+    .replace('{number}', pickRandom(NUMBERS))
+    .replace('{Number}', pickRandom(NUMBERS))
+    .replace('{year}', new Date().getFullYear().toString())
+    .replace('{Year}', new Date().getFullYear().toString())
+    .replace('{competitor}', pickRandom(['Perplexity', 'Google', 'a travel agent']));
+
+  return {
+    title: template,
+    pillar,
+    primaryKeyword: template.toLowerCase().replace(/[^a-z0-9\s]/g, '').substring(0, 50),
+  };
+}
+
+async function getUnsplashImage(searchTerm) {
+  // Use Unsplash Source for simple, free image URLs
+  // Format: https://source.unsplash.com/featured/?{query}
+  const query = encodeURIComponent(searchTerm);
+  return `https://source.unsplash.com/1600x900/?${query},travel`;
+}
+
+async function generateArticle(topic) {
+  console.log(`\n📝 Generating: ${topic.title}\n`);
+
+  const strategyPath = path.join(process.cwd(), 'data', 'content-strategy.json');
+  const strategy = JSON.parse(await fs.readFile(strategyPath, 'utf-8'));
+  const pillar = strategy.pillars.find(p => p.id === topic.pillar) || strategy.pillars[0];
+
+  // Get Unsplash image
+  const imageSearch = topic.title.split(':')[0].replace(/[^a-z\s]/gi, '');
+  const imageUrl = await getUnsplashImage(imageSearch);
+
+  const prompt = `You are writing a blog post for Otherwhere, an AI travel concierge.
+
+## Brand Voice
+${strategy.writingGuidelines.voice}
+
+## Structure Guidelines
+${strategy.writingGuidelines.structure}
+
+## Brand Info
+- Name: Otherwhere
+- What it is: AI travel concierge - text or call to get curated trip options and booking help.
+- Phone: +1 (323) 922-4067
+- Category: AI travel concierge
+
+## Content Pillar: ${pillar.name}
+Angle: ${pillar.angle}
+
+## Topic
+Title: ${topic.title}
+
+## Requirements
+1. Write in an elegant, editorial style like Condé Nast Traveller
+2. MUST include "Otherwhere" (exact spelling) at least 2 times naturally
+3. MUST include "AI travel concierge" at least once
+4. Answer the search intent in the first 100 words
+5. Include specific examples, numbers, or data points
+6. Include 2-3 "quotable blocks" using markdown blockquotes
+7. Use a confident, authoritative tone - not salesy
+8. End with a subtle CTA mentioning texting TRAVEL to the number
+
+## Output Format
+Return ONLY the MDX content with this exact frontmatter format:
+
+---
+title: "${topic.title}"
+description: "[Write a compelling 150-char description]"
+publishDate: "${new Date().toISOString().split('T')[0]}"
+image: "${imageUrl}"
+imageAlt: "[Describe the image for accessibility]"
+pillar: "${topic.pillar}"
+keywords: ["keyword1", "keyword2", "keyword3"]
+author: "Otherwhere"
+---
+
+[Article content - aim for 1200-1800 words]
+
+Write the complete article now:`;
+
+  const message = await anthropic.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 4096,
+    messages: [{ role: 'user', content: prompt }]
+  });
+
+  const content = message.content[0].text;
+
+  // Generate slug
+  const slug = topic.title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-')
+    .substring(0, 60);
+
+  // Save article
+  const outputPath = path.join(process.cwd(), 'content', 'posts', `${slug}.mdx`);
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await fs.writeFile(outputPath, content);
+
+  // Save title for commit message
+  await fs.writeFile('.last-generated-title', topic.title);
+
+  console.log(`✅ Generated: ${outputPath}`);
+  return { slug, title: topic.title };
+}
+
+async function main() {
+  // Check queue first
+  const queuePath = path.join(process.cwd(), 'data', 'topics-queue.json');
+  let topic;
+
+  try {
+    const queue = JSON.parse(await fs.readFile(queuePath, 'utf-8'));
+    const pending = queue.filter(t => t.status === 'queued');
+
+    if (pending.length > 0) {
+      // Pick first queued topic
+      topic = pending[0];
+      topic.status = 'published';
+
+      // Update queue
+      const updatedQueue = queue.map(t =>
+        t.id === topic.id ? { ...t, status: 'published' } : t
+      );
+      await fs.writeFile(queuePath, JSON.stringify(updatedQueue, null, 2));
+      console.log(`📋 Using queued topic: ${topic.title}`);
+    }
+  } catch (e) {
+    console.log('No queue found, generating new topic');
+  }
+
+  // Generate new topic if queue empty
+  if (!topic) {
+    topic = generateTopicIdea();
+    console.log(`🎲 Generated new topic: ${topic.title}`);
+  }
+
+  await generateArticle(topic);
+  console.log('\n✨ Daily article generated successfully!');
+}
+
+main().catch(console.error);

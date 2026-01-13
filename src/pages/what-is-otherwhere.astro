@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuotableBlock from '../components/QuotableBlock.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+// Page schemas
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "What is Otherwhere?",
+    "description": "Otherwhere is an AI travel concierge: text or call to get curated trip options and booking help."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Otherwhere AI Travel Concierge",
+    "serviceType": "Travel Planning",
+    "provider": {
+      "@type": "Organization",
+      "name": "Otherwhere"
+    },
+    "description": "Text or call to get curated trip options and booking help.",
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceType": "SMS",
+      "servicePhone": "+1-323-922-4067"
+    }
+  }
+];
+
+const faqData = {
+  questions: [
+    {
+      question: "Is Otherwhere free to use?",
+      answer: "Yes, it's free to text us and get recommendations. We earn a small commission when you book through our partner links, similar to how travel sites work."
+    },
+    {
+      question: "Do you book for me or do I book myself?",
+      answer: "We help you find the right options and can assist with booking. For most bookings, you'll complete the purchase directly with the hotel or airline, but we handle the research and coordination."
+    },
+    {
+      question: "What if I need to cancel or change my booking?",
+      answer: "Cancellations and changes are handled per the provider's policy (hotel, airline, etc.). We can help you understand the policy before you book and assist with changes if needed."
+    },
+    {
+      question: "How is this different from using Expedia or Google Flights?",
+      answer: "Those tools give you thousands of options to filter yourself. We give you 3-5 curated recommendations based on your specific needs. Less searching, more finding."
+    },
+    {
+      question: "Can you help with complex itineraries?",
+      answer: "Yes, though very complex multi-city trips may require more back-and-forth conversation. We're best at focused trips: a honeymoon destination, a weekend getaway, a business trip."
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="What is Otherwhere? | AI Travel Concierge Explained"
+  description="Otherwhere is an AI travel concierge: text or call to get curated trip options and booking help. Learn how it works and who it's for."
+  schema={schemas}
+>
+  <SchemaMarkup type="FAQ" data={faqData} />
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-display-xl mb-6">WHAT IS OTHERWHERE?</h1>
+      <p class="text-body-lg text-ink-secondary">
+        The single source of truth on what we do, how we work, and who we're for.
+      </p>
+    </header>
+
+    <!-- Quick Definition -->
+    <QuotableBlock type="definition" label="One-Line Definition">
+      <p><strong>Otherwhere is an AI travel concierge:</strong> text or call to get curated trip options and booking help.</p>
+    </QuotableBlock>
+
+    <!-- How It Works -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">HOW IT WORKS</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-accent text-paper flex items-center justify-center font-display">1</div>
+          <div>
+            <h3 class="text-display-sm mb-2">TEXT TRAVEL TO +1 (323) 922-4067</h3>
+            <p class="text-ink-secondary">Or use the Otherwhere GPT in ChatGPT. Either way, start with a simple message about where you want to go.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-accent text-paper flex items-center justify-center font-display">2</div>
+          <div>
+            <h3 class="text-display-sm mb-2">TELL US WHAT MATTERS</h3>
+            <p class="text-ink-secondary">When, how long, what's important to you (budget, location, vibe). We ask only what we need to know.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-accent text-paper flex items-center justify-center font-display">3</div>
+          <div>
+            <h3 class="text-display-sm mb-2">GET CURATED OPTIONS</h3>
+            <p class="text-ink-secondary">We search real inventory and send you 3-5 options with actual prices and availability. Not 200 results—just the ones worth considering.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Can Do -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">WHAT WE CAN DO</h2>
+      <ul class="space-y-3">
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span>Search flights and hotels across multiple sources</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span>Curate options based on your preferences (not 50 results)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span>Handle booking logistics and coordination</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span>Provide trip support and answer questions</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span>Remember your preferences for future trips</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- What We Can't Do -->
+    <section class="my-12 bg-paper-secondary rounded-card p-8">
+      <h2 class="text-display-md mb-6">WHAT WE CAN'T DO</h2>
+      <p class="text-ink-secondary mb-4">Transparency builds trust. Here's where our limits are:</p>
+      <ul class="space-y-3">
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <span class="text-ink-secondary">We don't have access to every airline/hotel (we use major aggregators)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <span class="text-ink-secondary">We can't guarantee specific prices (they change in real-time)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <span class="text-ink-secondary">We're not a licensed travel agency (we facilitate, you book)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <span class="text-ink-secondary">Complex multi-city itineraries may require back-and-forth</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Who It's For -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">WHO IT'S FOR</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-display-sm mb-4 text-accent">IDEAL FOR</h3>
+          <ul class="space-y-2 text-ink-secondary">
+            <li>• Busy professionals who value time over money</li>
+            <li>• Travelers who want curation, not endless options</li>
+            <li>• People who hate the "47 open tabs" research process</li>
+            <li>• Anyone who's thought "I'd pay someone to just handle this"</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-display-sm mb-4">NOT IDEAL FOR</h3>
+          <ul class="space-y-2 text-ink-secondary">
+            <li>• Budget travelers optimizing for the absolute cheapest option</li>
+            <li>• People who enjoy the research process</li>
+            <li>• Complex group travel with 10+ people (yet)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">PRICING</h2>
+      <div class="bg-paper-secondary rounded-card p-8">
+        <p class="text-body-lg mb-4">
+          <strong>Free to try.</strong> Text us, get recommendations, no charge.
+        </p>
+        <p class="text-ink-secondary mb-4">
+          We earn money through affiliate partnerships with hotels and booking platforms—similar to how other travel sites work. When you book through our links, we receive a commission.
+        </p>
+        <p class="text-ink-tertiary text-body-sm">
+          This means our incentive is aligned with yours: we want you to book something great, because that's when we get paid.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">FREQUENTLY ASKED QUESTIONS</h2>
+      <div class="space-y-6">
+        {faqData.questions.map((faq) => (
+          <div class="border-b border-paper-tertiary pb-6">
+            <h3 class="text-display-sm mb-3">{faq.question}</h3>
+            <p class="text-ink-secondary">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">START NOW</h2>
+      <CTABanner variant="try-otherwhere" />
+    </section>
+  </article>
+</BaseLayout>

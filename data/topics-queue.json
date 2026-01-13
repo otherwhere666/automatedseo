@@ -1,0 +1,68 @@
+[
+  {
+    "id": "chatgpt-travel-complete-guide",
+    "slug": "chatgpt-for-travel-planning-complete-guide",
+    "title": "ChatGPT for Travel Planning: The Complete Guide (And Why It's Not Enough)",
+    "primaryKeyword": "chatgpt travel planning",
+    "secondaryKeywords": ["chatgpt for travel", "chatgpt travel itinerary", "ai travel planning"],
+    "pillar": "chatgpt-travel",
+    "template": "chatgpt-tutorial",
+    "priority": "high",
+    "status": "queued"
+  },
+  {
+    "id": "chatgpt-cant-book-flights",
+    "slug": "why-chatgpt-cant-book-flights",
+    "title": "Why ChatGPT Can't Actually Book Your Flight",
+    "primaryKeyword": "chatgpt book flights",
+    "secondaryKeywords": ["chatgpt flight booking", "can chatgpt book travel"],
+    "pillar": "chatgpt-travel",
+    "template": "chatgpt-limitation",
+    "priority": "high",
+    "status": "queued"
+  },
+  {
+    "id": "chatgpt-prompts-travel",
+    "slug": "50-chatgpt-prompts-travel-planning",
+    "title": "50 ChatGPT Prompts for Travel Planning That Actually Work",
+    "primaryKeyword": "chatgpt travel prompts",
+    "secondaryKeywords": ["chatgpt prompts for vacation", "best travel prompts"],
+    "pillar": "chatgpt-travel",
+    "template": "chatgpt-tutorial",
+    "priority": "medium",
+    "status": "queued"
+  },
+  {
+    "id": "travel-planning-stress",
+    "slug": "why-travel-planning-is-so-stressful",
+    "title": "Why Having 10,000 Hotel Options Makes You Book Worse",
+    "primaryKeyword": "travel planning stress",
+    "secondaryKeywords": ["too many travel options", "decision fatigue travel"],
+    "pillar": "paradox-of-choice",
+    "template": "thought-leadership",
+    "priority": "medium",
+    "status": "queued"
+  },
+  {
+    "id": "travel-planning-busy-professionals",
+    "slug": "travel-planning-for-busy-professionals",
+    "title": "The Real Cost of Planning Your Own Travel (A Time Audit)",
+    "primaryKeyword": "travel planning busy professionals",
+    "secondaryKeywords": ["executive travel planning", "outsource trip planning"],
+    "pillar": "time-over-money",
+    "template": "thought-leadership",
+    "priority": "medium",
+    "status": "queued"
+  },
+  {
+    "id": "best-ai-travel-tools",
+    "slug": "best-ai-travel-tools-2025",
+    "title": "Best AI Tools for Travel in 2025 (Tested & Ranked)",
+    "primaryKeyword": "best ai travel tools",
+    "secondaryKeywords": ["ai travel assistant", "ai travel planner"],
+    "pillar": "new-concierge",
+    "template": "comparison",
+    "priority": "high",
+    "status": "queued"
+  }
+]

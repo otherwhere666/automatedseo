@@ -1,0 +1,156 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  image = 'https://source.unsplash.com/1200x630/?travel,luxury',
+  canonicalUrl,
+  noindex = false,
+  schema = []
+} = Astro.props;
+
+const siteUrl = 'https://blog.otherwhere.world';
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const canonical = canonicalUrl || Astro.url.href;
+
+// Base organization schema
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Otherwhere",
+  "description": "AI travel concierge: text or call to get curated trip options and booking help.",
+  "url": "https://otherwhere.world",
+  "telephone": "+1-323-922-4067"
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Otherwhere",
+  "url": siteUrl
+};
+
+const allSchemas = [orgSchema, websiteSchema, ...schema];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonical} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:site_name" content="Otherwhere" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullImageUrl} />
+
+    <!-- Schema.org -->
+    {allSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <!-- GA4 - Replace with your ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
+
+  <body class="min-h-screen bg-paper">
+    <!-- Minimal header -->
+    <header class="border-b border-paper-tertiary">
+      <nav class="max-w-wide mx-auto px-6 py-5 flex items-center justify-between">
+        <a href="/" class="font-serif text-xl tracking-wide">
+          Otherwhere
+        </a>
+        <div class="flex items-center gap-8">
+          <a href="/case-studies" class="nav-link hidden sm:block">Trips</a>
+          <a href="/destinations" class="nav-link hidden sm:block">Destinations</a>
+          <a href="/what-is-otherwhere" class="nav-link hidden sm:block">About</a>
+          <a
+            href="sms:+13239224067&body=TRAVEL"
+            class="text-small uppercase tracking-wider border border-ink px-4 py-2 hover:bg-ink hover:text-white transition-all"
+          >
+            Text us
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <!-- Minimal footer -->
+    <footer class="border-t border-paper-tertiary mt-20">
+      <div class="max-w-wide mx-auto px-6 py-12">
+        <div class="grid md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <p class="font-serif text-lg mb-4">Otherwhere</p>
+            <p class="text-small text-ink-tertiary">
+              AI travel concierge.<br />
+              Text TRAVEL to +1 (323) 922-4067
+            </p>
+          </div>
+          <div>
+            <p class="text-caption uppercase tracking-wider text-ink-tertiary mb-4">Explore</p>
+            <ul class="space-y-2 text-small">
+              <li><a href="/what-is-otherwhere" class="nav-link">What is Otherwhere?</a></li>
+              <li><a href="/otherwhere-vs-chatgpt" class="nav-link">Otherwhere vs ChatGPT</a></li>
+              <li><a href="/what-is-ai-travel-concierge" class="nav-link">AI Travel Concierge</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-caption uppercase tracking-wider text-ink-tertiary mb-4">Case Studies</p>
+            <ul class="space-y-2 text-small">
+              <li><a href="/case-studies" class="nav-link">All trips</a></li>
+              <li><a href="/destinations" class="nav-link">Destinations</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-caption uppercase tracking-wider text-ink-tertiary mb-4">Connect</p>
+            <ul class="space-y-2 text-small">
+              <li><a href="https://otherwhere.world" class="nav-link">Main site</a></li>
+              <li><a href="sms:+13239224067&body=TRAVEL" class="nav-link">Text us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-paper-tertiary pt-8 text-center text-caption text-ink-muted">
+          &copy; {new Date().getFullYear()} Otherwhere
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

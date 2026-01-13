@@ -1,0 +1,191 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+
+interface Props {
+  title: string;
+  destination: string;
+  type: string;
+  travelerType: string;
+  budget: string;
+  timeline: string;
+  quote: string;
+  constraints: string[];
+  eliminated: { name: string; reason: string }[];
+  considered: { name: string; reason: string }[];
+  recommended: string;
+  finalBooking: {
+    property: string;
+    why: string;
+    price: string;
+    extras?: string;
+  };
+  timeSaved: {
+    diy: string;
+    otherwhere: string;
+  };
+  outcome: string;
+}
+
+const {
+  title,
+  destination,
+  type,
+  travelerType,
+  budget,
+  timeline,
+  quote,
+  constraints,
+  eliminated,
+  considered,
+  recommended,
+  finalBooking,
+  timeSaved,
+  outcome
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${title}: ${destination} Case Study`,
+  "description": `How Otherwhere planned a ${type.toLowerCase()} trip to ${destination}. Real case study.`,
+  "author": {
+    "@type": "Organization",
+    "name": "Otherwhere"
+  }
+};
+---
+
+<BaseLayout
+  title={`${title} | ${destination} | Otherwhere Case Study`}
+  description={`How we planned a ${type.toLowerCase()} trip to ${destination}. ${quote}`}
+  schema={[schema]}
+>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <a href="/case-studies" class="text-accent text-body-sm hover:text-accent-hover transition-colors mb-4 block">
+        ← All Case Studies
+      </a>
+      <span class="text-accent text-body-sm">{type}</span>
+      <h1 class="text-display-xl my-4">{title}</h1>
+      <p class="text-display-md text-ink-secondary">{destination}</p>
+    </header>
+
+    <!-- The Traveler -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">THE TRAVELER</h2>
+      <div class="bg-paper-secondary rounded-card p-6">
+        <ul class="space-y-2">
+          <li><strong>Type:</strong> {travelerType}</li>
+          <li><strong>Budget:</strong> {budget}</li>
+          <li><strong>Timeline:</strong> {timeline}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What They Asked -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">WHAT THEY ASKED</h2>
+      <blockquote class="border-l-4 border-accent pl-6 py-4 bg-paper-secondary rounded-r-card">
+        <p class="text-body-lg italic">"{quote}"</p>
+      </blockquote>
+    </section>
+
+    <!-- Constraints -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">CONSTRAINTS</h2>
+      <ul class="space-y-2">
+        {constraints.map((c) => (
+          <li class="flex items-start gap-3">
+            <span class="text-ink-tertiary mt-1">•</span>
+            <span>{c}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Shortlisting Logic -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">OUR SHORTLISTING LOGIC</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-display-sm mb-4 text-ink-tertiary">ELIMINATED</h3>
+          <ul class="space-y-2">
+            {eliminated.map((e) => (
+              <li class="flex items-start gap-3">
+                <span class="text-ink-tertiary mt-1">×</span>
+                <span><strong>{e.name}</strong> — {e.reason}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-display-sm mb-4">CONSIDERED</h3>
+          <ul class="space-y-2">
+            {considered.map((c) => (
+              <li class="flex items-start gap-3">
+                <span class="text-ink-tertiary mt-1">○</span>
+                <span><strong>{c.name}</strong> — {c.reason}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-display-sm mb-4 text-accent">RECOMMENDED</h3>
+          <p class="text-body-lg">{recommended}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Final Booking -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">THE FINAL BOOKING</h2>
+      <div class="bg-accent/10 border-2 border-accent rounded-card p-6">
+        <h3 class="text-display-sm mb-4">{finalBooking.property}</h3>
+        <ul class="space-y-2 text-ink-secondary">
+          <li><strong>Why it won:</strong> {finalBooking.why}</li>
+          <li><strong>Price:</strong> {finalBooking.price}</li>
+          {finalBooking.extras && <li><strong>Extras added:</strong> {finalBooking.extras}</li>}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Time Saved -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">TIME SAVED</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-paper-secondary rounded-card p-6 text-center">
+          <p class="text-body-sm text-ink-tertiary mb-2">DIY Research Estimate</p>
+          <p class="text-display-md">{timeSaved.diy}</p>
+        </div>
+        <div class="bg-accent text-paper rounded-card p-6 text-center">
+          <p class="text-body-sm text-paper/70 mb-2">With Otherwhere</p>
+          <p class="text-display-md">{timeSaved.otherwhere}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcome -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">OUTCOME</h2>
+      <p class="text-body-lg">{outcome}</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="mt-16">
+      <h2 class="text-display-md mb-6">WANT THIS FOR YOUR TRIP?</h2>
+      <CTABanner variant="personalized-recs" />
+    </section>
+
+    <!-- Navigation -->
+    <nav class="mt-12 pt-8 border-t border-paper-tertiary">
+      <a href="/case-studies" class="text-accent hover:text-accent-hover transition-colors">
+        ← Back to all case studies
+      </a>
+    </nav>
+  </article>
+</BaseLayout>

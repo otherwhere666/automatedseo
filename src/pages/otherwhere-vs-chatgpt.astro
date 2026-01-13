@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+import QuotableBlock from '../components/QuotableBlock.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Otherwhere vs ChatGPT for Travel Planning",
+    "description": "ChatGPT is great for travel brainstorming. Otherwhere is for actually booking. Here's when to use each."
+  }
+];
+
+const faqData = {
+  questions: [
+    {
+      question: "Can ChatGPT book flights or hotels?",
+      answer: "No. ChatGPT can suggest destinations and create itineraries, but it cannot check real-time availability, see current prices, or complete any bookings. It's a brainstorming tool, not a booking tool."
+    },
+    {
+      question: "Is Otherwhere just ChatGPT with booking?",
+      answer: "No. Otherwhere is a purpose-built travel concierge that searches real inventory, provides actual prices, and can help you book. It's a different category of tool designed specifically for travel planning and booking."
+    },
+    {
+      question: "Should I use ChatGPT or Otherwhere?",
+      answer: "Use ChatGPT for early-stage dreaming: 'Where should I go in Europe in spring?' Use Otherwhere when you're ready to commit: 'I want to book 4 nights in Lisbon next month.' They serve different stages of the journey."
+    },
+    {
+      question: "Does Otherwhere use AI?",
+      answer: "Yes. Otherwhere uses AI to understand your preferences, search across multiple sources, and curate recommendations. But unlike ChatGPT, it's connected to real booking inventory."
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="Otherwhere vs ChatGPT for Travel | Which Should You Use?"
+  description="ChatGPT is great for travel brainstorming but can't book. Otherwhere searches real inventory and helps you book. Here's when to use each."
+  schema={schemas}
+>
+  <SchemaMarkup type="FAQ" data={faqData} />
+
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-display-xl mb-6">OTHERWHERE VS CHATGPT</h1>
+      <p class="text-body-lg text-ink-secondary">
+        Both use AI. Only one can actually book your trip.
+      </p>
+    </header>
+
+    <!-- Quick Answer -->
+    <QuotableBlock type="quick-answer">
+      <p><strong>ChatGPT is great for travel brainstorming. Otherwhere is for actually booking.</strong></p>
+      <p class="mt-2 text-ink-secondary">Use ChatGPT to explore ideas. Use Otherwhere when you're ready to commit.</p>
+    </QuotableBlock>
+
+    <!-- What ChatGPT Does Well -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">WHAT CHATGPT DOES WELL</h2>
+      <p class="text-ink-secondary mb-6">Let's be fair—ChatGPT is genuinely useful for certain travel tasks:</p>
+      <ul class="space-y-3">
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span><strong>Generates itinerary ideas</strong> — "Give me a 5-day Japan itinerary" works great</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span><strong>Explains destinations</strong> — "What's the vibe in Lisbon vs Porto?" is perfect for ChatGPT</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span><strong>Suggests things to do</strong> — Great for "best restaurants in Barcelona" type questions</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span><strong>Helps with packing lists</strong> — "What to pack for Iceland in March" is solid</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">✓</span>
+          <span><strong>Answers general questions</strong> — Visa requirements, best seasons, cultural tips</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- What ChatGPT Can't Do -->
+    <section class="my-12 bg-paper-secondary rounded-card p-8">
+      <h2 class="text-display-md mb-6">WHAT CHATGPT CAN'T DO</h2>
+      <p class="text-ink-secondary mb-6">Here's where ChatGPT hits a wall:</p>
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <div>
+            <strong>Check real-time availability</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">It can't tell you if that hotel actually has rooms for your dates.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <div>
+            <strong>Show actual prices</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Any price it quotes is from training data—could be years old or completely wrong.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <div>
+            <strong>Book anything</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">It cannot make reservations, hold rooms, or complete purchases.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <div>
+            <strong>Remember your preferences across sessions</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Every conversation starts fresh. No loyalty program info, no travel history.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-ink-tertiary mt-1">×</span>
+          <div>
+            <strong>Access your loyalty programs</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Can't check your points balance or find award availability.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- What Otherwhere Does Differently -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">WHAT OTHERWHERE DOES DIFFERENTLY</h2>
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">→</span>
+          <div>
+            <strong>Searches real inventory with real prices</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Connected to actual booking systems. Prices are current. Availability is live.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">→</span>
+          <div>
+            <strong>Curates 3-5 options instead of generic lists</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Not "here are 50 hotels in Paris." Just the ones worth considering for you.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">→</span>
+          <div>
+            <strong>Can hand off to human concierge for complex bookings</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">When AI isn't enough, real expertise kicks in.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accent mt-1">→</span>
+          <div>
+            <strong>Learns your preferences over time</strong>
+            <p class="text-ink-secondary text-body-sm mt-1">Boutique hotels? Aisle seats? We remember.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Example Comparison -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">EXAMPLE: SAME QUESTION, DIFFERENT ANSWERS</h2>
+
+      <div class="bg-paper-secondary rounded-card p-6 mb-6">
+        <p class="text-body-sm text-ink-tertiary mb-2">YOU ASK:</p>
+        <p class="text-body-lg font-medium">"Find me a boutique hotel in Lisbon for 4 nights in March"</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="border border-paper-tertiary rounded-card p-6">
+          <h3 class="text-display-sm mb-4">CHATGPT SAYS:</h3>
+          <p class="text-ink-secondary text-body-sm">
+            "Here are some popular boutique hotels in Lisbon:
+          </p>
+          <ol class="text-ink-secondary text-body-sm mt-2 space-y-2 list-decimal list-inside">
+            <li>Hotel A - known for its rooftop views...</li>
+            <li>Hotel B - features a great restaurant...</li>
+            <li>Hotel C - located in the historic center...</li>
+          </ol>
+          <p class="text-ink-tertiary text-body-sm mt-4 italic">
+            (No prices, no availability, generic descriptions from training data)
+          </p>
+        </div>
+
+        <div class="border-2 border-accent rounded-card p-6">
+          <h3 class="text-display-sm mb-4 text-accent">OTHERWHERE SAYS:</h3>
+          <p class="text-ink-secondary text-body-sm">
+            "For March 12-16 in Lisbon, I found 3 boutique options:
+          </p>
+          <ol class="text-ink-secondary text-body-sm mt-2 space-y-2 list-decimal list-inside">
+            <li><strong>Hotel A</strong> - $180/night, available, 8 min walk to Baixa</li>
+            <li><strong>Hotel B</strong> - $220/night, only 2 rooms left, rooftop bar</li>
+            <li><strong>Hotel C</strong> - $165/night, available, farther from center</li>
+          </ol>
+          <p class="text-accent text-body-sm mt-4 font-medium">
+            Want me to hold one of these?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Decision Framework -->
+    <QuotableBlock type="decision" label="When to Use Each">
+      <div class="space-y-4">
+        <p><strong>Use ChatGPT when:</strong></p>
+        <ul class="list-disc list-inside text-ink-secondary ml-4">
+          <li>You're dreaming and exploring ("Where should I go?")</li>
+          <li>You need general information ("Best time to visit Japan?")</li>
+          <li>You want itinerary ideas ("5-day Greece trip")</li>
+        </ul>
+        <p class="mt-4"><strong>Use Otherwhere when:</strong></p>
+        <ul class="list-disc list-inside text-ink-secondary ml-4">
+          <li>You're ready to book ("I want 4 nights in Lisbon next month")</li>
+          <li>You need real prices and availability</li>
+          <li>You want curated options, not endless searching</li>
+        </ul>
+      </div>
+    </QuotableBlock>
+
+    <!-- FAQ -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">FREQUENTLY ASKED QUESTIONS</h2>
+      <div class="space-y-6">
+        {faqData.questions.map((faq) => (
+          <div class="border-b border-paper-tertiary pb-6">
+            <h3 class="text-display-sm mb-3">{faq.question}</h3>
+            <p class="text-ink-secondary">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">TRY BOTH</h2>
+      <p class="text-body-lg text-ink-secondary mb-6">
+        Use ChatGPT for dreaming. Use Otherwhere for doing.
+      </p>
+      <CTABanner variant="skip-the-prompts" />
+    </section>
+  </article>
+</BaseLayout>

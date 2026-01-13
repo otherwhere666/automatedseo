@@ -1,0 +1,27 @@
+---
+interface Props {
+  label?: string;
+  type?: 'quick-answer' | 'definition' | 'decision' | 'tip';
+}
+
+const { label, type = 'quick-answer' } = Astro.props;
+
+const defaultLabels = {
+  'quick-answer': 'Quick Answer',
+  'definition': 'Definition',
+  'decision': 'Decision Framework',
+  'tip': 'Pro Tip',
+};
+
+const displayLabel = label || defaultLabels[type];
+const isHighlight = type === 'quick-answer';
+---
+
+<div class={isHighlight ? 'quick-answer' : 'quotable'}>
+  {displayLabel && (
+    <span class="quotable-label">{displayLabel}</span>
+  )}
+  <div class="quotable-content">
+    <slot />
+  </div>
+</div>

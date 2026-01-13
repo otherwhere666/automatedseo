@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #FFFEF3;
+    color: #252525;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply text-body;
+  }
+
+  /* Editorial headlines */
+  h1, h2, h3, h4 {
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-weight: 400;
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    outline: 1px solid #252525;
+    outline-offset: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: #F5F4E8;
+    color: #252525;
+  }
+}
+
+@layer components {
+  /* Section label - like "INSPIRATION" */
+  .section-label {
+    @apply text-caption uppercase tracking-widest text-ink-tertiary mb-8;
+    letter-spacing: 0.2em;
+  }
+
+  /* Hero article card */
+  .article-hero {
+    @apply block;
+  }
+
+  .article-hero-image {
+    @apply w-full aspect-[16/10] object-cover mb-6;
+  }
+
+  .article-hero-title {
+    @apply font-serif text-headline-lg mb-4;
+  }
+
+  .article-hero-dek {
+    @apply text-subhead text-ink-secondary mb-3;
+  }
+
+  .article-hero-byline {
+    @apply text-caption uppercase tracking-wider text-ink-tertiary;
+  }
+
+  /* Article card (grid items) */
+  .article-card {
+    @apply block;
+  }
+
+  .article-card-image {
+    @apply w-full aspect-[4/3] object-cover mb-4;
+    transition: opacity 0.3s ease;
+  }
+
+  .article-card:hover .article-card-image {
+    opacity: 0.9;
+  }
+
+  .article-card-title {
+    @apply font-serif text-headline-sm mb-2;
+    transition: opacity 0.2s ease;
+  }
+
+  .article-card:hover .article-card-title {
+    opacity: 0.8;
+  }
+
+  .article-card-dek {
+    @apply text-small text-ink-secondary mb-2 line-clamp-2;
+  }
+
+  .article-card-byline {
+    @apply text-caption uppercase tracking-wider text-ink-tertiary;
+  }
+
+  /* Minimal CTA - not salesy */
+  .cta-subtle {
+    @apply text-small text-ink-tertiary border-b border-ink-tertiary pb-0.5;
+    transition: all 0.2s ease;
+  }
+
+  .cta-subtle:hover {
+    @apply text-ink border-ink;
+  }
+
+  /* Editorial blockquote */
+  .pullquote {
+    @apply font-serif text-headline text-ink-secondary my-12 max-w-2xl;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-paper-tertiary my-12;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply text-small text-ink-secondary;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    @apply text-ink;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+}
+
+img[loading="lazy"].loaded,
+img:not([loading="lazy"]) {
+  opacity: 1;
+}

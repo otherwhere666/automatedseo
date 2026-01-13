@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const destinations = [
+  { city: "Lisbon", country: "Portugal", slug: "lisbon", region: "Europe" },
+  { city: "Tokyo", country: "Japan", slug: "tokyo", region: "Asia" },
+  { city: "Barcelona", country: "Spain", slug: "barcelona", region: "Europe" },
+  { city: "Paris", country: "France", slug: "paris", region: "Europe" },
+  { city: "Tulum", country: "Mexico", slug: "tulum", region: "Americas" },
+];
+
+const byRegion = destinations.reduce((acc, d) => {
+  if (!acc[d.region]) acc[d.region] = [];
+  acc[d.region].push(d);
+  return acc;
+}, {} as Record<string, typeof destinations>);
+---
+
+<BaseLayout
+  title="Destination Guides | Otherwhere"
+  description="Curated destination guides for discerning travelers. Not 50 hotels — just the ones worth considering."
+>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <header class="mb-12">
+      <h1 class="text-display-xl mb-6">DESTINATIONS</h1>
+      <p class="text-body-lg text-ink-secondary max-w-2xl">
+        Curated guides, not comprehensive lists. We tell you where to stay for different types of travelers — and what to skip.
+      </p>
+    </header>
+
+    {Object.entries(byRegion).map(([region, cities]) => (
+      <section class="mb-12">
+        <h2 class="text-display-sm text-ink-tertiary mb-6">{region.toUpperCase()}</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {cities.map((d) => (
+            <a href={`/destinations/${d.slug}`} class="card group flex items-center justify-between">
+              <div>
+                <h3 class="text-display-sm group-hover:text-accent transition-colors">{d.city}</h3>
+                <p class="text-body-sm text-ink-tertiary">{d.country}</p>
+              </div>
+              <span class="text-accent">→</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <div class="bg-paper-secondary rounded-card p-8 text-center mt-16">
+      <h2 class="text-display-sm mb-4">DON'T SEE YOUR DESTINATION?</h2>
+      <p class="text-ink-secondary mb-6">
+        Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. We'll send you curated recommendations.
+      </p>
+      <a
+        href="sms:+13239224067&body=TRAVEL"
+        class="bg-ink text-paper px-6 py-3 rounded-card-sm font-medium hover:bg-ink-secondary transition-colors inline-block"
+      >
+        Text Us
+      </a>
+    </div>
+  </div>
+</BaseLayout>

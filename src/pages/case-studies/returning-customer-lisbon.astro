@@ -1,0 +1,41 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+---
+
+<CaseStudy
+  title="The Returning Customer"
+  destination="Lisbon, Portugal"
+  type="Repeat Trip"
+  travelerType="Creative director, 36, third trip booked through Otherwhere"
+  budget="$4,000 for a long weekend"
+  timeline="3 weeks out"
+  quote="Hey, planning another trip. Thinking Barcelona or maybe Lisbon. 4 nights. You know what I like."
+  constraints={[
+    "Prefers boutique hotels (no big chains)",
+    "Always wants walkable to restaurants",
+    "King bed, high floor, quiet room",
+    'Doesn\'t like "scene-y" hotels',
+    "United MileagePlus member"
+  ]}
+  eliminated={[
+    { name: "Barcelona", reason: "Loud in June — not her vibe" },
+    { name: "Chain hotels", reason: "We know she doesn't like them" },
+    { name: "Hotels with club scenes", reason: "Too noisy for her preferences" }
+  ]}
+  considered={[
+    { name: "Lisbon - Príncipe Real", reason: "Quieter neighborhood, boutique options" },
+    { name: "Lisbon - Chiado", reason: "Central but can be busy" }
+  ]}
+  recommended="Boutique in Príncipe Real — high floor corner room available, matches her pattern"
+  finalBooking={{
+    property: "Boutique hotel in Príncipe Real",
+    why: "We pattern-matched to her taste. High floor, quiet room, walkable to restaurants.",
+    price: "Within budget",
+    extras: "United flight (earns miles), TSA PreCheck info already on file"
+  }}
+  timeSaved={{
+    diy: "2-3 hours",
+    otherwhere: "4 minutes"
+  }}
+  outcome={'Booked in one exchange. She\'s now on trip #4 planning with us. The value: no re-entering preferences, no explaining "I don\'t like big hotels" again, no typing passport number.'}
+/>

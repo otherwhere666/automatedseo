@@ -1,0 +1,26 @@
+---
+interface Props {
+  pillar?: string;
+  currentSlug: string;
+}
+
+const { pillar, currentSlug } = Astro.props;
+
+// This will be populated dynamically once we have content
+// For now, showing placeholder structure
+const relatedPosts: { title: string; slug: string; description: string }[] = [];
+---
+
+{relatedPosts.length > 0 && (
+  <section class="mt-16 pt-8 border-t border-paper-tertiary">
+    <h3 class="text-display-sm mb-6">Related Articles</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      {relatedPosts.slice(0, 2).map((post) => (
+        <a href={post.slug} class="card block">
+          <h4 class="text-display-sm mb-2">{post.title}</h4>
+          <p class="text-body-sm text-ink-secondary">{post.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

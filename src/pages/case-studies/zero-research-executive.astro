@@ -1,0 +1,38 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+---
+
+<CaseStudy
+  title="The Zero Research Executive"
+  destination="London, UK"
+  type="Business"
+  travelerType="CFO, 52, flies 80+ times a year, zero patience for booking interfaces"
+  budget="Doesn't matter, company card"
+  timeline="Needs to be in London Monday morning for board meeting"
+  quote="JFK to Heathrow, Sunday night, business class, aisle seat. Arriving before 9am. Go."
+  constraints={[
+    "Must have: Business class, aisle, morning arrival",
+    "Loyalty: British Airways Executive Club (collect Avios)",
+    "No hotel needed. Just the flight."
+  ]}
+  eliminated={[
+    { name: "Economy options", reason: "Not an option for this traveler" },
+    { name: "Non-aisle seats", reason: "Explicit requirement" }
+  ]}
+  considered={[
+    { name: "BA 178", reason: "Departing 10:25pm Sunday, arriving 10:25am Monday" },
+    { name: "Alternative carriers", reason: "Wouldn't earn BA Avios" }
+  ]}
+  recommended="BA 178, business class, aisle seat 10C — arrives Monday morning, earns Avios"
+  finalBooking={{
+    property: "British Airways 178, Seat 10C",
+    why: "Met all requirements: timing, class, seat preference, loyalty program",
+    price: "Corporate rate",
+    extras: "None needed"
+  }}
+  timeSaved={{
+    diy: "15-20 minutes",
+    otherwhere: "3 minutes"
+  }}
+  outcome={'Booked. He texts us every week now. Said: "You\'re faster than my EA." This person doesn\'t need recommendations—they need someone to do the clicking.'}
+/>

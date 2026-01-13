@@ -1,0 +1,113 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CTABanner from '../components/CTABanner.astro';
+
+interface TravelerType {
+  name: string;
+  stayIn: string;
+  why: string;
+  pick: string;
+  price: string;
+}
+
+interface Props {
+  city: string;
+  country: string;
+  quickTake: string;
+  travelerTypes: TravelerType[];
+  skip: { name: string; reason: string }[];
+  lastUpdated: string;
+}
+
+const { city, country, quickTake, travelerTypes, skip, lastUpdated } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TravelGuide",
+  "about": {
+    "@type": "City",
+    "name": city,
+    "containedInPlace": {
+      "@type": "Country",
+      "name": country
+    }
+  },
+  "name": `Where to Stay in ${city}: A Curated Guide`,
+  "description": quickTake
+};
+---
+
+<BaseLayout
+  title={`Where to Stay in ${city} | Curated Guide | Otherwhere`}
+  description={`${quickTake} A curated guide for different types of travelers.`}
+  schema={[schema]}
+>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <a href="/destinations" class="text-accent text-body-sm hover:text-accent-hover transition-colors mb-4 block">
+        ← All Destinations
+      </a>
+      <h1 class="text-display-xl mb-4">{city.toUpperCase()}</h1>
+      <p class="text-display-sm text-ink-secondary">{country}</p>
+    </header>
+
+    <!-- Quick Take -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-4">QUICK TAKE</h2>
+      <p class="text-body-lg">{quickTake}</p>
+    </section>
+
+    <!-- Traveler Types -->
+    {travelerTypes.map((type, index) => (
+      <section class="my-12 bg-paper-secondary rounded-card p-8">
+        <h2 class="text-display-md mb-2">FOR {type.name.toUpperCase()}</h2>
+        <div class="space-y-4">
+          <div>
+            <p class="text-body-sm text-ink-tertiary">STAY IN</p>
+            <p class="text-body-lg font-medium">{type.stayIn}</p>
+          </div>
+          <div>
+            <p class="text-body-sm text-ink-tertiary">WHY</p>
+            <p class="text-ink-secondary">{type.why}</p>
+          </div>
+          <div class="border-t border-paper-tertiary pt-4 mt-4">
+            <p class="text-body-sm text-ink-tertiary">OUR PICK</p>
+            <p class="text-body-lg font-medium text-accent">{type.pick}</p>
+            <p class="text-body-sm text-ink-tertiary">{type.price}</p>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Skip These -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">SKIP THESE (TOURIST TRAPS)</h2>
+      <ul class="space-y-4">
+        {skip.map((s) => (
+          <li class="flex items-start gap-3">
+            <span class="text-ink-tertiary mt-1">×</span>
+            <div>
+              <strong>{s.name}</strong>
+              <p class="text-ink-secondary text-body-sm">{s.reason}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- CTA -->
+    <section class="my-12">
+      <h2 class="text-display-md mb-6">WANT A PERSONALIZED RECOMMENDATION?</h2>
+      <p class="text-ink-secondary mb-6">
+        Text TRAVEL to +1 (323) 922-4067 with "{city.toUpperCase()}" and your dates. We'll curate options based on your preferences.
+      </p>
+      <CTABanner variant="personalized-recs" />
+    </section>
+
+    <!-- Last Updated -->
+    <p class="text-body-sm text-ink-tertiary mt-12 text-center">
+      Last updated: {lastUpdated} · Prices are approximate
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,84 @@
+---
+interface Props {
+  variant?: 'skip-the-prompts' | 'try-otherwhere' | 'personalized-recs' | 'stop-researching' | 'soft-curious' | 'full' | 'inline';
+}
+
+const { variant = 'try-otherwhere' } = Astro.props;
+
+const variants = {
+  'skip-the-prompts': {
+    headline: 'Skip the Prompts',
+    body: 'Tired of crafting the perfect prompt? Text TRAVEL to +1 (323) 922-4067 and get personalized recommendations in minutes.',
+    secondary: 'Already using ChatGPT? Try the Otherwhere Travel Concierge GPT for recommendations that actually lead to bookings.',
+  },
+  'try-otherwhere': {
+    headline: 'Ready to Plan Your Trip?',
+    body: 'Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes.',
+    secondary: 'Or try the Otherwhere GPT in ChatGPT for smart recommendations that actually lead to bookings.',
+  },
+  'personalized-recs': {
+    headline: 'Want Personalized Recommendations?',
+    body: 'Text TRAVEL to +1 (323) 922-4067 and tell us what you\'re looking for. We\'ll curate options based on your preferences.',
+    secondary: null,
+  },
+  'stop-researching': {
+    headline: 'Stop Researching. Start Texting.',
+    body: 'Your time is worth more than endless scrolling. Text TRAVEL to +1 (323) 922-4067 - we\'ll do the research for you.',
+    secondary: null,
+  },
+  'soft-curious': {
+    headline: 'Curious How It Works?',
+    body: 'Text TRAVEL to +1 (323) 922-4067 to try Otherwhere. No commitment, just a conversation.',
+    secondary: null,
+  },
+  'full': {
+    headline: 'Ready to Plan Your Trip?',
+    body: 'Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes.',
+    secondary: 'Already in ChatGPT? Try the Otherwhere Travel Concierge GPT for smart recommendations that actually lead to bookings.',
+  },
+  'inline': {
+    headline: null,
+    body: 'Want current prices and availability? Text TRAVEL to +1 (323) 922-4067 with your dates.',
+    secondary: null,
+  },
+};
+
+const content = variants[variant] || variants['try-otherwhere'];
+const isInline = variant === 'inline';
+---
+
+{isInline ? (
+  <div class="cta-inline my-8">
+    <p class="text-body-md text-ink-secondary">
+      {content.body}
+    </p>
+  </div>
+) : (
+  <div class="cta-banner text-center">
+    {content.headline && (
+      <h3 class="text-display-md text-paper mb-4">{content.headline}</h3>
+    )}
+    <p class="text-body-md text-paper/90 mb-6 max-w-xl mx-auto">
+      {content.body}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="sms:+13239224067&body=TRAVEL"
+        class="bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-card-sm font-medium transition-colors"
+      >
+        Text TRAVEL Now
+      </a>
+      <a
+        href="tel:+13239224067"
+        class="text-paper/80 hover:text-paper transition-colors text-body-sm"
+      >
+        or call (323) 922-4067
+      </a>
+    </div>
+    {content.secondary && (
+      <p class="text-body-sm text-paper/60 mt-6 max-w-lg mx-auto">
+        {content.secondary}
+      </p>
+    )}
+  </div>
+)}

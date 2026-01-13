@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Trips We Planned | Otherwhere Case Studies",
+    "description": "Real examples of trips planned through Otherwhere. Anonymized case studies showing how AI concierge travel planning works."
+  }
+];
+
+const caseStudies = [
+  {
+    slug: "honeymoon-puglia",
+    title: "The Honeymoon Couple",
+    destination: "Puglia, Italy",
+    type: "Honeymoon",
+    quote: "We want somewhere romantic but not basic. Good food matters more than a beach.",
+    budget: "$6,000",
+    result: "$4,200 for 7 nights",
+    time: "22 minutes"
+  },
+  {
+    slug: "burnout-escape-iceland",
+    title: "The Burned-Out Founder",
+    destination: "Iceland Westfjords",
+    type: "Escape",
+    quote: "I need to disappear for a week. Somewhere I can sleep, read, and not think.",
+    budget: "Whatever it costs",
+    result: "Remote luxury lodge",
+    time: "18 minutes"
+  },
+  {
+    slug: "anniversary-trip-montreal",
+    title: "The Anniversary Trip",
+    destination: "Montreal, Canada",
+    type: "Anniversary",
+    quote: "We have 4 days without kids. We don't even know what we like anymore.",
+    budget: "$3,500",
+    result: "$2,100 for 4 nights + flights",
+    time: "15 minutes"
+  },
+  {
+    slug: "zero-research-executive",
+    title: "The Zero Research Executive",
+    destination: "London, UK",
+    type: "Business",
+    quote: "JFK to Heathrow, Sunday night, business class, aisle seat. Go.",
+    budget: "Company card",
+    result: "Booked in 3 minutes",
+    time: "3 minutes"
+  },
+  {
+    slug: "last-minute-miami",
+    title: "The Last-Minute Celebration",
+    destination: "Miami, FL",
+    type: "Last-Minute",
+    quote: "Miami tomorrow morning, first class if you can get it. Window seat.",
+    budget: "Up to $5k",
+    result: "Booked by 9:20pm",
+    time: "8 minutes"
+  },
+  {
+    slug: "returning-customer-lisbon",
+    title: "The Returning Customer",
+    destination: "Lisbon, Portugal",
+    type: "Repeat Trip",
+    quote: "You know what I like.",
+    budget: "$4,000",
+    result: "Booked in one exchange",
+    time: "4 minutes"
+  },
+  {
+    slug: "status-traveler-rome",
+    title: "The Status Traveler",
+    destination: "Rome, Italy",
+    type: "Loyalty Points",
+    quote: "I want somewhere good but still Marriott so I get my points.",
+    budget: "$3,000",
+    result: "St. Regis Rome, upgraded to suite",
+    time: "20 minutes"
+  },
+  {
+    slug: "surprise-anniversary-burgundy",
+    title: "The Surprise Anniversary",
+    destination: "Burgundy, France",
+    type: "Special Occasion",
+    quote: "I want to surprise my wife. She always plans everything.",
+    budget: "$10,000",
+    result: "Château hotel + hot air balloon",
+    time: "35 minutes"
+  },
+  {
+    slug: "quick-business-chicago",
+    title: "The Quick Business Trip",
+    destination: "Chicago, IL",
+    type: "Business",
+    quote: "ORD tomorrow, any afternoon flight, economy is fine, aisle.",
+    budget: "Up to $800",
+    result: "Booked by 11:38am",
+    time: "3 minutes"
+  }
+];
+---
+
+<BaseLayout
+  title="Trips We Planned | Otherwhere Case Studies"
+  description="Real examples of trips planned through Otherwhere. See how AI concierge travel planning works with anonymized case studies."
+  schema={schemas}
+>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-display-xl mb-6">TRIPS WE PLANNED</h1>
+      <p class="text-body-lg text-ink-secondary max-w-2xl">
+        Real examples, anonymized. These case studies show how Otherwhere works across different trip types, budgets, and timelines.
+      </p>
+    </header>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-6 mb-12 bg-paper-secondary rounded-card p-8">
+      <div class="text-center">
+        <p class="text-display-lg text-accent">9</p>
+        <p class="text-body-sm text-ink-secondary">Case Studies</p>
+      </div>
+      <div class="text-center">
+        <p class="text-display-lg text-accent">14 min</p>
+        <p class="text-body-sm text-ink-secondary">Avg. Conversation</p>
+      </div>
+      <div class="text-center">
+        <p class="text-display-lg text-accent">100%</p>
+        <p class="text-body-sm text-ink-secondary">Booked</p>
+      </div>
+    </div>
+
+    <!-- Case Study Grid -->
+    <div class="space-y-6">
+      {caseStudies.map((study) => (
+        <a href={`/case-studies/${study.slug}`} class="card block group">
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <div class="flex-grow">
+              <span class="text-accent text-body-sm">{study.type}</span>
+              <h2 class="text-display-sm my-2 group-hover:text-accent transition-colors">{study.title}</h2>
+              <p class="text-ink-secondary text-body-sm italic">"{study.quote}"</p>
+            </div>
+            <div class="flex-shrink-0 text-right">
+              <p class="text-display-sm">{study.destination}</p>
+              <p class="text-body-sm text-ink-tertiary">{study.time} of texts</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-16">
+      <h2 class="text-display-md mb-6">WANT THIS FOR YOUR TRIP?</h2>
+      <CTABanner variant="personalized-recs" />
+    </div>
+  </div>
+</BaseLayout>

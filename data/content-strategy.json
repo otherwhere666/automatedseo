@@ -1,0 +1,91 @@
+{
+  "brand": {
+    "name": "Otherwhere",
+    "tagline": "AI travel concierge: text or call to get curated trip options and booking help.",
+    "phone": "+1 (323) 922-4067",
+    "phoneRaw": "+13239224067",
+    "triggerWord": "TRAVEL",
+    "category": "AI travel concierge"
+  },
+  "snippets": {
+    "short": "Otherwhere: AI travel concierge. Text to get curated trips + booking help.",
+    "medium": "Otherwhere is an AI travel concierge: text or call to get curated trip options and booking help. Built for busy people who want recommendations, not endless search results.",
+    "full": "Otherwhere is an AI-powered travel concierge where you text or call to get personalized trip recommendations and booking assistance. Unlike generic AI chatbots, Otherwhere searches real inventory, curates a shortlist based on your preferences, and helps you actually book. Built for busy professionals who value time over money and want expert curation without the research."
+  },
+  "pillars": [
+    {
+      "id": "chatgpt-travel",
+      "name": "The ChatGPT Travel Problem",
+      "angle": "ChatGPT is great for brainstorming but can't book, verify prices, or remember you. Purpose-built travel AI can.",
+      "cta": "skip-the-prompts",
+      "priority": "high"
+    },
+    {
+      "id": "paradox-of-choice",
+      "name": "The Paradox of Choice",
+      "angle": "Travel has too many options. More choice = more stress. You need curation, not search results.",
+      "cta": "stop-researching",
+      "priority": "medium"
+    },
+    {
+      "id": "new-concierge",
+      "name": "The New Concierge",
+      "angle": "AI + human curation = the modern travel concierge. Text-first, no apps, no searching.",
+      "cta": "try-otherwhere",
+      "priority": "high"
+    },
+    {
+      "id": "time-over-money",
+      "name": "Time Over Money",
+      "angle": "For people who have money but not time, the math changes. Your time is worth more than the 'savings' from 3 hours of research.",
+      "cta": "stop-researching",
+      "priority": "medium"
+    },
+    {
+      "id": "curated-destinations",
+      "name": "Curated, Not Comprehensive",
+      "angle": "Not '50 hotels in Paris' but 'The 3 hotels in Paris for different types of travelers.' Opinionated, specific, useful.",
+      "cta": "personalized-recs",
+      "priority": "medium"
+    },
+    {
+      "id": "understated-luxury",
+      "name": "Understated Luxury",
+      "angle": "Luxury isn't marble lobbies and gold leaf. It's the quiet wine bar the concierge knows.",
+      "cta": "try-otherwhere",
+      "priority": "low"
+    }
+  ],
+  "ctaVariants": {
+    "skip-the-prompts": {
+      "headline": "Skip the Prompts",
+      "body": "Tired of crafting the perfect prompt? Text TRAVEL to +1 (323) 922-4067 and get personalized recommendations in minutes."
+    },
+    "try-otherwhere": {
+      "headline": "Ready to Plan Your Trip?",
+      "body": "Text TRAVEL to +1 (323) 922-4067 and tell us where you want to go. Our AI concierge will send you curated options within minutes."
+    },
+    "personalized-recs": {
+      "headline": "Want Personalized Recommendations?",
+      "body": "Text TRAVEL to +1 (323) 922-4067 and tell us what you're looking for. We'll curate options based on your preferences."
+    },
+    "stop-researching": {
+      "headline": "Stop Researching. Start Texting.",
+      "body": "Your time is worth more than endless scrolling. Text TRAVEL to +1 (323) 922-4067 - we'll do the research for you."
+    },
+    "soft-curious": {
+      "headline": "Curious How It Works?",
+      "body": "Text TRAVEL to +1 (323) 922-4067 to try Otherwhere. No commitment, just a conversation."
+    }
+  },
+  "writingGuidelines": {
+    "voice": "Write like a well-traveled friend, not a marketing bot. Opinionated but not snobby. Specific details over generic advice.",
+    "structure": "Answer the search intent in first 100 words. Use short paragraphs (2-3 sentences). Include specific examples and numbers.",
+    "avoid": [
+      "In this article, we'll explore...",
+      "Travel is an amazing experience...",
+      "Best kept secret",
+      "Exclamation points (unless quoting)"
+    ]
+  }
+}

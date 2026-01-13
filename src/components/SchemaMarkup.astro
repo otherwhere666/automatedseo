@@ -1,0 +1,67 @@
+---
+interface Props {
+  type: 'FAQ' | 'HowTo' | 'Service' | 'Article';
+  data: Record<string, unknown>;
+}
+
+const { type, data } = Astro.props;
+
+function buildSchema(type: string, data: Record<string, unknown>) {
+  const baseContext = { "@context": "https://schema.org" };
+
+  switch (type) {
+    case 'FAQ':
+      return {
+        ...baseContext,
+        "@type": "FAQPage",
+        "mainEntity": data.questions?.map((q: { question: string; answer: string }) => ({
+          "@type": "Question",
+          "name": q.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": q.answer
+          }
+        }))
+      };
+
+    case 'HowTo':
+      return {
+        ...baseContext,
+        "@type": "HowTo",
+        "name": data.name,
+        "description": data.description,
+        "step": data.steps?.map((step: string, i: number) => ({
+          "@type": "HowToStep",
+          "position": i + 1,
+          "text": step
+        }))
+      };
+
+    case 'Service':
+      return {
+        ...baseContext,
+        "@type": "Service",
+        "name": "Otherwhere AI Travel Concierge",
+        "serviceType": "Travel Planning",
+        "provider": {
+          "@type": "Organization",
+          "name": "Otherwhere"
+        },
+        "description": "Text or call to get curated trip options and booking help.",
+        "areaServed": "Worldwide",
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceType": "SMS",
+          "servicePhone": "+1-323-922-4067"
+        }
+      };
+
+    default:
+      return { ...baseContext, "@type": type, ...data };
+  }
+}
+
+const schema = buildSchema(type, data);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

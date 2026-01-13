@@ -1,0 +1,40 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+---
+
+<CaseStudy
+  title="The Honeymoon Couple"
+  destination="Puglia, Italy"
+  type="Honeymoon"
+  travelerType="Newly engaged couple, both 32, working in tech"
+  budget="$6,000 total (7 nights)"
+  timeline="3 weeks until trip"
+  quote="We want somewhere romantic but not basic. Not Cancun or an all-inclusive. Good food matters more than a beach. We're foodies."
+  constraints={[
+    "Must have: Great restaurants nearby, romantic vibe, walkable",
+    "Can't do: Long-haul flights (max 8 hours from NYC)",
+    'Dealbreaker: "Resort feel" or tourist crowds'
+  ]}
+  eliminated={[
+    { name: "Caribbean islands", reason: 'Too "honeymoon cliché" for them' },
+    { name: "Bali", reason: "20+ hour travel time" },
+    { name: "Santorini", reason: "Peak season crowds, overexposed on Instagram" }
+  ]}
+  considered={[
+    { name: "Portugal (Lisbon + Sintra)", reason: "Great food, romantic, but they'd been before" },
+    { name: "Amalfi Coast", reason: "Stunning but crowded in their window" },
+    { name: "Puglia, Italy", reason: "Off-the-radar, incredible food scene, authentic" }
+  ]}
+  recommended="Puglia — off-peak pricing, authentic, beaches + food without the crowds"
+  finalBooking={{
+    property: "Masseria (restored 17th-century farmhouse)",
+    why: "Private, romantic, farm-to-table meals included, trulli architecture they'd never seen",
+    price: "$4,200 for 7 nights (under budget)",
+    extras: "Cooking class ($150), truffle hunting experience ($200)"
+  }}
+  timeSaved={{
+    diy: "10-15 hours",
+    otherwhere: "22 minutes"
+  }}
+  outcome={'Booked. They sent photos of homemade orecchiette. Called it "the best trip we\'ve ever taken."'}
+/>

@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Featured articles with Unsplash images
+const heroArticle = {
+  title: "What is Otherwhere?",
+  dek: "AI travel concierge: text or call to get curated trip options and booking help",
+  slug: "/what-is-otherwhere",
+  image: "https://source.unsplash.com/1600x900/?travel,luxury,hotel",
+  author: "Otherwhere"
+};
+
+const featuredArticles = [
+  {
+    title: "Otherwhere vs ChatGPT for travel",
+    dek: "ChatGPT is great for brainstorming, but it can't book. Here's what actually works.",
+    slug: "/otherwhere-vs-chatgpt",
+    image: "https://source.unsplash.com/800x600/?laptop,travel,planning",
+    author: "Otherwhere"
+  },
+  {
+    title: "What is an AI travel concierge?",
+    dek: "The category explained: what it is, how it works, and who it's for.",
+    slug: "/what-is-ai-travel-concierge",
+    image: "https://source.unsplash.com/800x600/?concierge,hotel,service",
+    author: "Otherwhere"
+  }
+];
+
+const caseStudies = [
+  {
+    title: "The honeymoon couple: Puglia, Italy",
+    dek: "How we found the perfect romantic escape for foodies who wanted somewhere not basic.",
+    slug: "/case-studies/honeymoon-puglia",
+    image: "https://source.unsplash.com/800x600/?puglia,italy,countryside",
+    author: "Otherwhere"
+  },
+  {
+    title: "The burned-out founder: Iceland",
+    dek: "A remote luxury lodge for someone who needed to disappear.",
+    slug: "/case-studies/burnout-escape-iceland",
+    image: "https://source.unsplash.com/800x600/?iceland,remote,nature",
+    author: "Otherwhere"
+  },
+  {
+    title: "The surprise anniversary: Burgundy",
+    dek: "Planning a 20th anniversary trip without her knowing.",
+    slug: "/case-studies/surprise-anniversary-burgundy",
+    image: "https://source.unsplash.com/800x600/?burgundy,france,wine",
+    author: "Otherwhere"
+  },
+  {
+    title: "The returning customer: Lisbon",
+    dek: "When we already know what you like.",
+    slug: "/case-studies/returning-customer-lisbon",
+    image: "https://source.unsplash.com/800x600/?lisbon,portugal,city",
+    author: "Otherwhere"
+  }
+];
+
+const destinations = [
+  {
+    title: "Where to stay in Lisbon",
+    dek: "A curated guide for different types of travelers",
+    slug: "/destinations/lisbon",
+    image: "https://source.unsplash.com/800x600/?lisbon,street,architecture",
+    author: "Otherwhere"
+  }
+];
+---
+
+<BaseLayout
+  title="Otherwhere | AI Travel Concierge Insights"
+  description="Travel planning insights from Otherwhere, the AI travel concierge. Curated guides, destination tips, and why the future of booking is curation, not search."
+>
+  <div class="max-w-wide mx-auto px-6 py-12">
+
+    <!-- Section: Inspiration -->
+    <section class="mb-20">
+      <h1 class="section-label text-center">Inspiration</h1>
+
+      <!-- Hero Article -->
+      <a href={heroArticle.slug} class="article-hero block mb-16">
+        <img
+          src={heroArticle.image}
+          alt={heroArticle.title}
+          class="article-hero-image"
+          loading="eager"
+        />
+        <div class="max-w-article mx-auto text-center">
+          <h2 class="article-hero-title">{heroArticle.title}</h2>
+          <p class="article-hero-dek">{heroArticle.dek}</p>
+          <span class="article-hero-byline">By {heroArticle.author}</span>
+        </div>
+      </a>
+
+      <!-- Two-column featured -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-wide mx-auto">
+        {featuredArticles.map((article) => (
+          <a href={article.slug} class="article-card">
+            <img
+              src={article.image}
+              alt={article.title}
+              class="article-card-image"
+              loading="lazy"
+            />
+            <h3 class="article-card-title">{article.title}</h3>
+            <p class="article-card-dek">{article.dek}</p>
+            <span class="article-card-byline">By {article.author}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <div class="divider max-w-article mx-auto"></div>
+
+    <!-- Section: Trips We Planned -->
+    <section class="mb-20">
+      <h2 class="section-label text-center">Trips We Planned</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {caseStudies.map((article) => (
+          <a href={article.slug} class="article-card">
+            <img
+              src={article.image}
+              alt={article.title}
+              class="article-card-image"
+              loading="lazy"
+            />
+            <h3 class="article-card-title text-headline-sm">{article.title}</h3>
+            <p class="article-card-dek">{article.dek}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="/case-studies" class="cta-subtle">View all case studies</a>
+      </div>
+    </section>
+
+    <div class="divider max-w-article mx-auto"></div>
+
+    <!-- Section: Destinations -->
+    <section class="mb-20">
+      <h2 class="section-label text-center">Destinations</h2>
+
+      <div class="max-w-2xl mx-auto">
+        {destinations.map((article) => (
+          <a href={article.slug} class="article-card block">
+            <img
+              src={article.image}
+              alt={article.title}
+              class="article-hero-image"
+              loading="lazy"
+            />
+            <div class="text-center">
+              <h3 class="article-hero-title text-headline">{article.title}</h3>
+              <p class="article-hero-dek">{article.dek}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="/destinations" class="cta-subtle">View all destinations</a>
+      </div>
+    </section>
+
+    <div class="divider max-w-article mx-auto"></div>
+
+    <!-- Minimal CTA -->
+    <section class="max-w-article mx-auto text-center py-16">
+      <p class="font-serif text-headline text-ink-secondary mb-6">
+        Want personalized recommendations?
+      </p>
+      <p class="text-body text-ink-tertiary mb-8">
+        Text <strong class="text-ink">TRAVEL</strong> to +1 (323) 922-4067 and tell us where you want to go.
+      </p>
+      <a
+        href="sms:+13239224067&body=TRAVEL"
+        class="inline-block text-small uppercase tracking-wider border border-ink px-8 py-3 hover:bg-ink hover:text-white transition-all"
+      >
+        Start a conversation
+      </a>
+    </section>
+
+  </div>
+</BaseLayout>
