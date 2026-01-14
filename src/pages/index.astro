@@ -1,5 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Read blog posts from content/posts
+const postsDir = path.join(process.cwd(), 'content', 'posts');
+let blogPosts: any[] = [];
+
+try {
+  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+  for (const file of files) {
+    const content = fs.readFileSync(path.join(postsDir, file), 'utf-8');
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    if (frontmatterMatch) {
+      const frontmatter = frontmatterMatch[1];
+      const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
+      const description = frontmatter.match(/description:\s*"([^"]+)"/)?.[1] || '';
+      const publishDate = frontmatter.match(/publishDate:\s*"([^"]+)"/)?.[1] || '';
+      const image = frontmatter.match(/image:\s*"([^"]+)"/)?.[1] || '';
+      const slug = file.replace('.mdx', '');
+      blogPosts.push({ title, description, publishDate, image, slug });
+    }
+  }
+  blogPosts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+  blogPosts = blogPosts.slice(0, 4); // Show max 4 on homepage
+} catch (e) {
+  // No posts yet
+}
 
 // Featured articles with Unsplash images
 const heroArticle = {
@@ -139,6 +166,36 @@ const destinations = [
     </section>
 
     <div class="divider max-w-article mx-auto"></div>
+
+    <!-- Section: Blog -->
+    {blogPosts.length > 0 && (
+      <section class="mb-20">
+        <h2 class="section-label text-center">From the Blog</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {blogPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="article-card">
+              {post.image && (
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  class="article-card-image"
+                  loading="lazy"
+                />
+              )}
+              <h3 class="article-card-title text-headline-sm">{post.title}</h3>
+              <p class="article-card-dek">{post.description}</p>
+            </a>
+          ))}
+        </div>
+
+        <div class="text-center mt-10">
+          <a href="/blog" class="cta-subtle">View all blog posts</a>
+        </div>
+      </section>
+    )}
+
+    {blogPosts.length > 0 && <div class="divider max-w-article mx-auto"></div>}
 
     <!-- Section: Destinations -->
     <section class="mb-20">
