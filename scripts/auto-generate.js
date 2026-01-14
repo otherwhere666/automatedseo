@@ -85,11 +85,24 @@ function generateTopicIdea() {
   };
 }
 
-async function getUnsplashImage(searchTerm) {
-  // Use Unsplash Source for simple, free image URLs
-  // Format: https://source.unsplash.com/featured/?{query}
-  const query = encodeURIComponent(searchTerm);
-  return `https://source.unsplash.com/1600x900/?${query},travel`;
+function getUnsplashImage() {
+  // Curated list of reliable Unsplash travel images (direct URLs, not source redirects)
+  const travelImages = [
+    'photo-1488646953014-85cb44e25828', // world map with pins
+    'photo-1507003211169-0a1dd7228f2d', // airplane window view
+    'photo-1476514525535-07fb3b4ae5f1', // lake and mountains
+    'photo-1530789253388-582c481c54b0', // tropical beach
+    'photo-1502920917128-1aa500764cbd', // paris street
+    'photo-1493976040374-85c8e12f0c0e', // santorini
+    'photo-1506929562872-bb421503ef21', // beach sunset
+    'photo-1504598318550-17eba1008a68', // city skyline
+    'photo-1500835556837-99ac94a94552', // airplane wing
+    'photo-1501785888041-af3ef285b470', // mountain lake
+    'photo-1523906834658-6e24ef2386f9', // venice canal
+    'photo-1516483638261-f4dbaf036963', // italy coast
+  ];
+  const randomImage = travelImages[Math.floor(Math.random() * travelImages.length)];
+  return `https://images.unsplash.com/${randomImage}?w=1600&h=900&fit=crop`;
 }
 
 async function generateArticle(topic) {
