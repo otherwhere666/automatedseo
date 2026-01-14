@@ -1,13 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTABanner from '../../components/CTABanner.astro';
+import TrustSignals from '../../components/TrustSignals.astro';
 
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Trips We Planned | Otherwhere Case Studies",
-    "description": "Real examples of trips planned through Otherwhere. Anonymized case studies showing how AI concierge travel planning works."
+    "description": "Real examples of trips planned through Otherwhere. See how personal travel booking works with anonymized case studies."
   }
 ];
 
@@ -103,70 +103,77 @@ const caseStudies = [
     time: "3 minutes"
   }
 ];
+
+const trustStats = [
+  { value: "9", label: "Case studies" },
+  { value: "~5 min", label: "Avg. to booked" },
+  { value: "100%", label: "Booked" }
+];
+
+const testimonial = {
+  quote: "I told them where I wanted to go and five minutes later I had options. Ten minutes after that, I was booked.",
+  author: "Otherwhere customer"
+};
 ---
 
 <BaseLayout
   title="Trips We Planned | Otherwhere Case Studies"
-  description="Real examples of trips planned through Otherwhere. See how AI concierge travel planning works with anonymized case studies."
+  description="Real examples of trips planned through Otherwhere. See how personal travel booking works with anonymized case studies."
   schema={schemas}
 >
-  <div class="max-w-4xl mx-auto px-4 py-12">
-    <!-- Header -->
-    <header class="mb-12">
-      <h1 class="text-display-xl mb-6">TRIPS WE PLANNED</h1>
-      <p class="text-body-lg text-ink-secondary max-w-2xl">
-        Real examples, anonymized. These case studies show how Otherwhere works across different trip types, budgets, and timelines.
-      </p>
-    </header>
+  <article class="py-12">
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-8">
+        <h1 class="font-serif text-4xl md:text-5xl mb-6">Trips We Planned</h1>
+        <p class="text-xl text-ink-secondary leading-relaxed">
+          Real examples, anonymized. These case studies show how Otherwhere works across different trip types, budgets, and timelines.
+        </p>
+      </header>
 
-    <!-- Stats -->
-    <div class="grid grid-cols-3 gap-6 mb-8 bg-paper-secondary rounded-card p-8">
-      <div class="text-center">
-        <p class="text-display-lg text-accent">9</p>
-        <p class="text-body-sm text-ink-secondary">Case Studies</p>
-      </div>
-      <div class="text-center">
-        <p class="text-display-lg text-accent">14 min</p>
-        <p class="text-body-sm text-ink-secondary">Avg. Conversation</p>
-      </div>
-      <div class="text-center">
-        <p class="text-display-lg text-accent">100%</p>
-        <p class="text-body-sm text-ink-secondary">Booked</p>
-      </div>
-    </div>
+      <!-- Trust Signals -->
+      <TrustSignals stats={trustStats} testimonial={testimonial} />
 
-    <div class="text-center mb-12">
-      <a
-        href="sms:+13239224067"
-        class="inline-block bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-card-sm font-medium transition-colors"
-      >
-        Text Us to Plan Your Trip
-      </a>
-    </div>
+      <hr class="section-divider" />
 
-    <!-- Case Study Grid -->
-    <div class="space-y-6">
-      {caseStudies.map((study) => (
-        <a href={`/case-studies/${study.slug}`} class="card block group">
-          <div class="flex flex-col md:flex-row md:items-center gap-4">
-            <div class="flex-grow">
-              <span class="text-accent text-body-sm">{study.type}</span>
-              <h2 class="text-display-sm my-2 group-hover:text-accent transition-colors">{study.title}</h2>
-              <p class="text-ink-secondary text-body-sm italic">"{study.quote}"</p>
-            </div>
-            <div class="flex-shrink-0 text-right">
-              <p class="text-display-sm">{study.destination}</p>
-              <p class="text-body-sm text-ink-tertiary">{study.time} of texts</p>
-            </div>
-          </div>
+      <!-- Case Study Grid -->
+      <section>
+        <div class="space-y-6">
+          {caseStudies.map((study) => (
+            <a href={`/case-studies/${study.slug}`} class="block group">
+              <article class="bg-paper-secondary rounded-xl p-6 hover:bg-paper-tertiary transition-colors">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                  <div class="flex-grow">
+                    <span class="text-accent text-sm font-medium">{study.type}</span>
+                    <h2 class="font-serif text-xl my-2 group-hover:text-accent transition-colors">{study.title}</h2>
+                    <p class="text-ink-secondary text-sm italic">"{study.quote}"</p>
+                  </div>
+                  <div class="flex-shrink-0 md:text-right">
+                    <p class="font-serif text-lg">{study.destination}</p>
+                    <p class="text-sm text-ink-tertiary">{study.time} of texts</p>
+                  </div>
+                </div>
+              </article>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-8">
+        <h2 class="font-serif text-2xl mb-4">Want this for your trip?</h2>
+        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+          Text us where you want to go. We'll send options. You pick. We book.
+        </p>
+        <a
+          href="sms:+13239224067"
+          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+        >
+          Text Us to Plan Your Trip
         </a>
-      ))}
+      </section>
     </div>
-
-    <!-- CTA -->
-    <div class="mt-16">
-      <h2 class="text-display-md mb-6">WANT THIS FOR YOUR TRIP?</h2>
-      <CTABanner variant="personalized-recs" />
-    </div>
-  </div>
+  </article>
 </BaseLayout>
