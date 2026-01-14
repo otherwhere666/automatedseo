@@ -1,0 +1,84 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export async function getStaticPaths() {
+  const postsDir = path.join(process.cwd(), 'content', 'posts');
+  const paths: any[] = [];
+
+  try {
+    const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+
+    for (const file of files) {
+      const slug = file.replace('.mdx', '');
+      paths.push({ params: { slug } });
+    }
+  } catch (e) {
+    // No posts yet
+  }
+
+  return paths;
+}
+
+const { slug } = Astro.params;
+const postsDir = path.join(process.cwd(), 'content', 'posts');
+const filePath = path.join(postsDir, `${slug}.mdx`);
+const content = fs.readFileSync(filePath, 'utf-8');
+
+// Parse frontmatter
+const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+const frontmatterStr = frontmatterMatch?.[1] || '';
+const body = content.replace(/^---\n[\s\S]*?\n---\n*/, '');
+
+// Extract frontmatter values
+const title = frontmatterStr.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
+const description = frontmatterStr.match(/description:\s*"([^"]+)"/)?.[1] || '';
+const publishDate = frontmatterStr.match(/publishDate:\s*"([^"]+)"/)?.[1] || '';
+const image = frontmatterStr.match(/image:\s*"([^"]+)"/)?.[1] || '';
+const imageAlt = frontmatterStr.match(/imageAlt:\s*"([^"]+)"/)?.[1] || '';
+const pillar = frontmatterStr.match(/pillar:\s*"([^"]+)"/)?.[1] || '';
+
+const frontmatter = { title, description, publishDate, image, imageAlt, pillar };
+
+// Simple markdown to HTML conversion
+function markdownToHtml(md: string): string {
+  return md
+    // Headers
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    // Bold
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    // Blockquotes
+    .replace(/^> (.*$)/gim, '<blockquote><p>$1</p></blockquote>')
+    // Unordered lists
+    .replace(/^\- (.*$)/gim, '<li>$1</li>')
+    // Horizontal rules
+    .replace(/^---$/gim, '<hr />')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    // Paragraphs
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hpuolb])/gm, '<p>')
+    .replace(/(?<![>])$/gm, '</p>')
+    // Clean up empty paragraphs
+    .replace(/<p><\/p>/g, '')
+    .replace(/<p>(<h[123]>)/g, '$1')
+    .replace(/(<\/h[123]>)<\/p>/g, '$1')
+    .replace(/<p>(<blockquote>)/g, '$1')
+    .replace(/(<\/blockquote>)<\/p>/g, '$1')
+    .replace(/<p>(<hr \/>)/g, '$1')
+    .replace(/(<hr \/>)<\/p>/g, '$1')
+    .replace(/<p>(<li>)/g, '$1')
+    .replace(/(<\/li>)<\/p>/g, '$1');
+}
+
+const htmlContent = markdownToHtml(body);
+---
+
+<BlogPost frontmatter={frontmatter}>
+  <Fragment set:html={htmlContent} />
+</BlogPost>

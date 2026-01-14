@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Read MDX files from content/posts directory
+const postsDir = path.join(process.cwd(), 'content', 'posts');
+let posts: any[] = [];
+
+try {
+  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+
+  for (const file of files) {
+    const content = fs.readFileSync(path.join(postsDir, file), 'utf-8');
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+
+    if (frontmatterMatch) {
+      const frontmatter = frontmatterMatch[1];
+      const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
+      const description = frontmatter.match(/description:\s*"([^"]+)"/)?.[1] || '';
+      const publishDate = frontmatter.match(/publishDate:\s*"([^"]+)"/)?.[1] || '';
+      const image = frontmatter.match(/image:\s*"([^"]+)"/)?.[1] || '';
+      const pillar = frontmatter.match(/pillar:\s*"([^"]+)"/)?.[1] || '';
+      const slug = file.replace('.mdx', '');
+
+      posts.push({ title, description, publishDate, image, pillar, slug });
+    }
+  }
+
+  // Sort by date, newest first
+  posts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+} catch (e) {
+  // No posts yet
+}
+---
+
+<BaseLayout
+  title="Blog | Otherwhere"
+  description="Travel insights, booking tips, and destination guides from Otherwhere."
+>
+  <article class="py-12">
+    <div class="blog-content">
+      <header class="mb-12">
+        <h1 class="font-serif text-4xl md:text-5xl mb-6">Blog</h1>
+        <p class="text-xl text-ink-secondary leading-relaxed">
+          Travel insights, booking tips, and destination guides.
+        </p>
+      </header>
+
+      {posts.length === 0 ? (
+        <div class="text-center py-16 bg-paper-secondary rounded-xl">
+          <p class="text-ink-secondary text-lg mb-4">No posts yet. Check back soon!</p>
+          <p class="text-ink-tertiary text-sm">New articles are published daily.</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="block group">
+              <article class="border-b border-paper-tertiary pb-8">
+                {post.image && (
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    class="w-full h-48 object-cover rounded-xl mb-4"
+                  />
+                )}
+                <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
+                  <time datetime={post.publishDate}>
+                    {new Date(post.publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  {post.pillar && (
+                    <>
+                      <span>·</span>
+                      <span class="capitalize">{post.pillar.replace(/-/g, ' ')}</span>
+                    </>
+                  )}
+                </div>
+                <h2 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">
+                  {post.title}
+                </h2>
+                <p class="text-ink-secondary">{post.description}</p>
+              </article>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </article>
+</BaseLayout>
