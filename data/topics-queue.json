@@ -46,7 +46,7 @@
     "pillar": "new-concierge",
     "template": "comparison",
     "priority": "urgent",
-    "status": "queued",
+    "status": "published",
     "growth": "+40%",
     "notes": "Capture free-seekers, convert to understanding value of paid/concierge"
   },
