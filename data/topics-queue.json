@@ -80,7 +80,7 @@
     "pillar": "new-concierge",
     "template": "comparison",
     "priority": "urgent",
-    "status": "queued",
+    "status": "published",
     "growth": "+10%",
     "notes": "People comparing to Google - show where Otherwhere wins"
   },
