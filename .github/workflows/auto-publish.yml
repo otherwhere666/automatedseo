@@ -34,6 +34,7 @@ jobs:
       - name: Generate article automatically
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
         run: node scripts/auto-generate.js
 
       - name: Build site
