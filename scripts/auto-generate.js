@@ -85,24 +85,77 @@ function generateTopicIdea() {
   };
 }
 
-function getUnsplashImage() {
-  // Curated list of reliable Unsplash travel images (direct URLs, not source redirects)
-  const travelImages = [
-    'photo-1488646953014-85cb44e25828', // world map with pins
-    'photo-1507003211169-0a1dd7228f2d', // airplane window view
-    'photo-1476514525535-07fb3b4ae5f1', // lake and mountains
-    'photo-1530789253388-582c481c54b0', // tropical beach
-    'photo-1502920917128-1aa500764cbd', // paris street
-    'photo-1493976040374-85c8e12f0c0e', // santorini
-    'photo-1506929562872-bb421503ef21', // beach sunset
-    'photo-1504598318550-17eba1008a68', // city skyline
-    'photo-1500835556837-99ac94a94552', // airplane wing
-    'photo-1501785888041-af3ef285b470', // mountain lake
-    'photo-1523906834658-6e24ef2386f9', // venice canal
-    'photo-1516483638261-f4dbaf036963', // italy coast
-  ];
-  const randomImage = travelImages[Math.floor(Math.random() * travelImages.length)];
-  return `https://images.unsplash.com/${randomImage}?w=1600&h=900&fit=crop`;
+// Fallback images when API unavailable
+const FALLBACK_IMAGES = [
+  'photo-1488646953014-85cb44e25828', // world map with pins
+  'photo-1507003211169-0a1dd7228f2d', // airplane window view
+  'photo-1476514525535-07fb3b4ae5f1', // lake and mountains
+  'photo-1530789253388-582c481c54b0', // tropical beach
+  'photo-1502920917128-1aa500764cbd', // paris street
+  'photo-1493976040374-85c8e12f0c0e', // santorini
+  'photo-1506929562872-bb421503ef21', // beach sunset
+  'photo-1504598318550-17eba1008a68', // city skyline
+  'photo-1500835556837-99ac94a94552', // airplane wing
+  'photo-1501785888041-af3ef285b470', // mountain lake
+  'photo-1523906834658-6e24ef2386f9', // venice canal
+  'photo-1516483638261-f4dbaf036963', // italy coast
+];
+
+async function searchUnsplash(query) {
+  const accessKey = process.env.UNSPLASH_ACCESS_KEY;
+  if (!accessKey) {
+    console.log('⚠️  No UNSPLASH_ACCESS_KEY, using fallback image');
+    return null;
+  }
+
+  try {
+    const searchQuery = encodeURIComponent(`${query} travel`);
+    const response = await fetch(
+      `https://api.unsplash.com/search/photos?query=${searchQuery}&orientation=landscape&per_page=10`,
+      { headers: { Authorization: `Client-ID ${accessKey}` } }
+    );
+
+    if (!response.ok) {
+      console.log(`⚠️  Unsplash API error: ${response.status}`);
+      return null;
+    }
+
+    const data = await response.json();
+    if (data.results && data.results.length > 0) {
+      // Pick randomly from top 10 results for variety
+      const photo = data.results[Math.floor(Math.random() * data.results.length)];
+      console.log(`📷 Found image: "${photo.alt_description || photo.description || query}"`);
+      return {
+        url: `${photo.urls.raw}&w=1600&h=900&fit=crop`,
+        alt: photo.alt_description || photo.description || `${query} travel scene`
+      };
+    }
+  } catch (error) {
+    console.log(`⚠️  Unsplash search failed: ${error.message}`);
+  }
+  return null;
+}
+
+async function getUnsplashImage(topicTitle) {
+  // Extract key terms from title for search
+  const searchTerms = topicTitle
+    .replace(/[^a-zA-Z\s]/g, '')
+    .split(' ')
+    .filter(word => word.length > 3 && !['what', 'how', 'why', 'the', 'and', 'for', 'with', 'that', 'this', 'your', 'honest', 'review', 'guide', 'complete'].includes(word.toLowerCase()))
+    .slice(0, 3)
+    .join(' ');
+
+  const result = await searchUnsplash(searchTerms);
+  if (result) {
+    return result;
+  }
+
+  // Fallback to curated list
+  const randomImage = FALLBACK_IMAGES[Math.floor(Math.random() * FALLBACK_IMAGES.length)];
+  return {
+    url: `https://images.unsplash.com/${randomImage}?w=1600&h=900&fit=crop`,
+    alt: 'Scenic travel destination'
+  };
 }
 
 async function generateArticle(topic) {
@@ -112,9 +165,8 @@ async function generateArticle(topic) {
   const strategy = JSON.parse(await fs.readFile(strategyPath, 'utf-8'));
   const pillar = strategy.pillars.find(p => p.id === topic.pillar) || strategy.pillars[0];
 
-  // Get Unsplash image
-  const imageSearch = topic.title.split(':')[0].replace(/[^a-z\s]/gi, '');
-  const imageUrl = await getUnsplashImage(imageSearch);
+  // Get Unsplash image based on topic
+  const image = await getUnsplashImage(topic.title);
 
   const prompt = `You are writing a blog post for Otherwhere, an AI travel concierge.
 
@@ -162,8 +214,8 @@ Return ONLY the MDX content with this exact frontmatter format:
 title: "${topic.title}"
 description: "[Write a compelling 150-char description]"
 publishDate: "${new Date().toISOString().split('T')[0]}"
-image: "${imageUrl}"
-imageAlt: "[Describe the image for accessibility]"
+image: "${image.url}"
+imageAlt: "${image.alt}"
 pillar: "${topic.pillar}"
 keywords: ["keyword1", "keyword2", "keyword3"]
 author: "Otherwhere"
