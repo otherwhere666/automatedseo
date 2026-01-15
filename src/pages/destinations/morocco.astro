@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Marrakech"
+  country="Morocco"
+  image="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1200&h=600&fit=crop"
+  imageAlt="Marrakech riad courtyard with traditional Moroccan tilework and fountain"
+  quickTake="Morocco rewards the riad experience — traditional houses with interior courtyards that block out the medina chaos. The souks are intense and the hustle is real, but behind unmarked doors are some of the most beautiful boutique hotels anywhere. Book a riad, hire a guide for day one, and lean into the sensory overload."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Medina (near Jemaa el-Fnaa or Mouassine)",
+      why: "The medina is the point — you want to be in the maze of souks and riads, not outside it. Stay near the main square for orientation, or in Mouassine for a slightly calmer but still central experience. Walking out your door into the ancient city is the whole experience.",
+      pick: "Boutique riad in Mouassine with rooftop terrace",
+      price: "~$150-350/night"
+    },
+    {
+      name: "The Luxury Escape",
+      stayIn: "La Mamounia or Palmeraie",
+      why: "La Mamounia is the legendary palace hotel — Winston Churchill's favorite, gardens designed by Jacques Majorelle. If you want Moroccan grandeur with world-class service, this is it. The Palmeraie has villa resorts outside the city for pool-and-quiet seekers.",
+      pick: "Suite at La Mamounia or private villa in Palmeraie",
+      price: "~$500-1,500/night"
+    },
+    {
+      name: "The Design/Culture Seeker",
+      stayIn: "Dar el Bacha area or Kasbah",
+      why: "Dar el Bacha is the emerging cool neighborhood — Musée Yves Saint Laurent nearby, design-forward riads, serious restaurants. The Kasbah (near the royal palace) is quieter, with artisan workshops and the mellah (old Jewish quarter) to explore.",
+      pick: "Design-forward riad near Dar el Bacha",
+      price: "~$200-400/night"
+    }
+  ]}
+  skip={[
+    { name: "Hotels in Gueliz (new city)", reason: "The French colonial district has some decent restaurants but no soul. You came for the medina — stay in the medina." },
+    { name: "Budget riads with no reviews", reason: "Riad quality varies wildly. A bad riad means cold showers and noise bleeding through walls. This isn't the place to gamble on price." },
+    { name: "Staying only in Marrakech", reason: "The desert (Merzouga), Atlas Mountains, and coastal Essaouira are all doable as day trips or overnights. Marrakech alone isn't Morocco." }
+  ]}
+  lastUpdated="January 2025"
+/>

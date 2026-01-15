@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="New York"
+  country="USA"
+  image="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1200&h=600&fit=crop"
+  imageAlt="Manhattan skyline at dusk with Empire State Building"
+  quickTake="Everyone knows Times Square is a trap. The real question is which neighborhood matches your energy — downtown for culture, midtown for convenience, Brooklyn for locals' NYC. The subway works; don't overpay for location unless walking matters to you."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "SoHo, NoLita, or West Village",
+      why: "Downtown Manhattan without the chaos. SoHo has shopping and architecture, NoLita has the best coffee and boutiques, West Village has the brownstone New York from movies. All are walkable to major sights.",
+      pick: "Boutique hotel in SoHo or West Village",
+      price: "~$350-600/night"
+    },
+    {
+      name: "The Culture/Food Obsessive",
+      stayIn: "Lower East Side or Williamsburg",
+      why: "LES has the edge, the galleries, and the restaurants that get written about. Williamsburg is Brooklyn's gateway — great food, music venues, and a younger energy. Both reward staying out late.",
+      pick: "Design hotel on the Lower East Side",
+      price: "~$250-450/night"
+    },
+    {
+      name: "The Theater/Business Traveler",
+      stayIn: "Midtown West (near Hudson Yards) or Nomad",
+      why: "If you need Broadway, meetings, or major tourist access, stay midtown but pick your block carefully. Hudson Yards is new and corporate but functional. Nomad has better restaurants and the Flatiron area nearby.",
+      pick: "Upscale hotel in Nomad or modern midtown tower",
+      price: "~$300-550/night"
+    }
+  ]}
+  skip={[
+    { name: "Times Square hotels", reason: "You already know this. Chain hotels at premium prices surrounded by chaos. Stay 10 blocks away in any direction." },
+    { name: "Financial District on weekends", reason: "The area empties out Friday night. Great for business trips, ghost town for leisure." },
+    { name: "Far uptown unless you have a reason", reason: "Harlem and Washington Heights have their charms, but first-timers will spend their trip on the subway getting downtown." }
+  ]}
+  lastUpdated="January 2025"
+/>

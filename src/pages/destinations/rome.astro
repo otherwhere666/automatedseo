@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Rome"
+  country="Italy"
+  image="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&h=600&fit=crop"
+  imageAlt="Roman Colosseum at sunset with ancient ruins"
+  quickTake="Rome's centro storico is walkable but exhausting — cobblestones, crowds, and August heat are real. The best strategy is staying somewhere with character, booking Vatican and Colosseum tickets months ahead, and leaving time for neighborhoods that aren't in guidebooks."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Centro Storico (Campo de' Fiori or Piazza Navona area)",
+      why: "You'll walk everywhere — Pantheon, Trevi Fountain, Piazza Navona all on foot. The evening passeggiata culture makes sense when you're in the middle of it. Worth the premium for a first visit.",
+      pick: "Boutique hotel near Campo de' Fiori",
+      price: "~$300-500/night"
+    },
+    {
+      name: "The Food/Neighborhood Explorer",
+      stayIn: "Trastevere or Testaccio",
+      why: "Trastevere is the classic 'local' pick — ivy-covered streets, good trattorias, lively at night. Testaccio is grittier and more authentic, with Rome's best food market and the restaurants where Romans actually eat.",
+      pick: "Small hotel or apartment in Trastevere",
+      price: "~$200-350/night"
+    },
+    {
+      name: "The Luxury/Points Traveler",
+      stayIn: "Via Veneto or Piazza di Spagna",
+      why: "The grand hotels are here — St. Regis, Hassler, de Russie. If you want the suite upgrade, rooftop bar at sunset, and classic glamour, this is the move. Just know you're in tourist Rome, beautifully executed.",
+      pick: "Palace hotel near Spanish Steps",
+      price: "~$600-1,500/night"
+    }
+  ]}
+  skip={[
+    { name: "Termini Station area", reason: "Gritty, not in a good way. Budget hotels here are depressing and you'll feel far from the Rome you came for." },
+    { name: "Vatican-adjacent hotels", reason: "The area dies at night and you'll only visit the Vatican once. Stay somewhere livelier and metro over." },
+    { name: "Airbnbs in residential EUR", reason: "Mussolini-era suburb with nothing around. Cheap for a reason — you'll Uber everywhere and miss the point of Rome." }
+  ]}
+  lastUpdated="January 2025"
+/>

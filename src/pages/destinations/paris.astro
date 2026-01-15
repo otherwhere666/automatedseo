@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Paris"
+  country="France"
+  image="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&h=600&fit=crop"
+  imageAlt="Eiffel Tower at golden hour with Parisian rooftops in foreground"
+  quickTake="Paris rewards neighborhood commitment. Pick an arrondissement and own it rather than hotel-hopping or staying somewhere 'central' that's actually nowhere. The best Paris trips feel like you lived there briefly — not like you checked boxes."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Saint-Germain-des-Prés (6th)",
+      why: "Walkable to major sights, classically Parisian, excellent cafés. You'll feel like you're in the Paris you imagined. Close to the Seine, Luxembourg Gardens, and the Louvre without the tourist hotel chaos.",
+      pick: "Boutique hotel on a quiet side street near Odéon",
+      price: "~$350-500/night"
+    },
+    {
+      name: "The Design/Food Obsessive",
+      stayIn: "Le Marais (3rd/4th) or South Pigalle (9th)",
+      why: "Le Marais has the best concept stores, galleries, and natural wine bars. South Pigalle (SoPi) is where chefs eat on their nights off. Both neighborhoods reward wandering.",
+      pick: "Design hotel in upper Marais or boutique in SoPi",
+      price: "~$280-450/night"
+    },
+    {
+      name: "The Luxury Traditionalist",
+      stayIn: "8th arrondissement or Place Vendôme (1st)",
+      why: "The palace hotels are here for a reason. If you want white-glove service, Michelin dining in-house, and that old-money Paris energy, this is it. Just know it's not where young Parisians hang out.",
+      pick: "Palace hotel near Champs-Élysées or Place Vendôme",
+      price: "~$900-2,000/night"
+    }
+  ]}
+  skip={[
+    { name: "Hotels directly on Champs-Élysées", reason: "Tourist pricing, chain-heavy, and the avenue itself is mostly flagship stores. Stay nearby, not on it." },
+    { name: "Montmartre tourist zone", reason: "The Sacré-Cœur steps are a scam gauntlet. Stay in South Pigalle instead — same area, none of the hassle." },
+    { name: "Huge hotels near Opéra/Gare du Nord", reason: "Business hotel wasteland. You'll feel like you're in any city. The real Paris is a 15-minute walk away." }
+  ]}
+  lastUpdated="January 2025"
+/>

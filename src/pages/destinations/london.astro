@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="London"
+  country="UK"
+  image="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&h=600&fit=crop"
+  imageAlt="London skyline with Tower Bridge and the Shard at twilight"
+  quickTake="London is sprawling but the Tube makes it manageable. The trap is staying in tourist zones (Westminster, Leicester Square) where you'll overpay for generic hotels. The city's best areas for visitors — Marylebone, Fitzrovia, Shoreditch — are a short ride away and infinitely more interesting."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Marylebone or Fitzrovia",
+      why: "Central but residential, with village-y high streets and excellent restaurants. Marylebone has the boutique shopping; Fitzrovia has the media-industry energy and proximity to the British Museum. Both are walk-to-everything locations.",
+      pick: "Boutique hotel on a Marylebone side street",
+      price: "~$300-500/night"
+    },
+    {
+      name: "The Culture/Nightlife Seeker",
+      stayIn: "Shoreditch or Clerkenwell",
+      why: "East London has the galleries, street art, and nightlife that define current London. Shoreditch is the center of it — occasionally trying too hard, but undeniably alive. Clerkenwell is the grown-up adjacent option with serious restaurants.",
+      pick: "Design hotel in Shoreditch",
+      price: "~$200-400/night"
+    },
+    {
+      name: "The Luxury Traditionalist",
+      stayIn: "Mayfair or Knightsbridge",
+      why: "The grand hotels — Claridge's, The Connaught, The Berkeley — are here because old money is here. If you want the afternoon tea, the Michelin stars, and the Harrods proximity, this is the London that delivers.",
+      pick: "Heritage palace hotel in Mayfair",
+      price: "~$600-1,500/night"
+    }
+  ]}
+  skip={[
+    { name: "Leicester Square / Piccadilly hotels", reason: "Tourist central with nothing but M&M stores and chain restaurants. You'll pay premium rates for the worst of London." },
+    { name: "Heathrow airport stays", reason: "Even with an early flight, the Elizabeth Line makes central London accessible. Don't waste a night in an airport hotel." },
+    { name: "Generic South Bank chains", reason: "The views are nice but the area has no neighborhood feel. You'll walk across a bridge for dinner every night." }
+  ]}
+  lastUpdated="January 2025"
+/>

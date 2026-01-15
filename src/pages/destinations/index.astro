@@ -2,7 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const destinations = [
+  // Europe
+  { city: "Paris", country: "France", slug: "paris", region: "Europe" },
+  { city: "London", country: "UK", slug: "london", region: "Europe" },
+  { city: "Barcelona", country: "Spain", slug: "barcelona", region: "Europe" },
+  { city: "Rome", country: "Italy", slug: "rome", region: "Europe" },
+  { city: "Amalfi Coast", country: "Italy", slug: "amalfi-coast", region: "Europe" },
   { city: "Lisbon", country: "Portugal", slug: "lisbon", region: "Europe" },
+  // Asia
+  { city: "Tokyo", country: "Japan", slug: "tokyo", region: "Asia" },
+  { city: "Bali", country: "Indonesia", slug: "bali", region: "Asia" },
+  // Americas
+  { city: "New York", country: "USA", slug: "new-york", region: "Americas" },
+  { city: "Mexico City", country: "Mexico", slug: "mexico-city", region: "Americas" },
+  // Africa & Middle East
+  { city: "Marrakech", country: "Morocco", slug: "morocco", region: "Africa & Middle East" },
 ];
 
 const byRegion = destinations.reduce((acc, d) => {

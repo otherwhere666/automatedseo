@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Tokyo"
+  country="Japan"
+  image="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&h=600&fit=crop"
+  imageAlt="Tokyo cityscape at night with neon lights and Tokyo Tower"
+  quickTake="Tokyo is easier than you think and harder than you expect. The trains are perfect, English signage is everywhere, and convenience stores solve most problems. But booking the right ryokan, getting into good restaurants, and understanding neighborhood personalities — that's where guidance pays off."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Shibuya or Shinjuku",
+      why: "Best train access in the city — you can reach anywhere in 20 minutes. Shibuya is younger and more walkable; Shinjuku has the best food scene. Both put you in the energy without overwhelming you.",
+      pick: "Design hotel in Shibuya or upscale business hotel in Shinjuku",
+      price: "~$200-350/night"
+    },
+    {
+      name: "The Design/Culture Seeker",
+      stayIn: "Aoyama, Nakameguro, or Yanaka",
+      why: "Aoyama has galleries and architecture. Nakameguro has the canal, coffee culture, and boutiques. Yanaka feels like old Tokyo with temples and craft shops. These neighborhoods reward slow mornings.",
+      pick: "Boutique hotel in Aoyama or guesthouse in Yanaka",
+      price: "~$180-400/night"
+    },
+    {
+      name: "The Ryokan Experience",
+      stayIn: "Day trip to Hakone or stay in Yanaka",
+      why: "True ryokans in central Tokyo are rare and often tourist-oriented. For the real experience, book 1-2 nights in Hakone (90 min away) for onsen and kaiseki. Or try a machiya-style stay in quieter Yanaka.",
+      pick: "Traditional ryokan in Hakone with private onsen",
+      price: "~$400-800/night (includes dinner and breakfast)"
+    }
+  ]}
+  skip={[
+    { name: "Hotels in Roppongi", reason: "Nightlife district that's lost its edge. Feels dated and foreigner-focused. The interesting Tokyo is elsewhere now." },
+    { name: "Airport hotels in Narita", reason: "Narita is 90 minutes from the city. Unless your flight is at 6am, stay in Tokyo and take the early Skyliner." },
+    { name: "Giant international chains in Ginza", reason: "Sterile and overpriced. Ginza is for shopping, not sleeping. The neighborhood empties out at night." }
+  ]}
+  lastUpdated="January 2025"
+/>
