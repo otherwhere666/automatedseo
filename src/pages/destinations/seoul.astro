@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Seoul"
+  country="South Korea"
+  image="https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1200&h=600&fit=crop"
+  imageAlt="Seoul cityscape with traditional palace and modern skyscrapers"
+  quickTake="Seoul is Asia's most underrated major city for visitors. The food is extraordinary, the design scene rivals Tokyo, and the nightlife runs until dawn. The metro is perfect, English is increasingly common, and the neighborhoods have distinct personalities worth exploring. K-culture is real, but the city has depth beyond it."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Myeongdong or Jongno",
+      why: "Myeongdong is central, walkable to palaces and shopping, with easy airport access. Jongno puts you near the historic sites and has excellent Korean restaurants that locals frequent. Both areas let you hit the highlights without complex logistics.",
+      pick: "Modern hotel near Myeongdong station or hanok-style hotel in Jongno",
+      price: "~$150-300/night"
+    },
+    {
+      name: "The Design/Food Obsessive",
+      stayIn: "Seongsu-dong or Hannam-dong",
+      why: "Seongsu is Seoul's Brooklyn — converted factories, specialty coffee, concept stores. Hannam has the Michelin-starred Korean restaurants and gallery scene. Both neighborhoods are where young creative Seoul hangs out. The aesthetics are impeccable.",
+      pick: "Design hotel in Seongsu or boutique hotel in Hannam",
+      price: "~$180-350/night"
+    },
+    {
+      name: "The Nightlife/K-Culture Seeker",
+      stayIn: "Gangnam or Hongdae",
+      why: "Gangnam has the high-end clubs, K-pop entertainment companies, and that glossy Seoul energy. Hongdae is younger, louder, and more indie — live music, street performers, bars until 6am. Different vibes, both deliver if you're staying out late.",
+      pick: "Upscale hotel in Gangnam or trendy hotel near Hongdae station",
+      price: "~$120-280/night"
+    }
+  ]}
+  skip={[
+    { name: "Itaewon (currently)", reason: "The former expat hub is struggling post-tragedy and feels uncertain. The restaurants have moved to Hannam; the energy has shifted elsewhere." },
+    { name: "Hotels near Seoul Station only", reason: "Transit hub, not a neighborhood. You'll spend your trip on the metro getting to anywhere interesting." },
+    { name: "Dongdaemun tourist hotels", reason: "The market is worth a visit, but the area is chaotic and the hotels are dated. Stay elsewhere and metro over for the late-night shopping." }
+  ]}
+  lastUpdated="January 2025"
+/>

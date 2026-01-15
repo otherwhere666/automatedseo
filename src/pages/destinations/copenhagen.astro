@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Copenhagen"
+  country="Denmark"
+  image="https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=1200&h=600&fit=crop"
+  imageAlt="Copenhagen colorful Nyhavn harbor with boats and historic buildings"
+  quickTake="Copenhagen is the most design-literate city in the world, and that extends to how you experience it. The restaurants are globally influential, the architecture is impeccable, and everything — bikes, furniture, signage — looks considered. It's expensive but compact, so you get value through walkability. Come for the aesthetics, stay for the food."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Indre By (city center) or Nyhavn area",
+      why: "Central Copenhagen is small and perfectly walkable. You'll hit Nyhavn, Strøget shopping, Tivoli, and the design museums on foot. The boutique hotels here blend historic buildings with Danish design sensibility. This is the Copenhagen you imagined.",
+      pick: "Design hotel in Indre By near Kongens Nytorv",
+      price: "~$300-500/night"
+    },
+    {
+      name: "The Design/Food Obsessive",
+      stayIn: "Vesterbro or Nørrebro",
+      why: "Vesterbro is the former meatpacking district with natural wine bars, concept stores, and restaurants where chefs eat. Nørrebro is more residential and diverse with excellent casual food. Both neighborhoods feel like local Copenhagen rather than tourist Copenhagen.",
+      pick: "Boutique hotel in Vesterbro near Kødbyen",
+      price: "~$250-400/night"
+    },
+    {
+      name: "The Luxury Experience",
+      stayIn: "Hotel d'Angleterre area or Christianshavn",
+      why: "Hotel d'Angleterre is Copenhagen's grand dame — classic luxury on the main square. For something more unique, Christianshavn has converted warehouse hotels along the canals, near Noma and the opera house. Both deliver high-end Copenhagen differently.",
+      pick: "Palace hotel on Kongens Nytorv or canal-side hotel in Christianshavn",
+      price: "~$500-900/night"
+    }
+  ]}
+  skip={[
+    { name: "Airport-area hotels", reason: "The airport is well-connected by metro, but the area is soulless. Stay in town and take the 15-minute train for early flights." },
+    { name: "Generic business hotels in Ørestad", reason: "New development area with corporate architecture and nothing walkable. You'll metro everywhere and miss what makes Copenhagen special." },
+    { name: "Visiting only for Noma", reason: "Noma is extraordinary but books out months ahead and costs accordingly. Copenhagen's food scene is deep — the second-tier restaurants here would be top-tier elsewhere." }
+  ]}
+  lastUpdated="January 2025"
+/>

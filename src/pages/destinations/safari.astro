@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Safari"
+  country="Kenya & Tanzania"
+  image="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop"
+  imageAlt="African elephant walking across savanna with acacia trees at sunset"
+  quickTake="An East African safari is a bucket-list trip that requires planning — the difference between camps, seasons, and parks dramatically affects what you'll see. The Great Migration alone spans different locations throughout the year. This isn't a trip to book casually. Get the timing right, choose your camps carefully, and prepare for something genuinely life-changing."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Maasai Mara (Kenya) or Serengeti (Tanzania)",
+      why: "Both parks deliver the classic safari experience — big cats, elephants, vast plains. The Maasai Mara is more accessible from Nairobi with excellent year-round game viewing. The Serengeti is larger and wilder, often paired with the Ngorongoro Crater. Either works; the camps you choose matter more than the park.",
+      pick: "Mid-range tented camp in the Maasai Mara conservancies",
+      price: "~$500-900/night (all-inclusive with game drives)"
+    },
+    {
+      name: "The Migration Chaser",
+      stayIn: "Follow the herds: Tanzania (Dec-July) or Kenya (July-Oct)",
+      why: "The Great Migration is 2 million wildebeest following the rains. December-March they're calving in the southern Serengeti. July-October they're crossing the Mara River into Kenya. Timing your trip to the migration is the difference between seeing animals and witnessing a spectacle.",
+      pick: "Mobile camp that follows the migration or luxury lodge in prime crossing territory",
+      price: "~$800-1,800/night"
+    },
+    {
+      name: "The Luxury Safari Experience",
+      stayIn: "Private conservancies (Kenya) or remote Tanzania camps",
+      why: "Private conservancies in Kenya (Mara North, Olare Motorogi) limit vehicle numbers and allow off-road driving and night drives that national parks don't permit. Tanzania's remote camps (Singita, &Beyond) offer exclusivity and exceptional guiding. Both deliver safari as a luxury experience, not a zoo visit.",
+      pick: "Exclusive-use camp in a private conservancy",
+      price: "~$1,500-3,500/night"
+    }
+  ]}
+  skip={[
+    { name: "Budget lodges inside main park gates", reason: "The difference between a $200/night and $600/night camp is enormous — guide quality, vehicle condition, location, and crowd levels. This is the wrong trip to economize on." },
+    { name: "Trying to do too many parks", reason: "Internal flights are expensive and time-consuming. Better to spend 4-5 nights in one excellent area than 2 nights each in three parks. You'll see more by staying put." },
+    { name: "Visiting during heavy rains (April-May)", reason: "The long rains make roads impassable and many camps close. Animals disperse across flooded plains. Wait for dry season (June-October) or short rains (November-December) for the best experience." }
+  ]}
+  lastUpdated="January 2025"
+/>

@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Greece"
+  country="Athens & Islands"
+  image="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&h=600&fit=crop"
+  imageAlt="Santorini white buildings and blue domes overlooking the Aegean Sea"
+  quickTake="Greece's challenge isn't finding beauty — it's choosing which island. Santorini is iconic but crowded. Mykonos is a party. The smaller islands reward effort with authenticity. Start with Athens (it's better than you've heard), then commit to 1-2 islands rather than rushing through three. Ferry logistics are real; plan accordingly."
+  travelerTypes={[
+    {
+      name: "The First-Timer",
+      stayIn: "Athens (2-3 nights) + Santorini",
+      why: "Athens has reinvented itself — the Acropolis is unmissable, and neighborhoods like Koukaki and Plaka have excellent restaurants. Santorini delivers the postcard views and caldera sunsets that everyone wants. It's crowded for a reason. See it once, then explore deeper next time.",
+      pick: "Boutique hotel in Koukaki (Athens) + caldera-view hotel in Oia or Imerovigli",
+      price: "~$200-400/night Athens, ~$400-800/night Santorini"
+    },
+    {
+      name: "The Crowd-Avoider",
+      stayIn: "Milos, Naxos, or Paros",
+      why: "Milos has the lunar beaches and hasn't been fully discovered yet. Naxos is the largest Cycladic island with real villages and beaches you'll have to yourself. Paros is the sweet spot — charming, accessible, less frantic than Mykonos. All three feel like the Greece you imagined.",
+      pick: "Boutique hotel in Milos or Paros town",
+      price: "~$180-350/night"
+    },
+    {
+      name: "The Luxury Seeker",
+      stayIn: "Santorini (Oia) or Mykonos (Ornos/Agios Ioannis)",
+      why: "The luxury infrastructure in Santorini is world-class — cave hotels, private plunge pools, dinner on your terrace. Mykonos has the beach clubs and scene if that's your thing, but the quiet sides of the island (Ornos, Agios Ioannis) have excellent boutique hotels without the party chaos.",
+      pick: "Cave hotel in Oia or beachfront boutique in Ornos",
+      price: "~$600-1,500/night"
+    }
+  ]}
+  skip={[
+    { name: "Mykonos town hotels in July-August", reason: "Unless you want to be in the middle of a 24-hour party. The music doesn't stop and neither do the crowds. Stay outside town or pick a different island." },
+    { name: "Island-hopping more than 2-3 islands", reason: "Ferries take longer than you think, and you'll spend your trip in transit. Better to go deep on one or two islands than skim five." },
+    { name: "Santorini in peak cruise-ship hours", reason: "The cruise ships dock from 10am-4pm and Oia becomes unbearable. Stay overnight to see sunset without 5,000 day-trippers, or visit in shoulder season." }
+  ]}
+  lastUpdated="January 2025"
+/>

@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Costa Rica"
+  country="Central America"
+  image="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=1200&h=600&fit=crop"
+  imageAlt="Costa Rica rainforest with hanging bridges and lush green canopy"
+  quickTake="Costa Rica is the rare destination that delivers on both adventure and relaxation without feeling like a compromise. The infrastructure is solid by Central American standards, the eco-lodges are genuinely impressive, and the biodiversity is real. The catch: distances are deceptive and roads are slow. Pick 2-3 areas maximum for a week."
+  travelerTypes={[
+    {
+      name: "The Adventure Seeker",
+      stayIn: "Arenal or Monteverde",
+      why: "Arenal has the volcano views, hot springs, and zip-lining. Monteverde has the cloud forest and some of the best wildlife viewing in the country. Both deliver that jungle-adventure experience. Arenal is more developed; Monteverde is more rugged and rewarding for nature lovers.",
+      pick: "Eco-lodge with volcano views in Arenal",
+      price: "~$200-450/night"
+    },
+    {
+      name: "The Beach + Surf Balance",
+      stayIn: "Guanacaste (Nosara or Santa Teresa)",
+      why: "Nosara has the wellness-surf-yoga trifecta with enough infrastructure to feel comfortable. Santa Teresa is younger, more backpacker-adjacent, with excellent surf breaks. Both have boutique hotels that punch above their weight. The Pacific coast delivers.",
+      pick: "Boutique surf hotel in Nosara or Santa Teresa",
+      price: "~$150-350/night"
+    },
+    {
+      name: "The Luxury Nature Escape",
+      stayIn: "Papagayo Peninsula or Osa Peninsula",
+      why: "Papagayo has the Four Seasons and Andaz — world-class resorts with private beaches and polished service. Osa Peninsula is remote and wild, with luxury eco-lodges like Lapa Rios in primary rainforest. Different vibes: Papagayo is refined, Osa is adventure with comfort.",
+      pick: "Luxury resort in Papagayo or eco-lodge on Osa Peninsula",
+      price: "~$500-1,200/night"
+    }
+  ]}
+  skip={[
+    { name: "San José beyond one night", reason: "The capital is a transit hub, not a destination. Fly in, stay near the airport if needed, leave in the morning." },
+    { name: "Trying to see everything", reason: "The country looks small on a map but drives take 4-5 hours on winding roads. Pick a region and go deep rather than rushing between coasts." },
+    { name: "All-inclusive Caribbean coast", reason: "The Caribbean side (Limón) is less developed and the resorts feel dated. The Pacific coast and central mountains are where Costa Rica shines." }
+  ]}
+  lastUpdated="January 2025"
+/>

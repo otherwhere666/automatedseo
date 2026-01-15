@@ -3,69 +3,120 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const destinations = [
   // Europe
-  { city: "Paris", country: "France", slug: "paris", region: "Europe" },
-  { city: "London", country: "UK", slug: "london", region: "Europe" },
-  { city: "Barcelona", country: "Spain", slug: "barcelona", region: "Europe" },
-  { city: "Rome", country: "Italy", slug: "rome", region: "Europe" },
-  { city: "Amalfi Coast", country: "Italy", slug: "amalfi-coast", region: "Europe" },
-  { city: "Lisbon", country: "Portugal", slug: "lisbon", region: "Europe" },
+  { city: "Paris", country: "France", slug: "paris", region: "Europe", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=500&fit=crop", tagline: "Beyond the clichés" },
+  { city: "London", country: "UK", slug: "london", region: "Europe", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=500&fit=crop", tagline: "Neighborhoods over landmarks" },
+  { city: "Barcelona", country: "Spain", slug: "barcelona", region: "Europe", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=500&fit=crop", tagline: "Where locals actually go" },
+  { city: "Rome", country: "Italy", slug: "rome", region: "Europe", image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=500&fit=crop", tagline: "Ancient city, modern strategy" },
+  { city: "Amalfi Coast", country: "Italy", slug: "amalfi-coast", region: "Europe", image: "https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=800&h=500&fit=crop", tagline: "Logistics that matter" },
+  { city: "Lisbon", country: "Portugal", slug: "lisbon", region: "Europe", image: "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800&h=500&fit=crop", tagline: "Hills and neighborhoods" },
+  { city: "Copenhagen", country: "Denmark", slug: "copenhagen", region: "Europe", image: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800&h=500&fit=crop", tagline: "Design-forward travel" },
+  { city: "Greece", country: "Athens & Islands", slug: "greece", region: "Europe", image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&h=500&fit=crop", tagline: "Which island for you" },
   // Asia
-  { city: "Tokyo", country: "Japan", slug: "tokyo", region: "Asia" },
-  { city: "Bali", country: "Indonesia", slug: "bali", region: "Asia" },
+  { city: "Tokyo", country: "Japan", slug: "tokyo", region: "Asia", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=500&fit=crop", tagline: "Easier than you think" },
+  { city: "Kyoto", country: "Japan", slug: "kyoto", region: "Asia", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=500&fit=crop", tagline: "Temples and timing" },
+  { city: "Seoul", country: "South Korea", slug: "seoul", region: "Asia", image: "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&h=500&fit=crop", tagline: "K-culture and beyond" },
+  { city: "Bali", country: "Indonesia", slug: "bali", region: "Asia", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=500&fit=crop", tagline: "Beyond the influencers" },
   // Americas
-  { city: "New York", country: "USA", slug: "new-york", region: "Americas" },
-  { city: "Mexico City", country: "Mexico", slug: "mexico-city", region: "Americas" },
-  // Africa & Middle East
-  { city: "Marrakech", country: "Morocco", slug: "morocco", region: "Africa & Middle East" },
+  { city: "New York", country: "USA", slug: "new-york", region: "Americas", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&h=500&fit=crop", tagline: "Neighborhood energy" },
+  { city: "Mexico City", country: "Mexico", slug: "mexico-city", region: "Americas", image: "https://images.unsplash.com/photo-1518659526054-e35dfb4e0891?w=800&h=500&fit=crop", tagline: "Food capital of the Americas" },
+  { city: "Costa Rica", country: "Central America", slug: "costa-rica", region: "Americas", image: "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=800&h=500&fit=crop", tagline: "Adventure meets luxury" },
+  // Middle East & Africa
+  { city: "Dubai", country: "UAE", slug: "dubai", region: "Middle East & Africa", image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=500&fit=crop", tagline: "Luxury and logistics" },
+  { city: "Marrakech", country: "Morocco", slug: "morocco", region: "Middle East & Africa", image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&h=500&fit=crop", tagline: "Riad culture decoded" },
+  { city: "Safari", country: "Kenya & Tanzania", slug: "safari", region: "Middle East & Africa", image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&h=500&fit=crop", tagline: "When and where to go" },
+  // Indian Ocean
+  { city: "Maldives", country: "Indian Ocean", slug: "maldives", region: "Islands", image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=500&fit=crop", tagline: "Which resort, which atoll" },
 ];
 
+const regionOrder = ["Europe", "Asia", "Americas", "Middle East & Africa", "Islands"];
 const byRegion = destinations.reduce((acc, d) => {
   if (!acc[d.region]) acc[d.region] = [];
   acc[d.region].push(d);
   return acc;
 }, {} as Record<string, typeof destinations>);
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Destination Guides | Otherwhere",
+    "description": "Curated destination guides for discerning travelers. Not 50 hotels — just the ones worth considering."
+  }
+];
 ---
 
 <BaseLayout
   title="Destination Guides | Otherwhere"
   description="Curated destination guides for discerning travelers. Not 50 hotels — just the ones worth considering."
+  schema={schemas}
 >
-  <div class="max-w-4xl mx-auto px-4 py-12">
-    <header class="mb-12">
-      <h1 class="text-display-xl mb-6">DESTINATIONS</h1>
-      <p class="text-body-lg text-ink-secondary max-w-2xl">
-        Curated guides, not comprehensive lists. We tell you where to stay for different types of travelers — and what to skip.
-      </p>
-    </header>
+  <article class="py-12">
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-8">
+        <h1 class="font-serif text-4xl md:text-5xl mb-6">Destination Guides</h1>
+        <p class="text-xl text-ink-secondary leading-relaxed">
+          Curated guides, not comprehensive lists. We tell you where to stay for different types of travelers — and what to skip.
+        </p>
+      </header>
 
-    {Object.entries(byRegion).map(([region, cities]) => (
-      <section class="mb-12">
-        <h2 class="text-display-sm text-ink-tertiary mb-6">{region.toUpperCase()}</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          {cities.map((d) => (
-            <a href={`/destinations/${d.slug}`} class="card group flex items-center justify-between">
-              <div>
-                <h3 class="text-display-sm group-hover:text-accent transition-colors">{d.city}</h3>
-                <p class="text-body-sm text-ink-tertiary">{d.country}</p>
-              </div>
-              <span class="text-accent">→</span>
-            </a>
-          ))}
+      <!-- Stats -->
+      <div class="flex gap-8 mb-8 text-center justify-center">
+        <div>
+          <p class="font-serif text-3xl">{destinations.length}</p>
+          <p class="text-sm text-ink-tertiary">Destinations</p>
         </div>
-      </section>
-    ))}
+        <div>
+          <p class="font-serif text-3xl">3</p>
+          <p class="text-sm text-ink-tertiary">Traveler types each</p>
+        </div>
+        <div>
+          <p class="font-serif text-3xl">57</p>
+          <p class="text-sm text-ink-tertiary">Neighborhoods covered</p>
+        </div>
+      </div>
 
-    <div class="bg-paper-secondary rounded-card p-8 text-center mt-16">
-      <h2 class="text-display-sm mb-4">DON'T SEE YOUR DESTINATION?</h2>
-      <p class="text-ink-secondary mb-6">
-        Text us at (323) 922-4067 and tell us where you want to go. We'll send you curated recommendations.
-      </p>
-      <a
-        href="sms:+13239224067"
-        class="bg-ink text-paper px-6 py-3 rounded-card-sm font-medium hover:bg-ink-secondary transition-colors inline-block"
-      >
-        Text Us
-      </a>
+      <hr class="section-divider" />
+
+      {regionOrder.map((region) => byRegion[region] && (
+        <section class="mb-12">
+          <h2 class="font-serif text-2xl mb-6">{region}</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {byRegion[region].map((d) => (
+              <a href={`/destinations/${d.slug}`} class="block group">
+                <article class="bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
+                  <img
+                    src={d.image}
+                    alt={d.city}
+                    class="w-full h-36 object-cover"
+                  />
+                  <div class="p-4">
+                    <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{d.city}</h3>
+                    <p class="text-sm text-ink-tertiary mb-1">{d.country}</p>
+                    <p class="text-sm text-ink-secondary italic">{d.tagline}</p>
+                  </div>
+                </article>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-8">
+        <h2 class="font-serif text-2xl mb-4">Don't see your destination?</h2>
+        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+          Text us where you want to go. We'll send curated recommendations — no guide required.
+        </p>
+        <a
+          href="sms:+13239224067"
+          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
+        >
+          Text Us Your Destination
+        </a>
+      </section>
     </div>
-  </div>
+  </article>
 </BaseLayout>

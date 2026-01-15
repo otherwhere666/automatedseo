@@ -1,0 +1,40 @@
+---
+import Destination from '../../layouts/Destination.astro';
+---
+
+<Destination
+  city="Maldives"
+  country="Indian Ocean"
+  image="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&h=600&fit=crop"
+  imageAlt="Maldives overwater bungalow with crystal clear turquoise water"
+  quickTake="The Maldives is a one-resort destination — you'll fly to Malé, transfer to your island, and likely not leave until you fly home. That's the point. The decision that matters is which resort, and they vary wildly: party islands vs. barefoot luxury, snorkeling house reefs vs. diving expeditions, all-inclusive vs. à la carte. Choose based on what you actually want to do."
+  travelerTypes={[
+    {
+      name: "The Honeymoon Couple",
+      stayIn: "North Malé Atoll or South Ari Atoll",
+      why: "The classic honeymoon resorts — overwater villas, private butler service, couples' spa — are concentrated here. Short transfers from Malé (30-60 min by speedboat or seaplane) mean less travel time, more pool time. The iconic Maldives experience delivered efficiently.",
+      pick: "Overwater villa with private pool at a romance-focused resort",
+      price: "~$800-2,000/night"
+    },
+    {
+      name: "The Diving/Snorkeling Enthusiast",
+      stayIn: "South Ari Atoll or Baa Atoll",
+      why: "South Ari has the whale shark encounters — nearly guaranteed sightings year-round. Baa Atoll is a UNESCO biosphere reserve with manta ray aggregations and exceptional house reefs. If marine life matters more than the villa, prioritize these atolls.",
+      pick: "Resort with dedicated dive center and strong house reef",
+      price: "~$600-1,500/night"
+    },
+    {
+      name: "The Ultimate Luxury Seeker",
+      stayIn: "Remote atolls (Lhaviyani, Noonu, or Gaafu)",
+      why: "The most exclusive resorts are deliberately remote — 45-min seaplane flights to reach private islands with 20 villas. Soneva, Cheval Blanc, Waldorf Astoria Ithaafushi set the standard. The isolation is the point. You're paying for space, privacy, and staff ratios that feel absurd.",
+      pick: "Private island villa at an ultra-luxury resort",
+      price: "~$2,500-8,000/night"
+    }
+  ]}
+  skip={[
+    { name: "Resorts too close to Malé", reason: "Some budget resorts are 10 minutes from the airport. You'll see cargo ships and construction, not pristine blue. The transfer time is worth it for the setting." },
+    { name: "Choosing on price alone", reason: "Maldives budget resorts often disappoint — dated rooms, weak food, no house reef. Either commit to the experience or consider alternatives like Seychelles or the Maldives for a future trip." },
+    { name: "Island-hopping between resorts", reason: "Unlike Greece or Thailand, you can't easily visit other islands. Transfers are expensive and eat into your time. Pick one resort and stay put." }
+  ]}
+  lastUpdated="January 2025"
+/>
