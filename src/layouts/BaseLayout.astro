@@ -89,8 +89,8 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
   </head>
 
   <body class="min-h-screen bg-paper">
-    <!-- Minimal header -->
-    <header class="border-b border-paper-tertiary">
+    <!-- Sticky header -->
+    <header class="sticky top-0 z-50 bg-paper border-b border-paper-tertiary">
       <nav class="max-w-wide mx-auto px-6 py-5 flex items-center justify-between">
         <a href="/" class="block">
           <img
@@ -99,16 +99,16 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
             class="h-5 w-auto"
           />
         </a>
-        <div class="flex items-center gap-8">
-          <a href="/blog" class="nav-link hidden sm:block">Blog</a>
-          <a href="/case-studies" class="nav-link hidden sm:block">Trips</a>
-          <a href="/destinations" class="nav-link hidden sm:block">Destinations</a>
-          <a href="/what-is-otherwhere" class="nav-link hidden sm:block">About</a>
+        <div class="flex items-center gap-10">
+          <a href="/blog" class="nav-link-caps hidden sm:block">BLOG</a>
+          <a href="/case-studies" class="nav-link-caps hidden sm:block">TRIPS</a>
+          <a href="/destinations" class="nav-link-caps hidden sm:block">DESTINATIONS</a>
+          <a href="/what-is-otherwhere" class="nav-link-caps hidden sm:block">ABOUT</a>
           <a
             href="sms:+13239224067"
-            class="text-small uppercase tracking-wider border border-ink px-4 py-2 hover:bg-ink hover:text-white transition-all"
+            class="btn-primary"
           >
-            Text us
+            TEXT US
           </a>
         </div>
       </nav>
@@ -118,46 +118,47 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
       <slot />
     </main>
 
-    <!-- Minimal footer -->
+    <!-- Footer -->
     <footer class="border-t border-paper-tertiary mt-20">
-      <div class="max-w-wide mx-auto px-6 py-12">
-        <div class="grid md:grid-cols-4 gap-8 mb-12">
+      <div class="max-w-wide mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-4 gap-12 mb-16">
           <div>
             <img
               src="https://images.squarespace-cdn.com/content/v1/690665841a49334c4700cbbe/80c79faa-2735-4b95-bf5b-dfb9af632b69/otherwhere.png?format=500w"
               alt="Otherwhere"
-              class="h-4 w-auto mb-4"
+              class="h-5 w-auto mb-6"
             />
-            <p class="text-small text-ink-tertiary">
-              AI travel concierge.<br />
+            <p class="text-sm text-ink-secondary leading-relaxed">
+              Personal travel booking.<br />
               Text us at (323) 922-4067
             </p>
           </div>
           <div>
-            <p class="text-caption uppercase tracking-wider text-ink-tertiary mb-4">Explore</p>
-            <ul class="space-y-2 text-small">
-              <li><a href="/what-is-otherwhere" class="nav-link">What is Otherwhere?</a></li>
-              <li><a href="/otherwhere-vs-chatgpt" class="nav-link">Otherwhere vs ChatGPT</a></li>
-              <li><a href="/what-is-ai-travel-concierge" class="nav-link">AI Travel Concierge</a></li>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">EXPLORE</p>
+            <ul class="space-y-3 text-sm">
+              <li><a href="/what-is-otherwhere" class="footer-link">What is Otherwhere?</a></li>
+              <li><a href="/otherwhere-vs-chatgpt" class="footer-link">Otherwhere vs ChatGPT</a></li>
+              <li><a href="/what-is-ai-travel-concierge" class="footer-link">AI Travel Concierge</a></li>
             </ul>
           </div>
           <div>
-            <p class="text-caption uppercase tracking-wider text-ink-tertiary mb-4">Case Studies</p>
-            <ul class="space-y-2 text-small">
-              <li><a href="/case-studies" class="nav-link">All trips</a></li>
-              <li><a href="/destinations" class="nav-link">Destinations</a></li>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">TRIPS</p>
+            <ul class="space-y-3 text-sm">
+              <li><a href="/case-studies" class="footer-link">Case Studies</a></li>
+              <li><a href="/destinations" class="footer-link">Destinations</a></li>
+              <li><a href="/blog" class="footer-link">Blog</a></li>
             </ul>
           </div>
           <div>
-            <p class="text-caption uppercase tracking-wider text-ink-tertiary mb-4">Connect</p>
-            <ul class="space-y-2 text-small">
-              <li><a href="https://otherwhere.world" class="nav-link">Main site</a></li>
-              <li><a href="sms:+13239224067" class="nav-link">Text us</a></li>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">CONNECT</p>
+            <ul class="space-y-3 text-sm">
+              <li><a href="https://otherwhere.world" class="footer-link">Main Site</a></li>
+              <li><a href="sms:+13239224067" class="footer-link">Text Us</a></li>
             </ul>
           </div>
         </div>
-        <div class="border-t border-paper-tertiary pt-8 text-center text-caption text-ink-muted">
-          &copy; {new Date().getFullYear()} Otherwhere
+        <div class="border-t border-paper-tertiary pt-8 text-center text-xs uppercase tracking-widest text-ink-muted">
+          &copy; {new Date().getFullYear()} OTHERWHERE
         </div>
       </div>
     </footer>

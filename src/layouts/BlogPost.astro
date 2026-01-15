@@ -111,7 +111,7 @@ const schemas = [articleSchema, breadcrumbSchema];
     <div class="blog-content">
       <!-- Article Header -->
       <header class="mb-8">
-        <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-4">
+        <div class="flex items-center gap-4 text-xs uppercase tracking-widest text-ink-tertiary mb-6">
           <time datetime={publishDate}>
             {new Date(publishDate).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -128,12 +128,12 @@ const schemas = [articleSchema, breadcrumbSchema];
           {pillar && (
             <>
               <span>·</span>
-              <span class="capitalize">{pillar.replace(/-/g, ' ')}</span>
+              <span>{pillar.replace(/-/g, ' ')}</span>
             </>
           )}
         </div>
-        <h1 class="font-serif text-4xl md:text-5xl mb-6">{title}</h1>
-        <p class="text-xl text-ink-secondary leading-relaxed">
+        <h1 class="text-3xl md:text-4xl font-light tracking-wide mb-6 leading-tight">{title}</h1>
+        <p class="text-lg text-ink-secondary leading-relaxed">
           {description}
         </p>
       </header>
@@ -153,16 +153,13 @@ const schemas = [articleSchema, breadcrumbSchema];
       <hr class="section-divider" />
 
       <!-- CTA Section -->
-      <section class="text-center py-8">
-        <h2 class="font-serif text-2xl mb-4">Ready to book your trip?</h2>
-        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">READY TO BOOK YOUR TRIP?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
           Text us where you want to go. We'll send options. You pick. We book.
         </p>
-        <a
-          href="sms:+13239224067"
-          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
-        >
-          Text Us to Get Started
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US TO START
         </a>
       </section>
 

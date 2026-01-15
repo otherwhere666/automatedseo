@@ -1,6 +1,5 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import CTABanner from '../components/CTABanner.astro';
 
 interface TravelerType {
   name: string;
@@ -47,11 +46,11 @@ const schema = {
   <article class="max-w-3xl mx-auto px-4 py-12">
     <!-- Header -->
     <header class="mb-12">
-      <a href="/destinations" class="text-accent text-body-sm hover:text-accent-hover transition-colors mb-4 block">
-        ← All Destinations
+      <a href="/destinations" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
+        ← ALL DESTINATIONS
       </a>
-      <h1 class="text-display-xl mb-4">{city.toUpperCase()}</h1>
-      <p class="text-display-sm text-ink-secondary">{country}</p>
+      <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-4">{city.toUpperCase()}</h1>
+      <p class="text-lg text-ink-secondary">{country}</p>
     </header>
 
     <!-- Hero Image -->
@@ -68,27 +67,27 @@ const schema = {
 
     <!-- Quick Take -->
     <section class="my-12">
-      <h2 class="text-display-md mb-4">QUICK TAKE</h2>
-      <p class="text-body-lg">{quickTake}</p>
+      <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-4">QUICK TAKE</h2>
+      <p class="text-lg leading-relaxed">{quickTake}</p>
     </section>
 
     <!-- Traveler Types -->
     {travelerTypes.map((type, index) => (
-      <section class="my-12 bg-paper-secondary rounded-card p-8">
-        <h2 class="text-display-md mb-2">FOR {type.name.toUpperCase()}</h2>
-        <div class="space-y-4">
+      <section class="my-12 bg-paper-secondary rounded-xl p-8">
+        <h2 class="text-lg font-light tracking-wide mb-6">FOR {type.name.toUpperCase()}</h2>
+        <div class="space-y-5">
           <div>
-            <p class="text-body-sm text-ink-tertiary">STAY IN</p>
-            <p class="text-body-lg font-medium">{type.stayIn}</p>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">STAY IN</p>
+            <p class="text-lg font-medium">{type.stayIn}</p>
           </div>
           <div>
-            <p class="text-body-sm text-ink-tertiary">WHY</p>
-            <p class="text-ink-secondary">{type.why}</p>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">WHY</p>
+            <p class="text-ink-secondary leading-relaxed">{type.why}</p>
           </div>
-          <div class="border-t border-paper-tertiary pt-4 mt-4">
-            <p class="text-body-sm text-ink-tertiary">OUR PICK</p>
-            <p class="text-body-lg font-medium text-accent">{type.pick}</p>
-            <p class="text-body-sm text-ink-tertiary">{type.price}</p>
+          <div class="border-t border-paper-tertiary pt-5 mt-5">
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">OUR PICK</p>
+            <p class="text-lg font-medium">{type.pick}</p>
+            <p class="text-sm text-ink-tertiary mt-1">{type.price}</p>
           </div>
         </div>
       </section>
@@ -96,14 +95,14 @@ const schema = {
 
     <!-- Skip These -->
     <section class="my-12">
-      <h2 class="text-display-md mb-6">SKIP THESE (TOURIST TRAPS)</h2>
+      <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">SKIP THESE</h2>
       <ul class="space-y-4">
         {skip.map((s) => (
           <li class="flex items-start gap-3">
             <span class="text-ink-tertiary mt-1">×</span>
             <div>
-              <strong>{s.name}</strong>
-              <p class="text-ink-secondary text-body-sm">{s.reason}</p>
+              <strong class="text-ink">{s.name}</strong>
+              <p class="text-ink-secondary text-sm mt-1">{s.reason}</p>
             </div>
           </li>
         ))}
@@ -111,16 +110,18 @@ const schema = {
     </section>
 
     <!-- CTA -->
-    <section class="my-12">
-      <h2 class="text-display-md mb-6">WANT A PERSONALIZED RECOMMENDATION?</h2>
-      <p class="text-ink-secondary mb-6">
-        Text us at (323) 922-4067 with "{city.toUpperCase()}" and your dates. We'll curate options based on your preferences.
+    <section class="my-16 text-center">
+      <h2 class="text-xl font-light tracking-wide mb-4">WANT A PERSONALIZED RECOMMENDATION?</h2>
+      <p class="text-ink-secondary mb-8 max-w-md mx-auto">
+        Text us with "{city.toUpperCase()}" and your dates. We'll curate options based on your preferences.
       </p>
-      <CTABanner variant="personalized-recs" />
+      <a href="sms:+13239224067" class="btn-primary inline-block">
+        TEXT US YOUR DATES
+      </a>
     </section>
 
     <!-- Last Updated -->
-    <p class="text-body-sm text-ink-tertiary mt-12 text-center">
+    <p class="text-xs uppercase tracking-widest text-ink-tertiary mt-12 text-center">
       Last updated: {lastUpdated} · Prices are approximate
     </p>
   </article>

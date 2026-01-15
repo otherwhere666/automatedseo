@@ -56,27 +56,27 @@ const isInline = variant === 'inline';
 ) : (
   <div class="cta-banner text-center">
     {content.headline && (
-      <h3 class="text-display-md text-paper mb-4">{content.headline}</h3>
+      <h3 class="text-xl font-light tracking-wide text-paper mb-4">{content.headline.toUpperCase()}</h3>
     )}
-    <p class="text-body-md text-paper/90 mb-6 max-w-xl mx-auto">
+    <p class="text-sm text-paper/90 mb-8 max-w-xl mx-auto">
       {content.body}
     </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
       <a
         href="sms:+13239224067"
-        class="bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-card-sm font-medium transition-colors"
+        class="text-xs uppercase tracking-widest bg-paper text-ink px-6 py-3 hover:bg-paper-secondary transition-colors"
       >
-        Text Us
+        TEXT US
       </a>
       <a
         href="tel:+13239224067"
-        class="text-paper/80 hover:text-paper transition-colors text-body-sm"
+        class="text-paper/80 hover:text-paper transition-colors text-xs uppercase tracking-widest"
       >
-        or call (323) 922-4067
+        OR CALL (323) 922-4067
       </a>
     </div>
     {content.secondary && (
-      <p class="text-body-sm text-paper/60 mt-6 max-w-lg mx-auto">
+      <p class="text-xs text-paper/60 mt-8 max-w-lg mx-auto">
         {content.secondary}
       </p>
     )}

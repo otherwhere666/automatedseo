@@ -92,12 +92,12 @@ const stats = [
     <div class="blog-content">
       <!-- Header -->
       <header class="mb-8">
-        <a href="/case-studies" class="text-accent text-sm hover:text-accent-hover transition-colors mb-4 inline-block">
-          ← All Case Studies
+        <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
+          ← ALL CASE STUDIES
         </a>
-        <span class="block text-accent text-sm font-medium uppercase tracking-wide mb-2">{type}</span>
-        <h1 class="font-serif text-4xl md:text-5xl mb-3">{title}</h1>
-        <p class="font-serif text-2xl text-ink-secondary">{destination}</p>
+        <span class="block text-xs uppercase tracking-widest text-ink-tertiary mb-4">{type}</span>
+        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-3">{title.toUpperCase()}</h1>
+        <p class="text-xl text-ink-secondary">{destination}</p>
       </header>
 
       <!-- Intro paragraph -->
@@ -112,7 +112,7 @@ const stats = [
 
       <!-- What They Asked -->
       <section>
-        <h2 class="font-serif text-2xl mb-4" id="the-brief">The Brief</h2>
+        <h2 class="text-xl font-light tracking-wide mb-4" id="the-brief">THE BRIEF</h2>
         <blockquote class="pull-quote">
           <p>"{quote}"</p>
         </blockquote>
@@ -132,7 +132,7 @@ const stats = [
 
       <!-- Our Process -->
       <section>
-        <h2 class="font-serif text-2xl mb-6" id="our-process">Our Process</h2>
+        <h2 class="text-xl font-light tracking-wide mb-6" id="our-process">OUR PROCESS</h2>
 
         <div class="space-y-8">
           <div>
@@ -169,7 +169,7 @@ const stats = [
 
       <!-- The Final Booking -->
       <section>
-        <h2 class="font-serif text-2xl mb-6" id="the-booking">The Booking</h2>
+        <h2 class="text-xl font-light tracking-wide mb-6" id="the-booking">THE BOOKING</h2>
         <div class="bg-accent/10 border-2 border-accent rounded-xl p-6">
           <h3 class="font-serif text-xl mb-4">{finalBooking.property}</h3>
           <ul class="space-y-2 text-ink-secondary">
@@ -184,7 +184,7 @@ const stats = [
 
       <!-- Outcome -->
       <section>
-        <h2 class="font-serif text-2xl mb-6" id="the-outcome">The Outcome</h2>
+        <h2 class="text-xl font-light tracking-wide mb-6" id="the-outcome">THE OUTCOME</h2>
         <CalloutBox title="Result" variant="outcome">
           <p class="text-lg">{outcome}</p>
         </CalloutBox>
@@ -205,23 +205,20 @@ const stats = [
       <hr class="section-divider" />
 
       <!-- CTA -->
-      <section class="text-center py-8">
-        <h2 class="font-serif text-2xl mb-4">Want this for your trip?</h2>
-        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">WANT THIS FOR YOUR TRIP?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
           We turn overwhelming options into effortless bookings. Text us to get started.
         </p>
-        <a
-          href="sms:+13239224067"
-          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
-        >
-          Text Us to Plan Your Trip
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US TO START
         </a>
       </section>
 
       <!-- Navigation -->
       <nav class="mt-8 pt-8 border-t border-paper-tertiary">
-        <a href="/case-studies" class="text-accent hover:text-accent-hover transition-colors">
-          ← Back to all case studies
+        <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors">
+          ← BACK TO ALL CASE STUDIES
         </a>
       </nav>
     </div>

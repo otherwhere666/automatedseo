@@ -145,6 +145,49 @@
     @apply text-ink;
   }
 
+  /* Navigation - All Caps Style (matching main site) */
+  .nav-link-caps {
+    @apply text-xs text-ink-secondary tracking-widest;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link-caps:hover {
+    @apply text-ink;
+  }
+
+  /* Primary Button - larger, bolder */
+  .btn-primary {
+    @apply text-xs uppercase tracking-widest bg-ink text-paper px-6 py-3;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    @apply bg-ink-secondary;
+  }
+
+  /* Secondary Button - outline style */
+  .btn-secondary {
+    @apply text-xs uppercase tracking-widest border border-ink text-ink px-6 py-3;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-ink text-paper;
+  }
+
+  /* Footer Links */
+  .footer-link {
+    @apply text-ink-secondary;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover {
+    @apply text-ink;
+  }
+
   /* Blog content container - constrained width for readability */
   .blog-content {
     max-width: var(--content-width);

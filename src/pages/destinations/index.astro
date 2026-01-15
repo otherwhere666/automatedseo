@@ -54,8 +54,8 @@ const schemas = [
     <div class="blog-content">
       <!-- Header -->
       <header class="mb-8">
-        <h1 class="font-serif text-4xl md:text-5xl mb-6">Destination Guides</h1>
-        <p class="text-xl text-ink-secondary leading-relaxed">
+        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">DESTINATION GUIDES</h1>
+        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
           Curated guides, not comprehensive lists. We tell you where to stay for different types of travelers — and what to skip.
         </p>
       </header>
@@ -79,8 +79,8 @@ const schemas = [
       <hr class="section-divider" />
 
       {regionOrder.map((region) => byRegion[region] && (
-        <section class="mb-12">
-          <h2 class="font-serif text-2xl mb-6">{region}</h2>
+        <section class="mb-16">
+          <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-8">{region.toUpperCase()}</h2>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {byRegion[region].map((d) => (
               <a href={`/destinations/${d.slug}`} class="block group">
@@ -105,16 +105,13 @@ const schemas = [
       <hr class="section-divider" />
 
       <!-- CTA -->
-      <section class="text-center py-8">
-        <h2 class="font-serif text-2xl mb-4">Don't see your destination?</h2>
-        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">DON'T SEE YOUR DESTINATION?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
           Text us where you want to go. We'll send curated recommendations — no guide required.
         </p>
-        <a
-          href="sms:+13239224067"
-          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
-        >
-          Text Us Your Destination
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US YOUR DESTINATION
         </a>
       </section>
     </div>
