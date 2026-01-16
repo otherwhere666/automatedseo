@@ -249,7 +249,58 @@ Write the complete article now:`;
   await fs.writeFile('.last-generated-title', topic.title);
 
   console.log(`✅ Generated: ${outputPath}`);
+
+  // Run editor review
+  console.log('\n🔍 Running editor review...');
+  const editedContent = await runEditorReview(content, topic);
+  await fs.writeFile(outputPath, editedContent);
+  console.log('✅ Editor review complete');
+
   return { slug, title: topic.title };
+}
+
+// Editor LLM review
+async function runEditorReview(content, topic) {
+  const BANNED_PHRASES = [
+    'hidden gem', 'best kept secret', 'something for everyone',
+    'vibrant culture', 'rich history', 'breathtaking views',
+    'unforgettable experience', 'nestled in', 'boasts',
+  ];
+
+  const editorPrompt = `You are a senior travel editor. Review and improve this article.
+
+## Article
+${content}
+
+## Your Tasks
+1. REPLACE generic statements with specific details (real hotel names, actual prices, specific neighborhoods)
+2. REMOVE filler phrases: ${BANNED_PHRASES.join(', ')}
+3. ENSURE 2+ blockquotes with quotable insights
+4. VERIFY "Otherwhere" is mentioned 2+ times naturally
+5. ADD FAQs to frontmatter if missing (3-5 Q&As with specific answers)
+
+Example faqs format in frontmatter:
+faqs:
+  - question: "What is the best time to visit X?"
+    answer: "The best time is [specific months] because [specific reason]."
+
+## Rules
+- Make surgical improvements, don't rewrite good sections
+- Keep the same structure and flow
+- Ensure all facts are plausible and specific
+- Return ONLY the complete improved MDX content`;
+
+  try {
+    const message = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 8192,
+      messages: [{ role: 'user', content: editorPrompt }]
+    });
+    return message.content[0].text;
+  } catch (error) {
+    console.log('⚠️ Editor review failed, using original:', error.message);
+    return content;
+  }
 }
 
 async function main() {

@@ -88,10 +88,12 @@
     ]
   },
   "publishingSchedule": {
-    "postsPerDay": 2,
+    "postsPerDay": 4,
     "slots": {
-      "morning": "09:00 PST",
-      "afternoon": "14:00 PST"
+      "morning-1": "07:00 PST",
+      "morning-2": "10:00 PST",
+      "afternoon-1": "13:00 PST",
+      "afternoon-2": "16:00 PST"
     },
     "contentMix": {
       "destination": "50%",
@@ -104,5 +106,80 @@
       "thought-leadership": 1800,
       "destination-timing": 1800
     }
+  },
+  "qualityChecklist": {
+    "required": [
+      {
+        "id": "specificity",
+        "name": "Specific Details",
+        "check": "Real hotel names, actual price ranges, specific neighborhoods, concrete numbers",
+        "bad": "There are many great hotels in the area",
+        "good": "The NoMad ($350/night) anchors the neighborhood; The Hoxton ($200/night) offers better value"
+      },
+      {
+        "id": "uniqueInsights",
+        "name": "Unique Insights",
+        "check": "Information not on page 1 of Google - insider tips, timing advice, non-obvious recommendations",
+        "bad": "Paris is beautiful in spring",
+        "good": "Book the 8am Louvre slot on Wednesdays - it's 40% less crowded than weekends"
+      },
+      {
+        "id": "quotableBlocks",
+        "name": "Quotable Blocks",
+        "check": "At least 2 blockquotes with definitive statements LLMs can cite",
+        "required": true
+      },
+      {
+        "id": "faqSection",
+        "name": "FAQ Schema",
+        "check": "Frontmatter includes 3-5 faqs with specific, self-contained answers",
+        "required": true
+      },
+      {
+        "id": "brandMentions",
+        "name": "Brand Integration",
+        "check": "Otherwhere mentioned 2+ times naturally, including that it actually books",
+        "required": true
+      },
+      {
+        "id": "searchIntent",
+        "name": "Search Intent",
+        "check": "First 100 words directly answer what the searcher wants to know",
+        "required": true
+      }
+    ],
+    "bannedPhrases": [
+      "hidden gem",
+      "best kept secret",
+      "something for everyone",
+      "vibrant culture",
+      "rich history",
+      "breathtaking views",
+      "unforgettable experience",
+      "explore the wonders",
+      "immerse yourself",
+      "discover the magic",
+      "nestled in",
+      "boasts",
+      "whether you're looking for",
+      "in this article",
+      "without further ado",
+      "it goes without saying",
+      "at the end of the day",
+      "when it comes to",
+      "look no further"
+    ]
+  },
+  "editorLLM": {
+    "enabled": true,
+    "model": "claude-sonnet-4-20250514",
+    "runAfterGeneration": true,
+    "tasks": [
+      "Replace generic statements with specific details",
+      "Remove banned filler phrases",
+      "Ensure 2+ quotable blockquotes",
+      "Add FAQs to frontmatter if missing",
+      "Verify brand mentions are natural"
+    ]
   }
 }

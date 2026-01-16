@@ -1,8 +1,10 @@
 {
   "settings": {
-    "postsPerDay": 2,
+    "postsPerDay": 4,
     "startDate": "2026-01-16",
-    "timezone": "America/Los_Angeles"
+    "timezone": "America/Los_Angeles",
+    "slots": ["morning-1", "morning-2", "afternoon-1", "afternoon-2"],
+    "editorReview": true
   },
   "weeks": [
     {

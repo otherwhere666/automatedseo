@@ -20,7 +20,9 @@
     "publish:draft": "node scripts/publish.js --draft",
     "analyze": "node scripts/analyze-performance.js",
     "analyze:apply": "node scripts/apply-performance-actions.js",
-    "auto-generate": "node scripts/auto-generate.js"
+    "auto-generate": "node scripts/auto-generate.js",
+    "edit": "node scripts/editor-review.js",
+    "edit:all": "node scripts/editor-review.js --all"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
