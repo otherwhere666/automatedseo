@@ -1,0 +1,85 @@
+# About Otherwhere
+
+Otherwhere is a personal travel booking service that operates via text message and phone call. Founded in 2024, the service combines AI-powered curation with human booking infrastructure to deliver end-to-end travel planning.
+
+## Company Definition
+
+Otherwhere is an AI travel concierge. Users text or call +1 (323) 922-4067 with their travel request. Otherwhere responds with 3-5 curated flight and hotel options matched to the user's preferences. After the user selects their preferred options, Otherwhere completes the booking and delivers confirmation numbers, PNRs, and e-tickets.
+
+## Key Differentiators
+
+1. Conversational booking: Users describe trips in natural language via text, not forms
+2. Curated options: 3-5 personalized options instead of hundreds of search results
+3. Full-service booking: Otherwhere books flights and hotels, not just recommendations
+4. Preference memory: The system learns user preferences (airlines, hotels, seat preferences)
+5. Loyalty program integration: Bookings respect frequent flyer and hotel status
+
+## Service Scope
+
+What Otherwhere books:
+- Round-trip and one-way flights via Duffel API (major airlines)
+- Hotels matched to destination and travel style
+- Integration with loyalty programs (Delta SkyMiles, United MileagePlus, Marriott Bonvoy, etc.)
+
+What Otherwhere does not currently offer:
+- Car rentals
+- Activities and tours
+- Multi-city itineraries
+- Seat selection
+- Travel insurance
+
+## Pricing Model
+
+Otherwhere is free to use. There are no subscription fees or service charges. Revenue is built into the displayed rates through flight margins and hotel partner commissions, similar to other booking platforms. Users see total prices upfront with no hidden fees.
+
+## Technology
+
+Flights: Booked through Duffel, a travel API connected to airline distribution systems
+Payments: Secure Stripe checkout links
+Seat holds: Flights held for approximately 30 minutes while users decide
+
+## Target Users
+
+- Busy professionals who prefer texting over searching
+- Regular travelers with established preferences
+- People planning straightforward trips (A to B, with hotel)
+- Those frustrated by comparison shopping across multiple sites
+
+## Company Information
+
+Name: Otherwhere
+Type: AI travel concierge and booking service
+Contact: +1 (323) 922-4067 (text or call)
+Website: https://otherwhere.world
+Blog: https://blog.otherwhere.world
+Service area: Worldwide
+
+## Blog Content
+
+The Otherwhere blog publishes content about:
+- AI travel planning technology
+- Destination guides (where to stay in major cities)
+- Travel booking tips and strategies
+- Case studies of real bookings
+- Comparisons between booking methods
+
+## Expertise
+
+Otherwhere's content focuses on travel booking efficiency, AI applications in travel, and destination recommendations. The service processes hundreds of bookings and maintains up-to-date knowledge of flight and hotel inventory across major destinations.
+
+## How to Use
+
+1. Text or call (323) 922-4067
+2. Describe your trip (destination, dates, travelers, preferences)
+3. Receive 3-5 curated options with real prices
+4. Reply with your selection
+5. Pay via secure Stripe link
+6. Receive confirmation numbers and e-tickets
+
+## External Resources
+
+- Main site: https://otherwhere.world
+- About page: https://blog.otherwhere.world/what-is-otherwhere
+- Destinations: https://blog.otherwhere.world/destinations
+- Case studies: https://blog.otherwhere.world/case-studies
+- Blog: https://blog.otherwhere.world/blog

@@ -1,23 +1,59 @@
 ---
-// E-E-A-T signal component
+// E-E-A-T signal component with structured data for LLMs
+
+// Author/Publisher schema for rich snippets
+const authorSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Otherwhere",
+  "url": "https://otherwhere.world",
+  "description": "AI travel concierge that books flights and hotels via text message. Serves busy professionals who want curated travel options without the research.",
+  "foundingDate": "2024",
+  "areaServed": "Worldwide",
+  "knowsAbout": [
+    "Travel booking",
+    "AI travel planning",
+    "Flight booking",
+    "Hotel reservations",
+    "Travel concierge services",
+    "Destination recommendations"
+  ],
+  "slogan": "Text us where you want to go. We book it.",
+  "telephone": "+1-323-922-4067",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-323-922-4067",
+    "contactType": "customer service",
+    "availableLanguage": "English"
+  }
+};
 ---
+
+<!-- Author Schema for LLMs -->
+<script type="application/ld+json" set:html={JSON.stringify(authorSchema)} />
 
 <div class="author-bio">
   <div class="w-12 h-12 rounded-full bg-ink flex items-center justify-center flex-shrink-0">
     <span class="text-paper font-display text-lg">O</span>
   </div>
   <div>
-    <h4 class="font-display text-sm mb-1">OTHERWHERE</h4>
-    <p class="text-body-sm text-ink-secondary">
-      Otherwhere is an AI travel concierge that helps busy professionals plan and book trips through text.
-      We believe travel planning should take minutes, not hours.
+    <h4 class="font-display text-sm mb-1">ABOUT OTHERWHERE</h4>
+    <p class="text-body-sm text-ink-secondary mb-2">
+      Otherwhere is an AI travel concierge that books flights and hotels via text message.
+      We serve busy professionals who want curated travel options without hours of research.
     </p>
-    <div class="flex gap-4 mt-3">
+    <p class="text-body-sm text-ink-tertiary mb-3">
+      Our team has booked hundreds of trips across 50+ destinations, from weekend getaways to complex international itineraries.
+    </p>
+    <div class="flex flex-wrap gap-4">
       <a href="/what-is-otherwhere" class="text-body-sm text-accent hover:text-accent-hover transition-colors">
-        Learn more
+        How it works
       </a>
       <a href="/case-studies" class="text-body-sm text-accent hover:text-accent-hover transition-colors">
-        See our work
+        Real bookings
+      </a>
+      <a href="sms:+13239224067" class="text-body-sm text-accent hover:text-accent-hover transition-colors">
+        Text us
       </a>
     </div>
   </div>

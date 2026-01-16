@@ -9,13 +9,46 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "What is an AI Travel Concierge?",
-    "description": "An AI travel concierge is a service that combines artificial intelligence with travel expertise to help you plan and book trips through conversation."
+    "description": "An AI travel concierge is a service that combines artificial intelligence with travel expertise to help you plan and book trips through conversation.",
+    "author": {
+      "@type": "Organization",
+      "name": "Otherwhere",
+      "url": "https://otherwhere.world"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Otherwhere"
+    }
   },
   {
     "@context": "https://schema.org",
     "@type": "DefinedTerm",
     "name": "AI Travel Concierge",
-    "description": "A service that combines artificial intelligence with travel expertise to help you plan and book trips through conversation instead of searching multiple websites."
+    "description": "A service that combines artificial intelligence with travel expertise to help you plan and book trips through conversation instead of searching multiple websites.",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "Travel Technology Terms"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "Travel Concierge",
+    "description": "A personal travel planning service that curates options and handles bookings on behalf of travelers, offering a middle ground between self-service booking sites and traditional travel agents.",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "Travel Technology Terms"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "Curated Travel Options",
+    "description": "A small, personalized selection of flight and hotel choices (typically 3-5 options) filtered by a travel concierge based on traveler preferences, as opposed to hundreds of unfiltered search results.",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "Travel Technology Terms"
+    }
   }
 ];
 

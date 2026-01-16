@@ -6,6 +6,11 @@ import RelatedPosts from '../components/RelatedPosts.astro';
 import AuthorBio from '../components/AuthorBio.astro';
 import CalloutBox from '../components/CalloutBox.astro';
 
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
 interface Props {
   frontmatter: {
     title: string;
@@ -20,6 +25,7 @@ interface Props {
     readingTime?: string;
     noindex?: boolean;
     showToc?: boolean;
+    faqs?: FAQ[];
   };
   headings?: { depth: number; slug: string; text: string }[];
 }
@@ -39,6 +45,7 @@ const {
   readingTime,
   noindex = false,
   showToc = true,
+  faqs = [],
 } = frontmatter;
 
 // Format pillar name for display
@@ -115,7 +122,21 @@ const breadcrumbSchema = {
   ]
 };
 
-const schemas = [articleSchema, breadcrumbSchema];
+// FAQ schema if post has FAQs
+const faqSchema = faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+} : null;
+
+const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
 ---
 
 <BaseLayout
