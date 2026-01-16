@@ -85,33 +85,61 @@ function generateTopicIdea() {
   };
 }
 
-// Fallback images when API unavailable
+// Lifestyle-focused fallback images
 const FALLBACK_IMAGES = [
-  'photo-1488646953014-85cb44e25828', // world map with pins
-  'photo-1507003211169-0a1dd7228f2d', // airplane window view
-  'photo-1476514525535-07fb3b4ae5f1', // lake and mountains
-  'photo-1530789253388-582c481c54b0', // tropical beach
-  'photo-1502920917128-1aa500764cbd', // paris street
-  'photo-1493976040374-85c8e12f0c0e', // santorini
-  'photo-1506929562872-bb421503ef21', // beach sunset
-  'photo-1504598318550-17eba1008a68', // city skyline
-  'photo-1500835556837-99ac94a94552', // airplane wing
-  'photo-1501785888041-af3ef285b470', // mountain lake
-  'photo-1523906834658-6e24ef2386f9', // venice canal
-  'photo-1516483638261-f4dbaf036963', // italy coast
+  'photo-1507608616759-54f48f0af0ee', // woman at cafe table
+  'photo-1517457373958-b7bdd4587205', // couple walking cobblestone street
+  'photo-1520250497591-112f2f40a3f4', // hotel pool lifestyle
+  'photo-1540541338287-41700207dee6', // person by infinity pool
+  'photo-1544161515-4ab6ce6db874', // spa/wellness moment
+  'photo-1566073771259-6a8506099945', // boutique hotel terrace
+  'photo-1551882547-ff40c63fe5fa', // luxury hotel lobby
+  'photo-1582719508461-905c673771fd', // rooftop bar sunset
+  'photo-1571896349842-33c89424de2d', // hotel room view
+  'photo-1542314831-068cd1dbfeeb', // resort walkway
+  'photo-1445019980597-93fa8acb246c', // morning coffee balcony
+  'photo-1596394516093-501ba68a0ba6', // poolside lounging
+  'photo-1414235077428-338989a2e8c0', // fine dining table
+  'photo-1559599746-c0f31a628657', // aperitivo scene
+  'photo-1504674900247-0877df9cc836', // food lifestyle
 ];
 
-async function searchUnsplash(query) {
+// Track recently used images to avoid duplicates
+const USED_IMAGES_FILE = path.join(process.cwd(), 'data', 'used-images.json');
+const MAX_USED_IMAGES = 30; // Remember last 30 images
+
+async function getUsedImages() {
+  try {
+    const data = await fs.readFile(USED_IMAGES_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
+}
+
+async function trackUsedImage(imageId) {
+  const used = await getUsedImages();
+  used.unshift(imageId);
+  // Keep only last N images
+  const trimmed = used.slice(0, MAX_USED_IMAGES);
+  await fs.writeFile(USED_IMAGES_FILE, JSON.stringify(trimmed, null, 2));
+}
+
+async function searchUnsplash(query, usedImages = []) {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   if (!accessKey) {
     console.log('⚠️  No UNSPLASH_ACCESS_KEY, using fallback image');
     return null;
   }
 
+  // Add lifestyle modifiers for better imagery
+  const lifestyleModifiers = ['lifestyle', 'aesthetic', 'luxury', 'boutique'];
+  const modifier = lifestyleModifiers[Math.floor(Math.random() * lifestyleModifiers.length)];
+
   try {
-    const searchQuery = encodeURIComponent(`${query} travel`);
+    const searchQuery = encodeURIComponent(`${query} ${modifier} travel`);
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?query=${searchQuery}&orientation=landscape&per_page=10`,
+      `https://api.unsplash.com/search/photos?query=${searchQuery}&orientation=landscape&per_page=20`,
       { headers: { Authorization: `Client-ID ${accessKey}` } }
     );
 
@@ -122,12 +150,25 @@ async function searchUnsplash(query) {
 
     const data = await response.json();
     if (data.results && data.results.length > 0) {
-      // Pick randomly from top 10 results for variety
-      const photo = data.results[Math.floor(Math.random() * data.results.length)];
-      console.log(`📷 Found image: "${photo.alt_description || photo.description || query}"`);
+      // Filter out recently used images
+      const available = data.results.filter(photo => !usedImages.includes(photo.id));
+
+      if (available.length === 0) {
+        console.log('⚠️  All search results recently used, picking from full set');
+        available.push(...data.results);
+      }
+
+      // Pick randomly from available results
+      const photo = available[Math.floor(Math.random() * available.length)];
+      console.log(`📷 Found image: "${photo.alt_description || photo.description || query}" (${modifier})`);
+
+      // Track this image
+      await trackUsedImage(photo.id);
+
       return {
         url: `${photo.urls.raw}&w=1600&h=900&fit=crop`,
-        alt: photo.alt_description || photo.description || `${query} travel scene`
+        alt: photo.alt_description || photo.description || `${query} travel scene`,
+        id: photo.id
       };
     }
   } catch (error) {
@@ -137,6 +178,9 @@ async function searchUnsplash(query) {
 }
 
 async function getUnsplashImage(topicTitle) {
+  // Load recently used images
+  const usedImages = await getUsedImages();
+
   // Extract key terms from title for search
   const searchTerms = topicTitle
     .replace(/[^a-zA-Z\s]/g, '')
@@ -145,16 +189,22 @@ async function getUnsplashImage(topicTitle) {
     .slice(0, 3)
     .join(' ');
 
-  const result = await searchUnsplash(searchTerms);
+  const result = await searchUnsplash(searchTerms, usedImages);
   if (result) {
     return result;
   }
 
-  // Fallback to curated list
-  const randomImage = FALLBACK_IMAGES[Math.floor(Math.random() * FALLBACK_IMAGES.length)];
+  // Fallback: rotate through list, avoiding recently used
+  const availableFallbacks = FALLBACK_IMAGES.filter(id => !usedImages.includes(id));
+  const fallbackId = availableFallbacks.length > 0
+    ? availableFallbacks[0]
+    : FALLBACK_IMAGES[0];
+
+  await trackUsedImage(fallbackId);
+
   return {
-    url: `https://images.unsplash.com/${randomImage}?w=1600&h=900&fit=crop`,
-    alt: 'Scenic travel destination'
+    url: `https://images.unsplash.com/${fallbackId}?w=1600&h=900&fit=crop`,
+    alt: 'Travel lifestyle moment'
   };
 }
 
