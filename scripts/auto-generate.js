@@ -158,6 +158,16 @@ async function getUnsplashImage(topicTitle) {
   };
 }
 
+// Strip markdown code blocks from LLM output
+function stripCodeBlocks(content) {
+  let cleaned = content.trim();
+  // Remove opening ```mdx or ```markdown or ``` at the start
+  cleaned = cleaned.replace(/^```(?:mdx|markdown)?\n?/, '');
+  // Remove closing ``` at the end
+  cleaned = cleaned.replace(/\n?```$/, '');
+  return cleaned.trim();
+}
+
 async function generateArticle(topic) {
   console.log(`\n📝 Generating: ${topic.title}\n`);
 
@@ -231,7 +241,7 @@ Write the complete article now:`;
     messages: [{ role: 'user', content: prompt }]
   });
 
-  const content = message.content[0].text;
+  const content = stripCodeBlocks(message.content[0].text);
 
   // Generate slug
   const slug = topic.title
@@ -296,7 +306,7 @@ faqs:
       max_tokens: 8192,
       messages: [{ role: 'user', content: editorPrompt }]
     });
-    return message.content[0].text;
+    return stripCodeBlocks(message.content[0].text);
   } catch (error) {
     console.log('⚠️ Editor review failed, using original:', error.message);
     return content;
