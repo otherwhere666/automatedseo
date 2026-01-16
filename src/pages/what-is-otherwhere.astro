@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CTABanner from '../components/CTABanner.astro';
+import CategoryPill from '../components/CategoryPill.astro';
 import SchemaMarkup from '../components/SchemaMarkup.astro';
-import TrustSignals from '../components/TrustSignals.astro';
-import CalloutBox from '../components/CalloutBox.astro';
 
 // Page schemas
 const schemas = [
@@ -93,17 +91,6 @@ const faqData = {
     }
   ]
 };
-
-const trustStats = [
-  { value: "100%", label: "Booking rate" },
-  { value: "~5 min", label: "Avg. to booked" },
-  { value: "Free", label: "To use" }
-];
-
-const testimonial = {
-  quote: "Ten minutes later, I had perfect flight and stay options. This is what travel booking should've always been.",
-  author: "Otherwhere customer"
-};
 ---
 
 <BaseLayout
@@ -113,189 +100,228 @@ const testimonial = {
 >
   <SchemaMarkup type="FAQ" data={faqData} />
 
-  <article class="py-12">
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-8">
-        <h1 class="font-serif text-4xl md:text-5xl mb-6">What is Otherwhere?</h1>
-        <p class="text-xl text-ink-secondary leading-relaxed">
+  <!-- Hero Section -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="max-w-3xl">
+        <p class="section-subtitle text-ink-tertiary mb-4">HOW IT WORKS</p>
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl mb-6">WHAT IS OTHERWHERE?</h1>
+        <p class="text-xl md:text-2xl text-ink-secondary leading-relaxed mb-8">
           Otherwhere plans and books your trips end-to-end. Text or call with where you want to go, and we'll find flights and hotels that match your preferences—then book everything for you.
         </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="sms:+13239224067" class="btn-pill btn-pill-primary">TEXT US TO START</a>
+          <a href="tel:+13239224067" class="btn-pill btn-pill-secondary">CALL (323) 922-4067</a>
+        </div>
       </header>
 
-      <!-- Trust Signals -->
-      <TrustSignals stats={trustStats} testimonial={testimonial} />
-
-      <!-- Quick Definition -->
-      <CalloutBox title="The Short Version" variant="highlight">
-        <p class="text-lg"><strong>Say where you want to go. We find booking-ready options. We book for you.</strong> No tabs, no searching, no checkout forms.</p>
-      </CalloutBox>
-
-      <hr class="section-divider" />
-
-      <!-- How It Works -->
-      <section>
-        <h2 class="font-serif text-2xl mb-8" id="how-it-works">How It Works</h2>
-        <div class="space-y-8">
-          <div class="flex gap-5">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">1</div>
-            <div>
-              <h3 class="font-medium text-lg mb-2">Say where</h3>
-              <p class="text-ink-secondary">Text or call (323) 922-4067 with your trip details. "Flying SFO to Rome, December 15-22, 2 travelers" works. So does "romantic long weekend in Europe, flexible on dates."</p>
-            </div>
-          </div>
-          <div class="flex gap-5">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">2</div>
-            <div>
-              <h3 class="font-medium text-lg mb-2">Get booking-ready options</h3>
-              <p class="text-ink-secondary">We search flights and hotels, then send you 3-5 curated options with real prices. We match your timing preferences, cabin class, loyalty programs, and style.</p>
-            </div>
-          </div>
-          <div class="flex gap-5">
-            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent text-paper flex items-center justify-center font-serif text-xl">3</div>
-            <div>
-              <h3 class="font-medium text-lg mb-2">Booked for you</h3>
-              <p class="text-ink-secondary">Pick your options, pay through a secure link, and we handle the rest. You'll get confirmation numbers, PNRs, and e-tickets. No forms to fill, no checkout flows—just confirmations.</p>
-            </div>
-          </div>
+      <!-- Stats -->
+      <div class="stats-row mt-12 pt-12 border-t border-paper-tertiary">
+        <div class="stat-item">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Booking rate</div>
         </div>
-
-        <div class="text-center mt-10">
-          <a
-            href="sms:+13239224067"
-            class="inline-block bg-accent hover:bg-accent-hover text-paper px-6 py-3 rounded-xl font-medium transition-colors"
-          >
-            Text Us to Start
-          </a>
+        <div class="stat-item">
+          <div class="stat-value">~5 min</div>
+          <div class="stat-label">Avg. to booked</div>
         </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- What We Book -->
-      <section>
-        <h2 class="font-serif text-2xl mb-6" id="what-we-book">What We Book</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">✈️</span>
-            <h3 class="font-medium mt-2 mb-1">Flights</h3>
-            <p class="text-ink-secondary text-sm">Round-trip or one-way. We search major airlines through Duffel's API and hold your seats while you decide (about 30 minutes).</p>
-          </div>
-          <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">🏨</span>
-            <h3 class="font-medium mt-2 mb-1">Hotels</h3>
-            <p class="text-ink-secondary text-sm">Matched to your destination and dates. We show pricing breakdowns including taxes before you book.</p>
-          </div>
-          <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">💳</span>
-            <h3 class="font-medium mt-2 mb-1">Loyalty programs</h3>
-            <p class="text-ink-secondary text-sm">Tell us your frequent flyer and hotel programs. We'll find options that earn you points.</p>
-          </div>
-          <div class="bg-paper-secondary rounded-xl p-5">
-            <span class="text-accent text-xl">🔄</span>
-            <h3 class="font-medium mt-2 mb-1">Your preferences</h3>
-            <p class="text-ink-secondary text-sm">We remember what you like—aisle vs window, boutique vs chain, direct flights only. Future trips get easier.</p>
-          </div>
+        <div class="stat-item">
+          <div class="stat-value">Free</div>
+          <div class="stat-label">To use</div>
         </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- What We Don't Do -->
-      <section>
-        <h2 class="font-serif text-2xl mb-6" id="limitations">What We Don't Do (Yet)</h2>
-        <p class="text-ink-secondary mb-6">We're focused on doing flights and hotels really well. Here's what's not available yet:</p>
-        <ul class="space-y-3 text-ink-secondary">
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">×</span>
-            <span>Car rentals and ground transportation</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">×</span>
-            <span>Activities, tours, and experiences</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">×</span>
-            <span>Multi-city trips (A→B→C routes)</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">×</span>
-            <span>Seat selection and meal preferences</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">×</span>
-            <span>Travel insurance</span>
-          </li>
-        </ul>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- Who It's For -->
-      <section>
-        <h2 class="font-serif text-2xl mb-6" id="who-its-for">Who It's For</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-paper-secondary rounded-xl p-6">
-            <h3 class="font-medium text-accent mb-4">Great fit</h3>
-            <ul class="space-y-2 text-ink-secondary">
-              <li>• Busy people who'd rather text than search</li>
-              <li>• Travelers who want someone to handle the booking</li>
-              <li>• People tired of 47 browser tabs</li>
-              <li>• Anyone who's thought "just book it for me"</li>
-            </ul>
-          </div>
-          <div class="bg-paper-secondary rounded-xl p-6">
-            <h3 class="font-medium mb-4">Maybe not ideal</h3>
-            <ul class="space-y-2 text-ink-secondary">
-              <li>• Extreme budget optimizers (we're not a price comparison tool)</li>
-              <li>• People who enjoy the research process</li>
-              <li>• Complex multi-city itineraries</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- Pricing -->
-      <section>
-        <h2 class="font-serif text-2xl mb-6" id="pricing">Pricing</h2>
-        <CalloutBox variant="default">
-          <p class="text-lg mb-3"><strong>Free to use.</strong> No subscription, no service fees.</p>
-          <p class="text-ink-secondary">Our pricing is built into the rates you see. We earn a small margin on flights and commissions from hotel partners—similar to how other booking platforms work. You see the total price upfront, pay once, done.</p>
-        </CalloutBox>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- FAQ -->
-      <section>
-        <h2 class="font-serif text-2xl mb-6" id="faq">Frequently Asked Questions</h2>
-        <div class="space-y-6">
-          {faqData.questions.map((faq) => (
-            <div class="border-b border-paper-tertiary pb-6">
-              <h3 class="font-medium text-lg mb-3">{faq.question}</h3>
-              <p class="text-ink-secondary leading-relaxed">{faq.answer}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-8">
-        <h2 class="font-serif text-2xl mb-4">Ready to try it?</h2>
-        <p class="text-ink-secondary mb-6 max-w-md mx-auto">
-          Text us where you want to go. We'll send options. You pick. We book.
-        </p>
-        <a
-          href="sms:+13239224067"
-          class="inline-block bg-accent hover:bg-accent-hover text-paper px-8 py-4 rounded-xl font-medium transition-colors text-lg"
-        >
-          Text Us to Get Started
-        </a>
-      </section>
+      </div>
     </div>
-  </article>
+  </section>
+
+  <!-- How It Works -->
+  <section class="bg-dark py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6">
+      <p class="section-subtitle text-paper/50 mb-2">THE PROCESS</p>
+      <h2 class="font-display text-3xl md:text-4xl text-paper mb-12">HOW IT WORKS</h2>
+
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+        <div class="text-center md:text-left">
+          <div class="font-display text-5xl md:text-6xl text-paper/30 mb-4">01</div>
+          <h3 class="font-display text-xl text-paper mb-3">SAY WHERE</h3>
+          <p class="text-paper/70 leading-relaxed">
+            Text or call (323) 922-4067 with your trip details. "Flying SFO to Rome, December 15-22, 2 travelers" works. So does "romantic long weekend in Europe, flexible on dates."
+          </p>
+        </div>
+        <div class="text-center md:text-left">
+          <div class="font-display text-5xl md:text-6xl text-paper/30 mb-4">02</div>
+          <h3 class="font-display text-xl text-paper mb-3">GET OPTIONS</h3>
+          <p class="text-paper/70 leading-relaxed">
+            We search flights and hotels, then send you 3-5 curated options with real prices. We match your timing preferences, cabin class, loyalty programs, and style.
+          </p>
+        </div>
+        <div class="text-center md:text-left">
+          <div class="font-display text-5xl md:text-6xl text-paper/30 mb-4">03</div>
+          <h3 class="font-display text-xl text-paper mb-3">BOOKED FOR YOU</h3>
+          <p class="text-paper/70 leading-relaxed">
+            Pick your options, pay through a secure link, and we handle the rest. You'll get confirmation numbers, PNRs, and e-tickets. No forms to fill, no checkout flows—just confirmations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Book -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6">
+      <p class="section-subtitle text-ink-tertiary mb-2">SERVICES</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-12">WHAT WE BOOK</h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-paper-secondary rounded-card p-6">
+          <div class="text-3xl mb-4">✈️</div>
+          <h3 class="font-display text-lg mb-2">FLIGHTS</h3>
+          <p class="text-ink-secondary text-sm leading-relaxed">Round-trip or one-way. We search major airlines through Duffel's API and hold your seats while you decide (about 30 minutes).</p>
+        </div>
+        <div class="bg-paper-secondary rounded-card p-6">
+          <div class="text-3xl mb-4">🏨</div>
+          <h3 class="font-display text-lg mb-2">HOTELS</h3>
+          <p class="text-ink-secondary text-sm leading-relaxed">Matched to your destination and dates. We show pricing breakdowns including taxes before you book.</p>
+        </div>
+        <div class="bg-paper-secondary rounded-card p-6">
+          <div class="text-3xl mb-4">💳</div>
+          <h3 class="font-display text-lg mb-2">LOYALTY</h3>
+          <p class="text-ink-secondary text-sm leading-relaxed">Tell us your frequent flyer and hotel programs. We'll find options that earn you points.</p>
+        </div>
+        <div class="bg-paper-secondary rounded-card p-6">
+          <div class="text-3xl mb-4">🔄</div>
+          <h3 class="font-display text-lg mb-2">PREFERENCES</h3>
+          <p class="text-ink-secondary text-sm leading-relaxed">We remember what you like—aisle vs window, boutique vs chain, direct flights only. Future trips get easier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Don't Do -->
+  <section class="bg-paper-secondary py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div>
+          <p class="section-subtitle text-ink-tertiary mb-2">COMING SOON</p>
+          <h2 class="font-display text-3xl md:text-4xl mb-6">WHAT WE DON'T DO (YET)</h2>
+          <p class="text-ink-secondary text-lg leading-relaxed">
+            We're focused on doing flights and hotels really well. Here's what's not available yet:
+          </p>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center gap-4 text-ink-secondary">
+            <span class="text-ink-tertiary text-xl">×</span>
+            <span>Car rentals and ground transportation</span>
+          </div>
+          <div class="flex items-center gap-4 text-ink-secondary">
+            <span class="text-ink-tertiary text-xl">×</span>
+            <span>Activities, tours, and experiences</span>
+          </div>
+          <div class="flex items-center gap-4 text-ink-secondary">
+            <span class="text-ink-tertiary text-xl">×</span>
+            <span>Multi-city trips (A→B→C routes)</span>
+          </div>
+          <div class="flex items-center gap-4 text-ink-secondary">
+            <span class="text-ink-tertiary text-xl">×</span>
+            <span>Seat selection and meal preferences</span>
+          </div>
+          <div class="flex items-center gap-4 text-ink-secondary">
+            <span class="text-ink-tertiary text-xl">×</span>
+            <span>Travel insurance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who It's For -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6">
+      <p class="section-subtitle text-ink-tertiary mb-2">FIT CHECK</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-12">WHO IT'S FOR</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-dark rounded-card p-8">
+          <CategoryPill category="Great fit" variant="light" class="mb-6" />
+          <ul class="space-y-4 text-paper/80">
+            <li class="flex items-start gap-3">
+              <span class="text-paper/50">→</span>
+              <span>Busy people who'd rather text than search</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-paper/50">→</span>
+              <span>Travelers who want someone to handle the booking</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-paper/50">→</span>
+              <span>People tired of 47 browser tabs</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-paper/50">→</span>
+              <span>Anyone who's thought "just book it for me"</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-paper-secondary rounded-card p-8">
+          <CategoryPill category="Maybe not ideal" variant="dark" class="mb-6" />
+          <ul class="space-y-4 text-ink-secondary">
+            <li class="flex items-start gap-3">
+              <span class="text-ink-tertiary">→</span>
+              <span>Extreme budget optimizers (we're not a price comparison tool)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ink-tertiary">→</span>
+              <span>People who enjoy the research process</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ink-tertiary">→</span>
+              <span>Complex multi-city itineraries</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="bg-dark py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="section-subtitle text-paper/50 mb-2">PRICING</p>
+      <h2 class="font-display text-4xl md:text-5xl text-paper mb-6">FREE TO USE</h2>
+      <p class="text-paper/70 text-lg max-w-2xl mx-auto leading-relaxed">
+        No subscription, no service fees. Our pricing is built into the rates you see. We earn a small margin on flights and commissions from hotel partners—similar to how other booking platforms work. You see the total price upfront, pay once, done.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="max-w-wide mx-auto px-6">
+      <p class="section-subtitle text-ink-tertiary mb-2">QUESTIONS</p>
+      <h2 class="font-display text-3xl md:text-4xl mb-12">FAQ</h2>
+
+      <div class="max-w-3xl space-y-8">
+        {faqData.questions.map((faq) => (
+          <div class="border-b border-paper-tertiary pb-8">
+            <h3 class="font-display text-lg md:text-xl mb-4">{faq.question.toUpperCase()}</h3>
+            <p class="text-ink-secondary leading-relaxed">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-paper cta-section border-t border-paper-tertiary">
+    <div class="cta-section-content">
+      <p class="cta-section-subtitle">READY TO GO?</p>
+      <h2 class="cta-section-title">TEXT US WHERE YOU WANT TO GO</h2>
+      <p class="cta-section-description">
+        We'll send options. You pick. We book.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="sms:+13239224067" class="btn-pill btn-pill-primary">TEXT (323) 922-4067</a>
+        <a href="/blog" class="btn-pill btn-pill-secondary">READ OUR GUIDES</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
