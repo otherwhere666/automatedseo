@@ -1,24 +1,84 @@
 ---
+import { getRelatedContent, getAllPosts } from '../utils/content';
+import type { RelatedItem } from '../types';
+
 interface Props {
   pillar?: string;
+  keywords?: string[];
   currentSlug: string;
+  currentType?: 'post' | 'destination' | 'case-study';
+  limit?: number;
 }
 
-const { pillar, currentSlug } = Astro.props;
+const { pillar, keywords = [], currentSlug, currentType = 'post', limit = 3 } = Astro.props;
 
-// This will be populated dynamically once we have content
-// For now, showing placeholder structure
-const relatedPosts: { title: string; slug: string; description: string }[] = [];
+// Get the current post to extract keywords if not provided
+let effectiveKeywords = keywords;
+if (effectiveKeywords.length === 0 && currentType === 'post') {
+  const posts = getAllPosts();
+  const currentPost = posts.find(p => currentSlug.includes(p.slug));
+  if (currentPost?.keywords) {
+    effectiveKeywords = currentPost.keywords;
+  }
+}
+
+// Get related content using the utility function
+const relatedItems = getRelatedContent(currentSlug, currentType, {
+  pillar,
+  keywords: effectiveKeywords,
+  limit
+});
+
+// Helper to get the URL for a related item
+function getItemUrl(item: RelatedItem): string {
+  switch (item.type) {
+    case 'post':
+      return `/blog/${item.slug}`;
+    case 'destination':
+      return `/destinations/${item.slug}`;
+    case 'case-study':
+      return `/case-studies/${item.slug}`;
+    default:
+      return '/';
+  }
+}
+
+// Helper to get the type label
+function getTypeLabel(type: RelatedItem['type']): string {
+  switch (type) {
+    case 'post':
+      return 'Article';
+    case 'destination':
+      return 'Guide';
+    case 'case-study':
+      return 'Case Study';
+    default:
+      return '';
+  }
+}
 ---
 
-{relatedPosts.length > 0 && (
+{relatedItems.length > 0 && (
   <section class="mt-16 pt-8 border-t border-paper-tertiary">
-    <h3 class="text-display-sm mb-6">Related Articles</h3>
+    <h3 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">RELATED CONTENT</h3>
     <div class="grid md:grid-cols-2 gap-6">
-      {relatedPosts.slice(0, 2).map((post) => (
-        <a href={post.slug} class="card block">
-          <h4 class="text-display-sm mb-2">{post.title}</h4>
-          <p class="text-body-sm text-ink-secondary">{post.description}</p>
+      {relatedItems.slice(0, 2).map((item) => (
+        <a href={getItemUrl(item)} class="block group bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
+          {item.image && (
+            <img
+              src={item.image.replace('w=1200', 'w=400').replace('h=600', 'h=200')}
+              alt={item.title}
+              class="w-full h-32 object-cover"
+              loading="lazy"
+            />
+          )}
+          <div class="p-4">
+            <span class="text-xs uppercase tracking-widest text-accent mb-2 block">{getTypeLabel(item.type)}</span>
+            <h4 class="font-serif text-lg group-hover:text-accent transition-colors">{item.title}</h4>
+            {item.description && (
+              <p class="text-sm text-ink-secondary mt-2 line-clamp-2">{item.description.substring(0, 100)}...</p>
+            )}
+          </div>
         </a>
       ))}
     </div>

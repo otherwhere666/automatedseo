@@ -1,0 +1,382 @@
+[
+  {
+    "slug": "honeymoon-puglia",
+    "title": "The Honeymoon Couple",
+    "destination": "Puglia, Italy",
+    "type": "Honeymoon",
+    "image": "https://images.unsplash.com/photo-1534008897995-27a23e859048?w=1200&h=600&fit=crop",
+    "imageAlt": "Traditional trulli houses in Puglia, Italy countryside",
+    "travelerType": "Newly engaged couple, both 32, working in tech",
+    "budget": "$6,000 total (7 nights)",
+    "timeline": "3 weeks until trip",
+    "quote": "We want somewhere romantic but not basic. Not Cancun or an all-inclusive. Good food matters more than a beach. We're foodies.",
+    "constraints": [
+      "Must have: Great restaurants nearby, romantic vibe, walkable",
+      "Can't do: Long-haul flights (max 8 hours from NYC)",
+      "Dealbreaker: \"Resort feel\" or tourist crowds"
+    ],
+    "eliminated": [
+      { "name": "Caribbean islands", "reason": "Too \"honeymoon cliché\" for them" },
+      { "name": "Bali", "reason": "20+ hour travel time" },
+      { "name": "Santorini", "reason": "Peak season crowds, overexposed on Instagram" }
+    ],
+    "considered": [
+      { "name": "Portugal (Lisbon + Sintra)", "reason": "Great food, romantic, but they'd been before" },
+      { "name": "Amalfi Coast", "reason": "Stunning but crowded in their window" },
+      { "name": "Puglia, Italy", "reason": "Off-the-radar, incredible food scene, authentic" }
+    ],
+    "recommended": "Puglia — off-peak pricing, authentic, beaches + food without the crowds",
+    "finalBooking": {
+      "property": "Masseria (restored 17th-century farmhouse)",
+      "why": "Private, romantic, farm-to-table meals included, trulli architecture they'd never seen",
+      "price": "$4,200 for 7 nights (under budget)",
+      "extras": "Cooking class ($150), truffle hunting experience ($200)"
+    },
+    "timeSaved": {
+      "diy": "10-15 hours",
+      "otherwhere": "22 minutes"
+    },
+    "outcome": "Booked. They sent photos of homemade orecchiette. Called it \"the best trip we've ever taken.\"",
+    "summary": {
+      "result": "$4,200 for 7 nights",
+      "time": "22 minutes"
+    }
+  },
+  {
+    "slug": "burnout-escape-iceland",
+    "title": "The Burned-Out Founder",
+    "destination": "Iceland Westfjords",
+    "type": "Escape",
+    "image": "https://images.unsplash.com/photo-1520769945061-0a448c463865?w=1200&h=600&fit=crop",
+    "imageAlt": "Remote Iceland landscape with dramatic mountains and glacial waters",
+    "travelerType": "Solo founder, 38, just closed a funding round",
+    "budget": "\"Whatever it costs\" (ended up ~$8,000)",
+    "timeline": "Needed to leave in 5 days",
+    "quote": "I need to disappear for a week. Somewhere I can sleep, read, and not think about work. No emails. No decisions.",
+    "constraints": [
+      "Must have: Privacy, nature, no \"scene\"",
+      "Can't do: Group activities, wellness retreats with schedules",
+      "Dealbreaker: Having to plan anything once there"
+    ],
+    "eliminated": [
+      { "name": "Typical beach resorts", "reason": "Too many people, too much stimulation" },
+      { "name": "Bali wellness retreats", "reason": "Too structured, too \"program-y\"" },
+      { "name": "European cities", "reason": "Still feels like \"doing something\"" }
+    ],
+    "considered": [
+      { "name": "Patagonia lodge", "reason": "Stunning but complex logistics" },
+      { "name": "Norwegian fjord cabin", "reason": "Remote but cold in their window" },
+      { "name": "New Zealand", "reason": "Too far, too much planning" }
+    ],
+    "recommended": "Remote luxury lodge in Iceland's Westfjords — accessible only by small plane",
+    "finalBooking": {
+      "property": "8-room lodge accessible only by charter flight",
+      "why": "Total isolation, all meals included, no WiFi by design, hot springs on property",
+      "price": "$7,800 for 6 nights including charter flight",
+      "extras": "None needed — that was the point"
+    },
+    "timeSaved": {
+      "diy": "8-12 hours",
+      "otherwhere": "18 minutes"
+    },
+    "outcome": "Booked same day. Texted us after: \"I slept 10 hours a night and read 4 books. Thank you.\"",
+    "summary": {
+      "result": "Remote luxury lodge",
+      "time": "18 minutes"
+    }
+  },
+  {
+    "slug": "anniversary-trip-montreal",
+    "title": "The Anniversary Trip",
+    "destination": "Montreal, Canada",
+    "type": "Anniversary",
+    "image": "https://images.unsplash.com/photo-1519178614-68673b201f36?w=1200&h=600&fit=crop",
+    "imageAlt": "Old Montreal cobblestone streets with European architecture",
+    "travelerType": "Couple, late 30s, two kids under 5, haven't traveled alone since 2021",
+    "budget": "$3,500 max (4 nights)",
+    "timeline": "6 weeks out, tied to grandparents' availability",
+    "quote": "We have 4 days without kids. We don't even know what we like anymore. Just... not a theme park and not exhausting.",
+    "constraints": [
+      "Must have: Good food, walkable, feels special but not stuffy",
+      "Can't do: Adventure travel, long travel days (wasted time)",
+      "Dealbreaker: Anywhere that feels like it's \"for young people\""
+    ],
+    "eliminated": [
+      { "name": "Vegas", "reason": "They specifically said \"no Vegas\"" },
+      { "name": "Caribbean", "reason": "Feels like a \"family resort without the family\"" },
+      { "name": "NYC", "reason": "They live 2 hours away, doesn't feel like an escape" }
+    ],
+    "considered": [
+      { "name": "Charleston", "reason": "Great food, walkable, romantic" },
+      { "name": "Montreal", "reason": "International feel, 1-hour flight, excellent restaurants" },
+      { "name": "Savannah", "reason": "Similar to Charleston, slightly lower-key" }
+    ],
+    "recommended": "Montreal — feels European, incredible restaurant scene, easy flight, feels \"adult\"",
+    "finalBooking": {
+      "property": "Boutique hotel in Old Montreal",
+      "why": "Feels European, incredible restaurant scene, easy flight, felt \"adult\"",
+      "price": "$2,100 for 4 nights + flights",
+      "extras": "Reservation at Michelin-starred restaurant ($400)"
+    },
+    "timeSaved": {
+      "diy": "6-8 hours",
+      "otherwhere": "15 minutes"
+    },
+    "outcome": "Booked. They extended by one night (grandparents agreed). Called it \"the reset we needed.\"",
+    "summary": {
+      "result": "$2,100 for 4 nights + flights",
+      "time": "15 minutes"
+    }
+  },
+  {
+    "slug": "zero-research-executive",
+    "title": "The Zero Research Executive",
+    "destination": "London, UK",
+    "type": "Business",
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&h=600&fit=crop",
+    "imageAlt": "London skyline with Tower Bridge at dusk",
+    "travelerType": "CFO, 52, flies 80+ times a year, zero patience for booking interfaces",
+    "budget": "Doesn't matter, company card",
+    "timeline": "Needs to be in London Monday morning for board meeting",
+    "quote": "JFK to Heathrow, Sunday night, business class, aisle seat. Arriving before 9am. Go.",
+    "constraints": [
+      "Must have: Business class, aisle, morning arrival",
+      "Loyalty: British Airways Executive Club (collect Avios)",
+      "No hotel needed. Just the flight."
+    ],
+    "eliminated": [
+      { "name": "Economy options", "reason": "Not an option for this traveler" },
+      { "name": "Non-aisle seats", "reason": "Explicit requirement" }
+    ],
+    "considered": [
+      { "name": "BA 178", "reason": "Departing 10:25pm Sunday, arriving 10:25am Monday" },
+      { "name": "Alternative carriers", "reason": "Wouldn't earn BA Avios" }
+    ],
+    "recommended": "BA 178, business class, aisle seat 10C — arrives Monday morning, earns Avios",
+    "finalBooking": {
+      "property": "British Airways 178, Seat 10C",
+      "why": "Met all requirements: timing, class, seat preference, loyalty program",
+      "price": "Corporate rate"
+    },
+    "timeSaved": {
+      "diy": "15-20 minutes",
+      "otherwhere": "3 minutes"
+    },
+    "outcome": "Booked. He texts us every week now. Said: \"You're faster than my EA.\" This person doesn't need recommendations—they need someone to do the clicking.",
+    "summary": {
+      "result": "Booked in 3 minutes",
+      "time": "3 minutes"
+    }
+  },
+  {
+    "slug": "last-minute-miami",
+    "title": "The Last-Minute Celebration",
+    "destination": "Miami, FL",
+    "type": "Last-Minute",
+    "image": "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1200&h=600&fit=crop",
+    "imageAlt": "Miami Beach oceanfront with palm trees and Art Deco buildings",
+    "travelerType": "Investor, 39, deal closed early, wants to celebrate immediately",
+    "budget": "Up to $5k for flights",
+    "timeline": "Leaving tomorrow",
+    "quote": "Miami tomorrow morning, first class if you can get it, I don't care which airline. Need to land by noon. Window seat.",
+    "constraints": [
+      "Must have: First class, window, land by noon",
+      "Loyalty: Delta SkyMiles (collect miles)",
+      "No hotel needed — staying at friend's place"
+    ],
+    "eliminated": [
+      { "name": "United 1522", "reason": "Arrives 12:15pm (late)" },
+      { "name": "Economy options", "reason": "First class was the requirement" }
+    ],
+    "considered": [
+      { "name": "Delta 1765", "reason": "First, $1,847, window 2A, arrives 11:58am" },
+      { "name": "American 1291", "reason": "First, $2,100, window 1A, arrives 11:45am" }
+    ],
+    "recommended": "Delta 1765 — First class, window seat, arrives before noon, earns SkyMiles",
+    "finalBooking": {
+      "property": "Delta 1765, Seat 2A",
+      "why": "Best price, met all requirements, earns Delta miles",
+      "price": "$1,847",
+      "extras": "SkyMiles number attached, miles credited automatically"
+    },
+    "timeSaved": {
+      "diy": "25-30 minutes",
+      "otherwhere": "8 minutes"
+    },
+    "outcome": "Booked by 9:20pm. Boarding pass in her Apple Wallet before she finished dinner. No apps, no searches — just \"this is what I want\" → \"here are options\" → \"book #1\" → done.",
+    "summary": {
+      "result": "Booked by 9:20pm",
+      "time": "8 minutes"
+    }
+  },
+  {
+    "slug": "returning-customer-lisbon",
+    "title": "The Returning Customer",
+    "destination": "Lisbon, Portugal",
+    "type": "Repeat Trip",
+    "image": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&h=600&fit=crop",
+    "imageAlt": "Iconic yellow tram on Lisbon cobblestone streets",
+    "travelerType": "Creative director, 36, third trip booked through Otherwhere",
+    "budget": "$4,000 for a long weekend",
+    "timeline": "3 weeks out",
+    "quote": "Hey, planning another trip. Thinking Barcelona or maybe Lisbon. 4 nights. You know what I like.",
+    "constraints": [
+      "Prefers boutique hotels (no big chains)",
+      "Always wants walkable to restaurants",
+      "King bed, high floor, quiet room",
+      "Doesn't like \"scene-y\" hotels",
+      "United MileagePlus member"
+    ],
+    "eliminated": [
+      { "name": "Barcelona", "reason": "Loud in June — not her vibe" },
+      { "name": "Chain hotels", "reason": "We know she doesn't like them" },
+      { "name": "Hotels with club scenes", "reason": "Too noisy for her preferences" }
+    ],
+    "considered": [
+      { "name": "Lisbon - Príncipe Real", "reason": "Quieter neighborhood, boutique options" },
+      { "name": "Lisbon - Chiado", "reason": "Central but can be busy" }
+    ],
+    "recommended": "Boutique in Príncipe Real — high floor corner room available, matches her pattern",
+    "finalBooking": {
+      "property": "Boutique hotel in Príncipe Real",
+      "why": "We pattern-matched to her taste. High floor, quiet room, walkable to restaurants.",
+      "price": "Within budget",
+      "extras": "United flight (earns miles), TSA PreCheck info already on file"
+    },
+    "timeSaved": {
+      "diy": "2-3 hours",
+      "otherwhere": "4 minutes"
+    },
+    "outcome": "Booked in one exchange. She's now on trip #4 planning with us. The value: no re-entering preferences, no explaining \"I don't like big hotels\" again, no typing passport number.",
+    "summary": {
+      "result": "Booked in one exchange",
+      "time": "4 minutes"
+    }
+  },
+  {
+    "slug": "status-traveler-rome",
+    "title": "The Status Traveler",
+    "destination": "Rome, Italy",
+    "type": "Loyalty Points",
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&h=600&fit=crop",
+    "imageAlt": "Roman Colosseum at golden hour",
+    "travelerType": "Management consultant, 41, Marriott Bonvoy Titanium, wants to KEEP earning points",
+    "budget": "$3,000 for 5 nights",
+    "timeline": "Planning 2 months ahead for a week off",
+    "quote": "I want somewhere that's actually good but still Marriott so I get my points and status benefits. Not an airport Marriott. Somewhere I'd actually want to go.",
+    "constraints": [
+      "Must have: Marriott property (to earn points + get Titanium benefits)",
+      "Loyalty: Marriott Bonvoy Titanium (earn points, suite upgrades, late checkout)",
+      "Dealbreaker: \"Might as well be a Courtyard\""
+    ],
+    "eliminated": [
+      { "name": "JW Marriott generic city properties", "reason": "Fine but not exciting" },
+      { "name": "Large resort Marriotts", "reason": "Feel corporate" }
+    ],
+    "considered": [
+      { "name": "EDITION Barcelona", "reason": "Design-forward, still Marriott family" },
+      { "name": "St. Regis Rome", "reason": "Luxury tier, points earning, Titanium perks apply" },
+      { "name": "Ritz-Carlton Kyoto", "reason": "Incredible property, Bonvoy eligible" }
+    ],
+    "recommended": "St. Regis Rome — historic building, butler service, Titanium benefits apply",
+    "finalBooking": {
+      "property": "St. Regis Rome",
+      "why": "Earns Bonvoy points at luxury rate, Titanium status = suite upgrade likely, doesn't feel like \"work travel\"",
+      "price": "$2,800 for 5 nights (paid in cash, earning ~14,000 Bonvoy points)",
+      "extras": "Bonvoy number already on file, attached to booking automatically"
+    },
+    "timeSaved": {
+      "diy": "4-6 hours",
+      "otherwhere": "20 minutes"
+    },
+    "outcome": "Got upgraded to a suite on arrival. Said \"finally a work trip's worth of points going toward something good.\" We knew which Marriott brands are actually good—that's the value.",
+    "summary": {
+      "result": "St. Regis Rome, upgraded to suite",
+      "time": "20 minutes"
+    }
+  },
+  {
+    "slug": "surprise-anniversary-burgundy",
+    "title": "The Surprise Anniversary",
+    "destination": "Burgundy, France",
+    "type": "Special Occasion",
+    "image": "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&h=600&fit=crop",
+    "imageAlt": "Burgundy wine region vineyards at sunset",
+    "travelerType": "Husband, 45, planning surprise 20th anniversary trip for wife",
+    "budget": "$10,000 (saved for 2 years)",
+    "timeline": "Specific dates locked around anniversary",
+    "quote": "I want to surprise my wife. She always plans everything. For once, I want to get it right without her help. She loves wine, she's always wanted to go to France, and she doesn't like 'roughing it.'",
+    "constraints": [
+      "Must have: Wine region, France, feels luxurious but not \"stuffy rich\"",
+      "Can't do: Backpacking-style, budget accommodations",
+      "Dealbreaker: Messing this up (high stakes)"
+    ],
+    "eliminated": [
+      { "name": "Paris", "reason": "They've been, she wants countryside" },
+      { "name": "Bordeaux city hotels", "reason": "Too urban for the vibe" },
+      { "name": "Provence", "reason": "Great but everyone does it" }
+    ],
+    "considered": [
+      { "name": "Burgundy", "reason": "Wine-focused, smaller scale than Bordeaux" },
+      { "name": "Champagne region", "reason": "Unique, less crowded" },
+      { "name": "Loire Valley", "reason": "Châteaux + wine, romantic" }
+    ],
+    "recommended": "Burgundy, based in Beaune — intimate châteaux, world-class wine, feels discovered",
+    "finalBooking": {
+      "property": "Small château hotel outside Beaune",
+      "why": "Intimate, wine tastings on-site, Michelin restaurant, felt \"discovered not Googled\"",
+      "price": "$7,200 for 6 nights including flights",
+      "extras": "Private vineyard tour ($300), hot air balloon ($450)"
+    },
+    "timeSaved": {
+      "diy": "15+ hours",
+      "otherwhere": "35 minutes"
+    },
+    "outcome": "She cried when she found out. He said: \"I couldn't have done this alone.\" We coordinated with the hotel for anniversary surprise (champagne, flowers).",
+    "summary": {
+      "result": "Château hotel + hot air balloon",
+      "time": "35 minutes"
+    }
+  },
+  {
+    "slug": "quick-business-chicago",
+    "title": "The Quick Business Trip",
+    "destination": "Chicago, IL",
+    "type": "Business",
+    "image": "https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=1200&h=600&fit=crop",
+    "imageAlt": "Chicago skyline with Willis Tower and Lake Michigan",
+    "travelerType": "Sales VP, 47, needs to be in Chicago for a client dinner",
+    "budget": "Company policy allows up to $800 for domestic flights",
+    "timeline": "Tomorrow",
+    "quote": "ORD tomorrow, any afternoon flight, economy is fine, aisle. Back Thursday red-eye.",
+    "constraints": [
+      "American AAdvantage member",
+      "Seat preference: Aisle",
+      "TSA PreCheck number on file",
+      "Work email for receipts"
+    ],
+    "eliminated": [
+      { "name": "United 892", "reason": "$312, but wouldn't earn AA miles" }
+    ],
+    "considered": [
+      { "name": "AA 1245", "reason": "2:15pm, aisle 14C, $347" },
+      { "name": "AA 1892", "reason": "4:30pm, aisle 12D, $289" }
+    ],
+    "recommended": "AA 1245 — afternoon departure, aisle seat, earns AAdvantage miles",
+    "finalBooking": {
+      "property": "American Airlines 1245, Seat 14C + Thursday red-eye return",
+      "why": "Met timing requirements, earns miles, aisle seat",
+      "price": "$347 outbound",
+      "extras": "AAdvantage miles earned automatically, receipt sent to work email"
+    },
+    "timeSaved": {
+      "diy": "12-15 minutes",
+      "otherwhere": "3 minutes"
+    },
+    "outcome": "He's booked 11 trips with us since. Calls us \"the best travel hack I've found.\" 3 minutes from request to confirmed booking. No app switching, no logging in, no seat map hunting.",
+    "summary": {
+      "result": "Booked by 11:38am",
+      "time": "3 minutes"
+    }
+  }
+]

@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getDestinationBySlug, getDestinationSlugs, getCaseStudiesForDestination, getPostsForDestination, getCurrentYear } from '../../utils/content';
+import type { Destination } from '../../types';
+
+export async function getStaticPaths() {
+  const slugs = getDestinationSlugs();
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const destination = getDestinationBySlug(slug);
+
+if (!destination) {
+  return Astro.redirect('/destinations');
+}
+
+const { city, country, quickTake, travelerTypes, skip, lastUpdated, image, imageAlt } = destination;
+
+// Get related content
+const relatedCaseStudies = getCaseStudiesForDestination(city);
+const relatedPosts = getPostsForDestination(city);
+const currentYear = getCurrentYear();
+
+// Enhanced SEO title
+const seoTitle = `Where to Stay in ${city} (${currentYear}) | ${country} Travel Guide`;
+const seoDescription = `${quickTake.substring(0, 150)}... A curated guide for different types of travelers.`;
+
+// FAQ Schema for common questions
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `What's the best area to stay in ${city}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": travelerTypes[0] ? `For first-time visitors, we recommend ${travelerTypes[0].stayIn}. ${travelerTypes[0].why}` : quickTake
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `How much do hotels cost in ${city}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": travelerTypes.map(t => `${t.name}: ${t.price}`).join('. ')
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What neighborhoods should I avoid in ${city}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": skip.map(s => `${s.name}: ${s.reason}`).join(' ')
+      }
+    }
+  ]
+};
+
+// TravelGuide schema
+const travelGuideSchema = {
+  "@context": "https://schema.org",
+  "@type": "TravelGuide",
+  "about": {
+    "@type": "City",
+    "name": city,
+    "containedInPlace": {
+      "@type": "Country",
+      "name": country
+    }
+  },
+  "name": `Where to Stay in ${city}: A Curated Guide`,
+  "description": quickTake,
+  "dateModified": lastUpdated
+};
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://blog.otherwhere.world"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Destinations",
+      "item": "https://blog.otherwhere.world/destinations"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": city
+    }
+  ]
+};
+
+const schemas = [travelGuideSchema, faqSchema, breadcrumbSchema];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  image={image}
+  schema={schemas}
+>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <a href="/destinations" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
+        ← ALL DESTINATIONS
+      </a>
+      <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-4">{city.toUpperCase()}</h1>
+      <p class="text-lg text-ink-secondary">{country}</p>
+    </header>
+
+    <!-- Hero Image -->
+    {image && (
+      <div class="mb-12 -mx-4 md:mx-0">
+        <img
+          src={image}
+          alt={imageAlt || `${city}, ${country}`}
+          class="w-full h-64 md:h-96 object-cover rounded-card"
+          loading="eager"
+        />
+      </div>
+    )}
+
+    <!-- Quick Take -->
+    <section class="my-12">
+      <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-4">QUICK TAKE</h2>
+      <p class="text-lg leading-relaxed">{quickTake}</p>
+    </section>
+
+    <!-- Traveler Types -->
+    {travelerTypes.map((type, index) => (
+      <section class="my-12 bg-paper-secondary rounded-xl p-8">
+        <h2 class="text-lg font-light tracking-wide mb-6">FOR {type.name.toUpperCase()}</h2>
+        <div class="space-y-5">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">STAY IN</p>
+            <p class="text-lg font-medium">{type.stayIn}</p>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">WHY</p>
+            <p class="text-ink-secondary leading-relaxed">{type.why}</p>
+          </div>
+          <div class="border-t border-paper-tertiary pt-5 mt-5">
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">OUR PICK</p>
+            <p class="text-lg font-medium">{type.pick}</p>
+            <p class="text-sm text-ink-tertiary mt-1">{type.price}</p>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Skip These -->
+    <section class="my-12">
+      <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">SKIP THESE</h2>
+      <ul class="space-y-4">
+        {skip.map((s) => (
+          <li class="flex items-start gap-3">
+            <span class="text-ink-tertiary mt-1">×</span>
+            <div>
+              <strong class="text-ink">{s.name}</strong>
+              <p class="text-ink-secondary text-sm mt-1">{s.reason}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Related Case Studies -->
+    {relatedCaseStudies.length > 0 && (
+      <section class="my-12 pt-8 border-t border-paper-tertiary">
+        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">REAL TRIPS TO {city.toUpperCase()}</h2>
+        <div class="grid gap-4">
+          {relatedCaseStudies.slice(0, 2).map((cs) => (
+            <a href={`/case-studies/${cs.slug}`} class="block group bg-paper-secondary rounded-xl p-5 hover:bg-paper-tertiary transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-accent text-sm font-medium">{cs.type}</span>
+                <span class="text-sm text-ink-tertiary">{cs.time}</span>
+              </div>
+              <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{cs.title}</h3>
+              <p class="text-ink-secondary text-sm italic mt-1">"{cs.quote}"</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Related Blog Posts -->
+    {relatedPosts.length > 0 && (
+      <section class="my-12 pt-8 border-t border-paper-tertiary">
+        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">READ MORE ABOUT {city.toUpperCase()}</h2>
+        <div class="grid gap-4">
+          {relatedPosts.slice(0, 2).map((post) => (
+            <a href={`/blog/${post.slug}`} class="block group bg-paper-secondary rounded-xl p-5 hover:bg-paper-tertiary transition-colors">
+              <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{post.title}</h3>
+              <p class="text-ink-secondary text-sm mt-1">{post.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <section class="my-16 text-center">
+      <h2 class="text-xl font-light tracking-wide mb-4">WANT A PERSONALIZED RECOMMENDATION?</h2>
+      <p class="text-ink-secondary mb-8 max-w-md mx-auto">
+        Text us with "{city.toUpperCase()}" and your dates. We'll curate options based on your preferences.
+      </p>
+      <a href="sms:+13239224067" class="btn-primary inline-block">
+        TEXT US YOUR DATES
+      </a>
+    </section>
+
+    <!-- Last Updated -->
+    <p class="text-xs uppercase tracking-widest text-ink-tertiary mt-12 text-center">
+      Last updated: {lastUpdated} · Prices are approximate
+    </p>
+  </article>
+</BaseLayout>

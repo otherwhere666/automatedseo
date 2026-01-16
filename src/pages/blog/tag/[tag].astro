@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllTags, getPostsByTag, getCurrentYear } from '../../../utils/content';
+
+export async function getStaticPaths() {
+  const tags = getAllTags();
+  return tags.map(tag => ({
+    params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+    props: { originalTag: tag }
+  }));
+}
+
+const { tag } = Astro.params;
+const { originalTag } = Astro.props;
+const posts = getPostsByTag(originalTag);
+const currentYear = getCurrentYear();
+
+// Format tag for display
+const tagDisplay = originalTag.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${tagDisplay} Travel Articles | Otherwhere Blog`,
+    "description": `Articles about ${tagDisplay.toLowerCase()}. Travel tips, guides, and insights.`
+  }
+];
+---
+
+<BaseLayout
+  title={`${tagDisplay} Travel Articles (${currentYear}) | Otherwhere Blog`}
+  description={`Articles about ${tagDisplay.toLowerCase()}. Travel tips, guides, and insights from Otherwhere.`}
+  schema={schemas}
+>
+  <article class="py-12">
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-12">
+        <a href="/blog" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
+          ← ALL ARTICLES
+        </a>
+        <div class="inline-block bg-accent/10 text-accent px-4 py-2 rounded-full text-sm mb-4">
+          {tagDisplay}
+        </div>
+        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">
+          {tagDisplay.toUpperCase()} ARTICLES
+        </h1>
+        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+          {posts.length} article{posts.length !== 1 ? 's' : ''} tagged with "{tagDisplay.toLowerCase()}"
+        </p>
+      </header>
+
+      <!-- Posts -->
+      {posts.length > 0 ? (
+        <div class="space-y-8">
+          {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="block group">
+              <article class="border-b border-paper-tertiary pb-8">
+                {post.image && (
+                  <img
+                    src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=300')}
+                    alt={post.title}
+                    class="w-full h-48 object-cover rounded-xl mb-4"
+                    loading="lazy"
+                  />
+                )}
+                <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
+                  <time datetime={post.publishDate}>
+                    {new Date(post.publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  {post.pillar && (
+                    <>
+                      <span>·</span>
+                      <span class="capitalize">{post.pillar.replace(/-/g, ' ')}</span>
+                    </>
+                  )}
+                </div>
+                <h2 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">
+                  {post.title}
+                </h2>
+                <p class="text-ink-secondary">{post.description}</p>
+                {post.keywords && post.keywords.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    {post.keywords.slice(0, 4).map((keyword) => (
+                      <span class="text-xs bg-paper-secondary px-2 py-1 rounded">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16 bg-paper-secondary rounded-xl">
+          <p class="text-ink-secondary text-lg mb-4">No articles with this tag yet.</p>
+          <a href="/blog" class="text-accent hover:underline">Browse all articles →</a>
+        </div>
+      )}
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">HAVE A QUESTION ABOUT {tagDisplay.toUpperCase()}?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
+          Text us your travel question. We're happy to help, even if you're not ready to book.
+        </p>
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US A QUESTION
+        </a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

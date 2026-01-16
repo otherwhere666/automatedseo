@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllPillars, getPillarById, getPostsByPillar, getAllDestinations, getAllCaseStudies } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const pillars = getAllPillars();
+  return pillars.map(pillar => ({ params: { pillar: pillar.id } }));
+}
+
+const { pillar: pillarId } = Astro.params;
+const pillar = getPillarById(pillarId);
+
+if (!pillar) {
+  return Astro.redirect('/topics');
+}
+
+const posts = getPostsByPillar(pillarId);
+
+// Get related destinations and case studies based on pillar keywords
+const pillarKeywords = pillar.name.toLowerCase().split(' ');
+const allDestinations = getAllDestinations();
+const allCaseStudies = getAllCaseStudies();
+
+// For now, show a selection of destinations and case studies
+const featuredDestinations = allDestinations.slice(0, 4);
+const featuredCaseStudies = allCaseStudies.slice(0, 2);
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${pillar.name} | Otherwhere Blog`,
+    "description": pillar.angle
+  }
+];
+---
+
+<BaseLayout
+  title={`${pillar.name} | Travel Articles | Otherwhere`}
+  description={pillar.angle}
+  schema={schemas}
+>
+  <article class="py-12">
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-12">
+        <a href="/topics" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
+          ← ALL TOPICS
+        </a>
+        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">{pillar.name.toUpperCase()}</h1>
+        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+          {pillar.angle}
+        </p>
+      </header>
+
+      <!-- Articles in this pillar -->
+      {posts.length > 0 ? (
+        <section class="mb-12">
+          <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">ARTICLES</h2>
+          <div class="space-y-6">
+            {posts.map((post) => (
+              <a href={`/blog/${post.slug}`} class="block group">
+                <article class="border-b border-paper-tertiary pb-6">
+                  {post.image && (
+                    <img
+                      src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=300')}
+                      alt={post.title}
+                      class="w-full h-48 object-cover rounded-xl mb-4"
+                      loading="lazy"
+                    />
+                  )}
+                  <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
+                    <time datetime={post.publishDate}>
+                      {new Date(post.publishDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                    {post.readingTime && (
+                      <>
+                        <span>·</span>
+                        <span>{post.readingTime}</span>
+                      </>
+                    )}
+                  </div>
+                  <h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">
+                    {post.title}
+                  </h3>
+                  <p class="text-ink-secondary">{post.description}</p>
+                </article>
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section class="mb-12">
+          <div class="text-center py-16 bg-paper-secondary rounded-xl">
+            <p class="text-ink-secondary text-lg mb-4">No articles in this topic yet.</p>
+            <p class="text-ink-tertiary text-sm">Check back soon — new content is published regularly.</p>
+          </div>
+        </section>
+      )}
+
+      <!-- Related Destinations -->
+      <section class="mb-12 pt-8 border-t border-paper-tertiary">
+        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">EXPLORE DESTINATIONS</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {featuredDestinations.map((dest) => (
+            <a href={`/destinations/${dest.slug}`} class="block group">
+              <article class="bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
+                <img
+                  src={dest.image.replace('w=1200', 'w=400').replace('h=600', 'h=200')}
+                  alt={dest.city}
+                  class="w-full h-28 object-cover"
+                  loading="lazy"
+                />
+                <div class="p-4">
+                  <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{dest.city}</h3>
+                  <p class="text-sm text-ink-tertiary">{dest.country}</p>
+                </div>
+              </article>
+            </a>
+          ))}
+        </div>
+        <div class="text-center mt-6">
+          <a href="/destinations" class="text-accent hover:underline text-sm">View all destinations →</a>
+        </div>
+      </section>
+
+      <!-- Related Case Studies -->
+      <section class="mb-12 pt-8 border-t border-paper-tertiary">
+        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">SEE HOW IT WORKS</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {featuredCaseStudies.map((cs) => (
+            <a href={`/case-studies/${cs.slug}`} class="block group bg-paper-secondary rounded-xl p-5 hover:bg-paper-tertiary transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-accent text-sm font-medium">{cs.type}</span>
+                <span class="text-sm text-ink-tertiary">{cs.timeSaved.otherwhere}</span>
+              </div>
+              <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{cs.title}</h3>
+              <p class="text-ink-secondary text-sm italic mt-1">"{cs.quote}"</p>
+            </a>
+          ))}
+        </div>
+        <div class="text-center mt-6">
+          <a href="/case-studies" class="text-accent hover:underline text-sm">View all case studies →</a>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">READY TO EXPERIENCE THIS?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
+          Text us where you want to go. We'll show you how personal travel booking works.
+        </p>
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US TO START
+        </a>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

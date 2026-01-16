@@ -1,39 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getDestinationsByRegion, getDestinationSummaries, getCurrentYear } from '../../utils/content';
 
-const destinations = [
-  // Europe
-  { city: "Paris", country: "France", slug: "paris", region: "Europe", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=500&fit=crop", tagline: "Beyond the clichés" },
-  { city: "London", country: "UK", slug: "london", region: "Europe", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=500&fit=crop", tagline: "Neighborhoods over landmarks" },
-  { city: "Barcelona", country: "Spain", slug: "barcelona", region: "Europe", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=500&fit=crop", tagline: "Where locals actually go" },
-  { city: "Rome", country: "Italy", slug: "rome", region: "Europe", image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=500&fit=crop", tagline: "Ancient city, modern strategy" },
-  { city: "Amalfi Coast", country: "Italy", slug: "amalfi-coast", region: "Europe", image: "https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=800&h=500&fit=crop", tagline: "Logistics that matter" },
-  { city: "Lisbon", country: "Portugal", slug: "lisbon", region: "Europe", image: "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800&h=500&fit=crop", tagline: "Hills and neighborhoods" },
-  { city: "Copenhagen", country: "Denmark", slug: "copenhagen", region: "Europe", image: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800&h=500&fit=crop", tagline: "Design-forward travel" },
-  { city: "Greece", country: "Athens & Islands", slug: "greece", region: "Europe", image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&h=500&fit=crop", tagline: "Which island for you" },
-  // Asia
-  { city: "Tokyo", country: "Japan", slug: "tokyo", region: "Asia", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=500&fit=crop", tagline: "Easier than you think" },
-  { city: "Kyoto", country: "Japan", slug: "kyoto", region: "Asia", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=500&fit=crop", tagline: "Temples and timing" },
-  { city: "Seoul", country: "South Korea", slug: "seoul", region: "Asia", image: "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&h=500&fit=crop", tagline: "K-culture and beyond" },
-  { city: "Bali", country: "Indonesia", slug: "bali", region: "Asia", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=500&fit=crop", tagline: "Beyond the influencers" },
-  // Americas
-  { city: "New York", country: "USA", slug: "new-york", region: "Americas", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&h=500&fit=crop", tagline: "Neighborhood energy" },
-  { city: "Mexico City", country: "Mexico", slug: "mexico-city", region: "Americas", image: "https://images.unsplash.com/photo-1518659526054-e35dfb4e0891?w=800&h=500&fit=crop", tagline: "Food capital of the Americas" },
-  { city: "Costa Rica", country: "Central America", slug: "costa-rica", region: "Americas", image: "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=800&h=500&fit=crop", tagline: "Adventure meets luxury" },
-  // Middle East & Africa
-  { city: "Dubai", country: "UAE", slug: "dubai", region: "Middle East & Africa", image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=500&fit=crop", tagline: "Luxury and logistics" },
-  { city: "Marrakech", country: "Morocco", slug: "morocco", region: "Middle East & Africa", image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&h=500&fit=crop", tagline: "Riad culture decoded" },
-  { city: "Safari", country: "Kenya & Tanzania", slug: "safari", region: "Middle East & Africa", image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&h=500&fit=crop", tagline: "When and where to go" },
-  // Indian Ocean
-  { city: "Maldives", country: "Indian Ocean", slug: "maldives", region: "Islands", image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=500&fit=crop", tagline: "Which resort, which atoll" },
-];
-
+const destinations = getDestinationSummaries();
+const byRegion = getDestinationsByRegion();
 const regionOrder = ["Europe", "Asia", "Americas", "Middle East & Africa", "Islands"];
-const byRegion = destinations.reduce((acc, d) => {
-  if (!acc[d.region]) acc[d.region] = [];
-  acc[d.region].push(d);
-  return acc;
-}, {} as Record<string, typeof destinations>);
+const currentYear = getCurrentYear();
 
 const schemas = [
   {

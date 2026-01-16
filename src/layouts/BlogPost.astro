@@ -41,7 +41,18 @@ const {
   showToc = true,
 } = frontmatter;
 
-// Article schema
+// Format pillar name for display
+const pillarDisplay = pillar ? pillar.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : '';
+
+// Enhanced SEO title with pillar
+const seoTitle = pillar
+  ? `${title} | ${pillarDisplay} | Otherwhere`
+  : `${title} | Otherwhere Blog`;
+
+// Calculate approximate word count for schema
+const canonicalUrl = `https://blog.otherwhere.world${Astro.url.pathname}`;
+
+// Enhanced Article schema with additional fields
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -50,19 +61,30 @@ const articleSchema = {
   "image": image,
   "author": {
     "@type": "Organization",
-    "name": "Otherwhere"
+    "name": "Otherwhere",
+    "url": "https://otherwhere.world"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Otherwhere",
-    "url": "https://otherwhere.world"
+    "url": "https://otherwhere.world",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://images.squarespace-cdn.com/content/v1/690665841a49334c4700cbbe/80c79faa-2735-4b95-bf5b-dfb9af632b69/otherwhere.png"
+    }
   },
   "datePublished": publishDate,
   "dateModified": updateDate || publishDate,
-  "keywords": keywords.join(', ')
+  "keywords": keywords.join(', '),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  },
+  "articleSection": pillarDisplay || "Travel",
+  "inLanguage": "en-US"
 };
 
-// Breadcrumb schema
+// Enhanced Breadcrumb schema with Blog intermediate
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -76,6 +98,18 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 2,
+      "name": "Blog",
+      "item": "https://blog.otherwhere.world/blog"
+    },
+    ...(pillar ? [{
+      "@type": "ListItem",
+      "position": 3,
+      "name": pillarDisplay,
+      "item": `https://blog.otherwhere.world/topics/${pillar}`
+    }] : []),
+    {
+      "@type": "ListItem",
+      "position": pillar ? 4 : 3,
       "name": title
     }
   ]
@@ -85,7 +119,7 @@ const schemas = [articleSchema, breadcrumbSchema];
 ---
 
 <BaseLayout
-  title={`${title} | Otherwhere Blog`}
+  title={seoTitle}
   description={description}
   image={image}
   noindex={noindex}
@@ -167,7 +201,7 @@ const schemas = [articleSchema, breadcrumbSchema];
       <AuthorBio />
 
       <!-- Related Posts -->
-      <RelatedPosts pillar={pillar} currentSlug={Astro.url.pathname} />
+      <RelatedPosts pillar={pillar} keywords={keywords} currentSlug={Astro.url.pathname} currentType="post" />
     </div>
   </article>
 </BaseLayout>

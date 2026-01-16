@@ -50,6 +50,14 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://images.squarespace-cdn.com" />
+
+    <!-- Preconnect for critical resources -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
@@ -78,13 +86,18 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
 
-    <!-- Google Analytics -->
+    <!-- Prefetch for navigation -->
+    <link rel="prefetch" href="/blog" />
+    <link rel="prefetch" href="/destinations" />
+    <link rel="prefetch" href="/case-studies" />
+
+    <!-- Google Analytics (deferred) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-73EZV154PS"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-73EZV154PS');
+      gtag('config', 'G-73EZV154PS', { 'anonymize_ip': true });
     </script>
   </head>
 

@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TrustSignals from '../../components/TrustSignals.astro';
+import { getCaseStudySummaries } from '../../utils/content';
+
+const caseStudies = getCaseStudySummaries();
 
 const schemas = [
   {
@@ -8,108 +11,6 @@ const schemas = [
     "@type": "CollectionPage",
     "name": "Trips We Planned | Otherwhere Case Studies",
     "description": "Real examples of trips planned through Otherwhere. See how personal travel booking works with anonymized case studies."
-  }
-];
-
-const caseStudies = [
-  {
-    slug: "honeymoon-puglia",
-    title: "The Honeymoon Couple",
-    destination: "Puglia, Italy",
-    type: "Honeymoon",
-    quote: "We want somewhere romantic but not basic. Good food matters more than a beach.",
-    budget: "$6,000",
-    result: "$4,200 for 7 nights",
-    time: "22 minutes",
-    image: "https://images.unsplash.com/photo-1534008897995-27a23e859048?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "burnout-escape-iceland",
-    title: "The Burned-Out Founder",
-    destination: "Iceland Westfjords",
-    type: "Escape",
-    quote: "I need to disappear for a week. Somewhere I can sleep, read, and not think.",
-    budget: "Whatever it costs",
-    result: "Remote luxury lodge",
-    time: "18 minutes",
-    image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "anniversary-trip-montreal",
-    title: "The Anniversary Trip",
-    destination: "Montreal, Canada",
-    type: "Anniversary",
-    quote: "We have 4 days without kids. We don't even know what we like anymore.",
-    budget: "$3,500",
-    result: "$2,100 for 4 nights + flights",
-    time: "15 minutes",
-    image: "https://images.unsplash.com/photo-1519178614-68673b201f36?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "zero-research-executive",
-    title: "The Zero Research Executive",
-    destination: "London, UK",
-    type: "Business",
-    quote: "JFK to Heathrow, Sunday night, business class, aisle seat. Go.",
-    budget: "Company card",
-    result: "Booked in 3 minutes",
-    time: "3 minutes",
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "last-minute-miami",
-    title: "The Last-Minute Celebration",
-    destination: "Miami, FL",
-    type: "Last-Minute",
-    quote: "Miami tomorrow morning, first class if you can get it. Window seat.",
-    budget: "Up to $5k",
-    result: "Booked by 9:20pm",
-    time: "8 minutes",
-    image: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "returning-customer-lisbon",
-    title: "The Returning Customer",
-    destination: "Lisbon, Portugal",
-    type: "Repeat Trip",
-    quote: "You know what I like.",
-    budget: "$4,000",
-    result: "Booked in one exchange",
-    time: "4 minutes",
-    image: "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "status-traveler-rome",
-    title: "The Status Traveler",
-    destination: "Rome, Italy",
-    type: "Loyalty Points",
-    quote: "I want somewhere good but still Marriott so I get my points.",
-    budget: "$3,000",
-    result: "St. Regis Rome, upgraded to suite",
-    time: "20 minutes",
-    image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "surprise-anniversary-burgundy",
-    title: "The Surprise Anniversary",
-    destination: "Burgundy, France",
-    type: "Special Occasion",
-    quote: "I want to surprise my wife. She always plans everything.",
-    budget: "$10,000",
-    result: "Château hotel + hot air balloon",
-    time: "35 minutes",
-    image: "https://images.unsplash.com/photo-1597953601374-1ff2d5640c85?w=800&h=500&fit=crop"
-  },
-  {
-    slug: "quick-business-chicago",
-    title: "The Quick Business Trip",
-    destination: "Chicago, IL",
-    type: "Business",
-    quote: "ORD tomorrow, any afternoon flight, economy is fine, aisle.",
-    budget: "Up to $800",
-    result: "Booked by 11:38am",
-    time: "3 minutes",
-    image: "https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=800&h=500&fit=crop"
   }
 ];
 

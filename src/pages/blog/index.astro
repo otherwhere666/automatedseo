@@ -1,56 +1,76 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import fs from 'node:fs';
-import path from 'node:path';
+import { getAllPosts, getAllTags, getAllPillars } from '../../utils/content';
 
-// Read MDX files from content/posts directory
-const postsDir = path.join(process.cwd(), 'content', 'posts');
-let posts: any[] = [];
+const posts = getAllPosts();
+const allTags = getAllTags();
+const pillars = getAllPillars();
 
-try {
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
+// Get top tags (most used)
+const tagCounts = new Map<string, number>();
+posts.forEach(post => {
+  post.keywords?.forEach(keyword => {
+    tagCounts.set(keyword, (tagCounts.get(keyword) || 0) + 1);
+  });
+});
+const popularTags = Array.from(tagCounts.entries())
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 8)
+  .map(([tag]) => tag);
 
-  for (const file of files) {
-    const content = fs.readFileSync(path.join(postsDir, file), 'utf-8');
-    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-
-    if (frontmatterMatch) {
-      const frontmatter = frontmatterMatch[1];
-      const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
-      const description = frontmatter.match(/description:\s*"([^"]+)"/)?.[1] || '';
-      const publishDate = frontmatter.match(/publishDate:\s*"([^"]+)"/)?.[1] || '';
-      const image = frontmatter.match(/image:\s*"([^"]+)"/)?.[1] || '';
-      const pillar = frontmatter.match(/pillar:\s*"([^"]+)"/)?.[1] || '';
-      const slug = file.replace('.mdx', '');
-
-      posts.push({ title, description, publishDate, image, pillar, slug });
-    }
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Otherwhere Blog",
+    "description": "Travel insights, booking tips, and destination guides from Otherwhere.",
+    "url": "https://blog.otherwhere.world/blog"
   }
-
-  // Sort by date, newest first
-  posts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-} catch (e) {
-  // No posts yet
-}
+];
 ---
 
 <BaseLayout
-  title="Blog | Otherwhere"
-  description="Travel insights, booking tips, and destination guides from Otherwhere."
+  title="Blog | Travel Tips & Destination Guides | Otherwhere"
+  description="Travel insights, booking tips, and destination guides. Learn about AI travel planning, find the best places to stay, and discover how personal travel booking works."
+  schema={schemas}
 >
   <article class="py-12">
     <div class="blog-content">
-      <header class="mb-12">
+      <header class="mb-8">
         <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">BLOG</h1>
         <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
           Travel insights, booking tips, and destination guides.
         </p>
       </header>
 
+      <!-- Popular Tags -->
+      {popularTags.length > 0 && (
+        <div class="mb-8">
+          <div class="flex flex-wrap gap-2">
+            {popularTags.map((tag) => (
+              <a
+                href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                class="text-sm bg-paper-secondary hover:bg-paper-tertiary px-3 py-1.5 rounded-full transition-colors"
+              >
+                {tag}
+              </a>
+            ))}
+            <a
+              href="/topics"
+              class="text-sm text-accent hover:underline px-3 py-1.5"
+            >
+              All topics →
+            </a>
+          </div>
+        </div>
+      )}
+
+      <hr class="section-divider" />
+
       {posts.length === 0 ? (
         <div class="text-center py-16 bg-paper-secondary rounded-xl">
           <p class="text-ink-secondary text-lg mb-4">No posts yet. Check back soon!</p>
-          <p class="text-ink-tertiary text-sm">New articles are published daily.</p>
+          <p class="text-ink-tertiary text-sm">New articles are published regularly.</p>
         </div>
       ) : (
         <div class="space-y-8">
@@ -59,9 +79,10 @@ try {
               <article class="border-b border-paper-tertiary pb-8">
                 {post.image && (
                   <img
-                    src={post.image}
+                    src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=300')}
                     alt={post.title}
                     class="w-full h-48 object-cover rounded-xl mb-4"
+                    loading="lazy"
                   />
                 )}
                 <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
@@ -75,7 +96,9 @@ try {
                   {post.pillar && (
                     <>
                       <span>·</span>
-                      <span class="capitalize">{post.pillar.replace(/-/g, ' ')}</span>
+                      <a href={`/topics/${post.pillar}`} class="capitalize hover:text-accent transition-colors">
+                        {post.pillar.replace(/-/g, ' ')}
+                      </a>
                     </>
                   )}
                 </div>
@@ -83,11 +106,33 @@ try {
                   {post.title}
                 </h2>
                 <p class="text-ink-secondary">{post.description}</p>
+                {post.keywords && post.keywords.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    {post.keywords.slice(0, 3).map((keyword) => (
+                      <span class="text-xs bg-paper-secondary px-2 py-1 rounded">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </article>
             </a>
           ))}
         </div>
       )}
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">READY TO BOOK YOUR TRIP?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
+          Text us where you want to go. We'll send options. You pick. We book.
+        </p>
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US TO START
+        </a>
+      </section>
     </div>
   </article>
 </BaseLayout>

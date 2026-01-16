@@ -1,0 +1,743 @@
+[
+  {
+    "slug": "paris",
+    "city": "Paris",
+    "country": "France",
+    "region": "Europe",
+    "tagline": "Beyond the clichés",
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&h=600&fit=crop",
+    "imageAlt": "Eiffel Tower at golden hour with Parisian rooftops in foreground",
+    "quickTake": "Paris rewards neighborhood commitment. Pick an arrondissement and own it rather than hotel-hopping or staying somewhere 'central' that's actually nowhere. The best Paris trips feel like you lived there briefly — not like you checked boxes.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Saint-Germain-des-Prés (6th)",
+        "why": "Walkable to major sights, classically Parisian, excellent cafés. You'll feel like you're in the Paris you imagined. Close to the Seine, Luxembourg Gardens, and the Louvre without the tourist hotel chaos.",
+        "pick": "Boutique hotel on a quiet side street near Odéon",
+        "price": "~$350-500/night"
+      },
+      {
+        "name": "The Design/Food Obsessive",
+        "stayIn": "Le Marais (3rd/4th) or South Pigalle (9th)",
+        "why": "Le Marais has the best concept stores, galleries, and natural wine bars. South Pigalle (SoPi) is where chefs eat on their nights off. Both neighborhoods reward wandering.",
+        "pick": "Design hotel in upper Marais or boutique in SoPi",
+        "price": "~$280-450/night"
+      },
+      {
+        "name": "The Luxury Traditionalist",
+        "stayIn": "8th arrondissement or Place Vendôme (1st)",
+        "why": "The palace hotels are here for a reason. If you want white-glove service, Michelin dining in-house, and that old-money Paris energy, this is it. Just know it's not where young Parisians hang out.",
+        "pick": "Palace hotel near Champs-Élysées or Place Vendôme",
+        "price": "~$900-2,000/night"
+      }
+    ],
+    "skip": [
+      { "name": "Hotels directly on Champs-Élysées", "reason": "Tourist pricing, chain-heavy, and the avenue itself is mostly flagship stores. Stay nearby, not on it." },
+      { "name": "Montmartre tourist zone", "reason": "The Sacré-Cœur steps are a scam gauntlet. Stay in South Pigalle instead — same area, none of the hassle." },
+      { "name": "Huge hotels near Opéra/Gare du Nord", "reason": "Business hotel wasteland. You'll feel like you're in any city. The real Paris is a 15-minute walk away." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "london",
+    "city": "London",
+    "country": "UK",
+    "region": "Europe",
+    "tagline": "Neighborhoods over landmarks",
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&h=600&fit=crop",
+    "imageAlt": "London skyline with Tower Bridge and the Shard at twilight",
+    "quickTake": "London is sprawling but the Tube makes it manageable. The trap is staying in tourist zones (Westminster, Leicester Square) where you'll overpay for generic hotels. The city's best areas for visitors — Marylebone, Fitzrovia, Shoreditch — are a short ride away and infinitely more interesting.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Marylebone or Fitzrovia",
+        "why": "Central but residential, with village-y high streets and excellent restaurants. Marylebone has the boutique shopping; Fitzrovia has the media-industry energy and proximity to the British Museum. Both are walk-to-everything locations.",
+        "pick": "Boutique hotel on a Marylebone side street",
+        "price": "~$300-500/night"
+      },
+      {
+        "name": "The Culture/Nightlife Seeker",
+        "stayIn": "Shoreditch or Clerkenwell",
+        "why": "East London has the galleries, street art, and nightlife that define current London. Shoreditch is the center of it — occasionally trying too hard, but undeniably alive. Clerkenwell is the grown-up adjacent option with serious restaurants.",
+        "pick": "Design hotel in Shoreditch",
+        "price": "~$200-400/night"
+      },
+      {
+        "name": "The Luxury Traditionalist",
+        "stayIn": "Mayfair or Knightsbridge",
+        "why": "The grand hotels — Claridge's, The Connaught, The Berkeley — are here because old money is here. If you want the afternoon tea, the Michelin stars, and the Harrods proximity, this is the London that delivers.",
+        "pick": "Heritage palace hotel in Mayfair",
+        "price": "~$600-1,500/night"
+      }
+    ],
+    "skip": [
+      { "name": "Leicester Square / Piccadilly hotels", "reason": "Tourist central with nothing but M&M stores and chain restaurants. You'll pay premium rates for the worst of London." },
+      { "name": "Heathrow airport stays", "reason": "Even with an early flight, the Elizabeth Line makes central London accessible. Don't waste a night in an airport hotel." },
+      { "name": "Generic South Bank chains", "reason": "The views are nice but the area has no neighborhood feel. You'll walk across a bridge for dinner every night." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "barcelona",
+    "city": "Barcelona",
+    "country": "Spain",
+    "region": "Europe",
+    "tagline": "Where locals actually go",
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1200&h=600&fit=crop",
+    "imageAlt": "Barcelona cityscape with Sagrada Familia and Mediterranean Sea",
+    "quickTake": "Barcelona has a tourist-trap problem in its most famous areas. The neighborhoods that locals love — Gràcia, Poble Sec, Sant Antoni — are a 10-minute metro from the cruise-ship chaos but feel like a different city. Stay in the real Barcelona and visit the landmarks.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Eixample (right side) or El Born",
+        "why": "Eixample gives you the Gaudí architecture on your doorstep with solid restaurants and easy metro access. El Born is smaller, more walkable, with better nightlife and proximity to the beach. Both are central without being overrun.",
+        "pick": "Boutique hotel in Eixample Dreta or El Born",
+        "price": "~$180-300/night"
+      },
+      {
+        "name": "The Food/Design Obsessive",
+        "stayIn": "Sant Antoni or Poble Sec",
+        "why": "Sant Antoni has the best market in the city (Mercat de Sant Antoni) and a thriving vermouth culture. Poble Sec is where chefs open their second restaurants. Both are residential-feeling with serious food.",
+        "pick": "Design hotel in Sant Antoni",
+        "price": "~$150-280/night"
+      },
+      {
+        "name": "The Beach + City Balance",
+        "stayIn": "Barceloneta or Poblenou",
+        "why": "Barceloneta puts you on the beach but it's crowded and touristy. Poblenou is the smarter play — beach access, former industrial buildings turned into cool hotels, and a local feel. Think Brooklyn-by-the-sea.",
+        "pick": "Converted warehouse hotel in Poblenou",
+        "price": "~$200-350/night"
+      }
+    ],
+    "skip": [
+      { "name": "Las Ramblas hotels", "reason": "Loud, overpriced, and pickpocket central. Locals avoid Las Ramblas entirely. Stay two blocks away and you're in a different world." },
+      { "name": "Gothic Quarter budget hotels", "reason": "The narrow streets trap noise and the buildings are old in a bad way. The area is beautiful to walk through, not sleep in." },
+      { "name": "Diagonal Mar / Forum area", "reason": "Modern, soulless, far from everything. Built for conventions, not travelers. You'll spend your trip on the metro." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "rome",
+    "city": "Rome",
+    "country": "Italy",
+    "region": "Europe",
+    "tagline": "Ancient city, modern strategy",
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&h=600&fit=crop",
+    "imageAlt": "Roman Colosseum at sunset with ancient ruins",
+    "quickTake": "Rome's centro storico is walkable but exhausting — cobblestones, crowds, and August heat are real. The best strategy is staying somewhere with character, booking Vatican and Colosseum tickets months ahead, and leaving time for neighborhoods that aren't in guidebooks.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Centro Storico (Campo de' Fiori or Piazza Navona area)",
+        "why": "You'll walk everywhere — Pantheon, Trevi Fountain, Piazza Navona all on foot. The evening passeggiata culture makes sense when you're in the middle of it. Worth the premium for a first visit.",
+        "pick": "Boutique hotel near Campo de' Fiori",
+        "price": "~$300-500/night"
+      },
+      {
+        "name": "The Food/Neighborhood Explorer",
+        "stayIn": "Trastevere or Testaccio",
+        "why": "Trastevere is the classic 'local' pick — ivy-covered streets, good trattorias, lively at night. Testaccio is grittier and more authentic, with Rome's best food market and the restaurants where Romans actually eat.",
+        "pick": "Small hotel or apartment in Trastevere",
+        "price": "~$200-350/night"
+      },
+      {
+        "name": "The Luxury/Points Traveler",
+        "stayIn": "Via Veneto or Piazza di Spagna",
+        "why": "The grand hotels are here — St. Regis, Hassler, de Russie. If you want the suite upgrade, rooftop bar at sunset, and classic glamour, this is the move. Just know you're in tourist Rome, beautifully executed.",
+        "pick": "Palace hotel near Spanish Steps",
+        "price": "~$600-1,500/night"
+      }
+    ],
+    "skip": [
+      { "name": "Termini Station area", "reason": "Gritty, not in a good way. Budget hotels here are depressing and you'll feel far from the Rome you came for." },
+      { "name": "Vatican-adjacent hotels", "reason": "The area dies at night and you'll only visit the Vatican once. Stay somewhere livelier and metro over." },
+      { "name": "Airbnbs in residential EUR", "reason": "Mussolini-era suburb with nothing around. Cheap for a reason — you'll Uber everywhere and miss the point of Rome." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "amalfi-coast",
+    "city": "Amalfi Coast",
+    "country": "Italy",
+    "region": "Europe",
+    "tagline": "Logistics that matter",
+    "image": "https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=1200&h=600&fit=crop",
+    "imageAlt": "Positano colorful houses cascading down cliffs to Mediterranean Sea",
+    "quickTake": "The Amalfi Coast is gorgeous and logistically annoying. The famous towns (Positano, Amalfi) are crowded and car-free — you'll haul luggage up hundreds of steps. The coast rewards strategic planning: pick one base, book boats instead of buses, and visit the famous spots rather than sleep in them.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Positano (upper town) or Praiano",
+        "why": "Positano is the postcard view, and it's worth experiencing once despite the crowds. Stay high in the town for better value and views. Praiano is 10 minutes away, quieter, with the same dramatic setting and easier beach access.",
+        "pick": "Boutique hotel with terrace in upper Positano or Praiano",
+        "price": "~$400-700/night"
+      },
+      {
+        "name": "The Luxury Seeker",
+        "stayIn": "Ravello or Hotel Santa Caterina (Amalfi)",
+        "why": "Ravello sits above the coast with gardens, classical music festivals, and a refined calm that the beach towns lack. It's where Jackie O and Gore Vidal stayed. The legendary cliff-side hotels here justify the splurge.",
+        "pick": "Grand hotel in Ravello with infinity pool",
+        "price": "~$600-1,200/night"
+      },
+      {
+        "name": "The Island Escape",
+        "stayIn": "Capri",
+        "why": "Technically not the Amalfi Coast, but the ferry makes it easy. Capri has the glamour, the shopping, and car-free ease that the mainland struggles with. Day-trippers leave by 5pm; staying overnight reveals the real island.",
+        "pick": "Boutique hotel in Capri town or Anacapri",
+        "price": "~$350-800/night"
+      }
+    ],
+    "skip": [
+      { "name": "Amalfi town center", "reason": "The town itself is fine but unremarkable — it's a transit hub, not a destination. Visit the cathedral and move on." },
+      { "name": "Sorrento as your only base", "reason": "Sorrento is the gateway but it's not on the Amalfi Coast — it's a separate peninsula. You'll spend hours on buses to see what you came for." },
+      { "name": "Driving yourself", "reason": "The coastal road is single-lane, cliff-edge, and terrifying. Buses and boats exist for a reason. Hire a driver if you must." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "lisbon",
+    "city": "Lisbon",
+    "country": "Portugal",
+    "region": "Europe",
+    "tagline": "Hills and neighborhoods",
+    "image": "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=1200&h=600&fit=crop",
+    "imageAlt": "Panoramic view of Lisbon with colorful buildings and terracotta rooftops",
+    "quickTake": "Lisbon rewards staying central. Skip the Airbnbs in residential areas unless you want to Uber everywhere. The hills are real — location matters more here than in flat cities.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Baixa or Chiado",
+        "why": "Walkable to everything, easy orientation. You'll figure out the city fast from here. Trams, restaurants, and landmarks all accessible on foot.",
+        "pick": "Boutique hotel near Praça do Comércio",
+        "price": "~$180-250/night"
+      },
+      {
+        "name": "The Design/Food Obsessive",
+        "stayIn": "Príncipe Real or Santos",
+        "why": "Best restaurants, boutique shopping, local feel. The crowds thin out here. You'll eat well and feel like you discovered something.",
+        "pick": "Design hotel in Príncipe Real",
+        "price": "~$220-320/night"
+      },
+      {
+        "name": "The Budget-Conscious",
+        "stayIn": "Mouraria or Graça",
+        "why": "Authentic, cheaper, still central-ish. You'll work harder to get around but save significantly. Good for longer stays.",
+        "pick": "Guesthouse in Graça with views",
+        "price": "~$80-140/night"
+      }
+    ],
+    "skip": [
+      { "name": "Bairro Alto hotels", "reason": "Loud at night. Great for bars, terrible for sleep." },
+      { "name": "Airport area stays", "reason": "You'll waste hours commuting. Not worth the savings." },
+      { "name": "Generic chain hotels outside center", "reason": "Lisbon's charm is walkability. Don't give that up." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "copenhagen",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "region": "Europe",
+    "tagline": "Design-forward travel",
+    "image": "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=1200&h=600&fit=crop",
+    "imageAlt": "Copenhagen colorful Nyhavn harbor with boats and historic buildings",
+    "quickTake": "Copenhagen is the most design-literate city in the world, and that extends to how you experience it. The restaurants are globally influential, the architecture is impeccable, and everything — bikes, furniture, signage — looks considered. It's expensive but compact, so you get value through walkability. Come for the aesthetics, stay for the food.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Indre By (city center) or Nyhavn area",
+        "why": "Central Copenhagen is small and perfectly walkable. You'll hit Nyhavn, Strøget shopping, Tivoli, and the design museums on foot. The boutique hotels here blend historic buildings with Danish design sensibility. This is the Copenhagen you imagined.",
+        "pick": "Design hotel in Indre By near Kongens Nytorv",
+        "price": "~$300-500/night"
+      },
+      {
+        "name": "The Design/Food Obsessive",
+        "stayIn": "Vesterbro or Nørrebro",
+        "why": "Vesterbro is the former meatpacking district with natural wine bars, concept stores, and restaurants where chefs eat. Nørrebro is more residential and diverse with excellent casual food. Both neighborhoods feel like local Copenhagen rather than tourist Copenhagen.",
+        "pick": "Boutique hotel in Vesterbro near Kødbyen",
+        "price": "~$250-400/night"
+      },
+      {
+        "name": "The Luxury Experience",
+        "stayIn": "Hotel d'Angleterre area or Christianshavn",
+        "why": "Hotel d'Angleterre is Copenhagen's grand dame — classic luxury on the main square. For something more unique, Christianshavn has converted warehouse hotels along the canals, near Noma and the opera house. Both deliver high-end Copenhagen differently.",
+        "pick": "Palace hotel on Kongens Nytorv or canal-side hotel in Christianshavn",
+        "price": "~$500-900/night"
+      }
+    ],
+    "skip": [
+      { "name": "Airport-area hotels", "reason": "The airport is well-connected by metro, but the area is soulless. Stay in town and take the 15-minute train for early flights." },
+      { "name": "Generic business hotels in Ørestad", "reason": "New development area with corporate architecture and nothing walkable. You'll metro everywhere and miss what makes Copenhagen special." },
+      { "name": "Visiting only for Noma", "reason": "Noma is extraordinary but books out months ahead and costs accordingly. Copenhagen's food scene is deep — the second-tier restaurants here would be top-tier elsewhere." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "greece",
+    "city": "Greece",
+    "country": "Athens & Islands",
+    "region": "Europe",
+    "tagline": "Which island for you",
+    "image": "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&h=600&fit=crop",
+    "imageAlt": "Santorini white buildings and blue domes overlooking the Aegean Sea",
+    "quickTake": "Greece's challenge isn't finding beauty — it's choosing which island. Santorini is iconic but crowded. Mykonos is a party. The smaller islands reward effort with authenticity. Start with Athens (it's better than you've heard), then commit to 1-2 islands rather than rushing through three. Ferry logistics are real; plan accordingly.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Athens (2-3 nights) + Santorini",
+        "why": "Athens has reinvented itself — the Acropolis is unmissable, and neighborhoods like Koukaki and Plaka have excellent restaurants. Santorini delivers the postcard views and caldera sunsets that everyone wants. It's crowded for a reason. See it once, then explore deeper next time.",
+        "pick": "Boutique hotel in Koukaki (Athens) + caldera-view hotel in Oia or Imerovigli",
+        "price": "~$200-400/night Athens, ~$400-800/night Santorini"
+      },
+      {
+        "name": "The Crowd-Avoider",
+        "stayIn": "Milos, Naxos, or Paros",
+        "why": "Milos has the lunar beaches and hasn't been fully discovered yet. Naxos is the largest Cycladic island with real villages and beaches you'll have to yourself. Paros is the sweet spot — charming, accessible, less frantic than Mykonos. All three feel like the Greece you imagined.",
+        "pick": "Boutique hotel in Milos or Paros town",
+        "price": "~$180-350/night"
+      },
+      {
+        "name": "The Luxury Seeker",
+        "stayIn": "Santorini (Oia) or Mykonos (Ornos/Agios Ioannis)",
+        "why": "The luxury infrastructure in Santorini is world-class — cave hotels, private plunge pools, dinner on your terrace. Mykonos has the beach clubs and scene if that's your thing, but the quiet sides of the island (Ornos, Agios Ioannis) have excellent boutique hotels without the party chaos.",
+        "pick": "Cave hotel in Oia or beachfront boutique in Ornos",
+        "price": "~$600-1,500/night"
+      }
+    ],
+    "skip": [
+      { "name": "Mykonos town hotels in July-August", "reason": "Unless you want to be in the middle of a 24-hour party. The music doesn't stop and neither do the crowds. Stay outside town or pick a different island." },
+      { "name": "Island-hopping more than 2-3 islands", "reason": "Ferries take longer than you think, and you'll spend your trip in transit. Better to go deep on one or two islands than skim five." },
+      { "name": "Santorini in peak cruise-ship hours", "reason": "The cruise ships dock from 10am-4pm and Oia becomes unbearable. Stay overnight to see sunset without 5,000 day-trippers, or visit in shoulder season." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "tokyo",
+    "city": "Tokyo",
+    "country": "Japan",
+    "region": "Asia",
+    "tagline": "Easier than you think",
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&h=600&fit=crop",
+    "imageAlt": "Tokyo cityscape at night with neon lights and Tokyo Tower",
+    "quickTake": "Tokyo is easier than you think and harder than you expect. The trains are perfect, English signage is everywhere, and convenience stores solve most problems. But booking the right ryokan, getting into good restaurants, and understanding neighborhood personalities — that's where guidance pays off.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Shibuya or Shinjuku",
+        "why": "Best train access in the city — you can reach anywhere in 20 minutes. Shibuya is younger and more walkable; Shinjuku has the best food scene. Both put you in the energy without overwhelming you.",
+        "pick": "Design hotel in Shibuya or upscale business hotel in Shinjuku",
+        "price": "~$200-350/night"
+      },
+      {
+        "name": "The Design/Culture Seeker",
+        "stayIn": "Aoyama, Nakameguro, or Yanaka",
+        "why": "Aoyama has galleries and architecture. Nakameguro has the canal, coffee culture, and boutiques. Yanaka feels like old Tokyo with temples and craft shops. These neighborhoods reward slow mornings.",
+        "pick": "Boutique hotel in Aoyama or guesthouse in Yanaka",
+        "price": "~$180-400/night"
+      },
+      {
+        "name": "The Ryokan Experience",
+        "stayIn": "Day trip to Hakone or stay in Yanaka",
+        "why": "True ryokans in central Tokyo are rare and often tourist-oriented. For the real experience, book 1-2 nights in Hakone (90 min away) for onsen and kaiseki. Or try a machiya-style stay in quieter Yanaka.",
+        "pick": "Traditional ryokan in Hakone with private onsen",
+        "price": "~$400-800/night (includes dinner and breakfast)"
+      }
+    ],
+    "skip": [
+      { "name": "Hotels in Roppongi", "reason": "Nightlife district that's lost its edge. Feels dated and foreigner-focused. The interesting Tokyo is elsewhere now." },
+      { "name": "Airport hotels in Narita", "reason": "Narita is 90 minutes from the city. Unless your flight is at 6am, stay in Tokyo and take the early Skyliner." },
+      { "name": "Giant international chains in Ginza", "reason": "Sterile and overpriced. Ginza is for shopping, not sleeping. The neighborhood empties out at night." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "kyoto",
+    "city": "Kyoto",
+    "country": "Japan",
+    "region": "Asia",
+    "tagline": "Temples and timing",
+    "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&h=600&fit=crop",
+    "imageAlt": "Kyoto traditional wooden temple surrounded by autumn maple trees",
+    "quickTake": "Kyoto is Japan's cultural heart, but overtourism has hit hard. The famous spots (Fushimi Inari, Arashiyama) are packed by 9am. The solution: stay in traditional ryokans, time your temple visits for early morning or late afternoon, and explore the neighborhoods that tourists skip. Kyoto rewards those who slow down.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Gion or Higashiyama",
+        "why": "Gion is the geisha district — machiya townhouses, tea houses, the most photogenic streets in Japan. Higashiyama puts you walking distance to the eastern temple circuit. Both areas let you experience old Kyoto on foot. Stay in a ryokan for at least one night.",
+        "pick": "Traditional ryokan in Gion or boutique machiya hotel in Higashiyama",
+        "price": "~$300-600/night"
+      },
+      {
+        "name": "The Ryokan Purist",
+        "stayIn": "Northern Higashiyama or Arashiyama",
+        "why": "The most atmospheric ryokans are slightly outside the center. Northern Higashiyama near Nanzen-ji has luxury ryokans with private gardens. Arashiyama has the bamboo grove and traditional inns along the river. Both require taxis but deliver the Japan you came for.",
+        "pick": "Luxury ryokan near Nanzen-ji with kaiseki dinner included",
+        "price": "~$500-1,200/night (includes dinner and breakfast)"
+      },
+      {
+        "name": "The Modern Design Seeker",
+        "stayIn": "Karasuma/Downtown or Kyoto Station area",
+        "why": "Not all of Kyoto is ancient. Downtown has design hotels and excellent restaurants. The Kyoto Station area has Aman Kyoto's minimalist aesthetic and Ace Hotel's contemporary take. If you want modern Japan with Kyoto day trips, these deliver.",
+        "pick": "Design hotel downtown or Aman Kyoto",
+        "price": "~$250-800/night"
+      }
+    ],
+    "skip": [
+      { "name": "Visiting Fushimi Inari at midday", "reason": "The torii gate tunnel is magical at 6am and miserable at noon. Go at dawn or skip it entirely — you'll spend more time in crowds than appreciating the shrine." },
+      { "name": "Arashiyama on weekends", "reason": "The bamboo grove becomes a shuffling queue of tourists. Visit on a Tuesday morning or accept that you'll see more phones than bamboo." },
+      { "name": "Rushing between temples", "reason": "Kyoto has 2,000 temples. You're not seeing them all. Pick 3-4 per day maximum and actually sit in the gardens. The city rewards patience." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "seoul",
+    "city": "Seoul",
+    "country": "South Korea",
+    "region": "Asia",
+    "tagline": "K-culture and beyond",
+    "image": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1200&h=600&fit=crop",
+    "imageAlt": "Seoul cityscape with traditional palace and modern skyscrapers",
+    "quickTake": "Seoul is Asia's most underrated major city for visitors. The food is extraordinary, the design scene rivals Tokyo, and the nightlife runs until dawn. The metro is perfect, English is increasingly common, and the neighborhoods have distinct personalities worth exploring. K-culture is real, but the city has depth beyond it.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Myeongdong or Jongno",
+        "why": "Myeongdong is central, walkable to palaces and shopping, with easy airport access. Jongno puts you near the historic sites and has excellent Korean restaurants that locals frequent. Both areas let you hit the highlights without complex logistics.",
+        "pick": "Modern hotel near Myeongdong station or hanok-style hotel in Jongno",
+        "price": "~$150-300/night"
+      },
+      {
+        "name": "The Design/Food Obsessive",
+        "stayIn": "Seongsu-dong or Hannam-dong",
+        "why": "Seongsu is Seoul's Brooklyn — converted factories, specialty coffee, concept stores. Hannam has the Michelin-starred Korean restaurants and gallery scene. Both neighborhoods are where young creative Seoul hangs out. The aesthetics are impeccable.",
+        "pick": "Design hotel in Seongsu or boutique hotel in Hannam",
+        "price": "~$180-350/night"
+      },
+      {
+        "name": "The Nightlife/K-Culture Seeker",
+        "stayIn": "Gangnam or Hongdae",
+        "why": "Gangnam has the high-end clubs, K-pop entertainment companies, and that glossy Seoul energy. Hongdae is younger, louder, and more indie — live music, street performers, bars until 6am. Different vibes, both deliver if you're staying out late.",
+        "pick": "Upscale hotel in Gangnam or trendy hotel near Hongdae station",
+        "price": "~$120-280/night"
+      }
+    ],
+    "skip": [
+      { "name": "Itaewon (currently)", "reason": "The former expat hub is struggling post-tragedy and feels uncertain. The restaurants have moved to Hannam; the energy has shifted elsewhere." },
+      { "name": "Hotels near Seoul Station only", "reason": "Transit hub, not a neighborhood. You'll spend your trip on the metro getting to anywhere interesting." },
+      { "name": "Dongdaemun tourist hotels", "reason": "The market is worth a visit, but the area is chaotic and the hotels are dated. Stay elsewhere and metro over for the late-night shopping." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "bali",
+    "city": "Bali",
+    "country": "Indonesia",
+    "region": "Asia",
+    "tagline": "Beyond the influencers",
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&h=600&fit=crop",
+    "imageAlt": "Bali rice terraces at sunrise with palm trees and mist",
+    "quickTake": "Bali has an Instagram problem — the famous spots are overrun and underwhelming in person. The island rewards going where the influencers aren't: the east coast, the mountains, the unglamorous towns with real Balinese culture. Traffic is brutal, so pick one area and commit.",
+    "travelerTypes": [
+      {
+        "name": "The Wellness/Retreat Seeker",
+        "stayIn": "Ubud (north of town) or Sidemen",
+        "why": "Ubud's rice paddies and yoga scene are real, but stay north of the center to escape the crowds. Sidemen is the quieter alternative — Mount Agung views, rice terraces, fewer tourists, authentic village feel.",
+        "pick": "Boutique resort with rice field views north of Ubud",
+        "price": "~$150-400/night"
+      },
+      {
+        "name": "The Beach + Nightlife Balance",
+        "stayIn": "Canggu or Sanur",
+        "why": "Canggu has the surf scene, beach clubs, and digital nomad energy — lively but not trashy like Kuta. Sanur is the opposite: calm, family-friendly, with a long beach promenade and an old-school Bali feel.",
+        "pick": "Design hotel in Canggu or beachfront resort in Sanur",
+        "price": "~$100-300/night"
+      },
+      {
+        "name": "The Luxury Escape",
+        "stayIn": "Uluwatu or East Bali (Amankila area)",
+        "why": "Uluwatu's clifftop resorts have the dramatic Indian Ocean views. East Bali around Candidasa has the island's most exclusive resorts (Amankila) with almost no tourists. Both require commitment — you won't leave the property much.",
+        "pick": "Clifftop villa in Uluwatu or luxury resort in East Bali",
+        "price": "~$400-1,200/night"
+      }
+    ],
+    "skip": [
+      { "name": "Kuta/Legian", "reason": "The Cancún of Bali. Loud, drunk, and nothing like the island you came for. Even the beach is mediocre." },
+      { "name": "Seminyak main strip", "reason": "Used to be cool, now mostly tourist restaurants and traffic. The better Seminyak spots are hidden, and Canggu does it better anyway." },
+      { "name": "Ubud town center hotels", "reason": "The center is a traffic-clogged mess. Stay 10-15 minutes north and you'll have the rice paddies and peace you imagined." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "new-york",
+    "city": "New York",
+    "country": "USA",
+    "region": "Americas",
+    "tagline": "Neighborhood energy",
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1200&h=600&fit=crop",
+    "imageAlt": "Manhattan skyline at dusk with Empire State Building",
+    "quickTake": "Everyone knows Times Square is a trap. The real question is which neighborhood matches your energy — downtown for culture, midtown for convenience, Brooklyn for locals' NYC. The subway works; don't overpay for location unless walking matters to you.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "SoHo, NoLita, or West Village",
+        "why": "Downtown Manhattan without the chaos. SoHo has shopping and architecture, NoLita has the best coffee and boutiques, West Village has the brownstone New York from movies. All are walkable to major sights.",
+        "pick": "Boutique hotel in SoHo or West Village",
+        "price": "~$350-600/night"
+      },
+      {
+        "name": "The Culture/Food Obsessive",
+        "stayIn": "Lower East Side or Williamsburg",
+        "why": "LES has the edge, the galleries, and the restaurants that get written about. Williamsburg is Brooklyn's gateway — great food, music venues, and a younger energy. Both reward staying out late.",
+        "pick": "Design hotel on the Lower East Side",
+        "price": "~$250-450/night"
+      },
+      {
+        "name": "The Theater/Business Traveler",
+        "stayIn": "Midtown West (near Hudson Yards) or Nomad",
+        "why": "If you need Broadway, meetings, or major tourist access, stay midtown but pick your block carefully. Hudson Yards is new and corporate but functional. Nomad has better restaurants and the Flatiron area nearby.",
+        "pick": "Upscale hotel in Nomad or modern midtown tower",
+        "price": "~$300-550/night"
+      }
+    ],
+    "skip": [
+      { "name": "Times Square hotels", "reason": "You already know this. Chain hotels at premium prices surrounded by chaos. Stay 10 blocks away in any direction." },
+      { "name": "Financial District on weekends", "reason": "The area empties out Friday night. Great for business trips, ghost town for leisure." },
+      { "name": "Far uptown unless you have a reason", "reason": "Harlem and Washington Heights have their charms, but first-timers will spend their trip on the subway getting downtown." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "mexico-city",
+    "city": "Mexico City",
+    "country": "Mexico",
+    "region": "Americas",
+    "tagline": "Food capital of the Americas",
+    "image": "https://images.unsplash.com/photo-1518659526054-e35dfb4e0891?w=1200&h=600&fit=crop",
+    "imageAlt": "Colorful Mexican architecture with Palacio de Bellas Artes dome",
+    "quickTake": "Mexico City is massive and traffic is brutal — your neighborhood choice determines your trip more than anywhere else. The good news: the best areas (Roma, Condesa, Polanco) are genuinely world-class for food and culture. Stay in one, explore on foot, and Uber strategically for the rest.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Roma Norte or Condesa",
+        "why": "Adjacent neighborhoods with tree-lined streets, the best restaurants in the city, and a walkable European feel. Roma Norte has more edge and galleries; Condesa has parks and cafés. You can't go wrong with either.",
+        "pick": "Boutique hotel on a quiet Roma Norte street",
+        "price": "~$150-300/night"
+      },
+      {
+        "name": "The Food Obsessive",
+        "stayIn": "Roma Norte (near Mercado Roma) or Juárez",
+        "why": "Roma Norte has the highest restaurant density in the city — from tasting menus to taquerías. Juárez is adjacent and slightly grittier, with natural wine bars and chefs' passion projects. This is where Mexico City's food reputation lives.",
+        "pick": "Design hotel walking distance to Contramar",
+        "price": "~$180-350/night"
+      },
+      {
+        "name": "The Luxury Traveler",
+        "stayIn": "Polanco",
+        "why": "Mexico City's Beverly Hills — wide boulevards, high-end shopping, museum row (Soumaya, Jumex, Anthropology). The grand hotels are here, and it's notably safe and polished. Less gritty charm, more reliable comfort.",
+        "pick": "Luxury hotel near Parque Lincoln",
+        "price": "~$300-600/night"
+      }
+    ],
+    "skip": [
+      { "name": "Centro Histórico hotels", "reason": "The Zócalo is worth a day trip, not a home base. The area is chaotic, shuts down early, and you'll feel disconnected from modern CDMX." },
+      { "name": "Zona Rosa", "reason": "Dated, touristy, and trying too hard. The neighborhoods around it (Roma, Juárez) absorbed anything good that was here." },
+      { "name": "Santa Fe business district", "reason": "Corporate campus energy with nothing to walk to. You'll need a car for everything and miss why people love this city." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "costa-rica",
+    "city": "Costa Rica",
+    "country": "Central America",
+    "region": "Americas",
+    "tagline": "Adventure meets luxury",
+    "image": "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=1200&h=600&fit=crop",
+    "imageAlt": "Costa Rica rainforest with hanging bridges and lush green canopy",
+    "quickTake": "Costa Rica is the rare destination that delivers on both adventure and relaxation without feeling like a compromise. The infrastructure is solid by Central American standards, the eco-lodges are genuinely impressive, and the biodiversity is real. The catch: distances are deceptive and roads are slow. Pick 2-3 areas maximum for a week.",
+    "travelerTypes": [
+      {
+        "name": "The Adventure Seeker",
+        "stayIn": "Arenal or Monteverde",
+        "why": "Arenal has the volcano views, hot springs, and zip-lining. Monteverde has the cloud forest and some of the best wildlife viewing in the country. Both deliver that jungle-adventure experience. Arenal is more developed; Monteverde is more rugged and rewarding for nature lovers.",
+        "pick": "Eco-lodge with volcano views in Arenal",
+        "price": "~$200-450/night"
+      },
+      {
+        "name": "The Beach + Surf Balance",
+        "stayIn": "Guanacaste (Nosara or Santa Teresa)",
+        "why": "Nosara has the wellness-surf-yoga trifecta with enough infrastructure to feel comfortable. Santa Teresa is younger, more backpacker-adjacent, with excellent surf breaks. Both have boutique hotels that punch above their weight. The Pacific coast delivers.",
+        "pick": "Boutique surf hotel in Nosara or Santa Teresa",
+        "price": "~$150-350/night"
+      },
+      {
+        "name": "The Luxury Nature Escape",
+        "stayIn": "Papagayo Peninsula or Osa Peninsula",
+        "why": "Papagayo has the Four Seasons and Andaz — world-class resorts with private beaches and polished service. Osa Peninsula is remote and wild, with luxury eco-lodges like Lapa Rios in primary rainforest. Different vibes: Papagayo is refined, Osa is adventure with comfort.",
+        "pick": "Luxury resort in Papagayo or eco-lodge on Osa Peninsula",
+        "price": "~$500-1,200/night"
+      }
+    ],
+    "skip": [
+      { "name": "San José beyond one night", "reason": "The capital is a transit hub, not a destination. Fly in, stay near the airport if needed, leave in the morning." },
+      { "name": "Trying to see everything", "reason": "The country looks small on a map but drives take 4-5 hours on winding roads. Pick a region and go deep rather than rushing between coasts." },
+      { "name": "All-inclusive Caribbean coast", "reason": "The Caribbean side (Limón) is less developed and the resorts feel dated. The Pacific coast and central mountains are where Costa Rica shines." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "dubai",
+    "city": "Dubai",
+    "country": "UAE",
+    "region": "Middle East & Africa",
+    "tagline": "Luxury and logistics",
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&h=600&fit=crop",
+    "imageAlt": "Dubai skyline with Burj Khalifa at sunset",
+    "quickTake": "Dubai is polarizing — either you embrace the maximalist luxury or you don't get it. What's undeniable: the hotels are extraordinary, the service is impeccable, and it works as a stopover better than anywhere else. The city is designed for consumption. Know that going in and you'll have a surprisingly good time.",
+    "travelerTypes": [
+      {
+        "name": "The Beach Resort Seeker",
+        "stayIn": "Jumeirah Beach or Palm Jumeirah",
+        "why": "The beachfront hotels here are genuinely world-class — private beaches, multiple pools, restaurants you don't need to leave for. Palm Jumeirah has the iconic resorts (Atlantis, One&Only). Jumeirah Beach is slightly more accessible and better for day trips into the city.",
+        "pick": "Beachfront resort on Jumeirah or Palm Jumeirah",
+        "price": "~$400-900/night"
+      },
+      {
+        "name": "The Stopover Strategist",
+        "stayIn": "Downtown Dubai or DIFC",
+        "why": "If you're passing through for 1-2 nights, stay central. Downtown has the Burj Khalifa, Dubai Mall, and the Address hotels. DIFC is the financial district with excellent restaurants and a more grown-up vibe. Both put you near what's worth seeing without beach-resort commitment.",
+        "pick": "Luxury hotel in Downtown with Burj Khalifa views",
+        "price": "~$300-600/night"
+      },
+      {
+        "name": "The Ultra-Luxury Experience",
+        "stayIn": "Burj Al Arab or One&Only Royal Mirage",
+        "why": "If you're doing Dubai, do Dubai. The Burj Al Arab is an icon for a reason — butler service, underwater restaurant, helipad tennis. One&Only Royal Mirage has Arabian fantasy architecture and more understated elegance. Both are once-in-a-lifetime stays.",
+        "pick": "Suite at Burj Al Arab or beachfront villa at One&Only",
+        "price": "~$1,500-5,000/night"
+      }
+    ],
+    "skip": [
+      { "name": "Deira old town hotels", "reason": "The historic district has character but infrastructure is dated. You'll feel disconnected from modern Dubai and the beaches are far." },
+      { "name": "Business hotels in Internet City", "reason": "Corporate parks with nothing walkable. Fine for conferences, pointless for leisure." },
+      { "name": "Budget hotels anywhere", "reason": "Dubai doesn't do budget well. Mid-range here feels cheap. Either commit to the luxury experience or save Dubai for when you can." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "morocco",
+    "city": "Marrakech",
+    "country": "Morocco",
+    "region": "Middle East & Africa",
+    "tagline": "Riad culture decoded",
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1200&h=600&fit=crop",
+    "imageAlt": "Marrakech riad courtyard with traditional Moroccan tilework and fountain",
+    "quickTake": "Morocco rewards the riad experience — traditional houses with interior courtyards that block out the medina chaos. The souks are intense and the hustle is real, but behind unmarked doors are some of the most beautiful boutique hotels anywhere. Book a riad, hire a guide for day one, and lean into the sensory overload.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Medina (near Jemaa el-Fnaa or Mouassine)",
+        "why": "The medina is the point — you want to be in the maze of souks and riads, not outside it. Stay near the main square for orientation, or in Mouassine for a slightly calmer but still central experience. Walking out your door into the ancient city is the whole experience.",
+        "pick": "Boutique riad in Mouassine with rooftop terrace",
+        "price": "~$150-350/night"
+      },
+      {
+        "name": "The Luxury Escape",
+        "stayIn": "La Mamounia or Palmeraie",
+        "why": "La Mamounia is the legendary palace hotel — Winston Churchill's favorite, gardens designed by Jacques Majorelle. If you want Moroccan grandeur with world-class service, this is it. The Palmeraie has villa resorts outside the city for pool-and-quiet seekers.",
+        "pick": "Suite at La Mamounia or private villa in Palmeraie",
+        "price": "~$500-1,500/night"
+      },
+      {
+        "name": "The Design/Culture Seeker",
+        "stayIn": "Dar el Bacha area or Kasbah",
+        "why": "Dar el Bacha is the emerging cool neighborhood — Musée Yves Saint Laurent nearby, design-forward riads, serious restaurants. The Kasbah (near the royal palace) is quieter, with artisan workshops and the mellah (old Jewish quarter) to explore.",
+        "pick": "Design-forward riad near Dar el Bacha",
+        "price": "~$200-400/night"
+      }
+    ],
+    "skip": [
+      { "name": "Hotels in Gueliz (new city)", "reason": "The French colonial district has some decent restaurants but no soul. You came for the medina — stay in the medina." },
+      { "name": "Budget riads with no reviews", "reason": "Riad quality varies wildly. A bad riad means cold showers and noise bleeding through walls. This isn't the place to gamble on price." },
+      { "name": "Staying only in Marrakech", "reason": "The desert (Merzouga), Atlas Mountains, and coastal Essaouira are all doable as day trips or overnights. Marrakech alone isn't Morocco." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "safari",
+    "city": "Safari",
+    "country": "Kenya & Tanzania",
+    "region": "Middle East & Africa",
+    "tagline": "When and where to go",
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop",
+    "imageAlt": "African elephant walking across savanna with acacia trees at sunset",
+    "quickTake": "An East African safari is a bucket-list trip that requires planning — the difference between camps, seasons, and parks dramatically affects what you'll see. The Great Migration alone spans different locations throughout the year. This isn't a trip to book casually. Get the timing right, choose your camps carefully, and prepare for something genuinely life-changing.",
+    "travelerTypes": [
+      {
+        "name": "The First-Timer",
+        "stayIn": "Maasai Mara (Kenya) or Serengeti (Tanzania)",
+        "why": "Both parks deliver the classic safari experience — big cats, elephants, vast plains. The Maasai Mara is more accessible from Nairobi with excellent year-round game viewing. The Serengeti is larger and wilder, often paired with the Ngorongoro Crater. Either works; the camps you choose matter more than the park.",
+        "pick": "Mid-range tented camp in the Maasai Mara conservancies",
+        "price": "~$500-900/night (all-inclusive with game drives)"
+      },
+      {
+        "name": "The Migration Chaser",
+        "stayIn": "Follow the herds: Tanzania (Dec-July) or Kenya (July-Oct)",
+        "why": "The Great Migration is 2 million wildebeest following the rains. December-March they're calving in the southern Serengeti. July-October they're crossing the Mara River into Kenya. Timing your trip to the migration is the difference between seeing animals and witnessing a spectacle.",
+        "pick": "Mobile camp that follows the migration or luxury lodge in prime crossing territory",
+        "price": "~$800-1,800/night"
+      },
+      {
+        "name": "The Luxury Safari Experience",
+        "stayIn": "Private conservancies (Kenya) or remote Tanzania camps",
+        "why": "Private conservancies in Kenya (Mara North, Olare Motorogi) limit vehicle numbers and allow off-road driving and night drives that national parks don't permit. Tanzania's remote camps (Singita, &Beyond) offer exclusivity and exceptional guiding. Both deliver safari as a luxury experience, not a zoo visit.",
+        "pick": "Exclusive-use camp in a private conservancy",
+        "price": "~$1,500-3,500/night"
+      }
+    ],
+    "skip": [
+      { "name": "Budget lodges inside main park gates", "reason": "The difference between a $200/night and $600/night camp is enormous — guide quality, vehicle condition, location, and crowd levels. This is the wrong trip to economize on." },
+      { "name": "Trying to do too many parks", "reason": "Internal flights are expensive and time-consuming. Better to spend 4-5 nights in one excellent area than 2 nights each in three parks. You'll see more by staying put." },
+      { "name": "Visiting during heavy rains (April-May)", "reason": "The long rains make roads impassable and many camps close. Animals disperse across flooded plains. Wait for dry season (June-October) or short rains (November-December) for the best experience." }
+    ],
+    "lastUpdated": "January 2025"
+  },
+  {
+    "slug": "maldives",
+    "city": "Maldives",
+    "country": "Indian Ocean",
+    "region": "Islands",
+    "tagline": "Which resort, which atoll",
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&h=600&fit=crop",
+    "imageAlt": "Maldives overwater bungalow with crystal clear turquoise water",
+    "quickTake": "The Maldives is a one-resort destination — you'll fly to Malé, transfer to your island, and likely not leave until you fly home. That's the point. The decision that matters is which resort, and they vary wildly: party islands vs. barefoot luxury, snorkeling house reefs vs. diving expeditions, all-inclusive vs. à la carte. Choose based on what you actually want to do.",
+    "travelerTypes": [
+      {
+        "name": "The Honeymoon Couple",
+        "stayIn": "North Malé Atoll or South Ari Atoll",
+        "why": "The classic honeymoon resorts — overwater villas, private butler service, couples' spa — are concentrated here. Short transfers from Malé (30-60 min by speedboat or seaplane) mean less travel time, more pool time. The iconic Maldives experience delivered efficiently.",
+        "pick": "Overwater villa with private pool at a romance-focused resort",
+        "price": "~$800-2,000/night"
+      },
+      {
+        "name": "The Diving/Snorkeling Enthusiast",
+        "stayIn": "South Ari Atoll or Baa Atoll",
+        "why": "South Ari has the whale shark encounters — nearly guaranteed sightings year-round. Baa Atoll is a UNESCO biosphere reserve with manta ray aggregations and exceptional house reefs. If marine life matters more than the villa, prioritize these atolls.",
+        "pick": "Resort with dedicated dive center and strong house reef",
+        "price": "~$600-1,500/night"
+      },
+      {
+        "name": "The Ultimate Luxury Seeker",
+        "stayIn": "Remote atolls (Lhaviyani, Noonu, or Gaafu)",
+        "why": "The most exclusive resorts are deliberately remote — 45-min seaplane flights to reach private islands with 20 villas. Soneva, Cheval Blanc, Waldorf Astoria Ithaafushi set the standard. The isolation is the point. You're paying for space, privacy, and staff ratios that feel absurd.",
+        "pick": "Private island villa at an ultra-luxury resort",
+        "price": "~$2,500-8,000/night"
+      }
+    ],
+    "skip": [
+      { "name": "Resorts too close to Malé", "reason": "Some budget resorts are 10 minutes from the airport. You'll see cargo ships and construction, not pristine blue. The transfer time is worth it for the setting." },
+      { "name": "Choosing on price alone", "reason": "Maldives budget resorts often disappoint — dated rooms, weak food, no house reef. Either commit to the experience or consider alternatives like Seychelles or the Maldives for a future trip." },
+      { "name": "Island-hopping between resorts", "reason": "Unlike Greece or Thailand, you can't easily visit other islands. Transfers are expensive and eat into your time. Pick one resort and stay put." }
+    ],
+    "lastUpdated": "January 2025"
+  }
+]

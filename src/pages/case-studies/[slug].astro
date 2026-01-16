@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import CaseStudyStats from '../../components/CaseStudyStats.astro';
+import CalloutBox from '../../components/CalloutBox.astro';
+import { getCaseStudyBySlug, getCaseStudySlugs, getDestinationBySlug, getCurrentYear } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const slugs = getCaseStudySlugs();
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const caseStudy = getCaseStudyBySlug(slug);
+
+if (!caseStudy) {
+  return Astro.redirect('/case-studies');
+}
+
+const {
+  title,
+  destination,
+  type,
+  travelerType,
+  budget,
+  timeline,
+  quote,
+  constraints,
+  eliminated,
+  considered,
+  recommended,
+  finalBooking,
+  timeSaved,
+  outcome,
+  image,
+  imageAlt
+} = caseStudy;
+
+// Check if there's a related destination guide
+const destinationSlug = destination.toLowerCase().split(',')[0].replace(/\s+/g, '-');
+const relatedDestination = getDestinationBySlug(destinationSlug);
+const currentYear = getCurrentYear();
+
+// Enhanced SEO title
+const seoTitle = `${type} Trip to ${destination}: How We Booked It | Case Study`;
+const seoDescription = `How Otherwhere planned a ${type.toLowerCase()} trip to ${destination}. ${quote}`;
+
+// Article schema
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${title}: ${destination} Case Study`,
+  "description": seoDescription,
+  "image": image,
+  "author": {
+    "@type": "Organization",
+    "name": "Otherwhere"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Otherwhere",
+    "url": "https://otherwhere.world"
+  }
+};
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://blog.otherwhere.world"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Case Studies",
+      "item": "https://blog.otherwhere.world/case-studies"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": title
+    }
+  ]
+};
+
+const schemas = [articleSchema, breadcrumbSchema];
+
+// Build stats for the stats strip
+const stats = [
+  { value: timeSaved.otherwhere, label: 'Time to book' },
+  { value: timeline, label: 'Planning window' },
+  { value: finalBooking.price, label: 'Final price' },
+  { value: timeSaved.diy, label: 'Time saved' },
+];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  image={image}
+  schema={schemas}
+>
+  <article class="py-12">
+    <!-- Hero Image - Full width -->
+    {image && (
+      <div class="max-w-5xl mx-auto px-4 mb-8">
+        <img
+          src={image}
+          alt={imageAlt || `${destination} travel destination`}
+          class="w-full h-72 md:h-[28rem] object-cover rounded-xl"
+          loading="eager"
+        />
+      </div>
+    )}
+
+    <!-- Content - Constrained width -->
+    <div class="blog-content">
+      <!-- Header -->
+      <header class="mb-8">
+        <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
+          ← ALL CASE STUDIES
+        </a>
+        <span class="block text-xs uppercase tracking-widest text-ink-tertiary mb-4">{type}</span>
+        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-3">{title.toUpperCase()}</h1>
+        <p class="text-xl text-ink-secondary">{destination}</p>
+      </header>
+
+      <!-- Intro paragraph -->
+      <p class="text-xl text-ink-secondary leading-relaxed mb-8">
+        {travelerType}. Budget: {budget}. Here's how we turned their vision into a booked trip.
+      </p>
+
+      <!-- Stats Strip -->
+      <CaseStudyStats stats={stats} />
+
+      <hr class="section-divider" />
+
+      <!-- What They Asked -->
+      <section>
+        <h2 class="text-xl font-light tracking-wide mb-4" id="the-brief">THE BRIEF</h2>
+        <blockquote class="pull-quote">
+          <p>"{quote}"</p>
+        </blockquote>
+
+        <h3 class="font-medium text-lg mb-3 mt-8">Their requirements:</h3>
+        <ul class="space-y-2 text-ink-secondary">
+          {constraints.map((c) => (
+            <li class="flex items-start gap-3">
+              <span class="text-accent mt-1">•</span>
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Our Process -->
+      <section>
+        <h2 class="text-xl font-light tracking-wide mb-6" id="our-process">OUR PROCESS</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="font-medium text-lg mb-3 text-ink-tertiary">What we ruled out:</h3>
+            <ul class="space-y-3">
+              {eliminated.map((e) => (
+                <li class="flex items-start gap-3 text-ink-secondary">
+                  <span class="text-red-400 mt-1">×</span>
+                  <span><strong class="text-ink">{e.name}</strong> — {e.reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-medium text-lg mb-3">What we considered:</h3>
+            <ul class="space-y-3">
+              {considered.map((c) => (
+                <li class="flex items-start gap-3 text-ink-secondary">
+                  <span class="text-ink-tertiary mt-1">○</span>
+                  <span><strong class="text-ink">{c.name}</strong> — {c.reason}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <CalloutBox title="Our Recommendation" variant="highlight">
+            <p class="text-lg">{recommended}</p>
+          </CalloutBox>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- The Final Booking -->
+      <section>
+        <h2 class="text-xl font-light tracking-wide mb-6" id="the-booking">THE BOOKING</h2>
+        <div class="bg-accent/10 border-2 border-accent rounded-xl p-6">
+          <h3 class="font-serif text-xl mb-4">{finalBooking.property}</h3>
+          <ul class="space-y-2 text-ink-secondary">
+            <li><strong class="text-ink">Why it won:</strong> {finalBooking.why}</li>
+            <li><strong class="text-ink">Price:</strong> {finalBooking.price}</li>
+            {finalBooking.extras && <li><strong class="text-ink">Extras added:</strong> {finalBooking.extras}</li>}
+          </ul>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Outcome -->
+      <section>
+        <h2 class="text-xl font-light tracking-wide mb-6" id="the-outcome">THE OUTCOME</h2>
+        <CalloutBox title="Result" variant="outcome">
+          <p class="text-lg">{outcome}</p>
+        </CalloutBox>
+
+        <!-- Time comparison -->
+        <div class="grid md:grid-cols-2 gap-4 mt-8">
+          <div class="bg-paper-secondary rounded-xl p-6 text-center">
+            <p class="text-sm text-ink-tertiary mb-2">DIY Research Estimate</p>
+            <p class="font-serif text-3xl">{timeSaved.diy}</p>
+          </div>
+          <div class="bg-accent text-paper rounded-xl p-6 text-center">
+            <p class="text-sm text-paper/70 mb-2">With Otherwhere</p>
+            <p class="font-serif text-3xl">{timeSaved.otherwhere}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Destination Guide -->
+      {relatedDestination && (
+        <>
+          <hr class="section-divider" />
+          <section>
+            <h2 class="text-xl font-light tracking-wide mb-6">DESTINATION GUIDE</h2>
+            <a href={`/destinations/${relatedDestination.slug}`} class="block group bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
+              <div class="md:flex">
+                <img
+                  src={relatedDestination.image.replace('w=1200', 'w=400').replace('h=600', 'h=250')}
+                  alt={relatedDestination.city}
+                  class="w-full md:w-48 h-32 md:h-auto object-cover"
+                  loading="lazy"
+                />
+                <div class="p-5">
+                  <h3 class="font-serif text-lg group-hover:text-accent transition-colors">Where to Stay in {relatedDestination.city}</h3>
+                  <p class="text-ink-secondary text-sm mt-2">{relatedDestination.quickTake.substring(0, 120)}...</p>
+                </div>
+              </div>
+            </a>
+          </section>
+        </>
+      )}
+
+      <hr class="section-divider" />
+
+      <!-- CTA -->
+      <section class="text-center py-12">
+        <h2 class="text-2xl font-light tracking-wide mb-4">WANT THIS FOR YOUR TRIP?</h2>
+        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
+          We turn overwhelming options into effortless bookings. Text us to get started.
+        </p>
+        <a href="sms:+13239224067" class="btn-primary inline-block">
+          TEXT US TO START
+        </a>
+      </section>
+
+      <!-- Navigation -->
+      <nav class="mt-8 pt-8 border-t border-paper-tertiary">
+        <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors">
+          ← BACK TO ALL CASE STUDIES
+        </a>
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
