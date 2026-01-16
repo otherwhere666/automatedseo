@@ -1,172 +1,169 @@
 [
   {
-    "id": "best-ai-travel-planner",
-    "slug": "best-ai-travel-planner",
-    "title": "Best AI Travel Planner in 2025: 7 Tools Tested (One Clear Winner)",
-    "primaryKeyword": "best ai travel planner",
-    "secondaryKeywords": [
-      "ai travel planner",
-      "ai trip planner",
-      "ai vacation planner"
-    ],
+    "id": "ai-travel-agent",
+    "slug": "ai-travel-agent-what-it-is-how-it-works-and-who-its-for",
+    "title": "AI Travel Agent: What It Is, How It Works, and Who It's For",
+    "primaryKeyword": "ai travel agent",
     "pillar": "new-concierge",
-    "template": "listicle",
-    "priority": "urgent",
     "status": "published",
-    "growth": "+90%",
-    "notes": "High-growth keyword - listicle format, position Otherwhere as winner"
-  },
-  {
-    "id": "build-ai-travel-planner",
-    "slug": "how-to-build-ai-travel-planner",
-    "title": "How to Build an AI Travel Planner (And Why Most Fail)",
-    "primaryKeyword": "build ai travel planner",
-    "secondaryKeywords": [
-      "ai travel planner api",
-      "create ai trip planner",
-      "travel ai development"
-    ],
-    "pillar": "new-concierge",
-    "template": "technical",
-    "priority": "urgent",
-    "status": "published",
-    "growth": "+70%",
-    "notes": "Dev audience - technical credibility, backlink magnet"
+    "publishDate": "2026-01-14"
   },
   {
     "id": "free-ai-trip-planner",
-    "slug": "free-ai-trip-planner",
+    "slug": "free-ai-trip-planner-what-you-get-and-what-you-dont",
     "title": "Free AI Trip Planner: What You Get (And What You Don't)",
     "primaryKeyword": "free ai trip planner",
-    "secondaryKeywords": [
-      "free ai travel planner",
-      "ai trip planner free",
-      "free travel ai"
-    ],
     "pillar": "new-concierge",
-    "template": "comparison",
-    "priority": "urgent",
     "status": "published",
-    "growth": "+40%",
-    "notes": "Capture free-seekers, convert to understanding value of paid/concierge"
-  },
-  {
-    "id": "ai-travel-agent",
-    "slug": "ai-travel-agent",
-    "title": "AI Travel Agent: What It Is, How It Works, and Who It's For",
-    "primaryKeyword": "ai travel agent",
-    "secondaryKeywords": [
-      "ai travel concierge",
-      "virtual travel agent ai",
-      "automated travel agent"
-    ],
-    "pillar": "new-concierge",
-    "template": "pillar-page",
-    "priority": "urgent",
-    "status": "published",
-    "growth": "+30%",
-    "notes": "CATEGORY OWNERSHIP - this is our term, must dominate"
+    "publishDate": "2026-01-14"
   },
   {
     "id": "google-ai-travel-planner",
-    "slug": "google-ai-travel-planner-vs-alternatives",
+    "slug": "google-ai-travel-planner-how-it-compares-honest-review",
     "title": "Google AI Travel Planner: How It Compares (Honest Review)",
     "primaryKeyword": "google ai travel planner",
-    "secondaryKeywords": [
-      "google travel ai",
-      "google trips ai",
-      "bard travel planning"
-    ],
     "pillar": "new-concierge",
-    "template": "comparison",
-    "priority": "urgent",
     "status": "published",
-    "growth": "+10%",
-    "notes": "People comparing to Google - show where Otherwhere wins"
+    "publishDate": "2026-01-15"
   },
   {
     "id": "chatgpt-travel-complete-guide",
     "slug": "chatgpt-for-travel-planning-complete-guide",
-    "title": "ChatGPT for Travel Planning: The Complete Guide (And Why It's Not Enough)",
+    "title": "ChatGPT for Travel Planning: Complete Guide (And Why It's Not Enough)",
     "primaryKeyword": "chatgpt travel planning",
-    "secondaryKeywords": [
-      "chatgpt for travel",
-      "chatgpt travel itinerary",
-      "ai travel planning"
-    ],
     "pillar": "chatgpt-travel",
-    "template": "chatgpt-tutorial",
-    "priority": "high",
-    "status": "queued"
+    "status": "scheduled",
+    "publishDate": "2026-01-16",
+    "slot": "morning"
+  },
+  {
+    "id": "best-time-paris",
+    "slug": "best-time-to-visit-paris",
+    "title": "Best Time to Visit Paris in 2026: Month-by-Month Guide",
+    "primaryKeyword": "best time to visit paris",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-16",
+    "slot": "afternoon"
   },
   {
     "id": "chatgpt-cant-book-flights",
     "slug": "why-chatgpt-cant-book-flights",
-    "title": "Why ChatGPT Can't Actually Book Your Flight",
+    "title": "Why ChatGPT Can't Actually Book Your Flight (Technical Breakdown)",
     "primaryKeyword": "chatgpt book flights",
-    "secondaryKeywords": [
-      "chatgpt flight booking",
-      "can chatgpt book travel"
-    ],
     "pillar": "chatgpt-travel",
-    "template": "chatgpt-limitation",
-    "priority": "high",
-    "status": "queued"
+    "status": "scheduled",
+    "publishDate": "2026-01-17",
+    "slot": "morning"
+  },
+  {
+    "id": "where-to-stay-tokyo",
+    "slug": "where-to-stay-in-tokyo-first-time",
+    "title": "Where to Stay in Tokyo: Neighborhood Guide for First-Timers",
+    "primaryKeyword": "where to stay in tokyo",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-17",
+    "slot": "afternoon"
+  },
+  {
+    "id": "too-many-options",
+    "slug": "too-many-hotel-options-decision-fatigue",
+    "title": "Why Having 10,000 Hotel Options Makes You Book Worse",
+    "primaryKeyword": "too many travel options",
+    "pillar": "paradox-of-choice",
+    "status": "scheduled",
+    "publishDate": "2026-01-18",
+    "slot": "morning"
+  },
+  {
+    "id": "rome-vs-florence",
+    "slug": "rome-vs-florence-which-to-visit",
+    "title": "Rome vs Florence: Which Italian City Should You Visit?",
+    "primaryKeyword": "rome vs florence",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-18",
+    "slot": "afternoon"
+  },
+  {
+    "id": "travel-planning-time-audit",
+    "slug": "cost-of-planning-travel-yourself-time-audit",
+    "title": "The Real Cost of Planning Your Own Travel (A Time Audit)",
+    "primaryKeyword": "travel planning time",
+    "pillar": "time-over-money",
+    "status": "scheduled",
+    "publishDate": "2026-01-19",
+    "slot": "morning"
+  },
+  {
+    "id": "best-time-bali",
+    "slug": "best-time-to-visit-bali",
+    "title": "Best Time to Visit Bali: Dry Season vs Wet Season Guide",
+    "primaryKeyword": "best time to visit bali",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-19",
+    "slot": "afternoon"
   },
   {
     "id": "chatgpt-prompts-travel",
-    "slug": "50-chatgpt-prompts-travel-planning",
+    "slug": "chatgpt-prompts-travel-planning",
     "title": "50 ChatGPT Prompts for Travel Planning That Actually Work",
     "primaryKeyword": "chatgpt travel prompts",
-    "secondaryKeywords": [
-      "chatgpt prompts for vacation",
-      "best travel prompts"
-    ],
     "pillar": "chatgpt-travel",
-    "template": "chatgpt-tutorial",
-    "priority": "medium",
-    "status": "queued"
+    "status": "scheduled",
+    "publishDate": "2026-01-20",
+    "slot": "morning"
   },
   {
-    "id": "travel-planning-stress",
-    "slug": "why-travel-planning-is-so-stressful",
-    "title": "Why Having 10,000 Hotel Options Makes You Book Worse",
-    "primaryKeyword": "travel planning stress",
-    "secondaryKeywords": [
-      "too many travel options",
-      "decision fatigue travel"
-    ],
-    "pillar": "paradox-of-choice",
-    "template": "thought-leadership",
-    "priority": "medium",
-    "status": "queued"
-  },
-  {
-    "id": "travel-planning-busy-professionals",
-    "slug": "travel-planning-for-busy-professionals",
-    "title": "The Real Cost of Planning Your Own Travel (A Time Audit)",
-    "primaryKeyword": "travel planning busy professionals",
-    "secondaryKeywords": [
-      "executive travel planning",
-      "outsource trip planning"
-    ],
-    "pillar": "time-over-money",
-    "template": "thought-leadership",
-    "priority": "medium",
-    "status": "queued"
+    "id": "where-to-stay-barcelona",
+    "slug": "where-to-stay-in-barcelona-neighborhoods",
+    "title": "Where to Stay in Barcelona: Beach vs Gothic Quarter vs Eixample",
+    "primaryKeyword": "where to stay in barcelona",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-20",
+    "slot": "afternoon"
   },
   {
     "id": "best-ai-travel-tools",
-    "slug": "best-ai-travel-tools-2025",
-    "title": "Best AI Tools for Travel in 2025 (Tested & Ranked)",
+    "slug": "best-ai-travel-tools-2026",
+    "title": "Best AI Tools for Travel in 2026 (Tested & Ranked)",
     "primaryKeyword": "best ai travel tools",
-    "secondaryKeywords": [
-      "ai travel assistant",
-      "ai travel planner"
-    ],
     "pillar": "new-concierge",
-    "template": "comparison",
-    "priority": "high",
-    "status": "queued"
+    "status": "scheduled",
+    "publishDate": "2026-01-21",
+    "slot": "morning"
+  },
+  {
+    "id": "maldives-worth-it",
+    "slug": "is-maldives-worth-it-cost",
+    "title": "Is the Maldives Worth It? Honest Cost Breakdown",
+    "primaryKeyword": "is maldives worth it",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-21",
+    "slot": "afternoon"
+  },
+  {
+    "id": "perplexity-vs-chatgpt",
+    "slug": "perplexity-vs-chatgpt-travel-planning",
+    "title": "Perplexity vs ChatGPT for Travel Planning: Which Is Better?",
+    "primaryKeyword": "perplexity vs chatgpt travel",
+    "pillar": "chatgpt-travel",
+    "status": "scheduled",
+    "publishDate": "2026-01-22",
+    "slot": "morning"
+  },
+  {
+    "id": "london-vs-paris",
+    "slug": "london-vs-paris-first-time",
+    "title": "London vs Paris: The Ultimate First-Timer Comparison",
+    "primaryKeyword": "london vs paris",
+    "pillar": "curated-destinations",
+    "status": "scheduled",
+    "publishDate": "2026-01-22",
+    "slot": "afternoon"
   }
 ]

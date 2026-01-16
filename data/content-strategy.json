@@ -86,5 +86,23 @@
       "Best kept secret",
       "Exclamation points (unless quoting)"
     ]
+  },
+  "publishingSchedule": {
+    "postsPerDay": 2,
+    "slots": {
+      "morning": "09:00 PST",
+      "afternoon": "14:00 PST"
+    },
+    "contentMix": {
+      "destination": "50%",
+      "pillar": "50%"
+    },
+    "targetWordCount": {
+      "guide": 2200,
+      "comparison": 2000,
+      "listicle": 2500,
+      "thought-leadership": 1800,
+      "destination-timing": 1800
+    }
   }
 }
