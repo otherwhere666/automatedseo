@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getDestinationsByRegion, getDestinationSummaries, getCurrentYear } from '../../utils/content';
+import CategoryPill from '../../components/CategoryPill.astro';
+import { getDestinationsByRegion, getDestinationSummaries } from '../../utils/content';
 
 const destinations = getDestinationSummaries();
 const byRegion = getDestinationsByRegion();
 const regionOrder = ["Europe", "Asia", "Americas", "Middle East & Africa", "Islands"];
-const currentYear = getCurrentYear();
 
 const schemas = [
   {
@@ -22,70 +22,87 @@ const schemas = [
   description="Curated destination guides for discerning travelers. Not 50 hotels — just the ones worth considering."
   schema={schemas}
 >
-  <article class="py-12">
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">DESTINATION GUIDES</h1>
-        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+  <!-- Hero Section (Cream) -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-10">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide">DESTINATIONS</h1>
+        <p class="text-ink-secondary mt-4 text-lg max-w-2xl">
           Curated guides, not comprehensive lists. We tell you where to stay for different types of travelers — and what to skip.
         </p>
       </header>
 
       <!-- Stats -->
-      <div class="flex gap-8 mb-8 text-center justify-center">
+      <div class="flex gap-12 mb-8">
         <div>
-          <p class="font-serif text-3xl">{destinations.length}</p>
-          <p class="text-sm text-ink-tertiary">Destinations</p>
+          <p class="font-display text-4xl">{destinations.length}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Destinations</p>
         </div>
         <div>
-          <p class="font-serif text-3xl">3</p>
-          <p class="text-sm text-ink-tertiary">Traveler types each</p>
+          <p class="font-display text-4xl">3</p>
+          <p class="text-sm text-ink-tertiary mt-1">Traveler types each</p>
         </div>
         <div>
-          <p class="font-serif text-3xl">57</p>
-          <p class="text-sm text-ink-tertiary">Neighborhoods covered</p>
+          <p class="font-display text-4xl">57</p>
+          <p class="text-sm text-ink-tertiary mt-1">Neighborhoods</p>
         </div>
       </div>
-
-      <hr class="section-divider" />
-
-      {regionOrder.map((region) => byRegion[region] && (
-        <section class="mb-16">
-          <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-8">{region.toUpperCase()}</h2>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {byRegion[region].map((d) => (
-              <a href={`/destinations/${d.slug}`} class="block group">
-                <article class="bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
-                  <img
-                    src={d.image}
-                    alt={d.city}
-                    class="w-full h-36 object-cover"
-                  />
-                  <div class="p-4">
-                    <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{d.city}</h3>
-                    <p class="text-sm text-ink-tertiary mb-1">{d.country}</p>
-                    <p class="text-sm text-ink-secondary italic">{d.tagline}</p>
-                  </div>
-                </article>
-              </a>
-            ))}
-          </div>
-        </section>
-      ))}
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">DON'T SEE YOUR DESTINATION?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us where you want to go. We'll send curated recommendations — no guide required.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US YOUR DESTINATION
-        </a>
-      </section>
     </div>
-  </article>
+  </section>
+
+  <!-- Destinations by Region (Alternating) -->
+  {regionOrder.map((region, regionIndex) => byRegion[region] && (
+    <section class={regionIndex % 2 === 0 ? "section-dark py-16 md:py-20" : "bg-paper py-16 md:py-20"}>
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10">
+          <p class={`text-xs uppercase tracking-widest mb-2 ${regionIndex % 2 === 0 ? 'text-paper/50' : 'text-ink-tertiary'}`} style="letter-spacing: 0.15em;">
+            REGION
+          </p>
+          <h2 class={`font-display text-3xl md:text-4xl ${regionIndex % 2 === 0 ? 'text-paper' : 'text-ink'}`}>
+            {region.toUpperCase()}
+          </h2>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          {byRegion[region].map((dest) => (
+            <a href={`/destinations/${dest.slug}`} class="magazine-card group">
+              <div class="relative mb-4">
+                <img
+                  src={dest.image}
+                  alt={dest.city}
+                  class="magazine-card-image"
+                  loading="lazy"
+                />
+              </div>
+              <div class="space-y-2">
+                <CategoryPill category={dest.country} variant={regionIndex % 2 === 0 ? "light" : "dark"} />
+                <h3 class={`font-display text-xl md:text-2xl leading-tight ${regionIndex % 2 === 0 ? 'text-paper' : 'text-ink'}`}>
+                  {dest.city}
+                </h3>
+                <p class={`text-sm ${regionIndex % 2 === 0 ? 'text-paper/70' : 'text-ink-secondary'}`}>{dest.tagline}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- CTA (Cream or Dark based on last section) -->
+  <section class="bg-paper py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">
+        NOT LISTED?
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+        DON'T SEE YOUR DESTINATION?
+      </h2>
+      <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+        Text us where you want to go. We'll send curated recommendations — no guide required.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+        TEXT US YOUR DESTINATION
+      </a>
+    </div>
+  </section>
 </BaseLayout>

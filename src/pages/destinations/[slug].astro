@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getDestinationBySlug, getDestinationSlugs, getCaseStudiesForDestination, getPostsForDestination, getCurrentYear } from '../../utils/content';
-import type { Destination } from '../../types';
+import CategoryPill from '../../components/CategoryPill.astro';
+import { getDestinationBySlug, getDestinationSlugs, getCaseStudiesForDestination, getPostsForDestination, getAllDestinations, getCurrentYear } from '../../utils/content';
 
 export async function getStaticPaths() {
   const slugs = getDestinationSlugs();
@@ -15,18 +15,23 @@ if (!destination) {
   return Astro.redirect('/destinations');
 }
 
-const { city, country, quickTake, travelerTypes, skip, lastUpdated, image, imageAlt } = destination;
+const { city, country, region, quickTake, travelerTypes, skip, lastUpdated, image, imageAlt } = destination;
 
 // Get related content
 const relatedCaseStudies = getCaseStudiesForDestination(city);
 const relatedPosts = getPostsForDestination(city);
+
+// Get other destinations for "More Destinations" section
+const allDestinations = getAllDestinations();
+const otherDestinations = allDestinations.filter(d => d.slug !== slug).slice(0, 3);
+
 const currentYear = getCurrentYear();
 
-// Enhanced SEO title
+// SEO
 const seoTitle = `Where to Stay in ${city} (${currentYear}) | ${country} Travel Guide`;
 const seoDescription = `${quickTake.substring(0, 150)}... A curated guide for different types of travelers.`;
 
-// FAQ Schema for common questions
+// Schemas
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -46,183 +51,232 @@ const faqSchema = {
         "@type": "Answer",
         "text": travelerTypes.map(t => `${t.name}: ${t.price}`).join('. ')
       }
-    },
-    {
-      "@type": "Question",
-      "name": `What neighborhoods should I avoid in ${city}?`,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": skip.map(s => `${s.name}: ${s.reason}`).join(' ')
-      }
     }
   ]
 };
 
-// TravelGuide schema
 const travelGuideSchema = {
   "@context": "https://schema.org",
   "@type": "TravelGuide",
-  "about": {
-    "@type": "City",
-    "name": city,
-    "containedInPlace": {
-      "@type": "Country",
-      "name": country
-    }
-  },
+  "about": { "@type": "City", "name": city, "containedInPlace": { "@type": "Country", "name": country } },
   "name": `Where to Stay in ${city}: A Curated Guide`,
   "description": quickTake,
   "dateModified": lastUpdated
 };
 
-// Breadcrumb schema
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://blog.otherwhere.world"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Destinations",
-      "item": "https://blog.otherwhere.world/destinations"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": city
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://blog.otherwhere.world" },
+    { "@type": "ListItem", "position": 2, "name": "Destinations", "item": "https://blog.otherwhere.world/destinations" },
+    { "@type": "ListItem", "position": 3, "name": city }
   ]
 };
 
 const schemas = [travelGuideSchema, faqSchema, breadcrumbSchema];
 ---
 
-<BaseLayout
-  title={seoTitle}
-  description={seoDescription}
-  image={image}
-  schema={schemas}
->
-  <article class="max-w-3xl mx-auto px-4 py-12">
-    <!-- Header -->
-    <header class="mb-12">
-      <a href="/destinations" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
+<BaseLayout title={seoTitle} description={seoDescription} image={image} schema={schemas}>
+  <!-- Hero Section -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <a href="/destinations" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
         ← ALL DESTINATIONS
       </a>
-      <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-4">{city.toUpperCase()}</h1>
-      <p class="text-lg text-ink-secondary">{country}</p>
-    </header>
 
-    <!-- Hero Image -->
-    {image && (
-      <div class="mb-12 -mx-4 md:mx-0">
-        <img
-          src={image}
-          alt={imageAlt || `${city}, ${country}`}
-          class="w-full h-64 md:h-96 object-cover rounded-card"
-          loading="eager"
-        />
-      </div>
-    )}
-
-    <!-- Quick Take -->
-    <section class="my-12">
-      <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-4">QUICK TAKE</h2>
-      <p class="text-lg leading-relaxed">{quickTake}</p>
-    </section>
-
-    <!-- Traveler Types -->
-    {travelerTypes.map((type, index) => (
-      <section class="my-12 bg-paper-secondary rounded-xl p-8">
-        <h2 class="text-lg font-light tracking-wide mb-6">FOR {type.name.toUpperCase()}</h2>
-        <div class="space-y-5">
-          <div>
-            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">STAY IN</p>
-            <p class="text-lg font-medium">{type.stayIn}</p>
-          </div>
-          <div>
-            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">WHY</p>
-            <p class="text-ink-secondary leading-relaxed">{type.why}</p>
-          </div>
-          <div class="border-t border-paper-tertiary pt-5 mt-5">
-            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-1">OUR PICK</p>
-            <p class="text-lg font-medium">{type.pick}</p>
-            <p class="text-sm text-ink-tertiary mt-1">{type.price}</p>
-          </div>
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <CategoryPill category={region} variant="dark" class="mb-4" />
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide mb-4">{city.toUpperCase()}</h1>
+          <p class="text-xl text-ink-secondary">{country}</p>
         </div>
-      </section>
-    ))}
 
-    <!-- Skip These -->
-    <section class="my-12">
-      <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">SKIP THESE</h2>
-      <ul class="space-y-4">
+        {image && (
+          <div class="relative">
+            <img
+              src={image}
+              alt={imageAlt || `${city}, ${country}`}
+              class="w-full aspect-[4/3] object-cover rounded-card"
+              loading="eager"
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Take (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl text-paper mb-8">QUICK TAKE</h2>
+      <p class="text-xl text-paper/90 leading-relaxed">{quickTake}</p>
+    </div>
+  </section>
+
+  <!-- Traveler Types (Cream) -->
+  <section class="bg-paper py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl mb-10">WHERE TO STAY</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {travelerTypes.map((type) => (
+          <div class="bg-paper-secondary rounded-card p-8">
+            <h3 class="font-display text-lg mb-6">FOR {type.name.toUpperCase()}</h3>
+
+            <div class="space-y-6">
+              <div>
+                <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-2" style="letter-spacing: 0.15em;">STAY IN</p>
+                <p class="text-lg font-medium text-ink">{type.stayIn}</p>
+              </div>
+
+              <div>
+                <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-2" style="letter-spacing: 0.15em;">WHY</p>
+                <p class="text-ink-secondary text-sm leading-relaxed">{type.why}</p>
+              </div>
+
+              <div class="border-t border-paper-tertiary pt-6">
+                <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-2" style="letter-spacing: 0.15em;">OUR PICK</p>
+                <p class="text-lg font-medium text-ink">{type.pick}</p>
+                <p class="text-sm text-ink-tertiary mt-1">{type.price}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Skip These (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl text-paper mb-8">SKIP THESE</h2>
+
+      <ul class="space-y-6">
         {skip.map((s) => (
-          <li class="flex items-start gap-3">
-            <span class="text-ink-tertiary mt-1">×</span>
+          <li class="flex items-start gap-4">
+            <span class="text-red-400 mt-1 font-bold text-lg">×</span>
             <div>
-              <strong class="text-ink">{s.name}</strong>
-              <p class="text-ink-secondary text-sm mt-1">{s.reason}</p>
+              <strong class="text-paper text-lg">{s.name}</strong>
+              <p class="text-paper/70 mt-1">{s.reason}</p>
             </div>
           </li>
         ))}
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- Related Case Studies -->
-    {relatedCaseStudies.length > 0 && (
-      <section class="my-12 pt-8 border-t border-paper-tertiary">
-        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">REAL TRIPS TO {city.toUpperCase()}</h2>
-        <div class="grid gap-4">
+  <!-- Related Case Studies (if any) -->
+  {relatedCaseStudies.length > 0 && (
+    <section class="bg-paper py-16 md:py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10 flex items-end justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-2" style="letter-spacing: 0.15em;">REAL TRIPS</p>
+            <h2 class="font-display text-2xl md:text-3xl">TRIPS TO {city.toUpperCase()}</h2>
+          </div>
+          <a href="/case-studies" class="text-ink-tertiary hover:text-ink text-sm uppercase tracking-wider transition-colors">
+            View all →
+          </a>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8">
           {relatedCaseStudies.slice(0, 2).map((cs) => (
-            <a href={`/case-studies/${cs.slug}`} class="block group bg-paper-secondary rounded-xl p-5 hover:bg-paper-tertiary transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-accent text-sm font-medium">{cs.type}</span>
-                <span class="text-sm text-ink-tertiary">{cs.time}</span>
+            <a href={`/case-studies/${cs.slug}`} class="magazine-card group">
+              <div class="relative mb-4">
+                <img src={cs.image} alt={cs.title} class="magazine-card-image" loading="lazy" />
               </div>
-              <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{cs.title}</h3>
-              <p class="text-ink-secondary text-sm italic mt-1">"{cs.quote}"</p>
+              <div class="space-y-2">
+                <CategoryPill category={cs.type} variant="dark" />
+                <h3 class="font-display text-xl leading-tight text-ink">{cs.title}</h3>
+                <p class="text-sm text-ink-tertiary italic">"{cs.quote}"</p>
+              </div>
             </a>
           ))}
         </div>
-      </section>
-    )}
+      </div>
+    </section>
+  )}
 
-    <!-- Related Blog Posts -->
-    {relatedPosts.length > 0 && (
-      <section class="my-12 pt-8 border-t border-paper-tertiary">
-        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">READ MORE ABOUT {city.toUpperCase()}</h2>
-        <div class="grid gap-4">
+  <!-- Related Blog Posts (if any) -->
+  {relatedPosts.length > 0 && (
+    <section class="section-dark py-16 md:py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10">
+          <p class="text-xs uppercase tracking-widest text-paper/50 mb-2" style="letter-spacing: 0.15em;">READ MORE</p>
+          <h2 class="font-display text-2xl md:text-3xl text-paper">ABOUT {city.toUpperCase()}</h2>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8">
           {relatedPosts.slice(0, 2).map((post) => (
-            <a href={`/blog/${post.slug}`} class="block group bg-paper-secondary rounded-xl p-5 hover:bg-paper-tertiary transition-colors">
-              <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{post.title}</h3>
-              <p class="text-ink-secondary text-sm mt-1">{post.description}</p>
+            <a href={`/blog/${post.slug}`} class="magazine-card group">
+              {post.image && (
+                <div class="relative mb-4">
+                  <img src={post.image} alt={post.title} class="magazine-card-image" loading="lazy" />
+                </div>
+              )}
+              <div class="space-y-2">
+                <h3 class="font-display text-xl leading-tight text-paper">{post.title}</h3>
+                <p class="text-sm text-paper/70">{post.description}</p>
+              </div>
             </a>
           ))}
         </div>
-      </section>
-    )}
+      </div>
+    </section>
+  )}
 
-    <!-- CTA -->
-    <section class="my-16 text-center">
-      <h2 class="text-xl font-light tracking-wide mb-4">WANT A PERSONALIZED RECOMMENDATION?</h2>
-      <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-        Text us with "{city.toUpperCase()}" and your dates. We'll curate options based on your preferences.
+  <!-- More Destinations -->
+  {otherDestinations.length > 0 && (
+    <section class="bg-paper py-16 md:py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10 flex items-end justify-between">
+          <h2 class="font-display text-2xl md:text-3xl">MORE DESTINATIONS</h2>
+          <a href="/destinations" class="text-ink-tertiary hover:text-ink text-sm uppercase tracking-wider transition-colors">
+            View all →
+          </a>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {otherDestinations.map((dest) => (
+            <a href={`/destinations/${dest.slug}`} class="magazine-card group">
+              <div class="relative mb-4">
+                <img src={dest.image} alt={dest.city} class="magazine-card-image" loading="lazy" />
+              </div>
+              <div class="space-y-2">
+                <CategoryPill category={dest.country} variant="dark" />
+                <h3 class="font-display text-xl leading-tight text-ink">{dest.city}</h3>
+                <p class="text-sm text-ink-secondary">{dest.tagline}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="section-dark py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-paper/50 mb-4" style="letter-spacing: 0.15em;">READY?</p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-paper mb-6">
+        WANT A PERSONALIZED PICK?
+      </h2>
+      <p class="text-paper/70 text-lg mb-10 max-w-md mx-auto">
+        Text us "{city.toUpperCase()}" and your dates. We'll curate options based on your preferences.
       </p>
-      <a href="sms:+13239224067" class="btn-primary inline-block">
+      <a href="sms:+13239224067" class="btn-pill btn-pill-light inline-block">
         TEXT US YOUR DATES
       </a>
-    </section>
+    </div>
+  </section>
 
-    <!-- Last Updated -->
-    <p class="text-xs uppercase tracking-widest text-ink-tertiary mt-12 text-center">
-      Last updated: {lastUpdated} · Prices are approximate
-    </p>
-  </article>
+  <!-- Last Updated -->
+  <section class="bg-paper py-8">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary">
+        Last updated: {lastUpdated} · Prices are approximate
+      </p>
+    </div>
+  </section>
 </BaseLayout>

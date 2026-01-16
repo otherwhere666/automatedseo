@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogArticleCard from '../../../components/BlogArticleCard.astro';
+import CategoryPill from '../../../components/CategoryPill.astro';
 import { getAllTags, getPostsByTag, getCurrentYear } from '../../../utils/content';
 
 export async function getStaticPaths() {
@@ -33,89 +35,59 @@ const schemas = [
   description={`Articles about ${tagDisplay.toLowerCase()}. Travel tips, guides, and insights from Otherwhere.`}
   schema={schemas}
 >
-  <article class="py-12">
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-12">
-        <a href="/blog" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
-          ← ALL ARTICLES
-        </a>
-        <div class="inline-block bg-accent/10 text-accent px-4 py-2 rounded-full text-sm mb-4">
-          {tagDisplay}
-        </div>
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">
-          {tagDisplay.toUpperCase()} ARTICLES
+  <!-- Hero Section (Cream) -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <a href="/blog" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
+        ← ALL ARTICLES
+      </a>
+      <header class="mb-10">
+        <CategoryPill category={tagDisplay} variant="dark" class="mb-4" />
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+          {tagDisplay.toUpperCase()}
         </h1>
-        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+        <p class="text-ink-secondary mt-4 text-lg">
           {posts.length} article{posts.length !== 1 ? 's' : ''} tagged with "{tagDisplay.toLowerCase()}"
         </p>
       </header>
+    </div>
+  </section>
 
-      <!-- Posts -->
+  <!-- Articles Grid (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
       {posts.length > 0 ? (
-        <div class="space-y-8">
-          {posts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="block group">
-              <article class="border-b border-paper-tertiary pb-8">
-                {post.image && (
-                  <img
-                    src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=300')}
-                    alt={post.title}
-                    class="w-full h-48 object-cover rounded-xl mb-4"
-                    loading="lazy"
-                  />
-                )}
-                <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
-                  <time datetime={post.publishDate}>
-                    {new Date(post.publishDate).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                  {post.pillar && (
-                    <>
-                      <span>·</span>
-                      <span class="capitalize">{post.pillar.replace(/-/g, ' ')}</span>
-                    </>
-                  )}
-                </div>
-                <h2 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">
-                  {post.title}
-                </h2>
-                <p class="text-ink-secondary">{post.description}</p>
-                {post.keywords && post.keywords.length > 0 && (
-                  <div class="flex flex-wrap gap-2 mt-4">
-                    {post.keywords.slice(0, 4).map((keyword) => (
-                      <span class="text-xs bg-paper-secondary px-2 py-1 rounded">
-                        {keyword}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </article>
-            </a>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          {posts.map((post, index) => (
+            <BlogArticleCard post={post} variant="dark" index={index} />
           ))}
         </div>
       ) : (
-        <div class="text-center py-16 bg-paper-secondary rounded-xl">
-          <p class="text-ink-secondary text-lg mb-4">No articles with this tag yet.</p>
-          <a href="/blog" class="text-accent hover:underline">Browse all articles →</a>
+        <div class="text-center py-16">
+          <p class="text-paper/70 text-lg mb-4">No articles with this tag yet.</p>
+          <a href="/blog" class="btn-pill btn-pill-light inline-block">
+            Browse all articles
+          </a>
         </div>
       )}
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">HAVE A QUESTION ABOUT {tagDisplay.toUpperCase()}?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us your travel question. We're happy to help, even if you're not ready to book.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US A QUESTION
-        </a>
-      </section>
     </div>
-  </article>
+  </section>
+
+  <!-- CTA (Cream) -->
+  <section class="bg-paper py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">
+        QUESTIONS?
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+        HAVE A QUESTION ABOUT {tagDisplay.toUpperCase()}?
+      </h2>
+      <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+        Text us your travel question. We're happy to help, even if you're not ready to book.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+        TEXT US A QUESTION
+      </a>
+    </div>
+  </section>
 </BaseLayout>

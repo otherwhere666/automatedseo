@@ -1,15 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
 import { getAllPillars, getPostsByPillar, getAllPosts } from '../../utils/content';
 
 const pillars = getAllPillars();
 const allPosts = getAllPosts();
-
-// Get post counts for each pillar
-const pillarCounts = pillars.map(p => ({
-  ...p,
-  count: getPostsByPillar(p.id).length
-}));
 
 const schemas = [
   {
@@ -26,56 +21,73 @@ const schemas = [
   description="Browse travel articles by topic. AI travel, trip planning, destination guides, and more."
   schema={schemas}
 >
-  <article class="py-12">
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-12">
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">TOPICS</h1>
-        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+  <!-- Hero Section (Cream) -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-10">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide">TOPICS</h1>
+        <p class="text-ink-secondary mt-4 text-lg max-w-2xl">
           Browse our content by theme. Each topic represents a different angle on travel booking and planning.
         </p>
       </header>
 
-      <!-- Pillar Grid -->
-      <div class="grid md:grid-cols-2 gap-6">
+      <!-- Stats -->
+      <div class="flex gap-12">
+        <div>
+          <p class="font-display text-4xl">{allPosts.length}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Total articles</p>
+        </div>
+        <div>
+          <p class="font-display text-4xl">{pillars.length}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Topics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topics Grid (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
         {pillars.map((pillar) => {
           const posts = getPostsByPillar(pillar.id);
           return (
-            <a href={`/topics/${pillar.id}`} class="block group">
-              <article class="bg-paper-secondary rounded-xl p-6 hover:bg-paper-tertiary transition-colors h-full">
-                <div class="flex items-center justify-between mb-3">
-                  <span class={`text-xs uppercase tracking-widest ${pillar.priority === 'high' ? 'text-accent' : 'text-ink-tertiary'}`}>
-                    {pillar.priority === 'high' ? 'FEATURED' : 'TOPIC'}
-                  </span>
-                  <span class="text-sm text-ink-tertiary">{posts.length} articles</span>
+            <a href={`/topics/${pillar.id}`} class="magazine-card group">
+              <div class="bg-paper/10 rounded-card p-8 h-full flex flex-col hover:bg-paper/20 transition-colors">
+                <div class="flex items-center justify-between mb-4">
+                  <CategoryPill
+                    category={pillar.priority === 'high' ? 'Featured' : 'Topic'}
+                    variant="light"
+                  />
+                  <span class="text-paper/50 text-sm">{posts.length} articles</span>
                 </div>
-                <h2 class="font-serif text-xl mb-3 group-hover:text-accent transition-colors">{pillar.name}</h2>
-                <p class="text-ink-secondary text-sm leading-relaxed">{pillar.angle}</p>
-              </article>
+                <h2 class="font-display text-2xl md:text-3xl leading-tight text-paper mb-4">
+                  {pillar.name.toUpperCase()}
+                </h2>
+                <p class="text-paper/70 text-sm leading-relaxed flex-grow">{pillar.angle}</p>
+              </div>
             </a>
           );
         })}
       </div>
-
-      <!-- All Posts Stats -->
-      <div class="mt-12 pt-8 border-t border-paper-tertiary text-center">
-        <p class="text-ink-tertiary">
-          {allPosts.length} total articles across {pillars.length} topics
-        </p>
-      </div>
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">CAN'T FIND WHAT YOU'RE LOOKING FOR?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us your travel question. We're happy to help, even if you're not ready to book.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US A QUESTION
-        </a>
-      </section>
     </div>
-  </article>
+  </section>
+
+  <!-- CTA (Cream) -->
+  <section class="bg-paper py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">
+        QUESTIONS?
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+        CAN'T FIND WHAT YOU'RE LOOKING FOR?
+      </h2>
+      <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+        Text us your travel question. We're happy to help, even if you're not ready to book.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+        TEXT US A QUESTION
+      </a>
+    </div>
+  </section>
 </BaseLayout>

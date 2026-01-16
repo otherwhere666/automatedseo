@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import TrustSignals from '../../components/TrustSignals.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
 import { getCaseStudySummaries } from '../../utils/content';
 
 const caseStudies = getCaseStudySummaries();
@@ -13,17 +13,6 @@ const schemas = [
     "description": "Real examples of trips planned through Otherwhere. See how personal travel booking works with anonymized case studies."
   }
 ];
-
-const trustStats = [
-  { value: "9", label: "Case studies" },
-  { value: "~5 min", label: "Avg. to booked" },
-  { value: "100%", label: "Booked" }
-];
-
-const testimonial = {
-  quote: "I told them where I wanted to go and five minutes later I had options. Ten minutes after that, I was booked.",
-  author: "Otherwhere customer"
-};
 ---
 
 <BaseLayout
@@ -31,59 +20,80 @@ const testimonial = {
   description="Real examples of trips planned through Otherwhere. See how personal travel booking works with anonymized case studies."
   schema={schemas}
 >
-  <article class="py-12">
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">TRIPS WE PLANNED</h1>
-        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+  <!-- Hero Section (Cream) -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-10">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide">TRIPS WE PLANNED</h1>
+        <p class="text-ink-secondary mt-4 text-lg max-w-2xl">
           Real examples, anonymized. These case studies show how Otherwhere works across different trip types, budgets, and timelines.
         </p>
       </header>
 
-      <!-- Trust Signals -->
-      <TrustSignals stats={trustStats} testimonial={testimonial} />
-
-      <hr class="section-divider" />
-
-      <!-- Case Study Grid -->
-      <section>
-        <div class="grid md:grid-cols-2 gap-6">
-          {caseStudies.map((study) => (
-            <a href={`/case-studies/${study.slug}`} class="block group">
-              <article class="bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
-                <img
-                  src={study.image}
-                  alt={study.destination}
-                  class="w-full h-40 object-cover"
-                />
-                <div class="p-5">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-accent text-sm font-medium">{study.type}</span>
-                    <span class="text-sm text-ink-tertiary">{study.time}</span>
-                  </div>
-                  <h2 class="font-serif text-lg mb-2 group-hover:text-accent transition-colors">{study.title}</h2>
-                  <p class="text-ink-secondary text-sm italic mb-3">"{study.quote}"</p>
-                  <p class="font-serif text-sm text-ink-tertiary">{study.destination}</p>
-                </div>
-              </article>
-            </a>
-          ))}
+      <!-- Stats -->
+      <div class="flex gap-12 mb-8">
+        <div>
+          <p class="font-display text-4xl">{caseStudies.length}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Case studies</p>
         </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">WANT THIS FOR YOUR TRIP?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us where you want to go. We'll send options. You pick. We book.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US TO START
-        </a>
-      </section>
+        <div>
+          <p class="font-display text-4xl">~5</p>
+          <p class="text-sm text-ink-tertiary mt-1">Minutes to booked</p>
+        </div>
+        <div>
+          <p class="font-display text-4xl">100%</p>
+          <p class="text-sm text-ink-tertiary mt-1">Booked</p>
+        </div>
+      </div>
     </div>
-  </article>
+  </section>
+
+  <!-- Case Studies Grid (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {caseStudies.map((study) => (
+          <a href={`/case-studies/${study.slug}`} class="magazine-card group">
+            <div class="relative mb-4">
+              <img
+                src={study.image}
+                alt={study.destination}
+                class="magazine-card-image"
+                loading="lazy"
+              />
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <CategoryPill category={study.type} variant="light" />
+                <span class="text-paper/50 text-sm">{study.time}</span>
+              </div>
+              <h2 class="font-display text-xl md:text-2xl leading-tight text-paper">
+                {study.title}
+              </h2>
+              <p class="text-paper/70 text-sm italic line-clamp-2">"{study.quote}"</p>
+              <p class="text-paper/50 text-sm">{study.destination}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA (Cream) -->
+  <section class="bg-paper py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">
+        YOUR TURN
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+        WANT THIS FOR YOUR TRIP?
+      </h2>
+      <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+        Text us where you want to go. We'll send options. You pick. We book.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+        TEXT US TO START
+      </a>
+    </div>
+  </section>
 </BaseLayout>

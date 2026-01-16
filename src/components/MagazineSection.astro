@@ -1,0 +1,69 @@
+---
+/**
+ * Magazine-style section with consistent styling
+ * Used throughout the site for content grids
+ */
+
+interface Props {
+  variant?: 'light' | 'dark';
+  title?: string;
+  subtitle?: string;
+  viewAllLink?: string;
+  viewAllText?: string;
+  columns?: 2 | 3 | 4;
+  id?: string;
+}
+
+const {
+  variant = 'light',
+  title,
+  subtitle,
+  viewAllLink,
+  viewAllText = 'View all →',
+  columns = 3,
+  id
+} = Astro.props;
+
+const sectionClasses = variant === 'dark' ? 'section-dark' : 'bg-paper';
+const titleClasses = variant === 'dark' ? 'text-paper' : 'text-ink';
+const subtitleClasses = variant === 'dark' ? 'text-paper/50' : 'text-ink-tertiary';
+const linkClasses = variant === 'dark'
+  ? 'text-paper/70 hover:text-paper'
+  : 'text-ink-tertiary hover:text-ink';
+
+const gridCols = {
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-2 lg:grid-cols-3',
+  4: 'md:grid-cols-2 lg:grid-cols-4'
+};
+---
+
+<section class={`${sectionClasses} py-16 md:py-20`} id={id}>
+  <div class="max-w-wide mx-auto px-6">
+    {(title || viewAllLink) && (
+      <header class="section-header mb-10">
+        <div>
+          {subtitle && (
+            <p class={`section-subtitle ${subtitleClasses}`}>
+              {subtitle}
+            </p>
+          )}
+          {title && (
+            <h2 class={`font-display text-3xl md:text-4xl ${titleClasses}`}>
+              {title}
+            </h2>
+          )}
+        </div>
+        {viewAllLink && (
+          <a href={viewAllLink} class={`section-view-all ${linkClasses}`}>
+            {viewAllText}
+          </a>
+        )}
+      </header>
+    )}
+
+    <div class={`grid grid-cols-1 ${gridCols[columns]} gap-8 lg:gap-10`}>
+      <slot />
+    </div>
+  </div>
+</section>

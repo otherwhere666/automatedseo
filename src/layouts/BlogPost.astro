@@ -1,10 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import CTABanner from '../components/CTABanner.astro';
-import TableOfContents from '../components/TableOfContents.astro';
-import RelatedPosts from '../components/RelatedPosts.astro';
-import AuthorBio from '../components/AuthorBio.astro';
-import CalloutBox from '../components/CalloutBox.astro';
+import CategoryPill from '../components/CategoryPill.astro';
+import { getAllPosts } from '../utils/content';
+import { getAuthorFromSlug, formatDate, getCategoryFromPost, AUTHORS } from '../utils/authors';
 
 interface FAQ {
   question: string;
@@ -26,6 +24,7 @@ interface Props {
     noindex?: boolean;
     showToc?: boolean;
     faqs?: FAQ[];
+    author?: string;
   };
   headings?: { depth: number; slug: string; text: string }[];
 }
@@ -41,210 +40,212 @@ const {
   imageAlt,
   pillar,
   keywords = [],
-  cta = 'try-otherwhere',
   readingTime,
   noindex = false,
-  showToc = true,
   faqs = [],
+  author: explicitAuthor,
 } = frontmatter;
+
+// Get current slug for related posts
+const currentSlug = Astro.url.pathname;
+const slugForAuthor = currentSlug.split('/').pop() || '';
+
+const author = explicitAuthor || getAuthorFromSlug(slugForAuthor);
+const category = getCategoryFromPost({ keywords, pillar });
 
 // Format pillar name for display
 const pillarDisplay = pillar ? pillar.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : '';
 
-// Enhanced SEO title with pillar
+// SEO
 const seoTitle = pillar
   ? `${title} | ${pillarDisplay} | Otherwhere`
   : `${title} | Otherwhere Blog`;
 
-// Calculate approximate word count for schema
 const canonicalUrl = `https://blog.otherwhere.world${Astro.url.pathname}`;
 
-// Enhanced Article schema with additional fields
+// Schemas
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": title,
   "description": description,
   "image": image,
-  "author": {
-    "@type": "Organization",
-    "name": "Otherwhere",
-    "url": "https://otherwhere.world"
-  },
+  "author": { "@type": "Organization", "name": "Otherwhere", "url": "https://otherwhere.world" },
   "publisher": {
     "@type": "Organization",
     "name": "Otherwhere",
     "url": "https://otherwhere.world",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://images.squarespace-cdn.com/content/v1/690665841a49334c4700cbbe/80c79faa-2735-4b95-bf5b-dfb9af632b69/otherwhere.png"
-    }
+    "logo": { "@type": "ImageObject", "url": "https://images.squarespace-cdn.com/content/v1/690665841a49334c4700cbbe/80c79faa-2735-4b95-bf5b-dfb9af632b69/otherwhere.png" }
   },
   "datePublished": publishDate,
   "dateModified": updateDate || publishDate,
   "keywords": keywords.join(', '),
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": canonicalUrl
-  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
   "articleSection": pillarDisplay || "Travel",
   "inLanguage": "en-US"
 };
 
-// Enhanced Breadcrumb schema with Blog intermediate
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://blog.otherwhere.world"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Blog",
-      "item": "https://blog.otherwhere.world/blog"
-    },
-    ...(pillar ? [{
-      "@type": "ListItem",
-      "position": 3,
-      "name": pillarDisplay,
-      "item": `https://blog.otherwhere.world/topics/${pillar}`
-    }] : []),
-    {
-      "@type": "ListItem",
-      "position": pillar ? 4 : 3,
-      "name": title
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://blog.otherwhere.world" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://blog.otherwhere.world/blog" },
+    ...(pillar ? [{ "@type": "ListItem", "position": 3, "name": pillarDisplay, "item": `https://blog.otherwhere.world/topics/${pillar}` }] : []),
+    { "@type": "ListItem", "position": pillar ? 4 : 3, "name": title }
   ]
 };
 
-// FAQ schema if post has FAQs
 const faqSchema = faqs.length > 0 ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": faqs.map(faq => ({
     "@type": "Question",
     "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer
-    }
+    "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
   }))
 } : null;
 
 const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+
+const formattedDate = formatDate(publishDate);
+
+// Get other posts for "More Articles" section
+const allPosts = getAllPosts();
+const otherPosts = allPosts.filter(p => !currentSlug.includes(p.slug)).slice(0, 3);
 ---
 
-<BaseLayout
-  title={seoTitle}
-  description={description}
-  image={image}
-  noindex={noindex}
-  schema={schemas}
->
-  <!-- Reading Progress Bar -->
-  <div id="reading-progress" class="reading-progress w-0"></div>
+<BaseLayout title={seoTitle} description={description} image={image} noindex={noindex} schema={schemas}>
+  <!-- Hero Section -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <a href="/" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
+        ← HOME
+      </a>
 
-  <article class="py-12">
-    <!-- Hero Image - Full width -->
-    {image && (
-      <div class="max-w-5xl mx-auto px-4 mb-8">
-        <img
-          src={image}
-          alt={imageAlt || title}
-          class="w-full h-72 md:h-[28rem] object-cover rounded-xl"
-          loading="eager"
-        />
-      </div>
-    )}
-
-    <!-- Content - Constrained width for readability -->
-    <div class="blog-content">
-      <!-- Article Header -->
-      <header class="mb-8">
-        <div class="flex items-center gap-4 text-xs uppercase tracking-widest text-ink-tertiary mb-6">
-          <time datetime={publishDate}>
-            {new Date(publishDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </time>
-          {readingTime && (
-            <>
-              <span>·</span>
-              <span>{readingTime}</span>
-            </>
-          )}
-          {pillar && (
-            <>
-              <span>·</span>
-              <span>{pillar.replace(/-/g, ' ')}</span>
-            </>
-          )}
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <CategoryPill category={category} variant="dark" class="mb-4" />
+          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl tracking-wide mb-6 leading-tight">{title.toUpperCase()}</h1>
+          <p class="text-lg text-ink-secondary leading-relaxed mb-6">{description}</p>
+          <div class="text-sm text-ink-tertiary">
+            <span>By {author}</span>
+            <span class="mx-2">·</span>
+            <time datetime={publishDate}>{formattedDate}</time>
+            {readingTime && (
+              <>
+                <span class="mx-2">·</span>
+                <span>{readingTime}</span>
+              </>
+            )}
+          </div>
         </div>
-        <h1 class="text-3xl md:text-4xl font-light tracking-wide mb-6 leading-tight">{title}</h1>
-        <p class="text-lg text-ink-secondary leading-relaxed">
-          {description}
-        </p>
-      </header>
 
-      <!-- Table of Contents -->
-      {showToc && headings.length > 2 && (
-        <TableOfContents headings={headings} />
-      )}
+        {image && (
+          <div class="relative">
+            <img
+              src={image}
+              alt={imageAlt || title}
+              class="w-full aspect-[4/3] object-cover rounded-card"
+              loading="eager"
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
 
-      <hr class="section-divider" />
-
-      <!-- Article Content -->
-      <div class="blog-article-content">
+  <!-- Article Content (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="prose-dark">
         <slot />
       </div>
-
-      <hr class="section-divider" />
-
-      <!-- CTA Section -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">READY TO BOOK YOUR TRIP?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us where you want to go. We'll send options. You pick. We book.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US TO START
-        </a>
-      </section>
-
-      <!-- Author Bio -->
-      <AuthorBio />
-
-      <!-- Related Posts -->
-      <RelatedPosts pillar={pillar} keywords={keywords} currentSlug={Astro.url.pathname} currentType="post" />
     </div>
-  </article>
+  </section>
+
+  <!-- Author Section (Cream) -->
+  <section class="bg-paper py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="flex gap-6 items-start">
+        <div class="w-16 h-16 rounded-full bg-ink flex items-center justify-center flex-shrink-0">
+          <span class="text-paper font-display text-2xl">O</span>
+        </div>
+        <div>
+          <h3 class="font-display text-lg mb-2">ABOUT OTHERWHERE</h3>
+          <p class="text-ink-secondary leading-relaxed mb-4">
+            Otherwhere is an AI travel concierge that books flights and hotels via text message.
+            We serve busy professionals who want curated travel options without hours of research.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/what-is-otherwhere" class="text-sm text-ink-tertiary hover:text-ink transition-colors underline underline-offset-4">
+              How it works
+            </a>
+            <a href="/case-studies" class="text-sm text-ink-tertiary hover:text-ink transition-colors underline underline-offset-4">
+              Real bookings
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Articles (Dark) -->
+  {otherPosts.length > 0 && (
+    <section class="section-dark py-16 md:py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10 flex items-end justify-between">
+          <h2 class="font-display text-2xl md:text-3xl text-paper">MORE ARTICLES</h2>
+          <a href="/" class="text-paper/70 hover:text-paper text-sm uppercase tracking-wider transition-colors">
+            View all →
+          </a>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {otherPosts.map((post) => {
+            const postAuthor = post.author || getAuthorFromSlug(post.slug);
+            const postCategory = getCategoryFromPost(post);
+            const postDate = formatDate(post.publishDate);
+
+            return (
+              <a href={`/blog/${post.slug}`} class="magazine-card group">
+                {post.image && (
+                  <div class="relative mb-4">
+                    <img src={post.image} alt={post.title} class="magazine-card-image" loading="lazy" />
+                  </div>
+                )}
+                <div class="space-y-3">
+                  <CategoryPill category={postCategory} variant="light" />
+                  <h3 class="font-display text-xl leading-tight text-paper">{post.title}</h3>
+                  <div class="text-sm text-paper/70">
+                    <span>By {postAuthor}</span>
+                    <span class="mx-2">·</span>
+                    <time datetime={post.publishDate}>{postDate}</time>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA (Cream) -->
+  <section class="bg-paper py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">
+        READY?
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+        BOOK YOUR TRIP
+      </h2>
+      <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+        Text us where you want to go. We'll send options. You pick. We book.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+        TEXT US TO START
+      </a>
+    </div>
+  </section>
 </BaseLayout>
-
-<script>
-  // Reading progress indicator
-  const progressBar = document.getElementById('reading-progress');
-  if (progressBar) {
-    window.addEventListener('scroll', () => {
-      const article = document.querySelector('article');
-      if (article) {
-        const articleTop = article.offsetTop;
-        const articleHeight = article.offsetHeight;
-        const windowHeight = window.innerHeight;
-        const scrollTop = window.scrollY;
-
-        const progress = Math.min(
-          100,
-          Math.max(0, ((scrollTop - articleTop + windowHeight) / articleHeight) * 100)
-        );
-        progressBar.style.width = `${progress}%`;
-      }
-    });
-  }
-</script>

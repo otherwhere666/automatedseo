@@ -1,245 +1,155 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import fs from 'node:fs';
-import path from 'node:path';
+import CategoryPill from '../components/CategoryPill.astro';
+import BlogArticleCard from '../components/BlogArticleCard.astro';
+import MagazineSection from '../components/MagazineSection.astro';
+import { getAllPosts, getAllCaseStudies, getAllDestinations } from '../utils/content';
+import { getAuthorFromSlug, formatDate, getCategoryFromPost } from '../utils/authors';
 
-// Read blog posts from content/posts
-const postsDir = path.join(process.cwd(), 'content', 'posts');
-let blogPosts: any[] = [];
+const posts = getAllPosts();
+const caseStudies = getAllCaseStudies().slice(0, 4);
+const destinations = getAllDestinations().slice(0, 3);
 
-try {
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx'));
-  for (const file of files) {
-    const content = fs.readFileSync(path.join(postsDir, file), 'utf-8');
-    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    if (frontmatterMatch) {
-      const frontmatter = frontmatterMatch[1];
-      const title = frontmatter.match(/title:\s*"([^"]+)"/)?.[1] || 'Untitled';
-      const description = frontmatter.match(/description:\s*"([^"]+)"/)?.[1] || '';
-      const publishDate = frontmatter.match(/publishDate:\s*"([^"]+)"/)?.[1] || '';
-      const image = frontmatter.match(/image:\s*"([^"]+)"/)?.[1] || '';
-      const slug = file.replace('.mdx', '');
-      blogPosts.push({ title, description, publishDate, image, slug });
-    }
-  }
-  blogPosts.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-  blogPosts = blogPosts.slice(0, 4); // Show max 4 on homepage
-} catch (e) {
-  // No posts yet
-}
+// Featured post for hero
+const featuredPost = posts[0];
+const gridPosts = posts.slice(1, 7);
 
-// Featured articles with Unsplash images
-const heroArticle = {
+// Hero content
+const heroData = featuredPost ? {
+  title: featuredPost.title,
+  description: featuredPost.description,
+  slug: `/blog/${featuredPost.slug}`,
+  image: featuredPost.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&h=900&fit=crop',
+  category: getCategoryFromPost(featuredPost),
+  author: getAuthorFromSlug(featuredPost.slug),
+  date: featuredPost.publishDate
+} : {
   title: "What is Otherwhere?",
-  dek: "AI travel concierge: text or call to get curated trip options and booking help",
+  description: "AI travel concierge: text or call to get curated trip options and booking help",
   slug: "/what-is-otherwhere",
   image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&h=900&fit=crop",
-  author: "Otherwhere"
+  category: "About",
+  author: "Maddy S.",
+  date: new Date().toISOString()
 };
 
-const featuredArticles = [
-  {
-    title: "Otherwhere vs ChatGPT for travel",
-    dek: "ChatGPT is great for brainstorming, but it can't book. Here's what actually works.",
-    slug: "/otherwhere-vs-chatgpt",
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  },
-  {
-    title: "What is an AI travel concierge?",
-    dek: "The category explained: what it is, how it works, and who it's for.",
-    slug: "/what-is-ai-travel-concierge",
-    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  }
-];
-
-const caseStudies = [
-  {
-    title: "The honeymoon couple: Puglia, Italy",
-    dek: "How we found the perfect romantic escape for foodies who wanted somewhere not basic.",
-    slug: "/case-studies/honeymoon-puglia",
-    image: "https://images.unsplash.com/photo-1534008897995-27a23e859048?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  },
-  {
-    title: "The burned-out founder: Iceland",
-    dek: "A remote luxury lodge for someone who needed to disappear.",
-    slug: "/case-studies/burnout-escape-iceland",
-    image: "https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  },
-  {
-    title: "The surprise anniversary: Burgundy",
-    dek: "Planning a 20th anniversary trip without her knowing.",
-    slug: "/case-studies/surprise-anniversary-burgundy",
-    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  },
-  {
-    title: "The returning customer: Lisbon",
-    dek: "When we already know what you like.",
-    slug: "/case-studies/returning-customer-lisbon",
-    image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  }
-];
-
-const destinations = [
-  {
-    title: "Where to stay in Lisbon",
-    dek: "A curated guide for different types of travelers",
-    slug: "/destinations/lisbon",
-    image: "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=800&h=600&fit=crop",
-    author: "Otherwhere"
-  }
-];
+const formattedHeroDate = formatDate(heroData.date);
 ---
 
 <BaseLayout
   title="Otherwhere | AI Travel Concierge Insights"
   description="Travel planning insights from Otherwhere, the AI travel concierge. Curated guides, destination tips, and why the future of booking is curation, not search."
 >
-  <div class="max-w-wide mx-auto px-6 py-12">
+  <!-- Hero Section -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-10">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide">OTHERWHERE</h1>
+        <p class="text-ink-secondary mt-2 text-lg">Travel insights & booking guides</p>
+      </header>
 
-    <!-- Section: Inspiration -->
-    <section class="mb-20">
-      <h1 class="section-label text-center">Inspiration</h1>
+      <div class="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-8">
+        <a href={heroData.slug} class="blog-hero-featured group block aspect-[16/10] lg:aspect-[16/9]">
+          <img
+            src={heroData.image}
+            alt={heroData.title}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div class="blog-hero-featured-overlay"></div>
 
-      <!-- Hero Article -->
-      <a href={heroArticle.slug} class="article-hero block mb-16">
-        <img
-          src={heroArticle.image}
-          alt={heroArticle.title}
-          class="article-hero-image"
-          loading="eager"
-        />
-        <div class="max-w-article mx-auto text-center">
-          <h2 class="article-hero-title">{heroArticle.title}</h2>
-          <p class="article-hero-dek">{heroArticle.dek}</p>
-          <span class="article-hero-byline">By {heroArticle.author}</span>
-        </div>
-      </a>
+          <div class="absolute inset-0 p-6 md:p-10 flex flex-col justify-end">
+            <CategoryPill category={heroData.category} variant="light" class="mb-4 w-fit" />
 
-      <!-- Two-column featured -->
-      <div class="grid md:grid-cols-2 gap-8 max-w-wide mx-auto">
-        {featuredArticles.map((article) => (
-          <a href={article.slug} class="article-card">
-            <img
-              src={article.image}
-              alt={article.title}
-              class="article-card-image"
-              loading="lazy"
-            />
-            <h3 class="article-card-title">{article.title}</h3>
-            <p class="article-card-dek">{article.dek}</p>
-            <span class="article-card-byline">By {article.author}</span>
-          </a>
-        ))}
-      </div>
-    </section>
+            <h2 class="font-display text-2xl md:text-4xl lg:text-5xl text-paper leading-tight mb-4 max-w-2xl">
+              {heroData.title}
+            </h2>
 
-    <div class="divider max-w-article mx-auto"></div>
+            <p class="text-paper/80 text-base md:text-lg mb-4 max-w-xl line-clamp-2 hidden md:block">
+              {heroData.description}
+            </p>
 
-    <!-- Section: Trips We Planned -->
-    <section class="mb-20">
-      <h2 class="section-label text-center">Trips We Planned</h2>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {caseStudies.map((article) => (
-          <a href={article.slug} class="article-card">
-            <img
-              src={article.image}
-              alt={article.title}
-              class="article-card-image"
-              loading="lazy"
-            />
-            <h3 class="article-card-title text-headline-sm">{article.title}</h3>
-            <p class="article-card-dek">{article.dek}</p>
-          </a>
-        ))}
-      </div>
-
-      <div class="text-center mt-10">
-        <a href="/case-studies" class="cta-subtle">View all case studies</a>
-      </div>
-    </section>
-
-    <div class="divider max-w-article mx-auto"></div>
-
-    <!-- Section: Blog -->
-    {blogPosts.length > 0 && (
-      <section class="mb-20">
-        <h2 class="section-label text-center">From the Blog</h2>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {blogPosts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="article-card">
-              {post.image && (
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  class="article-card-image"
-                  loading="lazy"
-                />
-              )}
-              <h3 class="article-card-title text-headline-sm">{post.title}</h3>
-              <p class="article-card-dek">{post.description}</p>
-            </a>
-          ))}
-        </div>
-
-        <div class="text-center mt-10">
-          <a href="/blog" class="cta-subtle">View all blog posts</a>
-        </div>
-      </section>
-    )}
-
-    {blogPosts.length > 0 && <div class="divider max-w-article mx-auto"></div>}
-
-    <!-- Section: Destinations -->
-    <section class="mb-20">
-      <h2 class="section-label text-center">Destinations</h2>
-
-      <div class="max-w-2xl mx-auto">
-        {destinations.map((article) => (
-          <a href={article.slug} class="article-card block">
-            <img
-              src={article.image}
-              alt={article.title}
-              class="article-hero-image"
-              loading="lazy"
-            />
-            <div class="text-center">
-              <h3 class="article-hero-title text-headline">{article.title}</h3>
-              <p class="article-hero-dek">{article.dek}</p>
+            <div class="text-paper/70 text-sm">
+              <span>By {heroData.author}</span>
+              <span class="mx-2">·</span>
+              <time datetime={heroData.date}>{formattedHeroDate}</time>
             </div>
-          </a>
-        ))}
+          </div>
+        </a>
+
+        <div class="blog-hero-sidebar">
+          <div>
+            <p class="section-subtitle text-ink-tertiary">OTHERWHERE PICKS</p>
+            <p class="text-ink-secondary leading-relaxed">
+              Travel insights, booking tips, and destination guides curated by our team.
+            </p>
+          </div>
+
+          <div class="mt-8 lg:mt-0 space-y-3">
+            <a href="/blog" class="btn-pill btn-pill-primary inline-block">ALL ARTICLES</a>
+            <a href="sms:+13239224067" class="btn-pill btn-pill-secondary inline-block ml-2">TEXT US</a>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="text-center mt-10">
-        <a href="/destinations" class="cta-subtle">View all destinations</a>
+  <!-- Latest Articles -->
+  {gridPosts.length > 0 && (
+    <MagazineSection variant="dark" title="LATEST" viewAllLink="/blog">
+      {gridPosts.map((post) => (
+        <BlogArticleCard post={post} variant="dark" />
+      ))}
+    </MagazineSection>
+  )}
+
+  <!-- Trips We Planned -->
+  {caseStudies.length > 0 && (
+    <MagazineSection variant="light" title="TRIPS WE PLANNED" subtitle="REAL TRIPS" viewAllLink="/case-studies" columns={4}>
+      {caseStudies.map((cs) => (
+        <a href={`/case-studies/${cs.slug}`} class="magazine-card group">
+          <div class="relative mb-4">
+            <img src={cs.image} alt={cs.title} class="magazine-card-image" loading="lazy" />
+          </div>
+          <div class="space-y-2">
+            <CategoryPill category={cs.type} variant="dark" />
+            <h3 class="font-display text-lg md:text-xl leading-tight text-ink">{cs.title}</h3>
+            <p class="text-sm text-ink-tertiary line-clamp-2">{cs.quote}</p>
+          </div>
+        </a>
+      ))}
+    </MagazineSection>
+  )}
+
+  <!-- Destinations -->
+  {destinations.length > 0 && (
+    <MagazineSection variant="dark" title="DESTINATIONS" subtitle="WHERE TO STAY" viewAllLink="/destinations">
+      {destinations.map((dest) => (
+        <a href={`/destinations/${dest.slug}`} class="magazine-card group">
+          <div class="relative mb-4">
+            <img src={dest.image} alt={`${dest.city}, ${dest.country}`} class="magazine-card-image" loading="lazy" />
+          </div>
+          <div class="space-y-2">
+            <CategoryPill category={dest.region} variant="light" />
+            <h3 class="font-display text-xl md:text-2xl leading-tight text-paper">{dest.city}</h3>
+            <p class="text-sm text-paper/70">{dest.tagline}</p>
+          </div>
+        </a>
+      ))}
+    </MagazineSection>
+  )}
+
+  <!-- CTA -->
+  <section class="bg-paper cta-section">
+    <div class="cta-section-content">
+      <p class="cta-section-subtitle">READY TO GO?</p>
+      <h2 class="cta-section-title">BOOK YOUR TRIP</h2>
+      <p class="cta-section-description">
+        Text us where you want to go. We'll send options. You pick. We book.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">TEXT (323) 922-4067</a>
+        <a href="/what-is-otherwhere" class="btn-pill btn-pill-secondary inline-block">HOW IT WORKS</a>
       </div>
-    </section>
-
-    <div class="divider max-w-article mx-auto"></div>
-
-    <!-- Minimal CTA -->
-    <section class="max-w-article mx-auto text-center py-16">
-      <p class="font-serif text-headline text-ink-secondary mb-6">
-        Want personalized recommendations?
-      </p>
-      <p class="text-body text-ink-tertiary mb-8">
-        Text us at <strong class="text-ink">(323) 922-4067</strong> and tell us where you want to go.
-      </p>
-      <a
-        href="sms:+13239224067"
-        class="inline-block text-small uppercase tracking-wider border border-ink px-8 py-3 hover:bg-ink hover:text-white transition-all"
-      >
-        Start a conversation
-      </a>
-    </section>
-
-  </div>
+    </div>
+  </section>
 </BaseLayout>

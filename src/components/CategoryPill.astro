@@ -1,0 +1,24 @@
+---
+interface Props {
+  category: string;
+  href?: string;
+  variant?: 'dark' | 'light';
+  class?: string;
+}
+
+const { category, href, variant = 'dark', class: className = '' } = Astro.props;
+
+const baseClasses = 'category-pill';
+const variantClasses = variant === 'light' ? 'category-pill-light' : '';
+const combinedClasses = `${baseClasses} ${variantClasses} ${className}`.trim();
+---
+
+{href ? (
+  <a href={href} class={combinedClasses}>
+    {category}
+  </a>
+) : (
+  <span class={combinedClasses}>
+    {category}
+  </span>
+)}

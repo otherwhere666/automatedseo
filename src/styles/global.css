@@ -26,7 +26,7 @@
 
 @layer base {
   html {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #FFFEF3;
     color: #252525;
     -webkit-font-smoothing: antialiased;
@@ -37,10 +37,18 @@
     @apply text-body;
   }
 
-  /* Editorial headlines */
+  /* Editorial headlines - Anton for display, Georgia for regular */
   h1, h2, h3, h4 {
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     font-weight: 400;
+  }
+
+  /* Anton display headlines */
+  .font-display {
+    font-family: "Anton", Impact, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   /* Focus styles */
@@ -409,6 +417,225 @@
 
   .toc-link {
     @apply text-ink-secondary hover:text-ink hover:underline transition-colors;
+  }
+
+  /* Dark section styles for magazine layout */
+  .section-dark {
+    @apply bg-dark text-paper;
+  }
+
+  .section-dark .category-pill {
+    @apply bg-paper text-ink;
+  }
+
+  .section-dark .article-card-title {
+    @apply text-paper;
+  }
+
+  .section-dark .article-card-meta {
+    @apply text-paper/70;
+  }
+
+  /* Blog hero section */
+  .blog-hero {
+    @apply bg-paper;
+  }
+
+  .blog-hero-featured {
+    @apply relative overflow-hidden rounded-card;
+  }
+
+  .blog-hero-featured-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent;
+  }
+
+  .blog-hero-sidebar {
+    @apply bg-paper-tertiary rounded-card p-8 flex flex-col justify-between h-full;
+  }
+
+  /* Magazine article card */
+  .magazine-card {
+    @apply block transition-transform duration-300;
+  }
+
+  .magazine-card:hover {
+    @apply -translate-y-1;
+  }
+
+  .magazine-card:hover .magazine-card-image {
+    @apply shadow-xl;
+  }
+
+  .magazine-card-image {
+    @apply w-full aspect-[4/3] object-cover rounded-card transition-shadow duration-300;
+  }
+
+  /* Category pill */
+  .category-pill {
+    @apply inline-block text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-ink text-paper;
+    letter-spacing: 0.1em;
+  }
+
+  .category-pill-light {
+    @apply bg-paper text-ink;
+  }
+
+  /* Pill button */
+  .btn-pill {
+    @apply text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-all duration-200;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-pill-primary {
+    @apply bg-ink text-paper hover:bg-ink-secondary;
+  }
+
+  .btn-pill-secondary {
+    @apply border border-ink text-ink hover:bg-ink hover:text-paper;
+  }
+
+  .btn-pill-light {
+    @apply bg-paper text-ink hover:bg-paper-secondary;
+  }
+
+  /* Prose styles for dark sections */
+  .prose-dark {
+    @apply text-paper/90 leading-relaxed;
+  }
+
+  .prose-dark h2 {
+    @apply font-display text-2xl md:text-3xl text-paper mt-12 mb-6;
+  }
+
+  .prose-dark h3 {
+    @apply font-display text-xl md:text-2xl text-paper mt-10 mb-4;
+  }
+
+  .prose-dark p {
+    @apply mb-6 text-paper/85 leading-relaxed text-lg;
+  }
+
+  .prose-dark a {
+    @apply text-paper underline underline-offset-4 hover:text-paper/70 transition-colors;
+  }
+
+  .prose-dark ul, .prose-dark ol {
+    @apply mb-6 space-y-2 pl-6;
+  }
+
+  .prose-dark li {
+    @apply text-paper/85 text-lg;
+  }
+
+  .prose-dark ul li {
+    @apply list-disc;
+  }
+
+  .prose-dark ol li {
+    @apply list-decimal;
+  }
+
+  .prose-dark blockquote {
+    @apply border-l-4 border-paper/30 pl-6 py-2 my-8 italic text-paper/70 text-xl;
+  }
+
+  .prose-dark strong {
+    @apply text-paper font-semibold;
+  }
+
+  .prose-dark hr {
+    @apply border-paper/20 my-12;
+  }
+
+  .prose-dark img {
+    @apply rounded-card my-8;
+  }
+
+  .prose-dark code {
+    @apply bg-paper/10 px-2 py-1 rounded text-sm;
+  }
+
+  .prose-dark pre {
+    @apply bg-paper/10 p-4 rounded-card overflow-x-auto my-6;
+  }
+
+  /* Magazine section header */
+  .section-header {
+    @apply flex items-end justify-between;
+  }
+
+  .section-subtitle {
+    @apply text-xs uppercase tracking-widest mb-2;
+    letter-spacing: 0.15em;
+  }
+
+  .section-view-all {
+    @apply text-sm uppercase tracking-wider transition-colors;
+  }
+
+  /* CTA section */
+  .cta-section {
+    @apply py-20 md:py-24;
+  }
+
+  .cta-section-content {
+    @apply max-w-wide mx-auto px-6 text-center;
+  }
+
+  .cta-section-subtitle {
+    @apply text-xs uppercase tracking-widest text-ink-tertiary mb-4;
+    letter-spacing: 0.15em;
+  }
+
+  .cta-section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl mb-6;
+  }
+
+  .cta-section-description {
+    @apply text-ink-secondary text-lg mb-10 max-w-md mx-auto;
+  }
+
+  /* Dark CTA section variant */
+  .cta-section-dark .cta-section-subtitle {
+    @apply text-paper/50;
+  }
+
+  .cta-section-dark .cta-section-title {
+    @apply text-paper;
+  }
+
+  .cta-section-dark .cta-section-description {
+    @apply text-paper/70;
+  }
+
+  /* Stats display */
+  .stats-row {
+    @apply flex flex-wrap gap-8 md:gap-12;
+  }
+
+  .stat-item {
+    @apply text-center md:text-left;
+  }
+
+  .stat-value {
+    @apply font-display text-3xl md:text-4xl;
+  }
+
+  .stat-label {
+    @apply text-sm text-ink-tertiary mt-1;
+  }
+
+  /* Author byline */
+  .byline {
+    @apply text-sm;
+  }
+
+  .byline-author {
+    @apply font-medium;
+  }
+
+  .byline-separator {
+    @apply mx-2;
   }
 }
 

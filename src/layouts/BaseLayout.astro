@@ -58,6 +58,11 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
     <!-- Preconnect for critical resources -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
+    <!-- Google Fonts: Anton (headlines) + Hanken Grotesk (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
@@ -113,13 +118,12 @@ const allSchemas = [orgSchema, websiteSchema, ...schema];
           />
         </a>
         <div class="flex items-center gap-10">
-          <a href="/blog" class="nav-link-caps hidden sm:block">BLOG</a>
           <a href="/case-studies" class="nav-link-caps hidden sm:block">TRIPS</a>
           <a href="/destinations" class="nav-link-caps hidden sm:block">DESTINATIONS</a>
           <a href="/what-is-otherwhere" class="nav-link-caps hidden sm:block">ABOUT</a>
           <a
             href="sms:+13239224067"
-            class="btn-primary"
+            class="btn-pill btn-pill-primary"
           >
             TEXT US
           </a>

@@ -1,0 +1,48 @@
+---
+import CategoryPill from './CategoryPill.astro';
+import type { BlogPost } from '../types';
+import { getAuthorFromSlug, formatDate, getCategoryFromPost } from '../utils/authors';
+
+interface Props {
+  post: BlogPost;
+  variant?: 'light' | 'dark';
+  showImage?: boolean;
+}
+
+const { post, variant = 'light', showImage = true } = Astro.props;
+
+const author = post.author || getAuthorFromSlug(post.slug);
+const formattedDate = formatDate(post.publishDate);
+const categoryLabel = getCategoryFromPost(post);
+const pillVariant = variant === 'dark' ? 'light' : 'dark';
+---
+
+<a href={`/blog/${post.slug}`} class="magazine-card group">
+  {showImage && post.image && (
+    <div class="relative mb-4">
+      <img
+        src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=500')}
+        alt={post.imageAlt || post.title}
+        class="magazine-card-image"
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <div class="space-y-3">
+    <CategoryPill
+      category={categoryLabel}
+      variant={pillVariant}
+    />
+
+    <h3 class={`font-display text-xl md:text-2xl leading-tight ${variant === 'dark' ? 'text-paper' : 'text-ink'}`}>
+      {post.title}
+    </h3>
+
+    <div class={`text-sm ${variant === 'dark' ? 'text-paper/70' : 'text-ink-tertiary'}`}>
+      <span>By {author}</span>
+      <span class="mx-2">·</span>
+      <time datetime={post.publishDate}>{formattedDate}</time>
+    </div>
+  </div>
+</a>

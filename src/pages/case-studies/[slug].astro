@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CTABanner from '../../components/CTABanner.astro';
-import CaseStudyStats from '../../components/CaseStudyStats.astro';
-import CalloutBox from '../../components/CalloutBox.astro';
-import { getCaseStudyBySlug, getCaseStudySlugs, getDestinationBySlug, getCurrentYear } from '../../utils/content';
+import CategoryPill from '../../components/CategoryPill.astro';
+import { getCaseStudyBySlug, getCaseStudySlugs, getDestinationBySlug, getAllCaseStudies } from '../../utils/content';
 
 export async function getStaticPaths() {
   const slugs = getCaseStudySlugs();
@@ -39,242 +37,267 @@ const {
 // Check if there's a related destination guide
 const destinationSlug = destination.toLowerCase().split(',')[0].replace(/\s+/g, '-');
 const relatedDestination = getDestinationBySlug(destinationSlug);
-const currentYear = getCurrentYear();
 
-// Enhanced SEO title
+// Get other case studies for "More Trips" section
+const allCaseStudies = getAllCaseStudies();
+const otherCaseStudies = allCaseStudies.filter(cs => cs.slug !== slug).slice(0, 3);
+
+// Enhanced SEO
 const seoTitle = `${type} Trip to ${destination}: How We Booked It | Case Study`;
 const seoDescription = `How Otherwhere planned a ${type.toLowerCase()} trip to ${destination}. ${quote}`;
 
-// Article schema
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": `${title}: ${destination} Case Study`,
   "description": seoDescription,
   "image": image,
-  "author": {
-    "@type": "Organization",
-    "name": "Otherwhere"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Otherwhere",
-    "url": "https://otherwhere.world"
-  }
+  "author": { "@type": "Organization", "name": "Otherwhere" },
+  "publisher": { "@type": "Organization", "name": "Otherwhere", "url": "https://otherwhere.world" }
 };
 
-// Breadcrumb schema
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://blog.otherwhere.world"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Case Studies",
-      "item": "https://blog.otherwhere.world/case-studies"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": title
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://blog.otherwhere.world" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://blog.otherwhere.world/case-studies" },
+    { "@type": "ListItem", "position": 3, "name": title }
   ]
 };
 
 const schemas = [articleSchema, breadcrumbSchema];
-
-// Build stats for the stats strip
-const stats = [
-  { value: timeSaved.otherwhere, label: 'Time to book' },
-  { value: timeline, label: 'Planning window' },
-  { value: finalBooking.price, label: 'Final price' },
-  { value: timeSaved.diy, label: 'Time saved' },
-];
 ---
 
-<BaseLayout
-  title={seoTitle}
-  description={seoDescription}
-  image={image}
-  schema={schemas}
->
-  <article class="py-12">
-    <!-- Hero Image - Full width -->
-    {image && (
-      <div class="max-w-5xl mx-auto px-4 mb-8">
-        <img
-          src={image}
-          alt={imageAlt || `${destination} travel destination`}
-          class="w-full h-72 md:h-[28rem] object-cover rounded-xl"
-          loading="eager"
-        />
+<BaseLayout title={seoTitle} description={seoDescription} image={image} schema={schemas}>
+  <!-- Hero Section -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
+        ← ALL CASE STUDIES
+      </a>
+
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <CategoryPill category={type} variant="dark" class="mb-4" />
+          <h1 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide mb-4">{title.toUpperCase()}</h1>
+          <p class="text-xl text-ink-secondary mb-6">{destination}</p>
+          <p class="text-ink-secondary leading-relaxed">
+            {travelerType}. Budget: {budget}. Here's how we turned their vision into a booked trip.
+          </p>
+        </div>
+
+        {image && (
+          <div class="relative">
+            <img
+              src={image}
+              alt={imageAlt || `${destination} travel destination`}
+              class="w-full aspect-[4/3] object-cover rounded-card"
+              loading="eager"
+            />
+          </div>
+        )}
       </div>
-    )}
 
-    <!-- Content - Constrained width -->
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-8">
-        <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
-          ← ALL CASE STUDIES
-        </a>
-        <span class="block text-xs uppercase tracking-widest text-ink-tertiary mb-4">{type}</span>
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-3">{title.toUpperCase()}</h1>
-        <p class="text-xl text-ink-secondary">{destination}</p>
-      </header>
+      <!-- Stats -->
+      <div class="flex flex-wrap gap-8 md:gap-16 mt-12">
+        <div>
+          <p class="font-display text-3xl md:text-4xl">{timeSaved.otherwhere}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Time to book</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl md:text-4xl">{timeline}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Planning window</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl md:text-4xl">{finalBooking.price}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Final price</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl md:text-4xl">{timeSaved.diy}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Time saved vs DIY</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Intro paragraph -->
-      <p class="text-xl text-ink-secondary leading-relaxed mb-8">
-        {travelerType}. Budget: {budget}. Here's how we turned their vision into a booked trip.
-      </p>
+  <!-- The Brief (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl text-paper mb-8">THE BRIEF</h2>
 
-      <!-- Stats Strip -->
-      <CaseStudyStats stats={stats} />
+      <blockquote class="text-2xl md:text-3xl text-paper/90 font-light leading-relaxed mb-10">
+        "{quote}"
+      </blockquote>
 
-      <hr class="section-divider" />
-
-      <!-- What They Asked -->
-      <section>
-        <h2 class="text-xl font-light tracking-wide mb-4" id="the-brief">THE BRIEF</h2>
-        <blockquote class="pull-quote">
-          <p>"{quote}"</p>
-        </blockquote>
-
-        <h3 class="font-medium text-lg mb-3 mt-8">Their requirements:</h3>
-        <ul class="space-y-2 text-ink-secondary">
+      <div>
+        <h3 class="text-xs uppercase tracking-widest text-paper/50 mb-4" style="letter-spacing: 0.15em;">REQUIREMENTS</h3>
+        <ul class="space-y-3">
           {constraints.map((c) => (
-            <li class="flex items-start gap-3">
-              <span class="text-accent mt-1">•</span>
+            <li class="flex items-start gap-3 text-paper/80">
+              <span class="text-paper/50 mt-1">•</span>
               <span>{c}</span>
             </li>
           ))}
         </ul>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <hr class="section-divider" />
+  <!-- Our Process (Cream) -->
+  <section class="bg-paper py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl mb-10">OUR PROCESS</h2>
 
-      <!-- Our Process -->
-      <section>
-        <h2 class="text-xl font-light tracking-wide mb-6" id="our-process">OUR PROCESS</h2>
-
-        <div class="space-y-8">
-          <div>
-            <h3 class="font-medium text-lg mb-3 text-ink-tertiary">What we ruled out:</h3>
-            <ul class="space-y-3">
-              {eliminated.map((e) => (
-                <li class="flex items-start gap-3 text-ink-secondary">
-                  <span class="text-red-400 mt-1">×</span>
-                  <span><strong class="text-ink">{e.name}</strong> — {e.reason}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="font-medium text-lg mb-3">What we considered:</h3>
-            <ul class="space-y-3">
-              {considered.map((c) => (
-                <li class="flex items-start gap-3 text-ink-secondary">
-                  <span class="text-ink-tertiary mt-1">○</span>
-                  <span><strong class="text-ink">{c.name}</strong> — {c.reason}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <CalloutBox title="Our Recommendation" variant="highlight">
-            <p class="text-lg">{recommended}</p>
-          </CalloutBox>
-        </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- The Final Booking -->
-      <section>
-        <h2 class="text-xl font-light tracking-wide mb-6" id="the-booking">THE BOOKING</h2>
-        <div class="bg-accent/10 border-2 border-accent rounded-xl p-6">
-          <h3 class="font-serif text-xl mb-4">{finalBooking.property}</h3>
-          <ul class="space-y-2 text-ink-secondary">
-            <li><strong class="text-ink">Why it won:</strong> {finalBooking.why}</li>
-            <li><strong class="text-ink">Price:</strong> {finalBooking.price}</li>
-            {finalBooking.extras && <li><strong class="text-ink">Extras added:</strong> {finalBooking.extras}</li>}
+      <div class="space-y-12">
+        <div>
+          <h3 class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">RULED OUT</h3>
+          <ul class="space-y-4">
+            {eliminated.map((e) => (
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1 font-bold">×</span>
+                <div>
+                  <strong class="text-ink">{e.name}</strong>
+                  <p class="text-ink-secondary text-sm mt-1">{e.reason}</p>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
-      </section>
 
-      <hr class="section-divider" />
-
-      <!-- Outcome -->
-      <section>
-        <h2 class="text-xl font-light tracking-wide mb-6" id="the-outcome">THE OUTCOME</h2>
-        <CalloutBox title="Result" variant="outcome">
-          <p class="text-lg">{outcome}</p>
-        </CalloutBox>
-
-        <!-- Time comparison -->
-        <div class="grid md:grid-cols-2 gap-4 mt-8">
-          <div class="bg-paper-secondary rounded-xl p-6 text-center">
-            <p class="text-sm text-ink-tertiary mb-2">DIY Research Estimate</p>
-            <p class="font-serif text-3xl">{timeSaved.diy}</p>
-          </div>
-          <div class="bg-accent text-paper rounded-xl p-6 text-center">
-            <p class="text-sm text-paper/70 mb-2">With Otherwhere</p>
-            <p class="font-serif text-3xl">{timeSaved.otherwhere}</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Related Destination Guide -->
-      {relatedDestination && (
-        <>
-          <hr class="section-divider" />
-          <section>
-            <h2 class="text-xl font-light tracking-wide mb-6">DESTINATION GUIDE</h2>
-            <a href={`/destinations/${relatedDestination.slug}`} class="block group bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
-              <div class="md:flex">
-                <img
-                  src={relatedDestination.image.replace('w=1200', 'w=400').replace('h=600', 'h=250')}
-                  alt={relatedDestination.city}
-                  class="w-full md:w-48 h-32 md:h-auto object-cover"
-                  loading="lazy"
-                />
-                <div class="p-5">
-                  <h3 class="font-serif text-lg group-hover:text-accent transition-colors">Where to Stay in {relatedDestination.city}</h3>
-                  <p class="text-ink-secondary text-sm mt-2">{relatedDestination.quickTake.substring(0, 120)}...</p>
+        <div>
+          <h3 class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">CONSIDERED</h3>
+          <ul class="space-y-4">
+            {considered.map((c) => (
+              <li class="flex items-start gap-3">
+                <span class="text-ink-tertiary mt-1">○</span>
+                <div>
+                  <strong class="text-ink">{c.name}</strong>
+                  <p class="text-ink-secondary text-sm mt-1">{c.reason}</p>
                 </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-paper-tertiary rounded-card p-8">
+          <h3 class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">OUR RECOMMENDATION</h3>
+          <p class="text-lg text-ink leading-relaxed">{recommended}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Booking (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl text-paper mb-8">THE BOOKING</h2>
+
+      <div class="bg-paper rounded-card p-8">
+        <h3 class="font-display text-2xl text-ink mb-6">{finalBooking.property.toUpperCase()}</h3>
+        <ul class="space-y-4 text-ink-secondary">
+          <li><strong class="text-ink">Why it won:</strong> {finalBooking.why}</li>
+          <li><strong class="text-ink">Price:</strong> {finalBooking.price}</li>
+          {finalBooking.extras && <li><strong class="text-ink">Extras:</strong> {finalBooking.extras}</li>}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Outcome (Cream) -->
+  <section class="bg-paper py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="font-display text-2xl md:text-3xl mb-8">THE OUTCOME</h2>
+
+      <div class="bg-green-50 border-l-4 border-green-500 rounded-r-card p-8 mb-10">
+        <p class="text-lg text-ink leading-relaxed">{outcome}</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-paper-secondary rounded-card p-8 text-center">
+          <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-2">DIY ESTIMATE</p>
+          <p class="font-display text-4xl">{timeSaved.diy}</p>
+        </div>
+        <div class="bg-ink text-paper rounded-card p-8 text-center">
+          <p class="text-xs uppercase tracking-widest text-paper/70 mb-2">WITH OTHERWHERE</p>
+          <p class="font-display text-4xl">{timeSaved.otherwhere}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Destination (if exists) -->
+  {relatedDestination && (
+    <section class="section-dark py-16 md:py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10">
+          <p class="text-xs uppercase tracking-widest text-paper/50 mb-2" style="letter-spacing: 0.15em;">EXPLORE</p>
+          <h2 class="font-display text-2xl md:text-3xl text-paper">DESTINATION GUIDE</h2>
+        </header>
+
+        <a href={`/destinations/${relatedDestination.slug}`} class="magazine-card group block">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <img
+              src={relatedDestination.image}
+              alt={relatedDestination.city}
+              class="magazine-card-image"
+              loading="lazy"
+            />
+            <div>
+              <CategoryPill category={relatedDestination.country} variant="light" class="mb-4" />
+              <h3 class="font-display text-2xl md:text-3xl text-paper mb-4">
+                WHERE TO STAY IN {relatedDestination.city.toUpperCase()}
+              </h3>
+              <p class="text-paper/70">{relatedDestination.quickTake.substring(0, 150)}...</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <!-- More Case Studies -->
+  {otherCaseStudies.length > 0 && (
+    <section class="bg-paper py-16 md:py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <header class="mb-10 flex items-end justify-between">
+          <h2 class="font-display text-2xl md:text-3xl">MORE TRIPS</h2>
+          <a href="/case-studies" class="text-ink-tertiary hover:text-ink text-sm uppercase tracking-wider transition-colors">
+            View all →
+          </a>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {otherCaseStudies.map((cs) => (
+            <a href={`/case-studies/${cs.slug}`} class="magazine-card group">
+              <div class="relative mb-4">
+                <img src={cs.image} alt={cs.title} class="magazine-card-image" loading="lazy" />
+              </div>
+              <div class="space-y-2">
+                <CategoryPill category={cs.type} variant="dark" />
+                <h3 class="font-display text-xl leading-tight text-ink">{cs.title}</h3>
+                <p class="text-sm text-ink-tertiary">{cs.destination}</p>
               </div>
             </a>
-          </section>
-        </>
-      )}
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">WANT THIS FOR YOUR TRIP?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          We turn overwhelming options into effortless bookings. Text us to get started.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US TO START
-        </a>
-      </section>
-
-      <!-- Navigation -->
-      <nav class="mt-8 pt-8 border-t border-paper-tertiary">
-        <a href="/case-studies" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors">
-          ← BACK TO ALL CASE STUDIES
-        </a>
-      </nav>
+  <!-- CTA -->
+  <section class="section-dark py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-paper/50 mb-4" style="letter-spacing: 0.15em;">YOUR TURN</p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-paper mb-6">
+        WANT THIS FOR YOUR TRIP?
+      </h2>
+      <p class="text-paper/70 text-lg mb-10 max-w-md mx-auto">
+        We turn overwhelming options into effortless bookings. Text us to get started.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-light inline-block">
+        TEXT US TO START
+      </a>
     </div>
-  </article>
+  </section>
 </BaseLayout>

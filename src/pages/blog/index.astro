@@ -1,22 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAllPosts, getAllTags, getAllPillars } from '../../utils/content';
+import BlogHero from '../../components/BlogHero.astro';
+import BlogArticleCard from '../../components/BlogArticleCard.astro';
+import { getAllPosts } from '../../utils/content';
 
 const posts = getAllPosts();
-const allTags = getAllTags();
-const pillars = getAllPillars();
 
-// Get top tags (most used)
-const tagCounts = new Map<string, number>();
-posts.forEach(post => {
-  post.keywords?.forEach(keyword => {
-    tagCounts.set(keyword, (tagCounts.get(keyword) || 0) + 1);
-  });
-});
-const popularTags = Array.from(tagCounts.entries())
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 8)
-  .map(([tag]) => tag);
+// Featured post = most recent post (or first with featured: true if we add that later)
+const featuredPost = posts[0];
+
+// Remaining posts for the grid (skip the featured one)
+const gridPosts = posts.slice(1);
 
 const schemas = [
   {
@@ -34,105 +28,56 @@ const schemas = [
   description="Travel insights, booking tips, and destination guides. Learn about AI travel planning, find the best places to stay, and discover how personal travel booking works."
   schema={schemas}
 >
-  <article class="py-12">
-    <div class="blog-content">
-      <header class="mb-8">
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">BLOG</h1>
-        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
-          Travel insights, booking tips, and destination guides.
-        </p>
-      </header>
-
-      <!-- Popular Tags -->
-      {popularTags.length > 0 && (
-        <div class="mb-8">
-          <div class="flex flex-wrap gap-2">
-            {popularTags.map((tag) => (
-              <a
-                href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                class="text-sm bg-paper-secondary hover:bg-paper-tertiary px-3 py-1.5 rounded-full transition-colors"
-              >
-                {tag}
-              </a>
-            ))}
-            <a
-              href="/topics"
-              class="text-sm text-accent hover:underline px-3 py-1.5"
-            >
-              All topics →
-            </a>
-          </div>
-        </div>
-      )}
-
-      <hr class="section-divider" />
-
-      {posts.length === 0 ? (
-        <div class="text-center py-16 bg-paper-secondary rounded-xl">
+  {posts.length === 0 ? (
+    <!-- Empty state -->
+    <section class="py-20">
+      <div class="max-w-wide mx-auto px-6">
+        <div class="text-center py-16 bg-paper-secondary rounded-card">
           <p class="text-ink-secondary text-lg mb-4">No posts yet. Check back soon!</p>
           <p class="text-ink-tertiary text-sm">New articles are published regularly.</p>
         </div>
-      ) : (
-        <div class="space-y-8">
-          {posts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="block group">
-              <article class="border-b border-paper-tertiary pb-8">
-                {post.image && (
-                  <img
-                    src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=300')}
-                    alt={post.title}
-                    class="w-full h-48 object-cover rounded-xl mb-4"
-                    loading="lazy"
-                  />
-                )}
-                <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
-                  <time datetime={post.publishDate}>
-                    {new Date(post.publishDate).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                  {post.pillar && (
-                    <>
-                      <span>·</span>
-                      <a href={`/topics/${post.pillar}`} class="capitalize hover:text-accent transition-colors">
-                        {post.pillar.replace(/-/g, ' ')}
-                      </a>
-                    </>
-                  )}
-                </div>
-                <h2 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">
-                  {post.title}
-                </h2>
-                <p class="text-ink-secondary">{post.description}</p>
-                {post.keywords && post.keywords.length > 0 && (
-                  <div class="flex flex-wrap gap-2 mt-4">
-                    {post.keywords.slice(0, 3).map((keyword) => (
-                      <span class="text-xs bg-paper-secondary px-2 py-1 rounded">
-                        {keyword}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </article>
-            </a>
-          ))}
+      </div>
+    </section>
+  ) : (
+    <>
+      <!-- Section 1: Hero (Cream background) -->
+      <BlogHero featuredPost={featuredPost} totalPosts={posts.length} />
+
+      <!-- Section 2: Article Grid (Dark background) -->
+      <section id="articles" class="section-dark py-16 md:py-20">
+        <div class="max-w-wide mx-auto px-6">
+          <header class="mb-12">
+            <h2 class="font-display text-3xl md:text-4xl text-paper">LATEST ARTICLES</h2>
+          </header>
+
+          {gridPosts.length > 0 ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+              {gridPosts.map((post) => (
+                <BlogArticleCard post={post} variant="dark" />
+              ))}
+            </div>
+          ) : (
+            <p class="text-paper/70 text-center py-8">
+              More articles coming soon.
+            </p>
+          )}
         </div>
-      )}
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">READY TO BOOK YOUR TRIP?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us where you want to go. We'll send options. You pick. We book.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US TO START
-        </a>
       </section>
-    </div>
-  </article>
+
+      <!-- Section 3: CTA (Cream background) -->
+      <section class="bg-paper py-20 md:py-24">
+        <div class="max-w-wide mx-auto px-6 text-center">
+          <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+            READY TO BOOK YOUR TRIP?
+          </h2>
+          <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+            Text us where you want to go. We'll send options. You pick. We book.
+          </p>
+          <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+            TEXT US TO START
+          </a>
+        </div>
+      </section>
+    </>
+  )}
 </BaseLayout>

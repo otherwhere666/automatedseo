@@ -20,12 +20,22 @@ module.exports = {
           DEFAULT: '#252525',
           hover: '#3a3a3a',
         },
+        dark: {
+          DEFAULT: '#252525',
+          secondary: '#1a1a1a',
+        },
       },
       fontFamily: {
+        // Anton for bold headlines
+        display: ['Anton', 'Impact', 'sans-serif'],
         // Editorial serif for headlines - like CN Traveller
         serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-        // Clean sans for body
-        sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        // Hanken Grotesk for body text
+        sans: ['"Hanken Grotesk"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+      },
+      borderRadius: {
+        'card': '20px',
+        'card-lg': '24px',
       },
       fontSize: {
         // Editorial scale

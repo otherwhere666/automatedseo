@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogArticleCard from '../../components/BlogArticleCard.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
 import { getAllPillars, getPillarById, getPostsByPillar, getAllDestinations, getAllCaseStudies } from '../../utils/content';
 
 export async function getStaticPaths() {
@@ -16,14 +18,9 @@ if (!pillar) {
 
 const posts = getPostsByPillar(pillarId);
 
-// Get related destinations and case studies based on pillar keywords
-const pillarKeywords = pillar.name.toLowerCase().split(' ');
-const allDestinations = getAllDestinations();
-const allCaseStudies = getAllCaseStudies();
-
-// For now, show a selection of destinations and case studies
-const featuredDestinations = allDestinations.slice(0, 4);
-const featuredCaseStudies = allCaseStudies.slice(0, 2);
+// Get related destinations and case studies
+const featuredDestinations = getAllDestinations().slice(0, 3);
+const featuredCaseStudies = getAllCaseStudies().slice(0, 4);
 
 const schemas = [
   {
@@ -40,126 +37,145 @@ const schemas = [
   description={pillar.angle}
   schema={schemas}
 >
-  <article class="py-12">
-    <div class="blog-content">
-      <!-- Header -->
-      <header class="mb-12">
-        <a href="/topics" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 block">
-          ← ALL TOPICS
-        </a>
-        <h1 class="text-4xl md:text-5xl font-light tracking-wide mb-6">{pillar.name.toUpperCase()}</h1>
-        <p class="text-lg text-ink-secondary leading-relaxed max-w-2xl">
+  <!-- Hero Section (Cream) -->
+  <section class="bg-paper py-12 md:py-16">
+    <div class="max-w-wide mx-auto px-6">
+      <a href="/topics" class="text-xs uppercase tracking-widest text-ink-tertiary hover:text-ink transition-colors mb-6 inline-block">
+        ← ALL TOPICS
+      </a>
+      <header class="mb-10">
+        <CategoryPill category={pillar.priority === 'high' ? 'Featured Topic' : 'Topic'} variant="dark" class="mb-4" />
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">{pillar.name.toUpperCase()}</h1>
+        <p class="text-ink-secondary mt-4 text-lg max-w-2xl">
           {pillar.angle}
         </p>
       </header>
 
-      <!-- Articles in this pillar -->
-      {posts.length > 0 ? (
-        <section class="mb-12">
-          <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">ARTICLES</h2>
-          <div class="space-y-6">
-            {posts.map((post) => (
-              <a href={`/blog/${post.slug}`} class="block group">
-                <article class="border-b border-paper-tertiary pb-6">
-                  {post.image && (
-                    <img
-                      src={post.image.replace('w=1200', 'w=800').replace('h=600', 'h=300')}
-                      alt={post.title}
-                      class="w-full h-48 object-cover rounded-xl mb-4"
-                      loading="lazy"
-                    />
-                  )}
-                  <div class="flex items-center gap-4 text-sm text-ink-tertiary mb-2">
-                    <time datetime={post.publishDate}>
-                      {new Date(post.publishDate).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </time>
-                    {post.readingTime && (
-                      <>
-                        <span>·</span>
-                        <span>{post.readingTime}</span>
-                      </>
-                    )}
-                  </div>
-                  <h3 class="font-serif text-2xl mb-2 group-hover:text-accent transition-colors">
-                    {post.title}
-                  </h3>
-                  <p class="text-ink-secondary">{post.description}</p>
-                </article>
-              </a>
-            ))}
-          </div>
-        </section>
-      ) : (
-        <section class="mb-12">
-          <div class="text-center py-16 bg-paper-secondary rounded-xl">
-            <p class="text-ink-secondary text-lg mb-4">No articles in this topic yet.</p>
-            <p class="text-ink-tertiary text-sm">Check back soon — new content is published regularly.</p>
-          </div>
-        </section>
-      )}
-
-      <!-- Related Destinations -->
-      <section class="mb-12 pt-8 border-t border-paper-tertiary">
-        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">EXPLORE DESTINATIONS</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          {featuredDestinations.map((dest) => (
-            <a href={`/destinations/${dest.slug}`} class="block group">
-              <article class="bg-paper-secondary rounded-xl overflow-hidden hover:bg-paper-tertiary transition-colors">
-                <img
-                  src={dest.image.replace('w=1200', 'w=400').replace('h=600', 'h=200')}
-                  alt={dest.city}
-                  class="w-full h-28 object-cover"
-                  loading="lazy"
-                />
-                <div class="p-4">
-                  <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{dest.city}</h3>
-                  <p class="text-sm text-ink-tertiary">{dest.country}</p>
-                </div>
-              </article>
-            </a>
-          ))}
+      <!-- Stats -->
+      <div class="flex gap-12">
+        <div>
+          <p class="font-display text-4xl">{posts.length}</p>
+          <p class="text-sm text-ink-tertiary mt-1">Articles</p>
         </div>
-        <div class="text-center mt-6">
-          <a href="/destinations" class="text-accent hover:underline text-sm">View all destinations →</a>
-        </div>
-      </section>
-
-      <!-- Related Case Studies -->
-      <section class="mb-12 pt-8 border-t border-paper-tertiary">
-        <h2 class="text-xs uppercase tracking-widest text-ink-tertiary mb-6">SEE HOW IT WORKS</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          {featuredCaseStudies.map((cs) => (
-            <a href={`/case-studies/${cs.slug}`} class="block group bg-paper-secondary rounded-xl p-5 hover:bg-paper-tertiary transition-colors">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-accent text-sm font-medium">{cs.type}</span>
-                <span class="text-sm text-ink-tertiary">{cs.timeSaved.otherwhere}</span>
-              </div>
-              <h3 class="font-serif text-lg group-hover:text-accent transition-colors">{cs.title}</h3>
-              <p class="text-ink-secondary text-sm italic mt-1">"{cs.quote}"</p>
-            </a>
-          ))}
-        </div>
-        <div class="text-center mt-6">
-          <a href="/case-studies" class="text-accent hover:underline text-sm">View all case studies →</a>
-        </div>
-      </section>
-
-      <hr class="section-divider" />
-
-      <!-- CTA -->
-      <section class="text-center py-12">
-        <h2 class="text-2xl font-light tracking-wide mb-4">READY TO EXPERIENCE THIS?</h2>
-        <p class="text-ink-secondary mb-8 max-w-md mx-auto">
-          Text us where you want to go. We'll show you how personal travel booking works.
-        </p>
-        <a href="sms:+13239224067" class="btn-primary inline-block">
-          TEXT US TO START
-        </a>
-      </section>
+      </div>
     </div>
-  </article>
+  </section>
+
+  <!-- Articles Grid (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-12">
+        <h2 class="font-display text-3xl md:text-4xl text-paper">ARTICLES</h2>
+      </header>
+
+      {posts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          {posts.map((post, index) => (
+            <BlogArticleCard post={post} variant="dark" index={index} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-paper/70 text-lg mb-4">No articles in this topic yet.</p>
+          <p class="text-paper/50 text-sm">Check back soon — new content is published regularly.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Related Destinations (Cream) -->
+  <section class="bg-paper py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-10 flex items-end justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-2" style="letter-spacing: 0.15em;">
+            EXPLORE
+          </p>
+          <h2 class="font-display text-3xl md:text-4xl">DESTINATIONS</h2>
+        </div>
+        <a href="/destinations" class="text-ink-tertiary hover:text-ink text-sm uppercase tracking-wider transition-colors">
+          View all →
+        </a>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {featuredDestinations.map((dest) => (
+          <a href={`/destinations/${dest.slug}`} class="magazine-card group">
+            <div class="relative mb-4">
+              <img
+                src={dest.image}
+                alt={dest.city}
+                class="magazine-card-image"
+                loading="lazy"
+              />
+            </div>
+            <div class="space-y-2">
+              <CategoryPill category={dest.country} variant="dark" />
+              <h3 class="font-display text-xl md:text-2xl leading-tight text-ink">
+                {dest.city}
+              </h3>
+              <p class="text-sm text-ink-secondary">{dest.tagline}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Case Studies (Dark) -->
+  <section class="section-dark py-16 md:py-20">
+    <div class="max-w-wide mx-auto px-6">
+      <header class="mb-10 flex items-end justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-paper/50 mb-2" style="letter-spacing: 0.15em;">
+            SEE HOW IT WORKS
+          </p>
+          <h2 class="font-display text-3xl md:text-4xl text-paper">TRIPS WE PLANNED</h2>
+        </div>
+        <a href="/case-studies" class="text-paper/70 hover:text-paper text-sm uppercase tracking-wider transition-colors">
+          View all →
+        </a>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {featuredCaseStudies.map((cs) => (
+          <a href={`/case-studies/${cs.slug}`} class="magazine-card group">
+            <div class="relative mb-4">
+              <img
+                src={cs.image}
+                alt={cs.title}
+                class="magazine-card-image"
+                loading="lazy"
+              />
+            </div>
+            <div class="space-y-2">
+              <CategoryPill category={cs.type} variant="light" />
+              <h3 class="font-display text-lg md:text-xl leading-tight text-paper">
+                {cs.title}
+              </h3>
+              <p class="text-paper/70 text-sm italic line-clamp-2">"{cs.quote}"</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA (Cream) -->
+  <section class="bg-paper py-20 md:py-24">
+    <div class="max-w-wide mx-auto px-6 text-center">
+      <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-4" style="letter-spacing: 0.15em;">
+        READY?
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
+        EXPERIENCE THIS YOURSELF
+      </h2>
+      <p class="text-ink-secondary text-lg mb-10 max-w-md mx-auto">
+        Text us where you want to go. We'll show you how personal travel booking works.
+      </p>
+      <a href="sms:+13239224067" class="btn-pill btn-pill-primary inline-block">
+        TEXT US TO START
+      </a>
+    </div>
+  </section>
 </BaseLayout>

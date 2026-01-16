@@ -1,0 +1,80 @@
+---
+import CategoryPill from './CategoryPill.astro';
+import type { BlogPost } from '../types';
+import { getAuthorFromSlug, formatDate, getCategoryFromPost } from '../utils/authors';
+
+interface Props {
+  featuredPost: BlogPost;
+  totalPosts: number;
+}
+
+const { featuredPost, totalPosts } = Astro.props;
+
+const author = featuredPost.author || getAuthorFromSlug(featuredPost.slug);
+const formattedDate = formatDate(featuredPost.publishDate);
+const categoryLabel = getCategoryFromPost(featuredPost);
+---
+
+<section class="blog-hero py-12 md:py-16">
+  <div class="max-w-wide mx-auto px-6">
+    <!-- Header -->
+    <header class="mb-10">
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide">BLOG</h1>
+    </header>
+
+    <!-- Hero Grid: Featured + Sidebar -->
+    <div class="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-8">
+      <!-- Featured Article (65-70% width on desktop) -->
+      <a href={`/blog/${featuredPost.slug}`} class="blog-hero-featured group block aspect-[16/10] lg:aspect-[16/9]">
+        {featuredPost.image && (
+          <img
+            src={featuredPost.image}
+            alt={featuredPost.imageAlt || featuredPost.title}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        )}
+        <div class="blog-hero-featured-overlay"></div>
+
+        <!-- Content overlay -->
+        <div class="absolute inset-0 p-6 md:p-10 flex flex-col justify-end">
+          <CategoryPill category={categoryLabel} variant="light" class="mb-4 w-fit" />
+
+          <h2 class="font-display text-2xl md:text-4xl lg:text-5xl text-paper leading-tight mb-4 max-w-2xl">
+            {featuredPost.title}
+          </h2>
+
+          <p class="text-paper/80 text-base md:text-lg mb-4 max-w-xl line-clamp-2 hidden md:block">
+            {featuredPost.description}
+          </p>
+
+          <div class="text-paper/70 text-sm">
+            <span>By {author}</span>
+            <span class="mx-2">·</span>
+            <time datetime={featuredPost.publishDate}>{formattedDate}</time>
+          </div>
+        </div>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="blog-hero-sidebar">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-ink-tertiary mb-3" style="letter-spacing: 0.15em;">
+            OTHERWHERE PICKS
+          </p>
+          <p class="text-ink-secondary leading-relaxed">
+            Travel insights, booking tips, and destination guides curated by our team.
+          </p>
+        </div>
+
+        <div class="mt-8 lg:mt-0">
+          <a
+            href="#articles"
+            class="btn-pill btn-pill-primary inline-block"
+          >
+            SEE ALL {totalPosts} ARTICLES
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
