@@ -29,6 +29,39 @@ const schemas = [
       "serviceType": "SMS",
       "servicePhone": "+1-323-922-4067"
     }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Book Travel with Otherwhere",
+    "description": "Book flights and hotels by texting Otherwhere. Get curated options and complete booking in minutes.",
+    "totalTime": "PT5M",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Text your trip details",
+        "text": "Text or call (323) 922-4067 with your destination, dates, and preferences. Example: 'Flying SFO to Rome, December 15-22, 2 travelers'."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Receive curated options",
+        "text": "Otherwhere searches flights and hotels, then sends 3-5 curated options with real prices matched to your preferences."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Pick and pay",
+        "text": "Select your preferred options and pay through a secure Stripe link. Otherwhere handles the complete booking."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Get confirmations",
+        "text": "Receive confirmation numbers, PNRs, and e-tickets. Your trip is booked."
+      }
+    ]
   }
 ];
 

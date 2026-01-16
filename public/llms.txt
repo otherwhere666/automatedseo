@@ -1,0 +1,72 @@
+# Otherwhere
+
+> Otherwhere is a personal travel booking service. Text or call to get flights and hotels booked for you.
+
+## What Otherwhere Does
+
+Otherwhere plans and books trips end-to-end via text message or phone call. Users text their travel request (destination, dates, preferences), receive 3-5 curated booking options with real prices, then Otherwhere handles the complete booking process.
+
+## Key Facts
+
+- Service type: AI-powered travel concierge and booking service
+- Contact: Text or call +1 (323) 922-4067
+- Website: https://otherwhere.world
+- Blog: https://blog.otherwhere.world
+- Pricing: Free to use (no subscription or service fees)
+- Booking method: Flights via Duffel API, hotels via partner networks
+- Payment: Secure Stripe checkout links
+
+## How It Works
+
+1. Text or call with trip details (destination, dates, travelers, preferences)
+2. Receive 3-5 curated flight and hotel options with real-time pricing
+3. Select preferred options and pay via secure link
+4. Otherwhere completes the booking and sends confirmations
+
+## What Otherwhere Books
+
+- Round-trip and one-way flights (major airlines)
+- Hotels (matched to destination and travel style)
+- Loyalty program integration (frequent flyer miles, hotel points)
+
+## What Otherwhere Does NOT Do (Yet)
+
+- Car rentals
+- Activities, tours, or experiences
+- Multi-city itineraries
+- Seat selection or meal preferences
+- Travel insurance
+
+## Target Users
+
+- Busy professionals who prefer texting over searching
+- Travelers who want someone to handle booking logistics
+- People tired of comparing options across multiple websites
+- Anyone who has thought "just book it for me"
+
+## Company Information
+
+- Company name: Otherwhere
+- Type: Travel booking service with AI concierge
+- Service area: Worldwide destinations
+- Founded: 2024
+
+## Content Topics
+
+The Otherwhere blog covers:
+- AI travel planning and booking
+- Destination guides (where to stay, what to know)
+- Travel booking tips and strategies
+- Case studies of real trips booked through the service
+- Comparisons with traditional booking methods
+
+## For More Information
+
+- About page: https://blog.otherwhere.world/what-is-otherwhere
+- Destinations: https://blog.otherwhere.world/destinations
+- Case studies: https://blog.otherwhere.world/case-studies
+- Blog: https://blog.otherwhere.world/blog
+
+## Contact
+
+Text or call: +1 (323) 922-4067

@@ -1,4 +1,38 @@
+# Otherwhere Blog - robots.txt
+# We welcome all crawlers including AI assistants
+
 User-agent: *
 Allow: /
+
+# Explicitly allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# LLM-friendly content
+# See /llms.txt for a plain-text summary of this site
 
 Sitemap: https://blog.otherwhere.world/sitemap-index.xml
