@@ -13,7 +13,7 @@ const { pillar: pillarId } = Astro.params;
 const pillar = getPillarById(pillarId);
 
 if (!pillar) {
-  return Astro.redirect('/topics');
+  return Astro.redirect('/topics', 301);
 }
 
 const posts = getPostsByPillar(pillarId);

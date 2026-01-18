@@ -12,7 +12,7 @@ const { slug } = Astro.params;
 const destination = getDestinationBySlug(slug);
 
 if (!destination) {
-  return Astro.redirect('/destinations');
+  return Astro.redirect('/destinations', 301);
 }
 
 const { city, country, region, quickTake, travelerTypes, skip, lastUpdated, image, imageAlt } = destination;
